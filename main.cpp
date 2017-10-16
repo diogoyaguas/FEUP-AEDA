@@ -1,6 +1,8 @@
 #include <iostream>
+using namespace std;
 
 int main() {
-    std::cout << "Hello é a f*cking Bea" << std::endl;
+
+
     return 0;
 }
