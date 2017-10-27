@@ -7,21 +7,23 @@
 
 
 class Beach {
-private:
+protected:
+    string name;
     bool blue_flag, lifeguard;
     unsigned int max_capacity;
     struct GPS_coordinates{
-        unsigned float LAT, LONG;
+        float LAT, LONG;
     };
 
-
-protected:
+public:
     bool get_blue_flag();
     bool get_lifeguard();
     unsigned int get_max_capacity();
     float get_Latitude();
     float get_Longitude();
 };
+
+
 
 
 #endif //AEDA_BEACH_H
