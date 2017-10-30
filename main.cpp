@@ -1,21 +1,30 @@
 #include <iostream>
 #include <cmath>
 #include "Beach.h"
+#include <fstream>
 using namespace std;
 
 int mainMenu();
+void timer();
 
 int main() {
 
-    cout << endl << "WELCOME!\nDirecting you to Main Menu...\n";
-    clock_t start;
-    double duration;
-    start = clock();
+    fstream beachFile;
+    string fileName = "BeachFile.txt";
 
 
 
-    while(duration != 0.5){
-        duration = ( clock() - start ) / (double) CLOCKS_PER_SEC;
+
+    cout << endl << "WELCOME!Loading files...\n";
+
+    timer();
+
+
+    beachFile.open(fileName);
+    if(!beachFile.is_open()){
+        cout << "Error in opening file. Exiting program...";
+        return 1;
+
     }
 
     cout << string(100, '\n');
@@ -26,3 +35,6 @@ int main() {
 
     return 0;
 }
+
+
+

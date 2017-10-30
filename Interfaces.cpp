@@ -29,3 +29,16 @@ int mainMenu() {
 
     return 0;
 }
+
+
+void timer(){
+
+    clock_t startProgram;
+    double duration;
+    startProgram = clock();
+
+    while(duration != 0.8){
+        duration = ( clock() - startProgram ) / (double) CLOCKS_PER_SEC;
+    }
+
+}
