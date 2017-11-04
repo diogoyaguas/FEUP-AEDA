@@ -1,3 +1,5 @@
+//file contains functions related to user's menus
+
 #include <iostream>
 using namespace std;
 #include <iomanip>
@@ -8,7 +10,6 @@ bool ValidInput(int lowerL, int upperL, int input){
         return true;
     else return false;
 }
-
 
 int mainMenu() {
     int option;

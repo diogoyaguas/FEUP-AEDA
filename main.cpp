@@ -2,36 +2,26 @@
 #include <cmath>
 #include "Beach.h"
 #include <fstream>
+#include <vector>
 using namespace std;
 
 int mainMenu();
 void timer();
+int readBeachFile();
+vector<Beach> Beaches;
 
 int main() {
 
-    fstream beachFile;
-    string fileName = "BeachFile.txt";
 
-
-
-
-    cout << endl << "WELCOME!Loading files...\n";
-
+    cout << endl << "WELCOME! Loading files...\n";
     timer();
 
 
-    beachFile.open(fileName);
-    if(!beachFile.is_open()){
-        cout << "Error in opening file. Exiting program...";
-        return 1;
+    readBeachFile();
 
-    }
 
     cout << string(100, '\n');
     mainMenu();
-
-
-
 
     return 0;
 }
