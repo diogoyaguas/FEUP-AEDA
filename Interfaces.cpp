@@ -17,7 +17,9 @@ int mainMenu() {
 
     cout << " MAIN MENU" << setw(40) << " " << endl;
     cout << setfill('-') << setw(50)<<"-"<<endl;
-    cout << "1. Do stuff." << endl;
+    cout << "1. Search Beach." << endl;
+    cout << "2. Do stuff." << endl;
+
     cout << endl << "Enter a number option: ";
     cin >> option;
 

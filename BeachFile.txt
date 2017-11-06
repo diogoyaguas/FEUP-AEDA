@@ -1,1 +1,1 @@
-distrito, nome, 1, 1, 50, 13, 14, 150
+concelho; nome; albufeira; 1; 1; 50; 13; 14; 150; wc, toldos;(restaurante, "comia-te", €€, 3*; bar, "fode te", €, 4*;)
