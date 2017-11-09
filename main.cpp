@@ -5,10 +5,12 @@
 #include <vector>
 using namespace std;
 
-int mainMenu();
-void timer();
+#include "Interfaces.h"
+
 int readBeachFile();
 vector<Beach> Beaches;
+
+
 
 int main() {
 

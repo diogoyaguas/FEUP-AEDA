@@ -2,23 +2,24 @@
 // Created by Beatriz Mendes on 06/11/2017.
 //
 
-#ifndef AEDA_SERVICE_H
-#define AEDA_SERVICE_H
+#ifndef AEDA_SERVICES_H
+#define AEDA_SERVICES_H
 
 #include <iostream>
 using namespace std;
 
-class Service {
+class Services {
     string type, name, priceRange, stars;
 
 public:
-    Service(string type, string name, string priceRange, string stars);
+    Services(string type, string name, string priceRange, string stars);
     string getType(){return type;}
     string getName(){return name;}
     string getPriceRange(){return priceRange;}
     string getStars(){return stars;}
-
 };
 
 
-#endif //AEDA_SERVICE_H
+
+
+#endif //AEDA_SERVICES_H

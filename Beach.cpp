@@ -5,6 +5,7 @@
 
 
 #include "Beach.h"
+#include <cmath>
 
 //Beach
 Beach::Beach(string district,string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float LONG, vector<string> &basicServices):
@@ -22,6 +23,21 @@ unsigned int Beach::get_max_capacity(){return max_capacity;}
 float Beach::get_Latitude(){return LAT;}
 
 float Beach::get_Longitude(){return LONG;}
+
+vector<Services> Beach::getServices(){return extraServices;}
+
+float Beach::distanceToBeach(float LAT, float LONG){
+    float dLONG, dLAT, a, c, distance, earthRadius;
+    earthRadius=6373;
+
+    dLONG = this->LONG-LONG;
+    dLAT= this->LAT - LAT;
+    a= pow(sin(dLAT/2),2) + cos(LAT) * cos(this->LAT) * sin(dLONG/2);
+    c= 2 * atan2(sqrt(a),sqrt(1-a));
+    distance= c * 6373;
+
+    return distance;
+}
 
 
 

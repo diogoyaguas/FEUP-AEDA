@@ -5,7 +5,7 @@
 
 #include <string>
 #include <vector>
-#include "Service.h"
+#include "Services.h"
 using namespace std;
 
 class Beach {
@@ -15,16 +15,53 @@ protected:
     unsigned int max_capacity;
     float LAT, LONG;
     vector<string> basicServices;
+    vector<Services> extraServices;
 
 public:
+    /**
+     * @brief constructor for class Beach
+     * @param county
+     * @param name
+     * @param blueflag
+     * @param lifeguard
+     * @param max_capacity
+     * @param LAT
+     * @param Long
+     * @param basicServices
+     */
     Beach(string county, string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float Long, vector<string> &basicServices);
+    /**
+     * @return 1 if beach contains blue flag, 0 otherwise
+     */
     bool get_blue_flag();
+    /**
+     * @return 1 if beach contains lifeguard, 0 otherwise
+     */
     bool get_lifeguard();
+    /**
+     * @return maximum capacity
+     */
     unsigned int get_max_capacity();
+    /**
+     * @return Latitude
+     */
     float get_Latitude();
+    /**
+     * @return longitude
+     */
     float get_Longitude();
+    /**
+     * @return vector of Services beach contains
+     */
+    vector<Services> getExtraServices();
     virtual string getType() const=0;
-    vector<Service> extraServices;
+    /**
+     * @brief calculates distance from location's GPS coordinates to beach's coordinates
+     * @param 2nd latitude
+     * @param 2nd longitude
+     * @return distance
+     */
+    float distanceToBeach(float LAT,float LONG);
 };
 
 
