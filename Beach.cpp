@@ -24,7 +24,7 @@ float Beach::get_Latitude(){return LAT;}
 
 float Beach::get_Longitude(){return LONG;}
 
-vector<Services> Beach::getServices(){return extraServices;}
+vector<Services> Beach::getExtraServices(){return extraServices;}
 
 float Beach::distanceToBeach(float LAT, float LONG){
     float dLONG, dLAT, a, c, distance, earthRadius;

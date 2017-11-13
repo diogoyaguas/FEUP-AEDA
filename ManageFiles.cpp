@@ -8,19 +8,23 @@ using namespace std;
 int readBeachFile(){
 
     fstream beachFile;
-    string beachInfo, tempName, tempDistrict;
+    istringstream BeachStream(textBeach);
 
 
     //verify file is successfully opened
     beachFile.open("BeachFile.txt");
     if(!beachFile.is_open()){
         cout << "Error in opening file. Exiting program...";
-        return 1;
+        return -1;
 
     }
 
-    /*while(beachFile.eof()) {
-        //fazer cenas
-    }*/
+    string type,county, name;
+
+    if(type == "rio"){
+
+        BeachStream.ignore(1000,';');
+
+    }
     return 0;
 }
