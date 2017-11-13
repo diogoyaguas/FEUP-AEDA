@@ -68,6 +68,19 @@ public:
 class RiverBeach: public Beach{
     float width, maxDepth;
 public:
+    /**
+     * @brief constructor class RiverBeach
+     * @param county
+     * @param name
+     * @param blueflag
+     * @param lifeguard
+     * @param max_capacity
+     * @param LAT
+     * @param LONG
+     * @param width
+     * @param maxDepth
+     * @param basicServices
+     */
     RiverBeach(string county, string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float LONG, float width, float maxDepth , vector<string> &basicServices);
     string getType() const{return "RB";}
 };
@@ -76,6 +89,18 @@ public:
 class BayouBeach: public Beach{
     float aquaticArea;
 public:
+    /**
+     * @brief constructor class BayouBeach
+     * @param county
+     * @param name
+     * @param blueflag
+     * @param lifeguard
+     * @param max_capacity
+     * @param LAT
+     * @param LONG
+     * @param aquaticArea
+     * @param basicServices
+     */
     string getType() const{return "BB";}
     BayouBeach(string county,string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float LONG, float aquaticArea, vector<string> &basicServices);
 };

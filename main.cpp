@@ -14,7 +14,6 @@ vector<Beach> Beaches;
 
 int main() {
 
-
     cout << endl << "WELCOME! Loading file...\n";
     timer();
 

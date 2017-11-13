@@ -12,6 +12,13 @@ class Services {
     string type, name, priceRange, stars;
 
 public:
+    /**
+     * @brief constructor class Services
+     * @param type
+     * @param name
+     * @param priceRange
+     * @param stars
+     */
     Services(string type, string name, string priceRange, string stars);
     string getType(){return type;}
     string getName(){return name;}
