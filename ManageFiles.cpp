@@ -3,28 +3,39 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "Beach.h"
+
 using namespace std;
 
 int readBeachFile(){
 
-    fstream beachFile;
-    istringstream BeachStream(textBeach);
-
+    string fileBeach = "BeachFile.txt";
+    ifstream file(fileBeach);
+    string beach, type;
+    int stop;
 
     //verify file is successfully opened
-    beachFile.open("BeachFile.txt");
-    if(!beachFile.is_open()){
+
+    file.open("BeachFile.txt");
+    if(!file.is_open()){
         cout << "Error in opening file. Exiting program...";
         return -1;
 
     }
 
-    string type,county, name;
+    while (getline(file, beach))
+    {
+        stop = beach.find_first_of(';');
+        type = beach.substr(0,stop);
 
-    if(type == "rio"){
+        if(type == "rio") {
 
-        BeachStream.ignore(1000,';');
+            RiverBeach(beach.substr(stop+2));
+
+        }else
+            BayouBeach(beach.substr(stop+2));
 
     }
+
     return 0;
 }

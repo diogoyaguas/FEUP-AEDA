@@ -8,8 +8,6 @@ using namespace std;
 #include "Interfaces.h"
 
 int readBeachFile();
-vector<Beach> Beaches;
-
 
 
 int main() {

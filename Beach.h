@@ -8,9 +8,11 @@
 #include "Services.h"
 using namespace std;
 
+vector<Beach> Beaches;
+
 class Beach {
 protected:
-    string name, district;
+    string name, county;
     bool blueflag, lifeguard;
     unsigned int max_capacity;
     float LAT, LONG;
@@ -30,6 +32,7 @@ public:
      * @param basicServices
      */
     Beach(string county, string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float Long, vector<string> &basicServices);
+    Beach();
     /**
      * @return 1 if beach contains blue flag, 0 otherwise
      */
@@ -62,6 +65,7 @@ public:
      * @return distance
      */
     float distanceToBeach(float LAT,float LONG);
+    void setupBeach();
 };
 
 
@@ -82,6 +86,7 @@ public:
      * @param basicServices
      */
     RiverBeach(string county, string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float LONG, float width, float maxDepth , vector<string> &basicServices);
+    RiverBeach(string beach);
     string getType() const{return "RB";}
 };
 
@@ -101,8 +106,9 @@ public:
      * @param aquaticArea
      * @param basicServices
      */
-    string getType() const{return "BB";}
     BayouBeach(string county,string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float LONG, float aquaticArea, vector<string> &basicServices);
+    BayouBeach(string beach);
+    string getType() const{return "BB";}
 };
 
 

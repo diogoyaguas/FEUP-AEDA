@@ -1,18 +1,18 @@
 //
 // Created by Beatriz Mendes on 16/10/2017.
 //
-
-
-
 #include "Beach.h"
 #include <cmath>
+#include <string>
 
 //Beach
-Beach::Beach(string district,string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float LONG, vector<string> &basicServices):
-district(district),name(name), blueflag(blueflag), max_capacity(max_capacity), LAT(LAT), LONG(LONG)
+Beach::Beach(string county,string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float LONG, vector<string> &basicServices):
+county(county),name(name), blueflag(blueflag), max_capacity(max_capacity), LAT(LAT), LONG(LONG)
 {
     this->basicServices=basicServices;
 }
+
+Beach::Beach(){}
 
 bool Beach::get_blue_flag(){return blueflag;}
 
@@ -39,18 +39,83 @@ float Beach::distanceToBeach(float LAT, float LONG){
     return distance;
 }
 
-
-
 //River Beach
-RiverBeach::RiverBeach(string district, string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float LONG,  float width, float maxDepth, vector<string> &basicServices)
-        :Beach(district, name, blueflag, lifeguard, max_capacity,  LAT ,  LONG, basicServices) {
+RiverBeach::RiverBeach(string county, string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float LONG,  float width, float maxDepth, vector<string> &basicServices)
+        :Beach(county, name, blueflag, lifeguard, max_capacity,  LAT ,  LONG, basicServices) {
     this->width=width;
     this->maxDepth=maxDepth;
 }
 
+RiverBeach::RiverBeach(string beach) 
+:Beach()
+{
+    unsigned int stop = beach.find_first_of(';');
+    this->county = beach.substr(0,stop);
+
+    beach = beach.substr(stop+2);
+    stop = beach.find_first_of(';');
+    this->name = beach.substr(0,stop);
+
+    beach = beach.substr(stop+2);
+    stop = beach.find_first_of(';');
+    if(stoi(beach.substr(0,stop))){
+
+        this->blueflag=true;
+
+    }else
+        this->blueflag=false;
+
+    beach = beach.substr(stop+2);
+    stop = beach.find_first_of(';');
+    if(stoi(beach.substr(0,stop))){
+
+        this->lifeguard=true;
+
+    }else
+        this->lifeguard=false;
+
+
+    beach = beach.substr(stop+2);
+    stop = beach.find_first_of(';');
+    this->max_capacity = stoul(beach.substr(0,stop));
+
+    beach = beach.substr(stop+2);
+    stop = beach.find_first_of(';');
+    this->LAT = stof(beach.substr(0,stop));
+
+    beach = beach.substr(stop+2);
+    stop = beach.find_first_of(';');
+    this->LONG = stof(beach.substr(0,stop));
+
+    beach = beach.substr(stop+2);
+    stop = beach.find_first_of(';');
+    this->width = stof(beach.substr(0,stop));
+
+    beach = beach.substr(stop+2);
+    stop = beach.find_first_of(';');
+    this->maxDepth = stof(beach.substr(0,stop));
+
+    beach = beach.substr(stop+2);
+    stop = beach.find_first_of(';');
+    this->LONG = stof(beach.substr(0,stop));
+
+    beach = beach.substr(stop+2);
+    stop = beach.find_first_of(';');
+    unsigned int last = beach.find_first_of(';',stop);
+    string bservices = beach.substr(stop,last);
+    while(stop!=string::npos){
+        this->basicServices.push_back(bservices.substr(0,stop));
+        beach = bservices.substr(stop+2);
+        stop = bservices.find_first_of(',');
+    }
+    stop = last;
+    beach = beach.substr(stop+2);
+    
+
+}
 
 //Bayou Beach
-BayouBeach::BayouBeach(string district,string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float LONG, float aquaticArea, vector<string> &basicServices)
-        :Beach(district,name, blueflag, lifeguard, max_capacity,  LAT ,  LONG, basicServices){
+BayouBeach::BayouBeach(string county,string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float LONG, float aquaticArea, vector<string> &basicServices)
+        :Beach(county,name, blueflag, lifeguard, max_capacity,  LAT ,  LONG, basicServices){
     this->aquaticArea=aquaticArea;
 }
