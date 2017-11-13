@@ -5,6 +5,8 @@
 #include <string>
 #include "Beach.h"
 
+vector<Beach> Beaches;
+
 using namespace std;
 
 int readBeachFile(){
@@ -12,7 +14,7 @@ int readBeachFile(){
     string fileBeach = "BeachFile.txt";
     ifstream file(fileBeach);
     string beach, type;
-    int stop;
+    unsigned long stop;
 
     //verify file is successfully opened
 
@@ -23,19 +25,19 @@ int readBeachFile(){
 
     }
 
-    while (getline(file, beach))
-    {
-        stop = beach.find_first_of(';');
-        type = beach.substr(0,stop);
+   while (getline(file, beach))
+   {
+       stop = beach.find_first_of(';');
+       type = beach.substr(0, stop);
 
-        if(type == "rio") {
+       if (type == "rio") {
 
-            RiverBeach(beach.substr(stop+2));
+           //Beaches.push_back(RiverBeach(beach.substr(stop + 2)));
 
-        }else
-            BayouBeach(beach.substr(stop+2));
-
-    }
+       } else
+           //Beaches.push_back(BayouBeach(beach.substr(stop+2)));
+           return 1;
+   }
 
     return 0;
 }
