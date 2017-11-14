@@ -4,7 +4,6 @@
 #include <iostream>
 #include "Beach.h"
 
-
 using namespace std;
 
 int readBeachFile(){

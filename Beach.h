@@ -75,7 +75,9 @@ public:
      * @param 2nd longitude
      * @return distance
      */
-    double distanceToBeach(float LAT,float LONG);
+    float distanceToBeach(float LAT,float LONG);
+
+    virtual void displayBeach() = 0;
 };
 
 vector<Beach> Beaches;
@@ -102,8 +104,8 @@ public:
      * @param line from txt file representing an object of class beach
      */
     RiverBeach(string beach);
-
-    string getType() const{return "RiverBeach";}
+    string getType() const{return "RB";}
+    void displayBeach();
 };
 
 
@@ -128,8 +130,8 @@ public:
      * @param line from txt file representing an object of class beach
      */
     BayouBeach(string beach);
-
-    string getType() const{return "BayouBeach";}
+    string getType() const{return "BB";}
+    void displayBeach();
 };
 
 
