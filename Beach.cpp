@@ -58,8 +58,7 @@ RiverBeach::RiverBeach(string beach)
     stop= beach.find_first_of(';');
     this->county = beach.substr(0,stop);
 
-
-    //name
+    //attribute name
     beach = beach.substr(stop+2); // +2 marks the begining of the char after space
     stop = beach.find_first_of(';');
     this->name = beach.substr(0,stop);
@@ -74,7 +73,6 @@ RiverBeach::RiverBeach(string beach)
     }else
         this->blueflag=false;
 
-
     // attribute lifeguard
     beach = beach.substr(stop+2);
     stop = beach.find_first_of(';');
@@ -84,7 +82,6 @@ RiverBeach::RiverBeach(string beach)
 
     }else
         this->lifeguard=false;
-
 
     //attribute maximum capacity
     beach = beach.substr(stop+2);
@@ -117,7 +114,6 @@ RiverBeach::RiverBeach(string beach)
     basic_services = beach.substr(stop-1,last);
     unsigned long st;
 
-
     while(stop!=string::npos && !basic_services.empty()){
         st = basic_services.find_first_of(',');
         this->basicServices.push_back(basic_services.substr(0,st));
@@ -125,28 +121,23 @@ RiverBeach::RiverBeach(string beach)
         stop = st;
     }
 
-    //attribute estra services
+    //attribute extra services
     stop = beach.find_first_of('(')+1;
     last = beach.find_first_of(')')-1;
     extra_services = beach.substr(stop,last-stop);
     string tempService;
-    unsigned long tempStop=extra_services.find_first_of(';');
+    st = extra_services.find_first_of(';');
     if(extra_services.empty()){
-        extraServices.push_back(Services());
+        extraServices.emplace_back(Services());
     }
 
-    while(tempStop <= last){
-        tempService = extra_services.substr(0,tempStop);
-    
-       extraServices.push_back(Services(tempService));
-       extra_services=extra_services.substr(tempStop+2);
-       tempStop=extra_services.find_first_of(';');
-
+    while(st != string::npos){
+        tempService = extra_services.substr(0,st);
+        extraServices.emplace_back(Services(tempService));
+        extra_services=extra_services.substr(st+2);
+        st = extra_services.find_first_of(';');
    }
 }
-
-
-
 
 void RiverBeach::displayBeach(){
 
@@ -162,35 +153,35 @@ void RiverBeach::displayBeach(){
         cout << "Useful information : " <<  "Blue Flag" << endl << setw(21) << setfill(' ') << "Life Guard" << endl;
         for (unsigned int i = 0; i < basicServices.size(); i++){
 
-            cout << setw(21) << setfill(' ') << basicServices.at(i);
+            cout << setw(21) << setfill(' ') << basicServices.at(i) << endl;
         }
     }else if(blueflag == true && lifeguard == false){
         cout << "Useful information : " <<  "Blue Flag" << endl;
         for (unsigned int i = 0; i < basicServices.size(); i++){
 
-            cout << setw(21) << setfill(' ') << basicServices.at(i);
+            cout << setw(21) << setfill(' ') << basicServices.at(i) << endl;
         }
     }else if(blueflag == false && lifeguard == false){
         cout << "Useful information : " << "Life Guard" << endl;
         for (unsigned int i = 0; i < basicServices.size(); i++) {
 
-            cout << setw(21) << setfill(' ') << basicServices.at(i);
+            cout << setw(21) << setfill(' ') << basicServices.at(i) << endl;
         }
     }
     else{
         cout << "Useful information : " << basicServices.at(0) << endl;
         for (unsigned int i = 1; i < basicServices.size(); i++) {
 
-            cout << setw(21) << setfill(' ') << basicServices.at(i);
+            cout << setw(21) << setfill(' ') << basicServices.at(i) << endl;
         }
     }
 
     cout << endl << "Services : " << endl;
     for(unsigned int i = 0; i < extraServices.size(); i++){
-        cout << setw(11) << setfill(' ') << "Type : " << extraServices.at(i).getType() << endl;
-        cout << setw(11) << setfill(' ') << "Name : " << extraServices.at(i).getName() << endl;
-        cout << setw(11) << setfill(' ') << "Price Range : " << extraServices.at(i).getPriceRange() << endl;
-        cout << setw(11) << setfill(' ') << "Stars : " << extraServices.at(i).getStars() << endl << endl;
+        cout << setw(15) << setfill(' ') << "Type : " << extraServices.at(i).getType() << endl;
+        cout << setw(15) << setfill(' ') << "Name : " << extraServices.at(i).getName() << endl;
+        cout << setw(15) << setfill(' ') << "Price Range : " << extraServices.at(i).getPriceRange() << endl;
+        cout << setw(15) << setfill(' ') << "Stars : " << extraServices.at(i).getStars() << endl << endl;
     }
 }
 
@@ -199,9 +190,6 @@ BayouBeach::BayouBeach(string &county, string &name, bool &blueflag, bool &lifeg
         :Beach(county,name, blueflag, lifeguard, max_capacity,  LAT ,  LONG, basicServices){
     this->aquaticArea=aquaticArea;
 }
-
-
-
 
 BayouBeach::BayouBeach(string beach)
 :Beach()
@@ -215,7 +203,7 @@ BayouBeach::BayouBeach(string beach)
     stop= beach.find_first_of(';');
     this->county = beach.substr(0,stop);
 
-    //name
+    //attribute name
     beach = beach.substr(stop+2); // +2 marks the begining of the char after space
     stop = beach.find_first_of(';');
     this->name = beach.substr(0,stop);
@@ -255,46 +243,83 @@ BayouBeach::BayouBeach(string beach)
     stop = beach.find_first_of(';');
     this->LONG = stof(beach.substr(0,stop));
 
-    //attribute aquatic area
+    //attribute width
     beach = beach.substr(stop+2);
     stop = beach.find_first_of(';');
     this->aquaticArea = stof(beach.substr(0,stop));
 
     //attribute basic serves
     beach = beach.substr(stop+2);
-    stop = beach.find_first_of(';');
     last = beach.find_first_of(';',stop);
-    basic_services = beach.substr(stop,last);
+    basic_services = beach.substr(stop-1,last);
+    unsigned long st;
 
-    while(stop!=string::npos){
-        this->basicServices.push_back(basic_services.substr(0,stop));
-        beach = basic_services.substr(stop+2);
-        stop = basic_services.find_first_of(',');
+    while(stop!=string::npos && !basic_services.empty()){
+        st = basic_services.find_first_of(',');
+        this->basicServices.push_back(basic_services.substr(0,st));
+        basic_services = basic_services.substr(st+2);
+        stop = st;
     }
 
+    //attribute extra services
+    stop = beach.find_first_of('(')+1;
+    last = beach.find_first_of(')')-1;
+    extra_services = beach.substr(stop,last-stop);
+    string tempService;
+    st = extra_services.find_first_of(';');
+    if(extra_services.empty()){
+        extraServices.emplace_back(Services());
+    }
 
-    //attribute estra services
-    stop = beach.find_first_of('(');
-    extra_services = beach.substr(stop+2,beach.find_first_of(')')-stop);
-
-    while(stop != string::npos){
-        last = extra_services.find_first_of(';');
-        string service,type,name,priceRange,stars;
-        service = extra_services.substr(stop+2,last-stop);
-        unsigned int pos = extra_services.find_first_of(',');
-        type = service.substr(stop,pos-stop);
-        stop = pos;
-        pos = service.find_first_of(',',stop);
-        name = service.substr(stop,pos-stop);
-        stop = pos;
-        pos = service.find_first_of(',',stop);
-        priceRange = service.substr(stop,pos-stop);
-        stop = pos;
-        pos = last;
-        stars = service.substr(stop,pos-stop);
-        this->extraServices.emplace_back( Services(type,name,priceRange,stars));
-        stop = last;
+    while(st <= last){
+        tempService = extra_services.substr(0,st);
+        extraServices.emplace_back(Services(tempService));
+        extra_services=extra_services.substr(st+2);
+        st = extra_services.find_first_of(';');
     }
 }
 
-void BayouBeach::displayBeach() {}
+void BayouBeach::displayBeach() {
+
+    cout << "County : " << county << endl;
+    cout << "GPS coordinates: " << LAT << " | " << LONG << endl;
+    cout << "Name   : " << name << endl;
+    cout << "Maximum Capacity : " << max_capacity << endl;
+    cout << "Aquatic Area : " << aquaticArea << endl;
+
+    if(blueflag && lifeguard){
+
+        cout << "Useful information : " <<  "Blue Flag" << endl << setw(21) << setfill(' ') << "Life Guard" << endl;
+        for (unsigned int i = 0; i < basicServices.size(); i++){
+
+            cout << setw(21) << setfill(' ') << basicServices.at(i);
+        }
+    }else if(blueflag == true && lifeguard == false){
+        cout << "Useful information : " <<  "Blue Flag" << endl;
+        for (unsigned int i = 0; i < basicServices.size(); i++){
+
+            cout << setw(21) << setfill(' ') << basicServices.at(i);
+        }
+    }else if(blueflag == false && lifeguard == false){
+        cout << "Useful information : " << "Life Guard" << endl;
+        for (unsigned int i = 0; i < basicServices.size(); i++) {
+
+            cout << setw(21) << setfill(' ') << basicServices.at(i);
+        }
+    }
+    else{
+        cout << "Useful information : " << basicServices.at(0) << endl;
+        for (unsigned int i = 1; i < basicServices.size(); i++) {
+
+            cout << setw(21) << setfill(' ') << basicServices.at(i) << endl;
+        }
+    }
+
+    cout << endl << "Services : " << endl;
+    for(unsigned int i = 0; i < extraServices.size(); i++){
+        cout << setw(15) << setfill(' ') << "Type : " << extraServices.at(i).getType() << endl;
+        cout << setw(15) << setfill(' ') << "Name : " << extraServices.at(i).getName() << endl;
+        cout << setw(15) << setfill(' ') << "Price Range : " << extraServices.at(i).getPriceRange() << endl;
+        cout << setw(15) << setfill(' ') << "Stars : " << extraServices.at(i).getStars() << endl << endl;
+    }
+}

@@ -16,7 +16,10 @@ int main() {
 
     Company company;
 
+    for(unsigned int i = 0; i < company.getBeaches().size(); i++){
 
+        company.getBeaches().at(i)->displayBeach();
+    }
 
     cout << string(100, '\n');
     mainMenu();
