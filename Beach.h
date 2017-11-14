@@ -8,8 +8,6 @@
 #include "Services.h"
 using namespace std;
 
-vector<Beach> Beaches;
-
 class Beach {
 protected:
     string name, county;
@@ -68,6 +66,7 @@ public:
     void setupBeach();
 };
 
+vector<Beach> Beaches;
 
 class RiverBeach: public Beach{
     float width, maxDepth;

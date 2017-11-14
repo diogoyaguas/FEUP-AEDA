@@ -102,16 +102,33 @@ RiverBeach::RiverBeach(string beach)
     beach = beach.substr(stop+2);
     stop = beach.find_first_of(';');
     unsigned int last = beach.find_first_of(';',stop);
-    string bservices = beach.substr(stop,last);
+    string basic_services = beach.substr(stop,last);
     while(stop!=string::npos){
-        this->basicServices.push_back(bservices.substr(0,stop));
-        beach = bservices.substr(stop+2);
-        stop = bservices.find_first_of(',');
+        this->basicServices.push_back(basic_services.substr(0,stop));
+        beach = basic_services.substr(stop+2);
+        stop = basic_services.find_first_of(',');
     }
-    stop = last;
-    beach = beach.substr(stop+2);
-    
 
+    stop = beach.find_first_of('(');
+    string extra_services = beach.substr(stop+2,beach.find_first_of(')')-stop);
+    while(stop != string::npos){
+        last = extra_services.find_first_of(';');
+        string service,type,name,priceRange,stars;
+        service = extra_services.substr(stop+2,last-stop);
+        unsigned int pos = extra_services.find_first_of(',');
+        type = service.substr(stop,pos-stop);
+        stop = pos;
+        pos = service.find_first_of(',',stop);
+        name = service.substr(stop,pos-stop);
+        stop = pos;
+        pos = service.find_first_of(',',stop);
+        priceRange = service.substr(stop,pos-stop);
+        stop = pos;
+        pos = last;
+        stars = service.substr(stop,pos-stop);
+        this->extraServices.emplace_back( Services(type,name,priceRange,stars));
+        stop = last;
+    }
 }
 
 //Bayou Beach

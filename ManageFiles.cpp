@@ -2,8 +2,8 @@
 
 #include <fstream>
 #include <iostream>
-#include <string>
 #include "Beach.h"
+
 
 using namespace std;
 
