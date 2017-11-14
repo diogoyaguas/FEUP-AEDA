@@ -262,7 +262,7 @@ BayouBeach::BayouBeach(string beach)
     //attribute basic serves
     beach = beach.substr(stop+1);
     last = beach.find_first_of(';',stop);
-    basic_services = beach.substr(stop-1,last-1);
+    basic_services = beach.substr(stop-1,last-stop+1);
     unsigned long st;
 
     while(stop!=string::npos && !basic_services.empty()){
@@ -282,13 +282,19 @@ BayouBeach::BayouBeach(string beach)
         extraServices.emplace_back(Services());
     }
 
-    while(st <= last){
+    while(st != string::npos){
         tempService = extra_services.substr(0,st);
         extraServices.emplace_back(Services(tempService));
         extra_services=extra_services.substr(st+2);
         st = extra_services.find_first_of(';');
+
+        if(st == string::npos){
+            tempService = extra_services.substr(0,st);
+            extraServices.emplace_back(Services(tempService));
+        }
     }
 }
+
 
 void BayouBeach::displayBeach() {
 
@@ -306,21 +312,21 @@ void BayouBeach::displayBeach() {
         for (unsigned int i = 0; i < basicServices.size(); i++){
 
             size = basicServices.at(i).size();
-            cout << setw(20+size) << setfill(' ') << basicServices.at(i);
+            cout << setw(20+size) << setfill(' ') << basicServices.at(i) << endl;
         }
     }else if(blueflag && !lifeguard){
         cout << "Useful information: " <<  "Blue Flag" << endl;
         for (unsigned int i = 0; i < basicServices.size(); i++){
 
             size = basicServices.at(i).size();
-            cout << setw(20+size) << setfill(' ') << basicServices.at(i);
+            cout << setw(20+size) << setfill(' ') << basicServices.at(i) << endl;
         }
     }else if(!blueflag && !lifeguard){
         cout << "Useful information: " << "Life Guard" << endl;
         for (unsigned int i = 0; i < basicServices.size(); i++) {
 
             size = basicServices.at(i).size();
-            cout << setw(20+size) << setfill(' ') << basicServices.at(i);
+            cout << setw(20+size) << setfill(' ') << basicServices.at(i) << endl;
         }
     }
     else{
