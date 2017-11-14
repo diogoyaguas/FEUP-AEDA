@@ -20,6 +20,8 @@ public:
      * @param stars
      */
     Services(string type, string name, string priceRange, string stars);
+    Services(string service);
+    Services();
     string getType(){return type;}
     string getName(){return name;}
     string getPriceRange(){return priceRange;}

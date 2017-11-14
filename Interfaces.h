@@ -5,7 +5,6 @@
 #ifndef AEDA_INTERFACES_H
 #define AEDA_INTERFACES_H
 
-#endif //AEDA_INTERFACES_H
 
 /**
  * @brief shows main options and redirects user to next menu according to input
@@ -37,3 +36,4 @@ bool ValidInput(int lowerL, int upperL, int input);
  */
 void timer();
 
+#endif //AEDA_INTERFACES_H

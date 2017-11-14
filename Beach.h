@@ -75,12 +75,11 @@ public:
      * @param 2nd longitude
      * @return distance
      */
-    float distanceToBeach(float LAT,float LONG);
+    double distanceToBeach(float LAT,float LONG);
 
     virtual void displayBeach() = 0;
 };
 
-vector<Beach> Beaches;
 
 class RiverBeach: public Beach{
     float width, maxDepth;
