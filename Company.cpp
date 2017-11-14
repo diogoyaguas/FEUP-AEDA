@@ -1,7 +1,3 @@
-//
-// Created by Beatriz Mendes on 14/11/2017.
-//
-
 #include "Company.h"
 #include <fstream>
 

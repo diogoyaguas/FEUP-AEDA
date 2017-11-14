@@ -59,14 +59,18 @@ void searchMenu(){
     cout << string(100,'\n');
     cout << " SEARCH BEACH" << setw(37) << setfill(' ') << " " << endl;
     cout << setfill('-') << setw(47)<<"-"<<endl;
-    cout << "1. Search by name." << endl;
-    cout << "2. Search closest beach" << endl;
+    cout << "1. Search by county" << endl;
+    cout << "2. Search by name." << endl;
+    cout << "3. Search by Blue Flag" << endl;
+    cout << "4. Search by Lifeguard" << endl;
+    cout << "5. Search closest beach" << endl;
+    cout << "6. Search by Services" << endl;
 
     cout << endl << "Enter a number option: ";
     cin >> option;
 
     //verifies if input is valid
-    while(cin.fail()||!ValidInput(1, 3, option)) {
+    while(cin.fail()||!ValidInput(1, 6, option)) {
         cin.clear();
         cin.ignore(1000, '\n');
         cout << "Please enter a valid option: ";
@@ -74,31 +78,5 @@ void searchMenu(){
     }
 
     //do stuff
-
-}
-
-
-void compareBeaches(){
-    int option;
-
-    cout << string(100,'\n');
-    cout << " COMPARE BEACHES" << setw(34) << setfill(' ') << " " << endl;
-    cout << setfill('-') << setw(44)<<"-"<<endl;
-    cout << "1. Compare by capacity." << endl;
-    cout << "2. Compare by distance" << endl;
-
-    cout << endl << "Enter a number option: ";
-    cin >> option;
-
-    //verifies if input is valid
-    while(cin.fail()||!ValidInput(1, 2, option)) {
-        cin.clear();
-        cin.ignore(1000, '\n');
-        cout << "Please enter a valid option: ";
-        cin >> option;
-    }
-
-    //do stuff
-
 
 }

@@ -1,7 +1,3 @@
-//
-// Created by Beatriz Mendes on 09/11/2017.
-//
-
 #ifndef AEDA_INTERFACES_H
 #define AEDA_INTERFACES_H
 
@@ -16,11 +12,6 @@ void mainMenu();
  * @brief shows options related to the search of beaches and collects input
  */
 void searchMenu();
-
-/**
- * @brief shows options related to the comparison of beaches and collects input
- */
-void compareBeaches();
 
 /**
  * @brief verifies if input given by user is between lowerL and upperL

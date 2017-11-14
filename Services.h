@@ -1,7 +1,3 @@
-//
-// Created by Beatriz Mendes on 06/11/2017.
-//
-
 #ifndef AEDA_SERVICES_H
 #define AEDA_SERVICES_H
 

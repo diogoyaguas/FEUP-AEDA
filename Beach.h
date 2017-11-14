@@ -1,5 +1,3 @@
-
-
 #ifndef AEDA_BEACH_H
 #define AEDA_BEACH_H
 
