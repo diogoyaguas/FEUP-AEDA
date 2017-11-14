@@ -63,7 +63,8 @@ public:
      * @return distance
      */
     float distanceToBeach(float LAT,float LONG);
-    void setupBeach();
+
+    virtual void displayBeach() = 0;
 };
 
 vector<Beach> Beaches;
@@ -87,6 +88,7 @@ public:
     RiverBeach(string county, string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float LONG, float width, float maxDepth , vector<string> &basicServices);
     RiverBeach(string beach);
     string getType() const{return "RB";}
+    void displayBeach();
 };
 
 
@@ -108,6 +110,7 @@ public:
     BayouBeach(string county,string name, bool blueflag, bool lifeguard, unsigned int max_capacity, float LAT , float LONG, float aquaticArea, vector<string> &basicServices);
     BayouBeach(string beach);
     string getType() const{return "BB";}
+    void displayBeach();
 };
 
 

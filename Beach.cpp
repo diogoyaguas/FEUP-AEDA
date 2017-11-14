@@ -3,6 +3,7 @@
 //
 #include "Beach.h"
 #include <cmath>
+#include <iomanip
 #include <string>
 
 //Beach
@@ -128,6 +129,52 @@ RiverBeach::RiverBeach(string beach)
         stars = service.substr(stop,pos-stop);
         this->extraServices.emplace_back( Services(type,name,priceRange,stars));
         stop = last;
+    }
+}
+
+void RiverBeach::displayBeach(){
+
+    cout << "County : " << county << endl;
+    cout << "GPS coordinates: " << LAT << " | " << LONG << endl;
+    cout << "Name   : " << name << endl;
+    cout << "Maximum Capacity : " << max_capacity << endl;
+    cout << "Width : " << width << endl;
+    cout << "Maximum Depth :" << maxDepth << endl;
+
+    if(blueflag == true && lifeguard == true){
+
+        cout << "Useful information : " <<  "Blue Flag" << endl << setw(21) << setfill(' ') << "Life Guard" << endl;
+        for (unsigned int i = 0; i < basicServices.size(); i++){
+
+            cout << setw(21) << setfill(' ') << basicServices.at(i);
+        }
+    }else if(blueflag == true && lifeguard == false){
+        cout << "Useful information : " <<  "Blue Flag" << endl;
+        for (unsigned int i = 0; i < basicServices.size(); i++){
+
+            cout << setw(21) << setfill(' ') << basicServices.at(i);
+        }
+    }else if(blueflag == false && lifeguard == false){
+        cout << "Useful information : " << "Life Guard" << endl;
+        for (unsigned int i = 0; i < basicServices.size(); i++) {
+
+            cout << setw(21) << setfill(' ') << basicServices.at(i);
+        }
+    }
+    else{
+        cout << "Useful information : " << basicServices.at(0) << endl;
+        for (unsigned int i = 1; i < basicServices.size(); i++) {
+
+            cout << setw(21) << setfill(' ') << basicServices.at(i);
+        }
+    }
+
+    cout << endl << "Services : " << endl;
+    for(unsigned int i = 0; i < extraServices.size(); i++){
+        cout << setw(11) << setfill(' ') << "Type : " << extraServices.at(i).getType() << endl;
+        cout << setw(11) << setfill(' ') << "Name : " << extraServices.at(i).getName() << endl;
+        cout << setw(11) << setfill(' ') << "Price Range : " << extraServices.at(i).getPriceRange() << endl;
+        cout << setw(11) << setfill(' ') << "Stars : " << extraServices.at(i).getStars() << endl << endl;
     }
 }
 
