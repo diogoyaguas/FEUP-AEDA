@@ -103,7 +103,7 @@ public:
      * @param line from txt file representing an object of class beach
      */
     RiverBeach(string beach);
-    string getType() const{return "RB";}
+    string getType() const{return "River";}
     void displayBeach();
 };
 
@@ -129,7 +129,7 @@ public:
      * @param line from txt file representing an object of class beach
      */
     BayouBeach(string beach);
-    string getType() const{return "BB";}
+    string getType() const{return "Bayou";}
     void displayBeach();
 };
 

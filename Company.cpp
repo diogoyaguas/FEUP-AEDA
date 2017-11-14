@@ -30,7 +30,11 @@ Company::Company() {
         if (type == "rio") {
 
             Beaches.push_back(new RiverBeach(beach.substr(stop + 2)));
+        }
 
+        else if (type == "albufeira") {
+
+            Beaches.push_back(new BayouBeach(beach.substr(stop + 2)));
         }
     }
 }

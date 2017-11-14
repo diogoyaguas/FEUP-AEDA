@@ -109,9 +109,9 @@ RiverBeach::RiverBeach(string beach)
     this->maxDepth = stof(beach.substr(0,stop));
 
     //attribute basic serves
-    beach = beach.substr(stop+2);
+    beach = beach.substr(stop+1);
     last = beach.find_first_of(';',stop);
-    basic_services = beach.substr(stop-1,last);
+    basic_services = beach.substr(stop-1,last-1);
     unsigned long st;
 
     while(stop!=string::npos && !basic_services.empty()){
@@ -136,52 +136,63 @@ RiverBeach::RiverBeach(string beach)
         extraServices.emplace_back(Services(tempService));
         extra_services=extra_services.substr(st+2);
         st = extra_services.find_first_of(';');
+
+        if(st == string::npos){
+            tempService = extra_services.substr(0,st);
+            extraServices.emplace_back(Services(tempService));
+        }
    }
 }
 
 void RiverBeach::displayBeach(){
 
-    cout << "County : " << county << endl;
+    cout << "County: " << county << endl;
     cout << "GPS coordinates: " << LAT << " | " << LONG << endl;
-    cout << "Name   : " << name << endl;
-    cout << "Maximum Capacity : " << max_capacity << endl;
-    cout << "Width : " << width << endl;
-    cout << "Maximum Depth :" << maxDepth << endl;
+    cout << "Name: " << getType() << " Beach " << name << endl;
+    cout << "Maximum Capacity: " << max_capacity << endl;
+    cout << "Width: " << width << endl;
+    cout << "Maximum Depth:" << maxDepth << endl;
+
+    unsigned int size;
 
     if(blueflag && lifeguard){
 
-        cout << "Useful information : " <<  "Blue Flag" << endl << setw(21) << setfill(' ') << "Life Guard" << endl;
+        cout << "Useful information: " <<  "Blue Flag" << endl << setw(30) << setfill(' ') << "Life Guard" << endl;
         for (unsigned int i = 0; i < basicServices.size(); i++){
 
-            cout << setw(21) << setfill(' ') << basicServices.at(i) << endl;
+            size = basicServices.at(i).size();
+            cout << setw(20+size) << setfill(' ') << basicServices.at(i) << endl;
         }
-    }else if(blueflag == true && lifeguard == false){
-        cout << "Useful information : " <<  "Blue Flag" << endl;
+    }else if(blueflag && !lifeguard){
+        cout << "Useful information: " <<  "Blue Flag" << endl;
         for (unsigned int i = 0; i < basicServices.size(); i++){
 
-            cout << setw(21) << setfill(' ') << basicServices.at(i) << endl;
+            size = basicServices.at(i).size();
+            cout << setw(20+size) << setfill(' ') << basicServices.at(i) << endl;
         }
-    }else if(blueflag == false && lifeguard == false){
-        cout << "Useful information : " << "Life Guard" << endl;
+    }else if(!blueflag && !lifeguard){
+        cout << "Useful information: " << "Life Guard" << endl;
         for (unsigned int i = 0; i < basicServices.size(); i++) {
 
-            cout << setw(21) << setfill(' ') << basicServices.at(i) << endl;
+            size = basicServices.at(i).size();
+            cout << setw(20+size) << setfill(' ') << basicServices.at(i) << endl;
         }
     }
     else{
-        cout << "Useful information : " << basicServices.at(0) << endl;
+        cout << "Useful information: " << basicServices.at(0) << endl;
         for (unsigned int i = 1; i < basicServices.size(); i++) {
 
-            cout << setw(21) << setfill(' ') << basicServices.at(i) << endl;
+            size = basicServices.at(i).size();
+            cout << setw(20+size) << setfill(' ') << basicServices.at(i) << endl;
         }
     }
 
-    cout << endl << "Services : " << endl;
+    cout << endl << "Services: " << endl;
     for(unsigned int i = 0; i < extraServices.size(); i++){
-        cout << setw(15) << setfill(' ') << "Type : " << extraServices.at(i).getType() << endl;
-        cout << setw(15) << setfill(' ') << "Name : " << extraServices.at(i).getName() << endl;
-        cout << setw(15) << setfill(' ') << "Price Range : " << extraServices.at(i).getPriceRange() << endl;
-        cout << setw(15) << setfill(' ') << "Stars : " << extraServices.at(i).getStars() << endl << endl;
+        cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).getType() << endl;
+        cout << setw(15) << setfill(' ') << "Name: " << extraServices.at(i).getName() << endl;
+        cout << setw(22) << setfill(' ') << "Price Range: " << extraServices.at(i).getPriceRange() << endl;
+        cout << setw(16) << setfill(' ') << "Stars: " << extraServices.at(i).getStars() << endl << endl;
     }
 }
 
@@ -249,9 +260,9 @@ BayouBeach::BayouBeach(string beach)
     this->aquaticArea = stof(beach.substr(0,stop));
 
     //attribute basic serves
-    beach = beach.substr(stop+2);
+    beach = beach.substr(stop+1);
     last = beach.find_first_of(';',stop);
-    basic_services = beach.substr(stop-1,last);
+    basic_services = beach.substr(stop-1,last-1);
     unsigned long st;
 
     while(stop!=string::npos && !basic_services.empty()){
@@ -281,45 +292,51 @@ BayouBeach::BayouBeach(string beach)
 
 void BayouBeach::displayBeach() {
 
-    cout << "County : " << county << endl;
+    cout << "County: " << county << endl;
     cout << "GPS coordinates: " << LAT << " | " << LONG << endl;
-    cout << "Name   : " << name << endl;
-    cout << "Maximum Capacity : " << max_capacity << endl;
-    cout << "Aquatic Area : " << aquaticArea << endl;
+    cout << "Name: " << getType() << " Beach " << name << endl;
+    cout << "Maximum Capacity: " << max_capacity << endl;
+    cout << "Aquatic Area: " << aquaticArea << endl;
+
+    unsigned int size;
 
     if(blueflag && lifeguard){
 
-        cout << "Useful information : " <<  "Blue Flag" << endl << setw(21) << setfill(' ') << "Life Guard" << endl;
+        cout << "Useful information: " <<  "Blue Flag" << endl << setw(30) << setfill(' ') << "Life Guard" << endl;
         for (unsigned int i = 0; i < basicServices.size(); i++){
 
-            cout << setw(21) << setfill(' ') << basicServices.at(i);
+            size = basicServices.at(i).size();
+            cout << setw(20+size) << setfill(' ') << basicServices.at(i);
         }
-    }else if(blueflag == true && lifeguard == false){
-        cout << "Useful information : " <<  "Blue Flag" << endl;
+    }else if(blueflag && !lifeguard){
+        cout << "Useful information: " <<  "Blue Flag" << endl;
         for (unsigned int i = 0; i < basicServices.size(); i++){
 
-            cout << setw(21) << setfill(' ') << basicServices.at(i);
+            size = basicServices.at(i).size();
+            cout << setw(20+size) << setfill(' ') << basicServices.at(i);
         }
-    }else if(blueflag == false && lifeguard == false){
-        cout << "Useful information : " << "Life Guard" << endl;
+    }else if(!blueflag && !lifeguard){
+        cout << "Useful information: " << "Life Guard" << endl;
         for (unsigned int i = 0; i < basicServices.size(); i++) {
 
-            cout << setw(21) << setfill(' ') << basicServices.at(i);
+            size = basicServices.at(i).size();
+            cout << setw(20+size) << setfill(' ') << basicServices.at(i);
         }
     }
     else{
-        cout << "Useful information : " << basicServices.at(0) << endl;
+        cout << "Useful information: " << basicServices.at(0) << endl;
         for (unsigned int i = 1; i < basicServices.size(); i++) {
 
-            cout << setw(21) << setfill(' ') << basicServices.at(i) << endl;
+            size = basicServices.at(i).size();
+            cout << setw(20+size) << setfill(' ') << basicServices.at(i) << endl;
         }
     }
 
-    cout << endl << "Services : " << endl;
+    cout << endl << "Services: " << endl;
     for(unsigned int i = 0; i < extraServices.size(); i++){
-        cout << setw(15) << setfill(' ') << "Type : " << extraServices.at(i).getType() << endl;
-        cout << setw(15) << setfill(' ') << "Name : " << extraServices.at(i).getName() << endl;
-        cout << setw(15) << setfill(' ') << "Price Range : " << extraServices.at(i).getPriceRange() << endl;
-        cout << setw(15) << setfill(' ') << "Stars : " << extraServices.at(i).getStars() << endl << endl;
+        cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).getType() << endl;
+        cout << setw(15) << setfill(' ') << "Name: " << extraServices.at(i).getName() << endl;
+        cout << setw(22) << setfill(' ') << "Price Range: " << extraServices.at(i).getPriceRange() << endl;
+        cout << setw(16) << setfill(' ') << "Stars: " << extraServices.at(i).getStars() << endl << endl;
     }
 }
