@@ -2,10 +2,8 @@
 
 #include <fstream>
 #include <iostream>
-#include <string>
 #include "Beach.h"
 
-vector<Beach> Beaches;
 
 using namespace std;
 

@@ -8,7 +8,6 @@
 #include "Services.h"
 using namespace std;
 
-
 class Beach {
 protected:
     string name, county;
@@ -79,6 +78,7 @@ public:
     double distanceToBeach(float LAT,float LONG);
 };
 
+vector<Beach> Beaches;
 
 class RiverBeach: public Beach{
     float width, maxDepth;
