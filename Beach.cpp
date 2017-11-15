@@ -9,21 +9,30 @@ county(county),name(name), blueflag(blueflag), max_capacity(max_capacity), LAT(L
 {
 }
 
+// get functions
 string Beach::get_name(){ return name;}
-
 bool Beach::get_blue_flag(){return blueflag;}
-
 bool Beach::get_lifeguard(){return lifeguard;}
-
 unsigned long Beach::get_max_capacity(){return max_capacity;}
-
 float Beach::get_Latitude(){return LAT;}
-
 float Beach::get_Longitude(){return LONG;}
-
 vector<string> Beach::getBasicServices(){return basicServices;}
-
 vector<Services> Beach::getExtraServices(){return extraServices;}
+
+// set functions
+
+void Beach::set_name(string name){this->name = name;}
+void Beach::set_blue_flag(){if(this->blueflag){
+        this->blueflag = false;
+    } else this->blueflag = true;}
+void Beach::set_lifeguard(){if(this->lifeguard){
+        this->lifeguard = false;
+    } else this->lifeguard = true;}
+void Beach::set_max_capacity(unsigned long max_capacity){this->max_capacity = max_capacity;}
+void Beach::set_Latitude(float LAT){this->LAT = LAT;}
+void Beach::set_Longitude(float LONG){this->LONG = LONG;}
+void Beach::set_BasicServices(vector<string> basicServices){this->basicServices = basicServices;}
+void Beach::set_ExtraServices(vector<Services> extraServices){this->extraServices = extraServices;}
 
 double Beach::distanceToBeach(float LAT, float LONG){
     double dLONG, dLAT, a, c, distance, earthRadius;
@@ -37,6 +46,7 @@ double Beach::distanceToBeach(float LAT, float LONG){
 
     return distance;
 }
+
 
 //River Beach
 RiverBeach::RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG,  float &width, float &maxDepth)
@@ -147,7 +157,7 @@ void RiverBeach::displayBeach(){
 
     cout << "County: " << county << endl;
     cout << "GPS coordinates: " << LAT << " | " << LONG << endl;
-    cout << "Name: " << getType() << " Beach " << name << endl;
+    cout << "Name: " << get_Type() << " Beach " << name << endl;
     cout << "Maximum Capacity: " << max_capacity << endl;
     cout << "Width: " << width << endl;
     cout << "Maximum Depth:" << maxDepth << endl;
@@ -188,12 +198,13 @@ void RiverBeach::displayBeach(){
 
     cout << endl << "Services: " << endl;
     for(unsigned int i = 0; i < extraServices.size(); i++){
-        cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).getType() << endl;
+        cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).get_Type() << endl;
         cout << setw(15) << setfill(' ') << "Name: " << extraServices.at(i).getName() << endl;
         cout << setw(22) << setfill(' ') << "Price Range: " << extraServices.at(i).getPriceRange() << endl;
         cout << setw(16) << setfill(' ') << "Stars: " << extraServices.at(i).getStars() << endl << endl;
     }
 }
+
 
 //Bayou Beach
 BayouBeach::BayouBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG, float &aquaticArea)
@@ -306,7 +317,7 @@ void BayouBeach::displayBeach() {
 
     cout << "County: " << county << endl;
     cout << "GPS coordinates: " << LAT << " | " << LONG << endl;
-    cout << "Name: " << getType() << " Beach " << name << endl;
+    cout << "Name: " << get_Type() << " Beach " << name << endl;
     cout << "Maximum Capacity: " << max_capacity << endl;
     cout << "Aquatic Area: " << aquaticArea << endl;
 
@@ -346,7 +357,7 @@ void BayouBeach::displayBeach() {
 
     cout << endl << "Services: " << endl;
     for(unsigned int i = 0; i < extraServices.size(); i++){
-        cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).getType() << endl;
+        cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).get_Type() << endl;
         cout << setw(15) << setfill(' ') << "Name: " << extraServices.at(i).getName() << endl;
         cout << setw(22) << setfill(' ') << "Price Range: " << extraServices.at(i).getPriceRange() << endl;
         cout << setw(16) << setfill(' ') << "Stars: " << extraServices.at(i).getStars() << endl << endl;

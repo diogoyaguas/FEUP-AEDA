@@ -8,15 +8,10 @@ private:
     vector<Beach *> Beaches;
 public:
     Company();
-    vector<Beach *> getBeaches();
-    void quickSort(vector<Beach *> &v);
-    void  quickSort(vector<Beach *> &v,unsigned int left,unsigned int right);
-    const unsigned int &median3(vector<Beach *> &v, unsigned int left, unsigned int right);
     vector<Beach *> getBeaches(){return Beaches;}
     void addBeach();
     void removeBeach();
     void alterBeachInfo();
-    void updateFile();
 };
 
 template <class T>

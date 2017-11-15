@@ -68,7 +68,19 @@ public:
      * @brief helps identifying from which derived class ths object is
      * @return "BayouBeach" if it's a class BayouBeach object, "RiverBeach" if it's a class RiverBeach object
      */
-    virtual string getType() const=0;
+    virtual string get_Type() const=0;
+
+    void set_name(string name){};
+    void set_blue_flag(){};
+    void set_lifeguard(){};
+    void set_max_capacity(unsigned long max_capacity){};
+    void set_Latitude(float LAT){};
+    void set_Longitude(float LONG){};
+    void set_BasicServices(vector<string> basicServices){};
+    void set_ExtraServices(vector<Services> extraServices){};
+    virtual void set_width(float width) = 0;
+    virtual void set_maxDepth(float maxDept) = 0;
+    virtual void set_aquaticArea(float aquaticArea) = 0;
 
     /**
      * @brief calculates distance from location's GPS coordinates to beach's coordinates
@@ -104,7 +116,10 @@ public:
      * @param line from txt file representing an object of class beach
      */
     RiverBeach(string beach);
-    string getType() const{return "River";}
+    string get_Type() const{return "River";}
+    void set_width(float width){ this->width = width};
+    void set_maxDepth(float maxDept) { this->maxDepth = maxDept};
+    void set_aquaticArea(float aquaticArea){};
     void displayBeach();
 };
 
@@ -130,7 +145,10 @@ public:
      * @param line from txt file representing an object of class beach
      */
     BayouBeach(string beach);
-    string getType() const{return "Bayou";}
+    string get_Type() const{return "Bayou";}
+    void set_width(float width){};
+    void set_maxDepth(float maxDept) {};
+    void set_aquaticArea(float aquaticArea){this->aquaticArea = aquaticArea};
     void displayBeach();
 };
 
