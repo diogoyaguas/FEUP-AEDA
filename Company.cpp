@@ -52,7 +52,7 @@ void Company::addBeach() {
     int utilities, counter = 0, services, temp;
     string sType, sName, sPriceRange, sStars;
 
-    cout << "Insert type (Bayou or River): " << endl << ":::";
+    cout << "Insert type (Bayou or River): " << endl << "::: ";
     cin >> type;
     while(type != "River" && type != "Bayou"){
 
@@ -66,7 +66,7 @@ void Company::addBeach() {
     cin.ignore(1000, '\n');
     getline(cin,county);
 
-    cout << endl << "Insert name: "<< endl << ":::";
+    cout << endl << "Insert name: "<< endl << "::: ";
     getline(cin,name);
 
     cout << endl << "Insert 1 if contains blueflag, 0 otherwise: "<< endl << "::: ";
@@ -100,7 +100,7 @@ void Company::addBeach() {
     cin >> lat;
     fail(lat);
 
-    cout << ":::";
+    cout << "::: ";
     cin >> longi;
     fail(longi);
 
@@ -123,7 +123,7 @@ void Company::addBeach() {
         cin >> aquaticArea;
         fail(aquaticArea);
 
-        (new BayouBeach(county, name, blueflag, lifeguard, max_capacity, lat, longi, aquaticArea));
+        beaches.push_back(new BayouBeach(county, name, blueflag, lifeguard, max_capacity, lat, longi, aquaticArea));
     }
     
     cout << endl << "How many basic utilities does the beach have? (eg: wc, showers...): "<< endl << "::: ";
@@ -134,15 +134,15 @@ void Company::addBeach() {
         cin.ignore(1000,'\n');
         cout << endl << "service" <<++counter << ": ";
         getline(cin,utility);
-        beaches.at(beaches.size() - 1)->getBasicServices().push_back(utility);
+        beaches.at(beaches.size() - 1)->add_BasicService(utility);
     }
 
     cout << endl << "How many services does the beach have? (eg, Hotel, Bar): "<< endl << "::: ";
     cin >> services;
     fail(services);
     counter = 0;
+    cin.ignore(1000,'\n');
     while (counter < services) {
-        cin.ignore(1000,'\n');
         cout << endl << "Service " <<++ counter << ": ";
         
         cout << endl << "Type (eg: Hotel, Bar): ";
@@ -168,9 +168,9 @@ void Company::addBeach() {
             cin >> sStars;
         }
 
-        beaches.at(beaches.size() - 1)->getExtraServices().emplace_back(Services(sType, sName, sPriceRange, sStars));
-    }
+        beaches.at(beaches.size() - 1)->add_ExtraService(Services(sType, sName, sPriceRange, sStars));
 
+    }
     cout << "Beach added successfully!" << string(4,'\n');
 }
 

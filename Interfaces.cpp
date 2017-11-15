@@ -53,7 +53,7 @@ void mainMenu(Company &company) {
         case 2:
             searchMenu(company);
             break;
-        case 3:
+        case 4:
             AddAlterRemoveMenu(company);
             break;
 

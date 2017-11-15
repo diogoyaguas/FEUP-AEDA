@@ -33,6 +33,10 @@ void Beach::set_longitude(float longi){this->longi = longi;}
 void Beach::set_BasicServices(vector<string> basicServices){this->basicServices = basicServices;}
 void Beach::set_ExtraServices(vector<Services> extraServices){this->extraServices = extraServices;}
 
+
+void Beach::add_BasicService(string service){this->basicServices.push_back(service);}
+void Beach::add_ExtraService(Services service){this->extraServices.push_back(service);}
+
 double Beach::distanceToBeach(float lat, float longi){
     double dlongi, dlat, a, c, distance, earthRadius;
     earthRadius=6373;

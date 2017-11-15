@@ -8,7 +8,7 @@ using namespace std;
 int main() {
 
     cout << endl << "WELCOME! Loading file...\n";
-    timer();
+    //timer();
 
     Company company;
 

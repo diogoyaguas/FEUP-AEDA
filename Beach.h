@@ -115,6 +115,10 @@ public:
      */
     void set_BasicServices(vector<string> basicServices);
 
+
+    void add_BasicService(string service);
+    void add_ExtraService(Services service);
+
     /**
      * @brief changes extra services
      * @param extraServices
