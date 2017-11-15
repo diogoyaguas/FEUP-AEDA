@@ -9,7 +9,7 @@ county(county),name(name), blueflag(blueflag), max_capacity(max_capacity), LAT(L
 {
 }
 
-// get functions
+// get methods
 string Beach::get_name(){ return name;}
 bool Beach::get_blue_flag(){return blueflag;}
 bool Beach::get_lifeguard(){return lifeguard;}
@@ -19,8 +19,7 @@ float Beach::get_Longitude(){return LONG;}
 vector<string> Beach::getBasicServices(){return basicServices;}
 vector<Services> Beach::getExtraServices(){return extraServices;}
 
-// set functions
-
+// set methods
 void Beach::set_name(string name){this->name = name;}
 void Beach::set_blue_flag(){if(this->blueflag){
         this->blueflag = false;
@@ -157,7 +156,7 @@ void RiverBeach::displayBeach(){
 
     cout << "County: " << county << endl;
     cout << "GPS coordinates: " << LAT << " | " << LONG << endl;
-    cout << "Name: " << get_Type() << " Beach " << name << endl;
+    cout << "Name: " << getType() << " Beach " << name << endl;
     cout << "Maximum Capacity: " << max_capacity << endl;
     cout << "Width: " << width << endl;
     cout << "Maximum Depth:" << maxDepth << endl;
@@ -198,7 +197,7 @@ void RiverBeach::displayBeach(){
 
     cout << endl << "Services: " << endl;
     for(unsigned int i = 0; i < extraServices.size(); i++){
-        cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).get_Type() << endl;
+        cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).getType() << endl;
         cout << setw(15) << setfill(' ') << "Name: " << extraServices.at(i).getName() << endl;
         cout << setw(22) << setfill(' ') << "Price Range: " << extraServices.at(i).getPriceRange() << endl;
         cout << setw(16) << setfill(' ') << "Stars: " << extraServices.at(i).getStars() << endl << endl;
@@ -317,7 +316,7 @@ void BayouBeach::displayBeach() {
 
     cout << "County: " << county << endl;
     cout << "GPS coordinates: " << LAT << " | " << LONG << endl;
-    cout << "Name: " << get_Type() << " Beach " << name << endl;
+    cout << "Name: " << getType() << " Beach " << name << endl;
     cout << "Maximum Capacity: " << max_capacity << endl;
     cout << "Aquatic Area: " << aquaticArea << endl;
 
@@ -357,7 +356,7 @@ void BayouBeach::displayBeach() {
 
     cout << endl << "Services: " << endl;
     for(unsigned int i = 0; i < extraServices.size(); i++){
-        cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).get_Type() << endl;
+        cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).getType() << endl;
         cout << setw(15) << setfill(' ') << "Name: " << extraServices.at(i).getName() << endl;
         cout << setw(22) << setfill(' ') << "Price Range: " << extraServices.at(i).getPriceRange() << endl;
         cout << setw(16) << setfill(' ') << "Stars: " << extraServices.at(i).getStars() << endl << endl;

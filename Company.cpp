@@ -116,7 +116,7 @@ void Company::alterBeachInfo() {
 
         if (Beaches.at(i)->get_name() == name) {
 
-            if (Beaches.at(i)->get_Type() == "River") {
+            if (Beaches.at(i)->getType() == "River") {
                 cout << "What do you want to change?" << endl;
                 cout << "1. Change name" << endl;
                 cout << "2. Change if have Blue Flag" << endl;
@@ -177,7 +177,7 @@ void Company::alterBeachInfo() {
             }
 
 
-            if (Beaches.at(i)->get_Type() == "Bayou") {
+            if (Beaches.at(i)->getType() == "Bayou") {
                 cout << "What do you want to change?" << endl;
                 cout << "1. Change name" << endl;
                 cout << "2. Change if have blue flag" << endl;
