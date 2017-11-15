@@ -4,12 +4,12 @@
 #include <string>
 
 //Beach
-Beach::Beach(string &county,string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG, vector<string> &basicServices):
+Beach::Beach(string &county,string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG):
 county(county),name(name), blueflag(blueflag), max_capacity(max_capacity), LAT(LAT), LONG(LONG)
 {
-    this->basicServices=basicServices;
 }
 
+string Beach::get_name(){ return name;}
 
 bool Beach::get_blue_flag(){return blueflag;}
 
@@ -20,6 +20,8 @@ unsigned long Beach::get_max_capacity(){return max_capacity;}
 float Beach::get_Latitude(){return LAT;}
 
 float Beach::get_Longitude(){return LONG;}
+
+vector<string> Beach::getBasicServices(){return basicServices;}
 
 vector<Services> Beach::getExtraServices(){return extraServices;}
 
@@ -37,8 +39,8 @@ double Beach::distanceToBeach(float LAT, float LONG){
 }
 
 //River Beach
-RiverBeach::RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG,  float &width, float &maxDepth, vector<string> &basicServices)
-        :Beach(county, name, blueflag, lifeguard, max_capacity,  LAT ,  LONG, basicServices) {
+RiverBeach::RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG,  float &width, float &maxDepth)
+        :Beach(county, name, blueflag, lifeguard, max_capacity,  LAT ,  LONG) {
     this->width=width;
     this->maxDepth=maxDepth;
 }
@@ -194,8 +196,8 @@ void RiverBeach::displayBeach(){
 }
 
 //Bayou Beach
-BayouBeach::BayouBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG, float &aquaticArea, vector<string> &basicServices)
-        :Beach(county,name, blueflag, lifeguard, max_capacity,  LAT ,  LONG, basicServices){
+BayouBeach::BayouBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG, float &aquaticArea)
+        :Beach(county,name, blueflag, lifeguard, max_capacity,  LAT ,  LONG){
     this->aquaticArea=aquaticArea;
 }
 

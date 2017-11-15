@@ -8,7 +8,11 @@ private:
     vector<Beach *> Beaches;
 public:
     Company();
-    vector<Beach *> getBeaches();
+    vector<Beach *> getBeaches(){return Beaches;}
+    void addBeach();
+    void removeBeach();
+    void alterBeachInfo();
+    void updateFile();
 };
 
 

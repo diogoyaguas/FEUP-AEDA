@@ -27,10 +27,11 @@ public:
      * @param Long
      * @param basicServices
      */
-    Beach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &Long, vector<string> &basicServices);
+    Beach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &Long);
 
     Beach(){}
 
+    string get_name();
     /**
      * @return 1 if beach contains blue flag, 0 otherwise
      */
@@ -55,6 +56,8 @@ public:
      * @return longitude
      */
     float get_Longitude();
+
+    vector<string> getBasicServices();
 
     /**
      * @return vector of Services beach contains
@@ -95,7 +98,7 @@ public:
      * @param maxDepth
      * @param basicServices
      */
-    RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG,  float &width, float &maxDepth, vector<string> &basicServices);
+    RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG,  float &width, float &maxDepth);
     /**
      * @brief helper construtor which recognizes and associates Beach's object's given attributes
      * @param line from txt file representing an object of class beach
@@ -121,7 +124,7 @@ public:
      * @param aquaticArea
      * @param basicServices
      */
-    BayouBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG, float &aquaticArea, vector<string> &basicServices);
+    BayouBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG, float &aquaticArea);
     /**
      * @brief helper construtor which recognizes and associates Beach's object's given attributes
      * @param line from txt file representing an object of class beach
