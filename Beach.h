@@ -79,47 +79,47 @@ public:
      *
      * @param name
      */
-    void set_name(string name){};
+    void set_name(string name);
 
     /**
      *
      */
-    void set_blue_flag(){};
+    void set_blue_flag();
 
     /**
      *
      */
-    void set_lifeguard(){};
+    void set_lifeguard();
 
     /**
      *
      * @param max_capacity
      */
-    void set_max_capacity(unsigned long max_capacity){};
+    void set_max_capacity(unsigned long max_capacity);
 
     /**
      *
      * @param LAT
      */
-    void set_Latitude(float LAT){};
+    void set_Latitude(float LAT);
 
     /**
      *
      * @param LONG
      */
-    void set_Longitude(float LONG){};
+    void set_Longitude(float LONG);
 
     /**
      *
      * @param basicServices
      */
-    void set_BasicServices(vector<string> basicServices){};
+    void set_BasicServices(vector<string> basicServices);
 
     /**
      *
      * @param extraServices
      */
-    void set_ExtraServices(vector<Services> extraServices){};
+    void set_ExtraServices(vector<Services> extraServices);
 
     /**
      *

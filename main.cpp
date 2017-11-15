@@ -1,9 +1,7 @@
 #include <iostream>
-#include <vector>
 using namespace std;
-
 #include "Interfaces.h"
-#include "Company.h"
+
 
 
 
@@ -15,7 +13,7 @@ int main() {
     Company company;
 
     cout << string(100, '\n');
-    mainMenu();
+    mainMenu(company);
 
     return 0;
 }

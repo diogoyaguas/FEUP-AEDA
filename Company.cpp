@@ -23,16 +23,25 @@ Company::Company() {
         type = beach.substr(0, stop);
 
 
-        if (type == "rio") {
+        if (type == "river") {
 
             Beaches.push_back(new RiverBeach(beach.substr(stop + 2)));
-        } else if (type == "albufeira") {
+        } else if (type == "bayou") {
 
             Beaches.push_back(new BayouBeach(beach.substr(stop + 2)));
         }
     }
 }
 
+unsigned int Company::beachExists(string name){
+    for (unsigned int i = 0; i < Beaches.size(); ++i) {
+
+        if (Beaches.at(i)->get_name() == name) {
+            return i;
+        }
+    }
+        return -1;
+}
 
 void Company::addBeach() {
     string type, county, name, utility;
@@ -77,11 +86,11 @@ void Company::addBeach() {
 
 
     cout << endl << "How many basic utilities does the beach have? (eg: wc, showers...): ";
+    cin >> utilities;
     while (counter < utilities) {
-        cout << endl << counter++ << "st utility: ";
+        cout << endl << ++counter << "st utility: ";
         cin >> utility;
         Beaches.at(Beaches.size() - 1)->getBasicServices().push_back(utility);
-        counter++;
 
     }
 
@@ -89,7 +98,7 @@ void Company::addBeach() {
     cin >> services;
     counter = 0;
     while (counter < services) {
-        cout << endl << counter++ << "st service: ";
+        cout << endl << ++counter << "st service: ";
         cout << endl << "Type (eg: Hotel, Bar): ";
         cin >> sType;
         cout << endl << "Name (eg: Tapada Grande): ";
@@ -100,145 +109,62 @@ void Company::addBeach() {
         cin >> sStars;
         Beaches.at(Beaches.size() - 1)->getExtraServices().push_back(Services(sType, sName, sPriceRange, sStars));
     }
+
+    cout << "Beach added successfully!" << string(4,'\n');
 }
 
-void Company::alterBeachInfo() {
 
-    int option;
-    string name;
-    unsigned long maxCap;
-    float maxDepth, width, LAT, LONG, aquaticArea;
+void Company::alterRBeachInfo(unsigned int option, unsigned int i) {
+    string name, county;
+    bool blueflag, lifeguard;
+    unsigned long max_capacity;
+    float LAT, LONG;
+    float width, maxDepth;
+    vector<string> basicServices;
+    vector<Services> extraServices;
 
-    cout << "Insert beach name" << endl;
-    cin >> name;
-
-    for (unsigned int i = 0; i < Beaches.size(); ++i) {
-
-        if (Beaches.at(i)->get_name() == name) {
-
-            if (Beaches.at(i)->getType() == "River") {
-                cout << "What do you want to change?" << endl;
-                cout << "1. Change name" << endl;
-                cout << "2. Change if have Blue Flag" << endl;
-                cout << "3. Change if have Lifeguard" << endl;
-                cout << "4. Change maximum capacity" << endl;
-                cout << "5. Change width" << endl;
-                cout << "6. Change maximum depth" << endl;
-                cout << "7. Change GPS coordinates" << endl;
-                cout << "8. Change services" << endl;
-                cout << endl << "Enter a number option: ";
-                cin >> option;
-
-                //verifies if input is valid
-                while (cin.fail() || !ValidInput(1, 8, option)) {
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    cout << "Please enter a valid option: ";
-                    cin >> option;
-                }
-
-                switch (option) {
-
-                    case 1:
-                        cout << "Insert new name: " << endl;
-                        cin >> name;
-                        Beaches.at(i)->set_name(name);
-                        break;
-                    case 2:
-                        Beaches.at(i)->set_blue_flag();
-                        break;
-                    case 3:
-                        Beaches.at(i)->set_lifeguard();
-                        break;
-                    case 4:
-                        cout << "Insert new maximum capacity: " << endl;
-                        cin >> maxCap;
-                        Beaches.at(i)->set_max_capacity(maxCap);
-                        break;
-                    case 5:
-                        cout << "Insert new width: " << endl;
-                        cin >> width;
-                        Beaches.at(i)->set_width(width);
-                        break;
-                    case 6:
-                        cout << "Insert new maximum depth: " << endl;
-                        cin >> maxDepth;
-                        Beaches.at(i)->set_maxDepth(maxDepth);
-                        break;
-                    case 7:
-                        cout << "Insert latitude and longitude coordinates separated by a space (eg: 40.268799 -7.143181): " << endl;
-                        cin >> LAT >> LONG;
-                        Beaches.at(i)->set_Latitude(LAT);
-                        Beaches.at(i)->set_Longitude(LONG);
-                        break;
-                    case 8:
-                        break;
-                }
-            }
-
-
-            if (Beaches.at(i)->getType() == "Bayou") {
-                cout << "What do you want to change?" << endl;
-                cout << "1. Change name" << endl;
-                cout << "2. Change if have blue flag" << endl;
-                cout << "3. Change if have lifeguard" << endl;
-                cout << "4. Change maximum capacity" << endl;
-                cout << "5. Change aquatic area" << endl;
-                cout << "6. Change GPS coordinates" << endl;
-                cout << "7. Change services" << endl;
-                cout << endl << "Enter a number option: ";
-                cin >> option;
-
-                //verifies if input is valid
-                while (cin.fail() || !ValidInput(1, 7, option)) {
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    cout << "Please enter a valid option: ";
-                    cin >> option;
-
-                }
-
-                switch (option) {
-
-                    case 1:
-                        cout << "Insert new name: " << endl;
-                        cin >> name;
-                        Beaches.at(i)->set_name(name);
-                        break;
-                    case 2:
-                        Beaches.at(i)->set_blue_flag();
-                        break;
-                    case 3:
-                        Beaches.at(i)->set_lifeguard();
-                        break;
-                    case 4:
-                        cout << "Insert new maximum capacity: " << endl;
-                        cin >> maxCap;
-                        Beaches.at(i)->set_max_capacity(maxCap);
-                        break;
-                    case 5:
-                        cout << "Insert new aquatic area: " << endl;
-                        cin >> aquaticArea;
-                        Beaches.at(i)->set_aquaticArea(aquaticArea);
-                        break;
-                    case 6:
-                        cout << "Insert latitude and longitude coordinates separated by a space (eg: 40.268799 -7.143181): " << endl;
-                        cin >> LAT >> LONG;
-                        Beaches.at(i)->set_Latitude(LAT);
-                        Beaches.at(i)->set_Longitude(LONG);
-                        break;
-                    case 7:
-                        break;
-                }
-            }
-        }
+    switch (option) {
+        case 1:
+            cout << "Insert new name: " << endl;
+            cin >> name;
+            Beaches.at(i)->set_name(name);
+            break;
+        case 2:
+            Beaches.at(i)->set_blue_flag();
+            break;
+        case 3:
+            Beaches.at(i)->set_lifeguard();
+            break;
+        case 4:
+            cout << "Insert new maximum capacity: " << endl;
+            cin >> max_capacity;
+            Beaches.at(i)->set_max_capacity(max_capacity);
+            break;
+        case 5:
+            cout << "Insert new depth area: " << endl;
+            cin >> maxDepth;
+            Beaches.at(i)->set_aquaticArea(maxDepth);
+            break;
+        case 6:
+            cout << "Insert latitude and longitude coordinates separated by a space (eg: 40.268799 -7.143181): "
+                 << endl;
+            cin >> LAT >> LONG;
+            Beaches.at(i)->set_Latitude(LAT);
+            Beaches.at(i)->set_Longitude(LONG);
+            break;
+        case 7:
+            break;
     }
 
-
 }
+
+
+
+
 
 void Company::removeBeach() {
     string name;
+    bool removed = false;
 
     cout << "Insert beach name: ";
     cin >> name;
@@ -247,16 +173,14 @@ void Company::removeBeach() {
 
         if (Beaches.at(i)->get_name() == name) {
 
-            Beaches.erase(Beaches.begin() + Beaches.size());
-            cout << "Beach " << name << " erased" << endl;
-
-        } else if (i == Beaches.size() - 1 && Beaches.at(i)->get_name() != name) {
-
-            cout << "There is no beach with the given name.";
-
+            Beaches.erase(Beaches.begin()+i);
+            cout << endl<< name<< " beach erased successfully!" << string(4,'\n');
+            removed = true;
         }
     }
 
-
+    if(!removed){
+        cout <<endl << "ERROR: There is no beach with the given name!" << string(4,'\n');
+    }
 }
 

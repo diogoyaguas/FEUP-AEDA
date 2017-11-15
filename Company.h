@@ -11,7 +11,9 @@ public:
     vector<Beach *> getBeaches(){return Beaches;}
     void addBeach();
     void removeBeach();
-    void alterBeachInfo();
+    void alterRBeachInfo(unsigned int option, unsigned int i);
+
+    unsigned int beachExists(string name);
 };
 
 
