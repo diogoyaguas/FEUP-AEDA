@@ -62,24 +62,24 @@ void Company::addBeach() {
         cin >> type;
     }
 
-    cout << endl << "Insert county (eg: Arcos de Valdevez): "<< endl << ":::";
+    cout << endl << "Insert county (eg: Arcos de Valdevez): "<< endl << "::: ";
     cin.ignore(1000, '\n');
     getline(cin,county);
 
     cout << endl << "Insert name: "<< endl << ":::";
     getline(cin,name);
 
-    cout << endl << "Insert 1 if contains blueflag, 0 otherwise: "<< endl << ":::";
+    cout << endl << "Insert 1 if contains blueflag, 0 otherwise: "<< endl << "::: ";
     cin >> blueflag;
 
-    cout << endl << "Insert 1 if contains lifeguard, 0 otherwise: "<< endl << ":::";
+    cout << endl << "Insert 1 if contains lifeguard, 0 otherwise: "<< endl << "::: ";
     cin >> lifeguard;
 
-    cout << endl << "Insert maximum capacity (eg: 1000): "<< endl << ":::";
+    cout << endl << "Insert maximum capacity (eg: 1000): "<< endl << "::: ";
     cin >> max_capacity;
     fail(max_capacity);
 
-    cout << endl << "Insert latitude and longitude coordinates(eg: 40.268799): "<< endl << ":::";
+    cout << endl << "Insert latitude and longitude coordinates(eg: 40.268799): "<< endl << "::: ";
     cin >> lat;
     fail(lat);
 
@@ -89,11 +89,11 @@ void Company::addBeach() {
 
     if (type == "River") {
 
-        cout << endl << "Insert width in meters (eg: 72): "<< endl << ":::";
+        cout << endl << "Insert width in meters (eg: 72): "<< endl << "::: ";
         cin >> width;
         fail(width);
 
-        cout << endl << "Insert depth in meters (eg: 12): "<< endl << ":::";
+        cout << endl << "Insert depth in meters (eg: 12): "<< endl << "::: ";
         cin >> maxDepth;
         fail(maxDepth);
 
@@ -102,28 +102,31 @@ void Company::addBeach() {
 
     if (type == "Bayou") {
 
-        cout << endl << "Insert width in meters (eg: 1150500000): " << endl << ":::";
+        cout << endl << "Insert width in meters (eg: 1150500000): " << endl << "::: ";
         cin >> aquaticArea;
         fail(aquaticArea);
 
         (new BayouBeach(county, name, blueflag, lifeguard, max_capacity, lat, longi, aquaticArea));
     }
     
-    cout << endl << "How many basic utilities does the beach have? (eg: wc, showers...): "<< endl << ":::";
+    cout << endl << "How many basic utilities does the beach have? (eg: wc, showers...): "<< endl << "::: ";
     cin >> utilities;
     fail(utilities);
+    counter =0;
     while (counter < utilities) {
-        cout << endl << ++counter << "st utility: ";
+        cin.ignore(1000,'\n');
+        cout << endl << "service" <<++counter << ": ";
         getline(cin,utility);
         Beaches.at(Beaches.size() - 1)->getBasicServices().push_back(utility);
     }
 
-    cout << endl << "How many services does the beach have? (eg, Hotel, Bar): "<< endl << ":::";
+    cout << endl << "How many services does the beach have? (eg, Hotel, Bar): "<< endl << "::: ";
     cin >> services;
     fail(services);
     counter = 0;
     while (counter < services) {
-        cout << endl << ++counter << "st service: ";
+        cin.ignore(1000,'\n');
+        cout << endl << "Service " <<++ counter << ": ";
         
         cout << endl << "Type (eg: Hotel, Bar): ";
         getline(cin,sType);
@@ -133,8 +136,7 @@ void Company::addBeach() {
 
         cout << endl << "Price Range (eg: 1/3): ";
         cin >> sPriceRange;
-        while(sPriceRange != "1/3" || sPriceRange != "2/3" || sPriceRange != "3/3"){
-            cin.clear();
+        while(sPriceRange != "1/3" && sPriceRange != "2/3" && sPriceRange != "3/3"){
             cin.ignore(1000, '\n');
             cout << "Please enter a valid value: ";
             cin >> sPriceRange;
@@ -142,7 +144,7 @@ void Company::addBeach() {
 
         cout << endl << "Stars (eg: **): ";
         cin >> sStars;
-        while(sStars != "*" || sStars != "**" || sStars != "***"){
+        while(sStars != "*" && sStars != "**" && sStars != "***"){
             cin.clear();
             cin.ignore(1000, '\n');
             cout << "Please enter a valid value: ";
