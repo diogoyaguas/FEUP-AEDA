@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "Services.h"
+
 using namespace std;
 
 class Beach {
@@ -154,7 +155,6 @@ public:
     virtual void displayBeach() = 0;
 };
 
-
 class RiverBeach: public Beach{
     float width, maxDepth;
 public:
@@ -184,7 +184,6 @@ public:
     void displayBeach();
 };
 
-
 class BayouBeach: public Beach{
     float aquaticArea;
 public:
@@ -212,7 +211,5 @@ public:
     void set_aquaticArea(float aquaticArea){this->aquaticArea = aquaticArea;};
     void displayBeach();
 };
-
-
 
 #endif //AEDA_BEACH_H
