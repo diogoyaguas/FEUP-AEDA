@@ -23,7 +23,6 @@ void timer(){
     }
 }
 
-
 void mainMenu(Company &company) {
     int option;
 
@@ -34,14 +33,14 @@ void mainMenu(Company &company) {
     cout << "3. Add, alter or remove beach." << endl;
     cout << "4. Update Beaches' file." << endl;
 
-    cout << endl << "Enter a number option: ";
+    cout << endl << "Enter a number option: " << endl << ":::";
     cin >> option;
 
     //verifies if input is valid
     while(cin.fail()||!ValidMenuInput(1, 4, option)) {
         cin.clear();
         cin.ignore(1000, '\n');
-        cout << "Please enter a valid option: ";
+        cout << "Please enter a valid option: "<< endl << ":::";
         cin >> option;
     }
 
@@ -55,8 +54,6 @@ void mainMenu(Company &company) {
             break;
 
     }}
-
-
 
 void searchMenu(Company &company){
     int option;
@@ -98,14 +95,14 @@ void AddAlterRemoveMenu(Company &company){
     cout << "3. Alter beach." << endl;
     cout << "4. Return to main menu" << endl;
 
-    cout << endl << "Enter a number option: ";
+    cout << endl << "Enter a number option: " << endl << ":::";
     cin >> option;
 
     //verifies if input is valid
     while(cin.fail()||!ValidMenuInput(1, 4, option)) {
         cin.clear();
         cin.ignore(1000, '\n');
-        cout << "Please enter a valid option: ";
+        cout << "Please enter a valid option: "<< endl << ":::";
         cin >> option;
     }
 
@@ -132,10 +129,10 @@ void AlterBeachMenu(Company &company){
     unsigned int option, i;
     string name;
 
-    cout << "Insert beach name" << endl;
-    cin >> name;
+    cout << "Insert beach name" << endl << ":::";
+    getline(cin,name);
 
-    i= company.beachExists(name);
+    i = company.beachExists(name);
 
     if(i!=-1) {
 
@@ -159,19 +156,17 @@ void AlterBeachMenu(Company &company){
         cout << ++displayOption << ". GPS coordinates" << endl;
         cout  << ++displayOption << ". Change services" << endl;
 
-
         //Collect input
-        cout << endl << "Enter a number option: ";
+        cout << endl << "Enter a number option: "<< endl << ":::";
         cin >> option;
 
         //verifies if input is valid
         while (cin.fail() || !ValidMenuInput(1, 7, option)) {
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "Please enter a valid option: ";
+            cout << "Please enter a valid option: "<< endl << ":::";
             cin >> option;
         }
-
 
         //Alter according if to it's type
         if(company.getBeaches().at(company.beachExists(name))->getType()=="River"){
@@ -180,7 +175,7 @@ void AlterBeachMenu(Company &company){
             company.alterBBeachInfo(option,i);
         }
 
-        //If 'if' verifies and funtion reaches here succsedd
+        //If 'if' verifies and function reaches here succeed
         cout << "Information altered successfully!" << string(4,'\n');
         mainMenu(company);
 

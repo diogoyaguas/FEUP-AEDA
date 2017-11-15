@@ -43,5 +43,17 @@ public:
     unsigned int beachExists(string name);
 };
 
+template <class T>
+void fail (T &value){
+
+    while(cin.fail()){
+
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Please enter a valid value: ";
+        cin >> value;
+    }
+}
+
 
 #endif //AEDA_COMPANY_H

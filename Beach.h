@@ -12,7 +12,7 @@ protected:
     string name, county;
     bool blueflag, lifeguard;
     unsigned long max_capacity;
-    float LAT, LONG;
+    float lat, longi;
     vector<string> basicServices;
     vector<Services> extraServices;
 
@@ -25,11 +25,11 @@ public:
      * @param blueflag
      * @param lifeguard
      * @param max_capacity
-     * @param LAT
-     * @param Long
+     * @param lat
+     * @param longi
      * @param basicServices
      */
-    Beach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &Long);
+    Beach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi);
 
     Beach(){};
 
@@ -51,14 +51,14 @@ public:
     unsigned long get_max_capacity();
 
     /**
-     * @return Latitude
+     * @return latitude
      */
-    float get_Latitude();
+    float get_latitude();
 
     /**
      * @return longitude
      */
-    float get_Longitude();
+    float get_longitude();
 
     vector<string> getBasicServices();
 
@@ -101,13 +101,13 @@ public:
      * @brief changes latitude
      * @param latitude
      */
-    void set_Latitude(float LAT);
+    void set_latitude(float lat);
 
     /**
      * @brief changes longitude
      * @param longitude
      */
-    void set_Longitude(float LONG);
+    void set_longitude(float longi);
 
     /**
      * @brief changes basic services
@@ -147,7 +147,7 @@ public:
      * @param 2nd longitude
      * @return distance
      */
-    double distanceToBeach(float LAT,float LONG);
+    double distanceToBeach(float lat,float longi);
 
     /**
      * @brief displays all information about the beach
@@ -165,13 +165,13 @@ public:
      * @param blueflag
      * @param lifeguard
      * @param max_capacity
-     * @param LAT
-     * @param LONG
+     * @param lat
+     * @param longi
      * @param width
      * @param maxDepth
      * @param basicServices
      */
-    RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG,  float &width, float &maxDepth);
+    RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi,  float &width, float &maxDepth);
     /**
      * @brief helper construtor which recognizes and associates Beach's object's given attributes
      * @param line from txt file representing an object of class beach
@@ -194,12 +194,12 @@ public:
      * @param blueflag
      * @param lifeguard
      * @param max_capacity
-     * @param LAT
-     * @param LONG
+     * @param lat
+     * @param longi
      * @param aquaticArea
      * @param basicServices
      */
-    BayouBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG, float &aquaticArea);
+    BayouBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi, float &aquaticArea);
     /**
      * @brief helper construtor which recognizes and associates Beach's object's given attributes
      * @param line from txt file representing an object of class beach

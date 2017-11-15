@@ -4,8 +4,8 @@
 #include <string>
 
 //Beach
-Beach::Beach(string &county,string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG):
-county(county),name(name), blueflag(blueflag), max_capacity(max_capacity), LAT(LAT), LONG(LONG)
+Beach::Beach(string &county,string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi):
+county(county),name(name), blueflag(blueflag), max_capacity(max_capacity), lat(lat), longi(longi)
 {
 }
 
@@ -14,8 +14,8 @@ string Beach::get_name(){ return name;}
 bool Beach::get_blue_flag(){return blueflag;}
 bool Beach::get_lifeguard(){return lifeguard;}
 unsigned long Beach::get_max_capacity(){return max_capacity;}
-float Beach::get_Latitude(){return LAT;}
-float Beach::get_Longitude(){return LONG;}
+float Beach::get_latitude(){return lat;}
+float Beach::get_longitude(){return longi;}
 vector<string> Beach::getBasicServices(){return basicServices;}
 vector<Services> Beach::getExtraServices(){return extraServices;}
 
@@ -28,18 +28,18 @@ void Beach::set_lifeguard(){if(this->lifeguard){
         this->lifeguard = false;
     } else this->lifeguard = true;}
 void Beach::set_max_capacity(unsigned long max_capacity){this->max_capacity = max_capacity;}
-void Beach::set_Latitude(float LAT){this->LAT = LAT;}
-void Beach::set_Longitude(float LONG){this->LONG = LONG;}
+void Beach::set_latitude(float lat){this->lat = lat;}
+void Beach::set_longitude(float longi){this->longi = longi;}
 void Beach::set_BasicServices(vector<string> basicServices){this->basicServices = basicServices;}
 void Beach::set_ExtraServices(vector<Services> extraServices){this->extraServices = extraServices;}
 
-double Beach::distanceToBeach(float LAT, float LONG){
-    double dLONG, dLAT, a, c, distance, earthRadius;
+double Beach::distanceToBeach(float lat, float longi){
+    double dlongi, dlat, a, c, distance, earthRadius;
     earthRadius=6373;
 
-    dLONG = this->LONG-LONG;
-    dLAT= this->LAT - LAT;
-    a= pow(sin(dLAT/2),2) + cos(LAT) * cos(this->LAT) * sin(dLONG/2);
+    dlongi = this->longi-longi;
+    dlat= this->lat - lat;
+    a= pow(sin(dlat/2),2) + cos(lat) * cos(this->lat) * sin(dlongi/2);
     c= 2 * atan2(sqrt(a),sqrt(1-a));
     distance= c * 6373;
 
@@ -48,8 +48,8 @@ double Beach::distanceToBeach(float LAT, float LONG){
 
 
 //River Beach
-RiverBeach::RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG,  float &width, float &maxDepth)
-        :Beach(county, name, blueflag, lifeguard, max_capacity,  LAT ,  LONG) {
+RiverBeach::RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi,  float &width, float &maxDepth)
+        :Beach(county, name, blueflag, lifeguard, max_capacity,  lat ,  longi) {
     this->width=width;
     this->maxDepth=maxDepth;
 }
@@ -96,15 +96,15 @@ RiverBeach::RiverBeach(string beach)
     stop = beach.find_first_of(';');
     this->max_capacity = stoul(beach.substr(0,stop));
 
-    //attribute Latitude
+    //attribute latitude
     beach = beach.substr(stop+2);
     stop = beach.find_first_of(';');
-    this->LAT = stof(beach.substr(0,stop));
+    this->lat = stof(beach.substr(0,stop));
 
-    //attribute Longitude
+    //attribute longitude
     beach = beach.substr(stop+2);
     stop = beach.find_first_of(';');
-    this->LONG = stof(beach.substr(0,stop));
+    this->longi = stof(beach.substr(0,stop));
 
     //attribute width
     beach = beach.substr(stop+2);
@@ -155,7 +155,7 @@ RiverBeach::RiverBeach(string beach)
 void RiverBeach::displayBeach(){
 
     cout << "County: " << county << endl;
-    cout << "GPS coordinates: " << LAT << " | " << LONG << endl;
+    cout << "GPS coordinates: " << lat << " | " << longi << endl;
     cout << "Name: " << getType() << " Beach " << name << endl;
     cout << "Maximum Capacity: " << max_capacity << endl;
     cout << "Width: " << width << endl;
@@ -206,8 +206,8 @@ void RiverBeach::displayBeach(){
 
 
 //Bayou Beach
-BayouBeach::BayouBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &LAT , float &LONG, float &aquaticArea)
-        :Beach(county,name, blueflag, lifeguard, max_capacity,  LAT ,  LONG){
+BayouBeach::BayouBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi, float &aquaticArea)
+        :Beach(county,name, blueflag, lifeguard, max_capacity,  lat ,  longi){
     this->aquaticArea=aquaticArea;
 }
 
@@ -253,15 +253,15 @@ BayouBeach::BayouBeach(string beach)
     stop = beach.find_first_of(';');
     this->max_capacity = stoul(beach.substr(0,stop));
 
-    //attribute Latitude
+    //attribute latitude
     beach = beach.substr(stop+2);
     stop = beach.find_first_of(';');
-    this->LAT = stof(beach.substr(0,stop));
+    this->lat = stof(beach.substr(0,stop));
 
-    //attribute Longitude
+    //attribute longitude
     beach = beach.substr(stop+2);
     stop = beach.find_first_of(';');
-    this->LONG = stof(beach.substr(0,stop));
+    this->longi = stof(beach.substr(0,stop));
 
     //attribute width
     beach = beach.substr(stop+2);
@@ -315,7 +315,7 @@ BayouBeach::BayouBeach(string beach)
 void BayouBeach::displayBeach() {
 
     cout << "County: " << county << endl;
-    cout << "GPS coordinates: " << LAT << " | " << LONG << endl;
+    cout << "GPS coordinates: " << lat << " | " << longi << endl;
     cout << "Name: " << getType() << " Beach " << name << endl;
     cout << "Maximum Capacity: " << max_capacity << endl;
     cout << "Aquatic Area: " << aquaticArea << endl;
