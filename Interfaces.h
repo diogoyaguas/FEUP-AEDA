@@ -4,19 +4,27 @@
 #include "Company.h"
 
 /**
- * @brief shows main options and redirects user to next menu according to input
- *
+ * @brief main menu that allows user to choose a topic to take action in
+ * @param company
  */
 void mainMenu(Company &company);
 
 /**
- * @brief shows options related to the search of beaches and collects input
+ * @brief sub-menu from main menu that allows user to choose actions relating to the search of a determinate beach
+ * @param company
  */
 void searchMenu(Company &company);
 
-
+/**
+ * @brief sub-menu from main menu that allows user to choose actions relating altering informarion about a beach, adding or removing beaches
+ * @param company
+ */
 void AddAlterRemoveMenu(Company &company);
 
+/**
+ * @brief sub-menu from Add, Alter ,Remove menu that allows user to choose which information of the beach he wishes to alter
+ * @param company
+ */
 void AlterBeachMenu(Company &company);
 
 /**

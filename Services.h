@@ -16,11 +16,27 @@ public:
      * @param stars
      */
     Services(string type, string name, string priceRange, string stars);
+    /**
+     * @brief helper construtor for class Services which creates an object from information in file
+     * @param string containing service attributes separated by collumns
+     */
     Services(string service);
     Services();
+    /**
+     * @return type
+     */
     string getType(){return type;}
+    /**
+     * @return name
+     */
     string getName(){return name;}
+    /**
+     * @return price range
+     */
     string getPriceRange(){return priceRange;}
+    /**
+     * @return stars
+     */
     string getStars(){return stars;}
 };
 

@@ -76,66 +76,66 @@ public:
 
     // set methods
     /**
-     *
+     * @brief changes name
      * @param name
      */
     void set_name(string name);
 
     /**
-     *
+     * @brief changes blueflag
      */
     void set_blue_flag();
 
     /**
-     *
+     * @brief changes lifeguard
      */
     void set_lifeguard();
 
     /**
-     *
-     * @param max_capacity
+     * @brief changes maximum capacity
+     * @param maximum capacity
      */
     void set_max_capacity(unsigned long max_capacity);
 
     /**
-     *
-     * @param LAT
+     * @brief changes latitude
+     * @param latitude
      */
     void set_Latitude(float LAT);
 
     /**
-     *
-     * @param LONG
+     * @brief changes longitude
+     * @param longitude
      */
     void set_Longitude(float LONG);
 
     /**
-     *
+     * @brief changes basic services
      * @param basicServices
      */
     void set_BasicServices(vector<string> basicServices);
 
     /**
-     *
+     * @brief changes extra services
      * @param extraServices
      */
     void set_ExtraServices(vector<Services> extraServices);
 
     /**
-     *
+     * @brief changes width
      * @param width
      */
     virtual void set_width(float width) = 0;
 
     /**
-     *
-     * @param maxDept
+     * @brief changes maximum depth
+     * @param maximum depth
      */
     virtual void set_maxDepth(float maxDept) = 0;
 
     /**
-     *
-     * @param aquaticArea
+     * @brief changes aquatic area
+     * @param Aquatic area
      */
     virtual void set_aquaticArea(float aquaticArea) = 0;
 
@@ -150,7 +150,7 @@ public:
     double distanceToBeach(float LAT,float LONG);
 
     /**
-     *
+     * @brief displays all information about the beach
      */
     virtual void displayBeach() = 0;
 };
