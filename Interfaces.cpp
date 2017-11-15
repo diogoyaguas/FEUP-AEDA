@@ -28,10 +28,11 @@ void mainMenu(Company &company) {
 
     cout << " MAIN MENU" << setw(40)<< setfill(' ') << " " << endl;
     cout << setfill('-') << setw(50)<<"-"<<endl;
-    cout << "1. Search Beach." << endl;
-    cout << "2. Compare Beaches." << endl;
-    cout << "3. Add, alter or remove beach." << endl;
-    cout << "4. Update Beaches' file." << endl;
+    cout << "1. Display all beaches" << endl;
+    cout << "2. Search beach." << endl;
+    cout << "3. Compare beaches." << endl;
+    cout << "4. Add, alter or remove beach." << endl;
+    cout << "5. Update beaches' file." << endl;
 
     cout << endl << "Enter a number option: " << endl << ":::";
     cin >> option;
@@ -47,6 +48,9 @@ void mainMenu(Company &company) {
     //redirect to next menu
     switch(option) {
         case 1:
+            company.displayBeaches();
+            break;
+        case 2:
             searchMenu(company);
             break;
         case 3:

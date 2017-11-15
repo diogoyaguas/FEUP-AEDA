@@ -25,18 +25,18 @@ Company::Company() {
 
         if (type == "river") {
 
-            Beaches.push_back(new RiverBeach(beach.substr(stop + 2)));
+            beaches.push_back(new RiverBeach(beach.substr(stop + 2)));
         } else if (type == "bayou") {
 
-            Beaches.push_back(new BayouBeach(beach.substr(stop + 2)));
+            beaches.push_back(new BayouBeach(beach.substr(stop + 2)));
         }
     }
 }
 
 unsigned int Company::beachExists(string name){
-    for (unsigned int i = 0; i < Beaches.size(); ++i) {
+    for (unsigned int i = 0; i < beaches.size(); ++i) {
 
-        if (Beaches.at(i)->get_name() == name) {
+        if (beaches.at(i)->get_name() == name) {
             return i;
         }
     }
@@ -49,7 +49,7 @@ void Company::addBeach() {
     unsigned long max_capacity;
     float lat, longi, width, maxDepth, aquaticArea;
     vector<string> basicServices;
-    int utilities, counter = 0, services;
+    int utilities, counter = 0, services, temp;
     string sType, sName, sPriceRange, sStars;
 
     cout << "Insert type (Bayou or River): " << endl << ":::";
@@ -70,10 +70,27 @@ void Company::addBeach() {
     getline(cin,name);
 
     cout << endl << "Insert 1 if contains blueflag, 0 otherwise: "<< endl << "::: ";
-    cin >> blueflag;
+    cin >> temp;
+    while(cin.fail() && temp != 0 && temp != 1){
+
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Please enter a valid value: ";
+        cin >> temp;
+    }
+    blueflag = temp;
+    
 
     cout << endl << "Insert 1 if contains lifeguard, 0 otherwise: "<< endl << "::: ";
-    cin >> lifeguard;
+    cin >> temp;
+    while(cin.fail() && temp != 0 && temp != 1){
+
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Please enter a valid value: ";
+        cin >> temp;
+    }
+    lifeguard = temp;
 
     cout << endl << "Insert maximum capacity (eg: 1000): "<< endl << "::: ";
     cin >> max_capacity;
@@ -97,7 +114,7 @@ void Company::addBeach() {
         cin >> maxDepth;
         fail(maxDepth);
 
-        Beaches.push_back(new RiverBeach(county, name, blueflag, lifeguard, max_capacity, lat, longi, width, maxDepth));
+        beaches.push_back(new RiverBeach(county, name, blueflag, lifeguard, max_capacity, lat, longi, width, maxDepth));
     }
 
     if (type == "Bayou") {
@@ -117,7 +134,7 @@ void Company::addBeach() {
         cin.ignore(1000,'\n');
         cout << endl << "service" <<++counter << ": ";
         getline(cin,utility);
-        Beaches.at(Beaches.size() - 1)->getBasicServices().push_back(utility);
+        beaches.at(beaches.size() - 1)->getBasicServices().push_back(utility);
     }
 
     cout << endl << "How many services does the beach have? (eg, Hotel, Bar): "<< endl << "::: ";
@@ -151,7 +168,7 @@ void Company::addBeach() {
             cin >> sStars;
         }
 
-        Beaches.at(Beaches.size() - 1)->getExtraServices().emplace_back(Services(sType, sName, sPriceRange, sStars));
+        beaches.at(beaches.size() - 1)->getExtraServices().emplace_back(Services(sType, sName, sPriceRange, sStars));
     }
 
     cout << "Beach added successfully!" << string(4,'\n');
@@ -170,35 +187,35 @@ void Company::alterRBeachInfo(unsigned int option, unsigned int i) {
         case 1:
             cout << "Insert new name: " << endl;
             cin >> name;
-            Beaches.at(i)->set_name(name);
+            beaches.at(i)->set_name(name);
             break;
         case 2:
-            Beaches.at(i)->set_blue_flag();
+            beaches.at(i)->set_blue_flag();
             break;
         case 3:
-            Beaches.at(i)->set_lifeguard();
+            beaches.at(i)->set_lifeguard();
             break;
         case 4:
             cout << "Insert new maximum capacity: " << endl;
             cin >> max_capacity;
-            Beaches.at(i)->set_max_capacity(max_capacity);
+            beaches.at(i)->set_max_capacity(max_capacity);
             break;
         case 5:
             cout << "Insert new width: " << endl;
             cin >> width;
-            Beaches.at(i)->set_width(width);
+            beaches.at(i)->set_width(width);
             break;
         case 6:
             cout << "Insert new depth area: " << endl;
             cin >> maxDepth;
-            Beaches.at(i)->set_maxDepth(maxDepth);
+            beaches.at(i)->set_maxDepth(maxDepth);
             break;
         case 7:
             cout << "Insert latitude and longitude coordinates separated by a space (eg: 40.268799 -7.143181): "
                  << endl;
             cin >> lat >> longi;
-            Beaches.at(i)->set_latitude(lat);
-            Beaches.at(i)->set_longitude(longi);
+            beaches.at(i)->set_latitude(lat);
+            beaches.at(i)->set_longitude(longi);
             break;
         case 8:
             break;
@@ -219,30 +236,30 @@ void Company::alterBBeachInfo(unsigned int option, unsigned int i) {
         case 1:
             cout << "Insert new name: " << endl;
             cin >> name;
-            Beaches.at(i)->set_name(name);
+            beaches.at(i)->set_name(name);
             break;
         case 2:
-            Beaches.at(i)->set_blue_flag();
+            beaches.at(i)->set_blue_flag();
             break;
         case 3:
-            Beaches.at(i)->set_lifeguard();
+            beaches.at(i)->set_lifeguard();
             break;
         case 4:
             cout << "Insert new maximum capacity: " << endl;
             cin >> max_capacity;
-            Beaches.at(i)->set_max_capacity(max_capacity);
+            beaches.at(i)->set_max_capacity(max_capacity);
             break;
         case 5:
             cout << "Insert new width: " << endl;
             cin >> aquaticArea;
-            Beaches.at(i)->set_width(aquaticArea);
+            beaches.at(i)->set_width(aquaticArea);
             break;
         case 6:
             cout << "Insert latitude and longitude coordinates separated by a space (eg: 40.268799 -7.143181): "
                  << endl;
             cin >> lat >> longi;
-            Beaches.at(i)->set_latitude(lat);
-            Beaches.at(i)->set_longitude(longi);
+            beaches.at(i)->set_latitude(lat);
+            beaches.at(i)->set_longitude(longi);
             break;
         case 7:
             break;
@@ -257,11 +274,11 @@ void Company::removeBeach() {
     cout << "Insert beach name: ";
     cin >> name;
 
-    for (int i = 0; i < Beaches.size(); ++i) {
+    for (int i = 0; i < beaches.size(); ++i) {
 
-        if (Beaches.at(i)->get_name() == name) {
+        if (beaches.at(i)->get_name() == name) {
 
-            Beaches.erase(Beaches.begin()+i);
+            beaches.erase(beaches.begin()+i);
             cout << endl<< name<< " beach erased successfully!" << string(4,'\n');
             removed = true;
         }
@@ -269,6 +286,14 @@ void Company::removeBeach() {
 
     if(!removed){
         cout <<endl << "ERROR: There is no beach with the given name!" << string(4,'\n');
+    }
+}
+
+void Company::displayBeaches(){
+    
+    for(unsigned int i = 0; i < beaches.size(); i++){
+        
+        beaches.at(i)->displayBeach();
     }
 }
 

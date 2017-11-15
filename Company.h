@@ -5,7 +5,7 @@
 
 class Company {
 private:
-    vector<Beach *> Beaches;
+    vector<Beach *> beaches;
 public:
     /**
      * Constructor of class Company
@@ -14,7 +14,7 @@ public:
     /**
      * @return vector Beaches
      */
-    vector<Beach *> getBeaches(){return Beaches;}
+    vector<Beach *> getBeaches(){return beaches;}
     /**
      * @brief adds beach to Beaches' vector with user's input information
      */
@@ -41,6 +41,11 @@ public:
      * @return pos of beach in Beaches' vector if beach with name exists, -1 otherwise
      */
     unsigned int beachExists(string name);
+    
+    /**
+     * 
+     */
+    void displayBeaches();
 };
 
 template <class T>
