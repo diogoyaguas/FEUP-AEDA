@@ -176,11 +176,13 @@ void AlterBeachMenu(Company &company){
         //Alter according if to it's type
         if(company.getBeaches().at(company.beachExists(name))->getType()=="River"){
             company.alterRBeachInfo(option,i);
-            cout << "Information altered successfully!" << string(4,'\n');
-            mainMenu(company);
         }else{
-
+            company.alterBBeachInfo(option,i);
         }
+
+        //If 'if' verifies and funtion reaches here succsedd
+        cout << "Information altered successfully!" << string(4,'\n');
+        mainMenu(company);
 
     } else {
         cout << "ERROR: Beach with given name doesn't exist." << endl;

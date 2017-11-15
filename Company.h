@@ -12,7 +12,7 @@ public:
     void addBeach();
     void removeBeach();
     void alterRBeachInfo(unsigned int option, unsigned int i);
-
+    void alterBBeachInfo(unsigned int option, unsigned int i);
     unsigned int beachExists(string name);
 };
 

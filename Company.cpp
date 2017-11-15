@@ -113,7 +113,6 @@ void Company::addBeach() {
     cout << "Beach added successfully!" << string(4,'\n');
 }
 
-
 void Company::alterRBeachInfo(unsigned int option, unsigned int i) {
     string name, county;
     bool blueflag, lifeguard;
@@ -141,9 +140,58 @@ void Company::alterRBeachInfo(unsigned int option, unsigned int i) {
             Beaches.at(i)->set_max_capacity(max_capacity);
             break;
         case 5:
+            cout << "Insert new width: " << endl;
+            cin >> width;
+            Beaches.at(i)->set_width(width);
+            break;
+        case 6:
             cout << "Insert new depth area: " << endl;
             cin >> maxDepth;
-            Beaches.at(i)->set_aquaticArea(maxDepth);
+            Beaches.at(i)->set_maxDepth(maxDepth);
+            break;
+        case 7:
+            cout << "Insert latitude and longitude coordinates separated by a space (eg: 40.268799 -7.143181): "
+                 << endl;
+            cin >> LAT >> LONG;
+            Beaches.at(i)->set_Latitude(LAT);
+            Beaches.at(i)->set_Longitude(LONG);
+            break;
+        case 8:
+            break;
+    }
+
+}
+
+void Company::alterBBeachInfo(unsigned int option, unsigned int i) {
+    string name, county;
+    bool blueflag, lifeguard;
+    unsigned long max_capacity;
+    float LAT, LONG;
+    float aquaticArea;
+    vector<string> basicServices;
+    vector<Services> extraServices;
+
+    switch (option) {
+        case 1:
+            cout << "Insert new name: " << endl;
+            cin >> name;
+            Beaches.at(i)->set_name(name);
+            break;
+        case 2:
+            Beaches.at(i)->set_blue_flag();
+            break;
+        case 3:
+            Beaches.at(i)->set_lifeguard();
+            break;
+        case 4:
+            cout << "Insert new maximum capacity: " << endl;
+            cin >> max_capacity;
+            Beaches.at(i)->set_max_capacity(max_capacity);
+            break;
+        case 5:
+            cout << "Insert new width: " << endl;
+            cin >> aquaticArea;
+            Beaches.at(i)->set_width(aquaticArea);
             break;
         case 6:
             cout << "Insert latitude and longitude coordinates separated by a space (eg: 40.268799 -7.143181): "
@@ -157,10 +205,6 @@ void Company::alterRBeachInfo(unsigned int option, unsigned int i) {
     }
 
 }
-
-
-
-
 
 void Company::removeBeach() {
     string name;
