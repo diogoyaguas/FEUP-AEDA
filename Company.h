@@ -45,7 +45,9 @@ public:
      * @brief displays the information about all beaches
      */
     void displayBeaches();
-
+    /**
+     *
+     */
     void updateFile();
 
 };

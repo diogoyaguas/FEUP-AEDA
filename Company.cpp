@@ -165,7 +165,7 @@ void Company::addBeach() {
 
         cout << endl << "Stars (eg: **): ";
         cin >> sStars;
-        while(sStars != "*" && sStars != "**" && sStars != "***"){
+        while(sStars != "*" && sStars != "**" && sStars != "***" && sStars != "****" && sStars != "*****"){
             cin.clear();
             cin.ignore(1000, '\n');
             cout << "Please enter a valid value: ";
@@ -190,7 +190,8 @@ void Company::alterRBeachInfo(unsigned int option, unsigned int i) {
     switch (option) {
         case 1:
             cout << "Insert new name: " << endl;
-            cin >> name;
+            cin.ignore(1000,'\n');
+            getline(cin,name);
             beaches.at(i)->set_name(name);
             break;
         case 2:
@@ -239,7 +240,8 @@ void Company::alterBBeachInfo(unsigned int option, unsigned int i) {
     switch (option) {
         case 1:
             cout << "Insert new name: " << endl;
-            cin >> name;
+            cin.ignore(1000,'\n');
+            getline(cin,name);
             beaches.at(i)->set_name(name);
             break;
         case 2:
