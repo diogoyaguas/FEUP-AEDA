@@ -131,8 +131,8 @@ void Company::addBeach() {
     cin >> utilities;
     fail(utilities);
     counter =0;
+    cin.ignore(1000, '\n');
     while (counter < utilities) {
-        cin.ignore(1000,'\n');
         cout << endl << "service" <<++counter << ": ";
         getline(cin,utility);
         beaches.at(beaches.size() - 1)->add_BasicService(utility);
@@ -141,8 +141,8 @@ void Company::addBeach() {
     cout << endl << "How many services does the beach have? (eg, Hotel, Bar): "<< endl << "::: ";
     cin >> services;
     fail(services);
+    cin.ignore(1000, '\n');
     counter = 0;
-    cin.ignore(1000,'\n');
     while (counter < services) {
         cout << endl << "Service " <<++ counter << ": ";
         
@@ -170,7 +170,7 @@ void Company::addBeach() {
         }
 
         beaches.at(beaches.size() - 1)->add_ExtraService(Services(sType, sName, sPriceRange, sStars));
-
+        cin.ignore(1000, '\n');
     }
     cout << "Beach added successfully!" << string(4,'\n');
 }
