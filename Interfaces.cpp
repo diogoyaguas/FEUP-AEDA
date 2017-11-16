@@ -34,14 +34,14 @@ void mainMenu(Company &company) {
     cout << "4. Add, alter or remove beach." << endl;
     cout << "5. Update beaches' file." << endl;
 
-    cout << endl << "Enter a number option: " << endl << ":::";
+    cout << endl << "Enter a number option: " << endl << "::: ";
     cin >> option;
 
     //verifies if input is valid
     while(cin.fail()||!ValidMenuInput(1, 5, option)) {
         cin.clear();
         cin.ignore(1000, '\n');
-        cout << "Please enter a valid option: "<< endl << ":::";
+        cout << "Please enter a valid option: "<< endl << "::: ";
         cin >> option;
     }
 
@@ -104,30 +104,33 @@ void AddAlterRemoveMenu(Company &company){
     cout << "3. Alter beach." << endl;
     cout << "4. Return to main menu" << endl;
 
-    cout << endl << "Enter a number option: " << endl << ":::";
+    cout << endl << "Enter a number option: " << endl << "::: ";
     cin >> option;
 
     //verifies if input is valid
     while(cin.fail()||!ValidMenuInput(1, 4, option)) {
         cin.clear();
         cin.ignore(1000, '\n');
-        cout << "Please enter a valid option: "<< endl << ":::";
+        cout << "Please enter a valid option: "<< endl << "::: ";
         cin >> option;
     }
 
     switch(option){
         case 1:
             company.addBeach();
+            cout << string(100,'\n');
             mainMenu(company);
             break;
         case 2:
             company.removeBeach();
+            cout << string(100,'\n');
             mainMenu(company);
             break;
         case 3:
             AlterBeachMenu(company);
             break;
         case 4:
+            cout << string(100,'\n');
             mainMenu(company);
             break;
     }

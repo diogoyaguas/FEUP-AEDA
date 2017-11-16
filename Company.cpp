@@ -326,6 +326,10 @@ void Company::updateFile(){
 
         if(!beach->getBasicServices().empty()) {
             for (auto &bService: beach->getBasicServices()) {
+                if(bService==beach->getBasicServices().at(beach->getBasicServices().size()-1)){
+                    file << bService ;
+                    break;
+                }
                 file << bService << ", ";
             }
         }
@@ -333,10 +337,14 @@ void Company::updateFile(){
         file << "(";
         if(!beach->getExtraServices().empty()) {
             for (auto & service: beach->getExtraServices()) {
-                file << service.getType() << ", ";
+                if(service.getName()==beach->getExtraServices().at(0).getName()){
+                    file << service.getType() << ", ";
+                }else{
+                    file << " " << service.getType() << ", ";
+                }
                 file << service.getName() << ", ";
                 file << service.getPriceRange() << ", ";
-                file << service.getStars() << "; ";
+                file << service.getStars() << ";";
             }
         }
         file << ")";
