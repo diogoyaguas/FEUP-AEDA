@@ -35,6 +35,7 @@ Company::Company() {
 }
 
 unsigned int Company::beachExists(string name){
+
     for (unsigned int i = 0; i < beaches.size(); ++i) {
 
         if (beaches.at(i)->get_name() == name) {
@@ -151,9 +152,6 @@ void Company::addBeach() {
 
         cout << endl << "Name (eg: Tapada Grande): ";
         getline(cin,sName);
-
-
-
 
         cout << endl << "Price Range (eg: 1/3): ";
         cin >> sPriceRange;
@@ -292,6 +290,79 @@ void Company::removeBeach() {
 
     if(!removed){
         cout <<endl << "ERROR: There is no beach with the given name!" << string(4,'\n');
+    }
+}
+
+void Company::addService() {
+
+    string name, sType, sName, sPriceRange, sStars;
+    int services, counter, i;
+
+    ClearScreen();
+
+    cout << "Insert name of the beach you wish to add a service to" << endl << ":::";
+    cin >> name;
+
+    i = beachExists(name);
+
+    if (i != -1) {
+
+        cout << endl << "How many services do you wish to add? (eg, Hotel, Bar): " << endl << "::: ";
+        cin >> services;
+        fail(services);
+        cin.ignore(1000, '\n');
+        counter = 0;
+        while (counter < services) {
+            cout << endl << "Service " << ++counter << ": ";
+
+            cout << endl << "Type (eg: Hotel, Bar): ";
+            getline(cin, sType);
+
+            cout << endl << "Name (eg: Tapada Grande): ";
+            getline(cin, sName);
+
+            cout << endl << "Price Range (eg: 1/3): ";
+            cin >> sPriceRange;
+            while (sPriceRange != "1/3" && sPriceRange != "2/3" && sPriceRange != "3/3") {
+                cin.ignore(1000, '\n');
+                cout << "Please enter a valid value: ";
+                cin >> sPriceRange;
+            }
+
+            cout << endl << "Stars (eg: **): ";
+            cin >> sStars;
+            while (sStars != "*" && sStars != "**" && sStars != "***" && sStars != "****" && sStars != "*****") {
+                cin.clear();
+                cin.ignore(1000, '\n');
+                cout << "Please enter a valid value: ";
+                cin >> sStars;
+            }
+
+            beaches.at(i)->add_ExtraService(Services(sType, sName, sPriceRange, sStars));
+            cin.ignore(1000, '\n');
+
+        }
+    }
+}
+
+void Company::eraseService() {
+
+    string name, service;
+    int i;
+
+    ClearScreen();
+
+    cout << "Insert name of the beach you wish to remove a service from" << endl << ":::";
+    cin >> name;
+
+    i = beachExists(name);
+
+    if (i != -1) {
+
+        cout << "Insert name of the service you wish to remove" << endl << ":::";
+        cin >> service;
+
+        beaches.at(i)->erase_ExtraService(service);
     }
 }
 

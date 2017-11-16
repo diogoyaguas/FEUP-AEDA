@@ -52,10 +52,6 @@ void AlterBeachMenu(Company &company);
  */
 bool ValidMenuInput(int lowerL, int upperL, int input);
 
-
-/**
- * gives the user 0.6 seconds to read welcome message before continuing program
- */
-void timer();
+void ClearScreen();
 
 #endif //AEDA_INTERFACES_H

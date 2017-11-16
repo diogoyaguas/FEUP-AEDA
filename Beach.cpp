@@ -1,7 +1,7 @@
 #include "Beach.h"
 #include <cmath>
 #include <iomanip>
-#include <string>
+#include <vector>
 
 //Beach
 Beach::Beach(string &county,string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi):
@@ -37,7 +37,16 @@ void Beach::set_ExtraServices(vector<Services> extraServices){this->extraService
 
 void Beach::add_BasicService(string service){this->basicServices.push_back(service);}
 void Beach::add_ExtraService(Services service){this->extraServices.push_back(service);}
+void Beach::erase_ExtraService(string service){
 
+    for(unsigned int i = 0; i < this->extraServices.size(); ++i){
+
+        if(this->extraServices.at(i).getName() == service){
+
+            this->extraServices.erase(this->extraServices.begin()+i);
+        }
+    }
+}
 double Beach::distanceToBeach(float lat, float longi){
     double dlongi, dlat, a, c, distance, earthRadius;
     earthRadius=6373;

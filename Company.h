@@ -36,6 +36,14 @@ public:
      */
     void alterBBeachInfo(unsigned int option, unsigned int i);
     /**
+     *
+     */
+    void addService();
+    /**
+     *
+     */
+    void eraseService();
+    /**
      * @brief verifies if beach with certain name exist
      * @param name
      * @return pos of beach in Beaches' vector if beach with name exists, -1 otherwise

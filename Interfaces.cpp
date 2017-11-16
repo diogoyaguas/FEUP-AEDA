@@ -12,17 +12,6 @@ bool ValidMenuInput(int lowerL, int upperL, int input){
     else return false;
 }
 
-void timer(){
-
-    clock_t startProgram;
-    double duration;
-    startProgram = clock();
-
-    while(duration != 0.6){
-        duration = ( clock() - startProgram ) / (double) CLOCKS_PER_SEC;
-    }
-}
-
 void mainMenu(Company &company) {
     int option;
 
@@ -99,16 +88,19 @@ void AddAlterRemoveMenu(Company &company){
     cout << string(100,'\n');
     cout << " ALTER BEACH FILE" << setw(37) << setfill(' ') << " " << endl;
     cout << setfill('-') << setw(47)<<"-"<<endl;
-    cout << "1. Add beach." << endl;
-    cout << "2. Remove beach." << endl;
-    cout << "3. Alter beach." << endl;
-    cout << "4. Return to main menu" << endl;
+    cout << "1. Add beach" << endl;
+    cout << "2. Remove beach" << endl;
+    cout << "3. Alter beach" << endl;
+    cout << "4. Add service" << endl;
+    cout << "5. Alter service" << endl;
+    cout << "6. Remove service" << endl;
+    cout << "7. Return to main menu" << endl;
 
     cout << endl << "Enter a number option: " << endl << "::: ";
     cin >> option;
 
     //verifies if input is valid
-    while(cin.fail()||!ValidMenuInput(1, 4, option)) {
+    while(cin.fail()||!ValidMenuInput(1, 7, option)) {
         cin.clear();
         cin.ignore(1000, '\n');
         cout << "Please enter a valid option: "<< endl << "::: ";
@@ -128,8 +120,22 @@ void AddAlterRemoveMenu(Company &company){
             break;
         case 3:
             AlterBeachMenu(company);
+            cout << string(100,'\n');
+            mainMenu(company);
             break;
         case 4:
+            company.addService();
+            cout << string(100,'\n');
+            mainMenu(company);
+            break;
+        case 5:
+            break;
+        case 6:
+            company.eraseService();
+            cout << string(100,'\n');
+            mainMenu(company);
+            break;
+        case 7:
             cout << string(100,'\n');
             mainMenu(company);
             break;
@@ -196,3 +202,10 @@ void AlterBeachMenu(Company &company){
         AddAlterRemoveMenu(company);
     }
 }
+
+void ClearScreen() {
+
+    cout << string(50,'\n');
+}
+
+

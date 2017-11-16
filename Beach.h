@@ -194,6 +194,11 @@ public:
      * @param service
      */
     void add_ExtraService(Services service);
+
+    /**
+     * @param service
+     */
+    void erase_ExtraService(string service);
 };
 
 class RiverBeach: public Beach{
