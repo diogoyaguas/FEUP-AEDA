@@ -152,6 +152,9 @@ void Company::addBeach() {
         cout << endl << "Name (eg: Tapada Grande): ";
         getline(cin,sName);
 
+
+
+
         cout << endl << "Price Range (eg: 1/3): ";
         cin >> sPriceRange;
         while(sPriceRange != "1/3" && sPriceRange != "2/3" && sPriceRange != "3/3"){
@@ -301,6 +304,7 @@ void Company::displayBeaches(){
 void Company::updateFile(){
 
     ofstream file;
+    file.open("BeachFile.txt");
 
     for(auto & beach: beaches){
         file << beach->getType() << "; ";
@@ -334,6 +338,7 @@ void Company::updateFile(){
             }
         }
         file << ")";
+        file << endl;
     }
 
 }

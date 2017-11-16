@@ -49,6 +49,7 @@ void mainMenu(Company &company) {
     switch(option) {
         case 1:
             company.displayBeaches();
+            mainMenu(company);
             break;
         case 2:
             searchMenu(company);
@@ -58,6 +59,7 @@ void mainMenu(Company &company) {
             break;
         case 5:
             company.updateFile();
+            mainMenu(company);
             break;
 
     }}
