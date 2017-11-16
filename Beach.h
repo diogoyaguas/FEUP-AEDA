@@ -68,12 +68,35 @@ public:
      */
     float get_longitude() const;
 
+    /**
+     *
+     * @return
+     */
+    virtual float get_width() const = 0;
+
+    /**
+     *
+     * @return
+     */
+    virtual float get_maxDepth() const  = 0;
+
+    /**
+     *
+     * @return
+     */
+    virtual float get_aquaticArea() const = 0;
+
+    /**
+     *
+     * @return
+     */
     vector<string> getBasicServices() const;
 
     /**
      * @return vector of Services beach contains
      */
     vector<Services> getExtraServices() const;
+
     /**
      * @brief helps identifying from which derived class ths object is
      * @return "BayouBeach" if it's a class BayouBeach object, "RiverBeach" if it's a class RiverBeach object
@@ -121,10 +144,6 @@ public:
      */
     void set_BasicServices(vector<string> basicServices);
 
-
-    void add_BasicService(string service);
-    void add_ExtraService(Services service);
-
     /**
      * @brief changes extra services
      * @param extraServices
@@ -163,6 +182,18 @@ public:
      * @brief displays all information about the beach
      */
     virtual void displayBeach() = 0;
+
+    /**
+     *
+     * @param service
+     */
+    void add_BasicService(string service);
+
+    /**
+     *
+     * @param service
+     */
+    void add_ExtraService(Services service);
 };
 
 class RiverBeach: public Beach{
@@ -187,10 +218,16 @@ public:
      * @param line from txt file representing an object of class beach
      */
     RiverBeach(string beach);
-    string getType() const{return "River";}
+
+    string getType() const{return "River";};
+    float get_width() const{return width;};
+    float get_maxDepth() const{return maxDepth;};
+    float get_aquaticArea() const{};
+
     void set_width(float width){ this->width = width;};
     void set_maxDepth(float maxDept) { this->maxDepth = maxDept;};
     void set_aquaticArea(float aquaticArea) {};
+
     void displayBeach();
 };
 
@@ -215,10 +252,16 @@ public:
      * @param line from txt file representing an object of class beach
      */
     BayouBeach(string beach);
+
     string getType() const{return "Bayou";}
+    float get_width() const{};
+    float get_maxDepth() const{};
+    float get_aquaticArea() const{return aquaticArea;};
+
     void set_width(float width){};
     void set_maxDepth(float maxDept) {};
     void set_aquaticArea(float aquaticArea){this->aquaticArea = aquaticArea;};
+
     void displayBeach();
 };
 

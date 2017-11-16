@@ -41,13 +41,12 @@ public:
      * @return pos of beach in Beaches' vector if beach with name exists, -1 otherwise
      */
     unsigned int beachExists(string name);
-    
     /**
      * @brief displays the information about all beaches
      */
     void displayBeaches();
 
-    //void updateFile();
+    void updateFile();
 
 };
 

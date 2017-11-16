@@ -38,7 +38,7 @@ void mainMenu(Company &company) {
     cin >> option;
 
     //verifies if input is valid
-    while(cin.fail()||!ValidMenuInput(1, 4, option)) {
+    while(cin.fail()||!ValidMenuInput(1, 5, option)) {
         cin.clear();
         cin.ignore(1000, '\n');
         cout << "Please enter a valid option: "<< endl << ":::";
@@ -57,7 +57,7 @@ void mainMenu(Company &company) {
             AddAlterRemoveMenu(company);
             break;
         case 5:
-            //company.updateFile();
+            company.updateFile();
             break;
 
     }}

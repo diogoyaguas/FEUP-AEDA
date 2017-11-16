@@ -298,8 +298,7 @@ void Company::displayBeaches(){
     }
 }
 
-
-/*void Company::updateFile(){
+void Company::updateFile(){
 
     ofstream file;
 
@@ -313,10 +312,10 @@ void Company::displayBeaches(){
         file << beach->get_longitude() << "; ";
 
         if(beach->getType()=="Bayou"){
-            file << beach->getWidth() << "; ";
-            file << beach->getMaxDepth() << "; ";
+            file << beach->get_width() << "; ";
+            file << beach->get_maxDepth() << "; ";
         }else{
-            file << beach->getAquaticArea() << "; ";
+            file << beach->get_aquaticArea() << "; ";
         }
 
         if(!beach->getBasicServices().empty()) {
@@ -338,4 +337,3 @@ void Company::displayBeaches(){
     }
 
 }
-*/
