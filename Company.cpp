@@ -24,10 +24,10 @@ Company::Company() {
         type = beach.substr(0, stop);
 
 
-        if (type == "river") {
+        if (type == "River") {
 
             beaches.push_back(new RiverBeach(beach.substr(stop + 2)));
-        } else if (type == "bayou") {
+        } else if (type == "Bayou") {
 
             beaches.push_back(new BayouBeach(beach.substr(stop + 2)));
         }
@@ -311,13 +311,14 @@ void Company::updateFile(){
     for(auto & beach: beaches){
         file << beach->getType() << "; ";
         file << beach->get_county() << "; ";
+        file << beach->get_name() << "; ";
         file << beach->get_blue_flag() << "; ";
         file << beach->get_lifeguard() << "; ";
         file << beach->get_max_capacity() << "; ";
         file << beach->get_latitude() << "; ";
         file << beach->get_longitude() << "; ";
 
-        if(beach->getType()=="Bayou"){
+        if(beach->getType()=="River"){
             file << beach->get_width() << "; ";
             file << beach->get_maxDepth() << "; ";
         }else{
