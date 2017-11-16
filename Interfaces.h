@@ -2,6 +2,22 @@
 #define AEDA_INTERFACES_H
 
 #include "Company.h"
+/**
+ * @brief
+ * @tparam template class T
+ * @param value
+ */
+template <class T>
+void fail (T &value){
+
+    while(cin.fail()){
+
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Please enter a valid value: ";
+        cin >> value;
+    }
+}
 
 /**
  * @brief main menu that allows user to choose a topic to take action in

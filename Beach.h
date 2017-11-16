@@ -34,45 +34,51 @@ public:
     Beach(){};
 
     // get methods
-    string get_name();
+    /**
+     * @return county
+     */
+    string get_county() const;
+
+    /**
+     * @return name
+     */
+    string get_name() const;
     /**
      * @return 1 if beach contains blue flag, 0 otherwise
      */
-    bool get_blue_flag();
+    bool get_blue_flag() const;
 
     /**
      * @return 1 if beach contains lifeguard, 0 otherwise
      */
-    bool get_lifeguard();
+    bool get_lifeguard() const;
 
     /**
      * @return maximum capacity
      */
-    unsigned long get_max_capacity();
+    unsigned long get_max_capacity() const;
 
     /**
      * @return latitude
      */
-    float get_latitude();
+    float get_latitude() const;
 
     /**
      * @return longitude
      */
-    float get_longitude();
+    float get_longitude() const;
 
-    vector<string> getBasicServices();
+    vector<string> getBasicServices() const;
 
     /**
      * @return vector of Services beach contains
      */
-    vector<Services> getExtraServices();
-
+    vector<Services> getExtraServices() const;
     /**
      * @brief helps identifying from which derived class ths object is
      * @return "BayouBeach" if it's a class BayouBeach object, "RiverBeach" if it's a class RiverBeach object
      */
     virtual string getType() const=0;
-
 
     // set methods
     /**
@@ -184,7 +190,7 @@ public:
     string getType() const{return "River";}
     void set_width(float width){ this->width = width;};
     void set_maxDepth(float maxDept) { this->maxDepth = maxDept;};
-    void set_aquaticArea(float aquaticArea){};
+    void set_aquaticArea(float aquaticArea) {};
     void displayBeach();
 };
 

@@ -10,14 +10,15 @@ county(county),name(name), blueflag(blueflag), max_capacity(max_capacity), lat(l
 }
 
 // get methods
-string Beach::get_name(){ return name;}
-bool Beach::get_blue_flag(){return blueflag;}
-bool Beach::get_lifeguard(){return lifeguard;}
-unsigned long Beach::get_max_capacity(){return max_capacity;}
-float Beach::get_latitude(){return lat;}
-float Beach::get_longitude(){return longi;}
-vector<string> Beach::getBasicServices(){return basicServices;}
-vector<Services> Beach::getExtraServices(){return extraServices;}
+string Beach::get_county() const {return county;}
+string Beach::get_name()const {return name;}
+bool Beach::get_blue_flag() const {return blueflag;}
+bool Beach::get_lifeguard()const{return lifeguard;}
+unsigned long Beach::get_max_capacity()const{return max_capacity;}
+float Beach::get_latitude()const{return lat;}
+float Beach::get_longitude()const{return longi;}
+vector<string> Beach::getBasicServices()const{return basicServices;}
+vector<Services> Beach::getExtraServices()const{return extraServices;}
 
 // set methods
 void Beach::set_name(string name){this->name = name;}
@@ -209,6 +210,8 @@ void RiverBeach::displayBeach(){
 }
 
 
+
+
 //Bayou Beach
 BayouBeach::BayouBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi, float &aquaticArea)
         :Beach(county,name, blueflag, lifeguard, max_capacity,  lat ,  longi){
@@ -315,7 +318,6 @@ BayouBeach::BayouBeach(string beach)
     }
 }
 
-
 void BayouBeach::displayBeach() {
 
     cout << "County: " << county << endl;
@@ -366,3 +368,4 @@ void BayouBeach::displayBeach() {
         cout << setw(16) << setfill(' ') << "Stars: " << extraServices.at(i).getStars() << endl << endl;
     }
 }
+

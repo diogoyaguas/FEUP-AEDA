@@ -1,6 +1,7 @@
 #include "Company.h"
 #include "Interfaces.h"
 #include <fstream>
+using namespace std;
 
 Company::Company() {
     string fileBeach = "BeachFile.txt";
@@ -297,3 +298,44 @@ void Company::displayBeaches(){
     }
 }
 
+
+/*void Company::updateFile(){
+
+    ofstream file;
+
+    for(auto & beach: beaches){
+        file << beach->getType() << "; ";
+        file << beach->get_county() << "; ";
+        file << beach->get_blue_flag() << "; ";
+        file << beach->get_lifeguard() << "; ";
+        file << beach->get_max_capacity() << "; ";
+        file << beach->get_latitude() << "; ";
+        file << beach->get_longitude() << "; ";
+
+        if(beach->getType()=="Bayou"){
+            file << beach->getWidth() << "; ";
+            file << beach->getMaxDepth() << "; ";
+        }else{
+            file << beach->getAquaticArea() << "; ";
+        }
+
+        if(!beach->getBasicServices().empty()) {
+            for (auto &bService: beach->getBasicServices()) {
+                file << bService << ", ";
+            }
+        }
+        file << "; ";
+        file << "(";
+        if(!beach->getExtraServices().empty()) {
+            for (auto & service: beach->getExtraServices()) {
+                file << service.getType() << ", ";
+                file << service.getName() << ", ";
+                file << service.getPriceRange() << ", ";
+                file << service.getStars() << "; ";
+            }
+        }
+        file << ")";
+    }
+
+}
+*/

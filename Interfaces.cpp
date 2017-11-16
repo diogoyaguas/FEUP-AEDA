@@ -56,6 +56,9 @@ void mainMenu(Company &company) {
         case 4:
             AddAlterRemoveMenu(company);
             break;
+        case 5:
+            //company.updateFile();
+            break;
 
     }}
 
