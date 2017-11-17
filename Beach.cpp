@@ -1,5 +1,4 @@
 #include "Beach.h"
-#include <cmath>
 #include <iomanip>
 #include <vector>
 
@@ -47,17 +46,20 @@ void Beach::erase_ExtraService(string service){
         }
     }
 }
-double Beach::distanceToBeach(float lat, float longi){
-    double dlongi, dlat, a, c, distance, earthRadius;
-    earthRadius=6373;
+double Beach::distanceToBeach(float lat, float longi) {
+    int earthRadiusKm = 6371;
+    double tempLat, tempL1;
 
-    dlongi = this->longi-longi;
-    dlat= this->lat - lat;
-    a= pow(sin(dlat/2),2) + cos(lat) * cos(this->lat) * sin(dlongi/2);
-    c= 2 * atan2(sqrt(a),sqrt(1-a));
-    distance= c * 6373;
+    double dLat = degreesToRadians(lat - this->lat);
+    double dLon = degreesToRadians(longi - this->longi);
 
-    return distance;
+    tempL1 = degreesToRadians(this->lat);
+    tempLat = degreesToRadians(lat);
+
+    double a = sin(dLat / 2) * sin(dLat / 2) + sin(dLon / 2) * sin(dLon / 2) * cos( tempL1) * cos(tempLat);
+    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    return earthRadiusKm * c;
+
 }
 
 

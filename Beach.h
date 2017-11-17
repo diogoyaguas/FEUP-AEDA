@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "Services.h"
+#include <math.h>
 
 using namespace std;
 
@@ -170,6 +171,8 @@ public:
 
 
     // other functions
+    double degreesToRadians(double degrees) {return degrees * M_PI / 180;}
+
     /**
      * @brief calculates distance from location's GPS coordinates to beach's coordinates
      * @param 2nd latitude
@@ -228,7 +231,7 @@ public:
     string getType() const{return "River";};
     float get_width() const{return width;};
     float get_maxDepth() const{return maxDepth;};
-    float get_aquaticArea() const{};
+    float get_aquaticArea() const{return -1;};
 
     void set_width(float width){ this->width = width;};
     void set_maxDepth(float maxDept) { this->maxDepth = maxDept;};
@@ -260,8 +263,8 @@ public:
     BayouBeach(string beach);
 
     string getType() const{return "Bayou";}
-    float get_width() const{};
-    float get_maxDepth() const{};
+    float get_width() const{return -1;};
+    float get_maxDepth() const{return -1;};
     float get_aquaticArea() const{return aquaticArea;};
 
     void set_width(float width){};
