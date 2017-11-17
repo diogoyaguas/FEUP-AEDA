@@ -2,6 +2,8 @@
 #define AEDA_COMPANY_H
 
 #include "Beach.h"
+#include <iomanip>
+#include <math.h>
 
 class Company {
 private:
@@ -36,11 +38,11 @@ public:
      */
     void alterBBeachInfo(unsigned int option, unsigned int i);
     /**
-     *
+     *@brief adds a service to a certain beach
      */
     void addService();
     /**
-     *
+     *@brief erases a service from a certain beach
      */
     void eraseService();
     /**
@@ -54,9 +56,15 @@ public:
      */
     void displayBeaches();
     /**
-     *
+     *@brief updates the file containing the information about the beaches according to the changes made in the program
      */
     void updateFile();
+    /**
+     * @brief displays information about 2 beaches side by side
+     * @param 1st Beach
+     * @param 2nd Beach
+     */
+    void compareBeaches(Beach * b1, Beach * b2);
 
 };
 

@@ -11,7 +11,9 @@ int main() {
     Company company;
 
     cout << string(100, '\n');
-    mainMenu(company);
+    company.compareBeaches(company.getBeaches().at(4),company.getBeaches().at(3));
+    //mainMenu(company);
+
 
     return 0;
 }

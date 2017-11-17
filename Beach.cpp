@@ -131,14 +131,16 @@ RiverBeach::RiverBeach(string beach)
     this->maxDepth = stof(beach.substr(0,stop));
 
     //attribute basic serves
-    beach = beach.substr(stop+1);
-    last = beach.find_first_of(';',stop);
-    basic_services = beach.substr(stop-1,last-1);
+    beach = beach.substr(stop+2);
+    last = beach.find(';');
+    basic_services = beach.substr(0,last);
     unsigned long st;
 
     while(stop!=string::npos && !basic_services.empty()){
         st = basic_services.find_first_of(',');
         this->basicServices.push_back(basic_services.substr(0,st));
+        if(st==string::npos)
+            break;
         basic_services = basic_services.substr(st+2);
         stop = st;
     }
@@ -179,7 +181,7 @@ void RiverBeach::displayBeach(){
 
     if(blueflag && lifeguard){
 
-        cout << "Useful information: " <<  "Blue Flag" << endl << setw(30) << setfill(' ') << "Lifeguard" << endl;
+        cout << "Useful information: " <<  "Blue Flag" << endl << setw(29) << setfill(' ') << "Lifeguard" << endl;
         for (unsigned int i = 0; i < basicServices.size(); i++){
 
             size = basicServices.at(i).size();
@@ -339,7 +341,7 @@ void BayouBeach::displayBeach() {
 
     if(blueflag && lifeguard){
 
-        cout << "Useful information: " <<  "Blue Flag" << endl << setw(30) << setfill(' ') << "Lifeguard" << endl;
+        cout << "Useful information: " <<  "Blue Flag" << endl << setw(29) << setfill(' ') << "Lifeguard" << endl;
         for (unsigned int i = 0; i < basicServices.size(); i++){
 
             size = basicServices.at(i).size();

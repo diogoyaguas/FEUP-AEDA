@@ -424,3 +424,90 @@ void Company::updateFile(){
     }
 
 }
+
+void Company::compareBeaches(Beach * b1, Beach * b2){
+    unsigned long size,size1, size2;
+
+    cout << string(100,'\n') << left;
+    cout << "COMPARE BEACHES:" << endl;
+    cout << "Distance between beaches: " << b1->distanceToBeach(b2->get_latitude(), b2->get_longitude()) << "Km" << endl;
+    cout << string(69,'-') << endl;
+    cout << "| TYPE:     | " << setw(25) << b1->getType() <<  " | " << setw(25) << b2->getType() << " |" << endl;
+    cout << string(69,'-') << endl;
+    cout << "| COUNTY:   | " << setw(25) << b1->get_county() <<  " | " << setw(25) << b2->get_county() << " |" << endl;
+    cout << string(69,'-') << endl;
+    cout << "| NAME:     | " << setw(25) << b1->get_name() << " | " << setw(25) << b2->get_name() << " |" << endl;
+    cout << string(69,'-') << endl;
+    cout << "| CAPACITY: | " << setw(25) << b1->get_max_capacity() << " | " << setw(25) << b2->get_max_capacity() << " |" << endl;
+    cout << "| MAXIMUM   | " << right << setw(28) << " | " << setw(27) << " |" << endl << left;
+    cout << string(69,'-') << endl;
+    cout << "| GPS       | " << "(" << fixed << setprecision(5) << right;
+
+    if(fabs(b1->get_latitude())<10 && fabs(b1->get_longitude())<10){
+        cout << b1->get_latitude() << ","  << b1->get_longitude() << ")" <<  setw(10) <<  " | ";
+    }else if(fabs(b1->get_latitude())>10 && fabs(b1->get_longitude())>10){
+        cout << b1->get_latitude() << ","  << b1->get_longitude() << ")" <<  setw(8) <<  " | ";
+    }else{
+        cout << b1->get_latitude() << ","  << b1->get_longitude() << ")" <<  setw(9) <<  " | ";
+    }
+
+    if(fabs(b2->get_latitude())<10 && fabs(b2->get_longitude())<10){
+        cout << b2->get_latitude() << ","  << b2->get_longitude() << ")" <<  setw(10) <<  " |" << endl;
+    }else if(fabs(b2->get_latitude())>10 && fabs(b2->get_longitude())>10){
+        cout << b2->get_latitude() << ","  << b2->get_longitude() << ")" <<  setw(8) <<  " |" << endl;
+    }else{
+        cout << b2->get_latitude() << ","  << b2->get_longitude() << ")" <<  setw(9) <<  " |" << endl;
+    }
+
+    cout << "| COORD:    | " << right << setw(28) << " | " << setw(27) << " |" << endl ;
+    cout << string(69,'-') << endl;
+
+
+    cout << "| USEFUL:   | ";
+    if(b1->get_lifeguard()){
+        cout << setw(25) << "Lifeguard" << " | ";
+    }else{
+        cout << setw(25) << "No lifeguard" << " | ";
+    }
+
+    if(b2->get_lifeguard()){
+        cout << setw(25) << "Lifeguard" << " | " << endl;
+    }else{
+        cout << setw(25) << "No lifeguard" << " | " << endl;
+    }
+
+    cout << "| INFO:     | ";
+    if(b1->get_blue_flag()){
+        cout << setw(25) << "Blueflag" << " | ";
+    }else{
+        cout << setw(25) << "No blueflag" << " | ";
+    }
+
+    if(b2->get_blue_flag()){
+        cout << setw(25) << "Blueflag" << " | " << endl;
+    }else{
+        cout << setw(25) << "No blueflag" << " | " << endl;
+    }
+
+    size1 = b1->getBasicServices().size();
+    size2 = b2->getBasicServices().size();
+    if(size1 >size2)
+        size = size1;
+    else
+        size = size2;
+
+
+    for(unsigned int i=0; i< size; i++){
+        if(i<size1)
+            cout << "|           | " << setw(25) << b1->getBasicServices().at(i) << " | ";
+        else
+            cout << "|           | " << setw(28) << " | ";
+        if(i<size2)
+            cout << setw(25) << b2->getBasicServices().at(i) << " | " << endl;
+        else
+            cout << setw(28) << " | " << endl;
+    }
+
+    cout << string(69,'-');
+
+}
