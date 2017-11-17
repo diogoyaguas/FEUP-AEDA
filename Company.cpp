@@ -452,14 +452,14 @@ void Company::compareBeaches(Beach * b1, Beach * b2){
     }
 
     if(fabs(b2->get_latitude())<10 && fabs(b2->get_longitude())<10){
-        cout << b2->get_latitude() << ","  << b2->get_longitude() << ")" <<  setw(10) <<  " |" << endl;
+        cout  << "("<< b2->get_latitude() << ","  << b2->get_longitude() << ")" <<  setw(9) <<  " |" << endl;
     }else if(fabs(b2->get_latitude())>10 && fabs(b2->get_longitude())>10){
-        cout << b2->get_latitude() << ","  << b2->get_longitude() << ")" <<  setw(8) <<  " |" << endl;
+        cout << "(" << b2->get_latitude() << ","  << b2->get_longitude() << ")" <<  setw(7) <<  " |" << endl;
     }else{
-        cout << b2->get_latitude() << ","  << b2->get_longitude() << ")" <<  setw(9) <<  " |" << endl;
+        cout  << "("<< b2->get_latitude() << ","  << b2->get_longitude() << ")" <<  setw(8) <<  " |" << endl;
     }
 
-    cout << "| COORD:    | " << right << setw(28) << " | " << setw(27) << " |" << endl ;
+    cout << "| COORD:    | " << right << setw(28) << " | " << setw(27) << " |" << endl << left;
     cout << string(69,'-') << endl;
 
 
@@ -501,13 +501,15 @@ void Company::compareBeaches(Beach * b1, Beach * b2){
         if(i<size1)
             cout << "|           | " << setw(25) << b1->getBasicServices().at(i) << " | ";
         else
-            cout << "|           | " << setw(28) << " | ";
+            cout << "|           | " << right << setw(28) << " | " << left;
         if(i<size2)
             cout << setw(25) << b2->getBasicServices().at(i) << " | " << endl;
         else
-            cout << setw(28) << " | " << endl;
+            cout << right << setw(28) << " | " << endl << left;
     }
 
     cout << string(69,'-');
+
+
 
 }
