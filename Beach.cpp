@@ -223,9 +223,6 @@ void RiverBeach::displayBeach(){
     }
 }
 
-
-
-
 //Bayou Beach
 BayouBeach::BayouBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi, float &aquaticArea)
         :Beach(county,name, blueflag, lifeguard, max_capacity,  lat ,  longi){

@@ -1,20 +1,16 @@
 #include <iostream>
-using namespace std;
 #include "Interfaces.h"
 
-
-
+using namespace std;
 
 
 int main() {
-
 
     Company company;
 
     cout << string(100, '\n');
     
-    //mainMenu(company);
-
+    mainMenu(company);
 
     return 0;
 }

@@ -1,6 +1,7 @@
 #include "Company.h"
 #include "Interfaces.h"
 #include <fstream>
+
 using namespace std;
 
 Company::Company() {
@@ -296,7 +297,7 @@ void Company::removeBeach() {
 void Company::addService() {
 
     string name, sType, sName, sPriceRange, sStars;
-    int services, counter, i;
+    unsigned int services, counter, i;
 
     ClearScreen();
 
@@ -341,6 +342,92 @@ void Company::addService() {
             beaches.at(i)->add_ExtraService(Services(sType, sName, sPriceRange, sStars));
             cin.ignore(1000, '\n');
 
+        }
+    }
+}
+
+void Company::alterService() {
+
+    string name, service, sType, sName, sPriceRange, sStars;
+    unsigned int i, option;
+
+    ClearScreen();
+
+    cout << "Insert name of the beach you wish to alter a service to" << endl << ":::";
+    cin.ignore(1000, '\n');
+    getline(cin,name);
+
+    i = beachExists(name);
+
+    if (i != -1) {
+
+        cout << "Insert name of the service you wish to alter" << endl << ":::";
+        getline(cin,service);
+
+        for(unsigned int j = 0; j < beaches.at(i)->getExtraServices().size(); ++j){
+
+            if(beaches.at(i)->getExtraServices().at(j).getName() == service){
+
+                cout << "What information do you wish to alter?" << endl;
+                cout << "1. Alter type" << endl;
+                cout << "2. Alter name" << endl;
+                cout << "3. Alter price range" << endl;
+                cout << "4. Alter number of stars" << endl;
+                cout << "5. Return to main menu" << endl;
+                cout << endl << "Enter a number option: "<< endl << ":::";
+                cin >> option;
+
+                //verifies if input is valid
+                while (cin.fail() || !ValidMenuInput(1, 5, option)) {
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    cout << "Please enter a valid option: "<< endl << ":::";
+                    cin >> option;
+                }
+
+                switch (option) {
+
+                    case 1:
+                        cout << "Insert the new type of service" << endl << ":::";
+                        cin.ignore(1000, '\n');
+                        getline(cin,sType);
+                        beaches.at(i)->getExtraServices().at(j).setType(sType);
+                        break;
+                    case 2:
+                        cout << "Insert the new name" << endl << ":::";
+                        cin.ignore(1000, '\n');
+                        getline(cin,sName);
+                        beaches.at(i)->getExtraServices().at(j).setName(sName);
+                        break;
+                    case 3:
+                        cout << "Insert the new price range" << endl << ":::";
+                        cin.ignore(1000, '\n');
+                        cin >> sPriceRange;
+                        while (sPriceRange != "1/3" && sPriceRange != "2/3" && sPriceRange != "3/3") {
+                            cin.ignore(1000, '\n');
+                            cout << "Please enter a valid value: ";
+                            cin >> sPriceRange;
+                        }
+                        beaches.at(i)->getExtraServices().at(j).setPriceRange(sPriceRange);
+                        break;
+                    case 4:
+                        cout << "Insert the new number of stars" << endl << ":::";
+                        cin.ignore(1000, '\n');
+                        cin >> sStars;
+                        while (sStars != "*" && sStars != "**" && sStars != "***" && sStars != "****" && sStars != "*****") {
+                            cin.clear();
+                            cin.ignore(1000, '\n');
+                            cout << "Please enter a valid value: ";
+                            cin >> sStars;
+                        }
+                        beaches.at(i)->getExtraServices().at(j).setStars(sStars);
+                        break;
+                    case 5:
+                        cout << string(100,'\n');
+                        break;
+
+                }
+            }
         }
     }
 }

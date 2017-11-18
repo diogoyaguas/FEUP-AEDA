@@ -42,6 +42,10 @@ public:
      */
     void addService();
     /**
+     *
+     */
+    void alterService();
+    /**
      *@brief erases a service from a certain beach
      */
     void eraseService();
@@ -67,8 +71,5 @@ public:
     void compareBeaches(Beach * b1, Beach * b2);
 
 };
-
-
-
 
 #endif //AEDA_COMPANY_H

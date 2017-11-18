@@ -38,9 +38,26 @@ public:
      * @return stars
      */
     string getStars(){return stars;}
+    /**
+     *
+     * @param type
+     */
+    void setType(string type) {this->type = type;}
+    /**
+     *
+     * @param name
+     */
+    void setName(string name) {this->name = name;}
+    /**
+     *
+     * @param price
+     */
+    void setPriceRange(string price) {this->priceRange = price;}
+    /**
+     *
+     * @param stars
+     */
+    void setStars(string stars) {this->stars = stars;}
 };
-
-
-
 
 #endif //AEDA_SERVICES_H

@@ -1,10 +1,10 @@
 //file contains functions related to user's menus
 
 #include <iostream>
-using namespace std;
 #include <iomanip>
 #include "Interfaces.h"
 
+using namespace std;
 
 bool ValidMenuInput(int lowerL, int upperL, int input){
     if(input<=upperL && input>=lowerL)
@@ -89,8 +89,8 @@ void AddAlterRemoveMenu(Company &company){
     cout << " ALTER BEACH FILE" << setw(37) << setfill(' ') << " " << endl;
     cout << setfill('-') << setw(47)<<"-"<<endl;
     cout << "1. Add beach" << endl;
-    cout << "2. Remove beach" << endl;
-    cout << "3. Alter beach" << endl;
+    cout << "2. Alter beach" << endl;
+    cout << "3. Remove beach" << endl;
     cout << "4. Add service" << endl;
     cout << "5. Alter service" << endl;
     cout << "6. Remove service" << endl;
@@ -114,12 +114,12 @@ void AddAlterRemoveMenu(Company &company){
             mainMenu(company);
             break;
         case 2:
-            company.removeBeach();
+            AlterBeachMenu(company);
             cout << string(100,'\n');
             mainMenu(company);
             break;
         case 3:
-            AlterBeachMenu(company);
+            company.removeBeach();
             cout << string(100,'\n');
             mainMenu(company);
             break;
@@ -129,6 +129,9 @@ void AddAlterRemoveMenu(Company &company){
             mainMenu(company);
             break;
         case 5:
+            company.alterService();
+            cout << string(100,'\n');
+            mainMenu(company);
             break;
         case 6:
             company.eraseService();
