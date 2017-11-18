@@ -38,16 +38,21 @@ void mainMenu(Company &company) {
     switch(option) {
         case 1:
             company.displayBeaches();
+            ClearScreen();
             mainMenu(company);
             break;
         case 2:
             searchMenu(company);
+            ClearScreen();
+            mainMenu(company);
             break;
         case 4:
             AddAlterRemoveMenu(company);
+            ClearScreen();
             break;
         case 5:
             company.updateFile();
+            ClearScreen();
             mainMenu(company);
             break;
 
@@ -77,7 +82,24 @@ void searchMenu(Company &company){
         cin >> option;
     }
 
-    //do stuff
+    switch(option) {
+
+        case 1:
+            company.searchCounty();
+            break;
+        case 2:
+            company.searchName();
+            break;
+        case 3:
+            company.searchBlueflag();
+            break;
+        case 4:
+            company.searchLifeguard();
+            break;
+        case 5:
+            company.searchClosest();
+            break;
+    }
 
 }
 
@@ -110,36 +132,36 @@ void AddAlterRemoveMenu(Company &company){
     switch(option){
         case 1:
             company.addBeach();
-            cout << string(100,'\n');
+            ClearScreen();
             mainMenu(company);
             break;
         case 2:
             AlterBeachMenu(company);
-            cout << string(100,'\n');
+            ClearScreen();
             mainMenu(company);
             break;
         case 3:
             company.removeBeach();
-            cout << string(100,'\n');
+            ClearScreen();
             mainMenu(company);
             break;
         case 4:
             company.addService();
-            cout << string(100,'\n');
+            ClearScreen();
             mainMenu(company);
             break;
         case 5:
             company.alterService();
-            cout << string(100,'\n');
+            ClearScreen();
             mainMenu(company);
             break;
         case 6:
             company.eraseService();
-            cout << string(100,'\n');
+            ClearScreen();
             mainMenu(company);
             break;
         case 7:
-            cout << string(100,'\n');
+            ClearScreen();
             mainMenu(company);
             break;
     }

@@ -64,6 +64,26 @@ public:
      */
     void updateFile();
     /**
+     *
+     */
+    void searchCounty();
+    /**
+     *
+     */
+    void searchName();
+    /**
+     *
+     */
+    void searchBlueflag();
+    /**
+     *
+     */
+    void searchLifeguard();
+    /**
+     *
+     */
+    void searchClosest();
+    /**
      * @brief displays information about 2 beaches side by side
      * @param 1st Beach
      * @param 2nd Beach
