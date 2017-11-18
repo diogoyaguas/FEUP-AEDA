@@ -711,7 +711,7 @@ void Company::searchClosest() {
                 }
 
                 cout << "Distance between your actual beach and closest beach: " << distance << " km" << endl;
-                cout << "Information of the beach: " << endl;
+                cout << endl << "Information of the beach: " << endl;
                 beaches.at(temp)->displayBeach();
                 break;
             }
