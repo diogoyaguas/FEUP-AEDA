@@ -2,6 +2,10 @@
 #define AEDA_INTERFACES_H
 
 #include "Company.h"
+
+
+void returnMainMenu();
+
 /**
  * @brief
  * @tparam template class T

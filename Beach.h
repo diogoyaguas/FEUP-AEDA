@@ -143,13 +143,13 @@ public:
      * @brief changes basic services
      * @param basicServices
      */
-    void set_BasicServices(vector<string> basicServices);
+    void set_BasicServices(vector<string> &basicServices);
 
     /**
      * @brief changes extra services
      * @param extraServices
      */
-    void set_ExtraServices(vector<Services> extraServices);
+    void set_ExtraServices(vector<Services> &extraServices);
 
     /**
      * @brief changes width
@@ -168,7 +168,6 @@ public:
      * @param Aquatic area
      */
     virtual void set_aquaticArea(float aquaticArea) = 0;
-
 
     // other functions
     double degreesToRadians(double degrees) {return degrees * M_PI / 180;}
@@ -202,6 +201,13 @@ public:
      * @param service
      */
     void erase_ExtraService(string service);
+
+    /**
+     *
+     * @param b1
+     * @return
+     */
+    bool operator<(const string &s1);
 
 };
 

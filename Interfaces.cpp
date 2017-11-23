@@ -2,9 +2,24 @@
 
 #include <iostream>
 #include <iomanip>
+#include <algorithm>
 #include "Interfaces.h"
 
 using namespace std;
+
+void returnMainMenu(){
+    int option;
+
+    cout << endl << "0. Return to main menu" << endl << ":::";
+    cin >> option;
+
+    while (cin.fail() || !ValidMenuInput(0, 0, option)) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Please enter a valid option: " << endl << ":::";
+        cin >> option;
+    }
+}
 
 bool ValidMenuInput(int lowerL, int upperL, int input){
     if(input<=upperL && input>=lowerL)
@@ -13,6 +28,7 @@ bool ValidMenuInput(int lowerL, int upperL, int input){
 }
 
 void mainMenu(Company &company) {
+
     int option;
 
     cout << " MAIN MENU" << setw(40)<< setfill(' ') << " " << endl;
@@ -131,12 +147,17 @@ void AddAlterRemoveMenu(Company &company){
 
     switch(option){
         case 1:
-            company.addBeach();
+            try{company.addBeach();}
+            catch(int x){
+                cout << endl << "ERROR: Beach already exists!" << endl;
+            }
+            returnMainMenu();
             ClearScreen();
             mainMenu(company);
             break;
         case 2:
             AlterBeachMenu(company);
+            returnMainMenu();
             ClearScreen();
             mainMenu(company);
             break;
@@ -146,12 +167,20 @@ void AddAlterRemoveMenu(Company &company){
             mainMenu(company);
             break;
         case 4:
-            company.addService();
+            try{company.addService();}
+            catch(int x){
+                cout << endl << "ERROR: Service already exists!" << endl;
+            }
+            returnMainMenu();
             ClearScreen();
             mainMenu(company);
             break;
         case 5:
-            company.alterService();
+            try{company.alterService();}
+            catch(int x){
+                cout << endl << "ERROR: Service already exists!" << endl;
+            }
+            returnMainMenu();
             ClearScreen();
             mainMenu(company);
             break;
@@ -169,10 +198,12 @@ void AddAlterRemoveMenu(Company &company){
 
 void AlterBeachMenu(Company &company){
     unsigned int displayOption=1;
-    unsigned int option, i;
+    unsigned int option;
+    int i, x;
     string name;
 
     cout << "Insert beach name" << endl << ":::";
+    cin.ignore(1000, '\n');
     getline(cin,name);
 
     i = company.beachExists(name);
@@ -213,14 +244,20 @@ void AlterBeachMenu(Company &company){
 
         //Alter according if to it's type
         if(company.getBeaches().at(company.beachExists(name))->getType()=="River"){
-            company.alterRBeachInfo(option,i);
+
+            try{company.alterRBeachInfo(option,i);} catch(int x){
+                x = -1;
+                cout << endl << "ERROR: Beach already exists!" << endl;
+            }
         }else{
-            company.alterBBeachInfo(option,i);
+            try{company.alterBBeachInfo(option,i);}catch(int x){
+                x = -1;
+                cout << endl << "ERROR: Beach already exists!" << endl;
+            }
         }
 
         //If 'if' verifies and function reaches here succeed
-        cout << "Information altered successfully!" << string(4,'\n');
-        mainMenu(company);
+        if(x != -1) cout << "Information altered successfully!" << string(4,'\n');
 
     } else {
         cout << "ERROR: Beach with given name doesn't exist." << endl;

@@ -54,7 +54,7 @@ public:
      * @param name
      * @return pos of beach in Beaches' vector if beach with name exists, -1 otherwise
      */
-    unsigned int beachExists(string name);
+    int beachExists(string name);
     /**
      * @brief displays the information about all beaches
      */
@@ -91,5 +91,6 @@ public:
     void compareBeaches(Beach * b1, Beach * b2);
 
 };
+
 
 #endif //AEDA_COMPANY_H

@@ -1,5 +1,6 @@
 #include "Company.h"
 #include "Interfaces.h"
+#include <algorithm>
 #include <fstream>
 
 using namespace std;
@@ -35,7 +36,7 @@ Company::Company() {
     }
 }
 
-unsigned int Company::beachExists(string name) {
+int Company::beachExists(string name) {
 
     for (unsigned int i = 0; i < beaches.size(); ++i) {
 
@@ -71,6 +72,7 @@ void Company::addBeach() {
 
     cout << endl << "Insert name: " << endl << "::: ";
     getline(cin, name);
+    if(beachExists(name) != -1) { throw  -1;}
 
     cout << endl << "Insert 1 if contains blueflag, 0 otherwise: " << endl << "::: ";
     cin >> temp;
@@ -191,6 +193,7 @@ void Company::alterRBeachInfo(unsigned int option, unsigned int i) {
             cout << "Insert new name: " << endl;
             cin.ignore(1000, '\n');
             getline(cin, name);
+            if(beachExists(name) != -1) { throw  -1;}
             beaches.at(i)->set_name(name);
             break;
         case 2:
@@ -241,6 +244,7 @@ void Company::alterBBeachInfo(unsigned int option, unsigned int i) {
             cout << "Insert new name: " << endl;
             cin.ignore(1000, '\n');
             getline(cin, name);
+            if(beachExists(name) != -1) { throw  -1;}
             beaches.at(i)->set_name(name);
             break;
         case 2:
@@ -297,7 +301,8 @@ void Company::removeBeach() {
 void Company::addService() {
 
     string name, sType, sName, sPriceRange, sStars;
-    unsigned int services, counter, i;
+    unsigned int services, counter;
+    int i;
 
     ClearScreen();
 
@@ -339,8 +344,15 @@ void Company::addService() {
                 cin >> sStars;
             }
 
+            for(auto & beach_service : beaches.at(i)->getExtraServices()){
+
+                if(beach_service.getName() == sName) {throw -1;}
+            }
+
             beaches.at(i)->add_ExtraService(Services(sType, sName, sPriceRange, sStars));
             cin.ignore(1000, '\n');
+
+            cout << endl << "Added successfully!" << endl;
 
         }
     }
@@ -349,7 +361,8 @@ void Company::addService() {
 void Company::alterService() {
 
     string name, service, sType, sName, sPriceRange, sStars;
-    unsigned int i, option;
+    unsigned int option;
+    int i;
     vector<Services> newServices;
 
     ClearScreen();
@@ -400,6 +413,12 @@ void Company::alterService() {
                         cout << "Insert the new name" << endl << ":::";
                         cin.ignore(1000, '\n');
                         getline(cin, sName);
+
+                        for(auto & beach_service : beaches.at(i)->getExtraServices()){
+
+                            if(beach_service.getName() == sName) {throw -1;}
+                        }
+
                         newServices = beaches.at(i)->getExtraServices();
                         newServices.at(j).setName(sName);
                         beaches.at(i)->set_ExtraServices(newServices);
@@ -435,6 +454,8 @@ void Company::alterService() {
                     case 5:
                         break;
                 }
+
+                cout << endl << "Altered successfully!" << endl;
             }
         }
     }
@@ -471,15 +492,8 @@ void Company::displayBeaches() {
         beaches.at(i)->displayBeach();
     }
 
-    cout << "0. Return to main menu" << endl << ":::";
-    cin >> option;
+    returnMainMenu();
 
-    while (cin.fail() || !ValidMenuInput(0, 0, option)) {
-        cin.clear();
-        cin.ignore(1000, '\n');
-        cout << "Please enter a valid option: " << endl << ":::";
-        cin >> option;
-    }
 }
 
 void Company::updateFile() {
@@ -540,7 +554,7 @@ void Company::searchCounty() {
 
     ClearScreen();
 
-    cout << "Insert the name of the county you wish to search for beaches" << endl << ":::";
+    cout << "Insert the name of the county you wish to search for beaches" << endl << "::: ";
     cin.ignore(1000, '\n');
     getline(cin, county);
 
@@ -554,15 +568,7 @@ void Company::searchCounty() {
         }
     }
 
-    cout << "0. Return to main menu" << endl << ":::";
-    cin >> option;
-
-    while (cin.fail() || !ValidMenuInput(0, 0, option)) {
-        cin.clear();
-        cin.ignore(1000, '\n');
-        cout << "Please enter a valid option: " << endl << ":::";
-        cin >> option;
-    }
+    returnMainMenu();
 }
 
 void Company::searchName() {
@@ -586,15 +592,7 @@ void Company::searchName() {
         }
     }
 
-    cout << "0. Return to main menu" << endl << ":::";
-    cin >> option;
-
-    while (cin.fail() || !ValidMenuInput(0, 0, option)) {
-        cin.clear();
-        cin.ignore(1000, '\n');
-        cout << "Please enter a valid option: " << endl << ":::";
-        cin >> option;
-    }
+    returnMainMenu();
 }
 
 void Company::searchBlueflag() {
@@ -611,15 +609,7 @@ void Company::searchBlueflag() {
         }
     }
 
-    cout << "0. Return to main menu" << endl << ":::";
-    cin >> option;
-
-    while (cin.fail() || !ValidMenuInput(0, 0, option)) {
-        cin.clear();
-        cin.ignore(1000, '\n');
-        cout << "Please enter a valid option: " << endl << ":::";
-        cin >> option;
-    }
+    returnMainMenu();
 }
 
 void Company::searchLifeguard() {
@@ -636,15 +626,7 @@ void Company::searchLifeguard() {
         }
     }
 
-    cout << "0. Return to main menu" << endl << ":::";
-    cin >> option;
-
-    while (cin.fail() || !ValidMenuInput(0, 0, option)) {
-        cin.clear();
-        cin.ignore(1000, '\n');
-        cout << "Please enter a valid option: " << endl << ":::";
-        cin >> option;
-    }
+    returnMainMenu();
 }
 
 void Company::searchClosest() {
@@ -717,15 +699,7 @@ void Company::searchClosest() {
             }
     }
 
-    cout << "0. Return to main menu" << endl << ":::";
-    cin >> option;
-
-    while (cin.fail() || !ValidMenuInput(0, 0, option)) {
-        cin.clear();
-        cin.ignore(1000, '\n');
-        cout << "Please enter a valid option: " << endl << ":::";
-        cin >> option;
-    }
+    returnMainMenu();
 }
 
 void Company::compareBeaches(Beach *b1, Beach *b2) {

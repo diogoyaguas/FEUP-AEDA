@@ -30,10 +30,10 @@ void Beach::set_lifeguard(){if(this->lifeguard){
 void Beach::set_max_capacity(unsigned long max_capacity){this->max_capacity = max_capacity;}
 void Beach::set_latitude(float lat){this->lat = lat;}
 void Beach::set_longitude(float longi){this->longi = longi;}
-void Beach::set_BasicServices(vector<string> basicServices){this->basicServices = basicServices;}
-void Beach::set_ExtraServices(vector<Services> extraServices){this->extraServices = extraServices;}
+void Beach::set_BasicServices(vector<string> &basicServices){this->basicServices = basicServices;}
+void Beach::set_ExtraServices(vector<Services> &extraServices){this->extraServices = extraServices;}
 
-
+//other methods
 void Beach::add_BasicService(string service){this->basicServices.push_back(service);}
 void Beach::add_ExtraService(Services service){this->extraServices.push_back(service);}
 void Beach::erase_ExtraService(string service){
@@ -61,8 +61,6 @@ double Beach::distanceToBeach(float lat, float longi) {
     return earthRadiusKm * c;
 
 }
-
-
 
 //River Beach
 RiverBeach::RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi,  float &width, float &maxDepth)
@@ -377,6 +375,21 @@ void BayouBeach::displayBeach() {
         cout << setw(15) << setfill(' ') << "Name: " << extraServices.at(i).getName() << endl;
         cout << setw(22) << setfill(' ') << "Price Range: " << extraServices.at(i).getPriceRange() << endl;
         cout << setw(16) << setfill(' ') << "Stars: " << extraServices.at(i).getStars() << endl << endl;
+    }
+}
+
+bool operator<(const string &s1, const string &s2){
+
+    unsigned int i = 1;
+
+    if(s1.at(0) < s2.at(0)) return true;
+    else if(s1.at(0) > s2.at(0)) return false;
+    else {
+        while(s1.at(i) != s2.at(i)){
+            i++;
+        }
+        if(s1.at(0) < s2.at(0)) return true;
+        else if(s1.at(0) > s2.at(0)) return false;
     }
 }
 
