@@ -34,17 +34,25 @@ Company::Company() {
             beaches.push_back(new BayouBeach(beach.substr(stop + 2)));
         }
     }
+
+    sort(beaches.begin(),beaches.end(),orderByName);
 }
 
 int Company::beachExists(string name) {
 
-    for (unsigned int i = 0; i < beaches.size(); ++i) {
+    sort(beaches.begin(),beaches.end(),orderByName);
 
-        if (beaches.at(i)->get_name() == name) {
-            return i;
-        }
+    int left = 0, right = beaches.size() - 1;
+    while (left <= right) {
+        int middle = (left + right) / 2;
+        if (beaches.at(middle)->get_name() < name)
+            left = middle + 1;
+        else if (name < beaches.at(middle)->get_name())
+            right = middle - 1;
+        else
+            return middle; // encontrou
     }
-    return -1;
+    return -1; // não encontrou
 }
 
 void Company::addBeach() {
@@ -487,6 +495,8 @@ void Company::displayBeaches() {
 
     int option;
 
+    ClearScreen();
+
     for (unsigned int i = 0; i < beaches.size(); i++) {
 
         beaches.at(i)->displayBeach();
@@ -500,6 +510,8 @@ void Company::updateFile() {
 
     ofstream file;
     file.open("BeachFile.txt");
+
+    sort(beaches.begin(),beaches.end(),orderByName);
 
     for (auto &beach: beaches) {
         file << beach->getType() << "; ";
@@ -578,18 +590,24 @@ void Company::searchName() {
 
     ClearScreen();
 
+    sort(beaches.begin(),beaches.end(),orderByName);
+
     cout << "Insert the name of the beach you wish to search for" << endl << ":::";
     cin.ignore(1000, '\n');
     getline(cin, name);
 
     ClearScreen();
 
-    for (auto &beach: beaches) {
+    int left = 0, right = beaches.size() - 1;
 
-        if (beach->get_name() == name) {
-
-            beach->displayBeach();
-        }
+    while (left <= right) {
+        int middle = (left + right) / 2;
+        if (beaches.at(middle)->get_name() < name)
+            left = middle + 1;
+        else if (name < beaches.at(middle)->get_name())
+            right = middle - 1;
+        else
+            beaches.at(middle)->displayBeach();
     }
 
     returnMainMenu();
@@ -789,5 +807,10 @@ void Company::compareBeaches(Beach *b1, Beach *b2) {
 
     cout << string(69, '-');
 
+}
 
+bool orderByName(Beach *s1, Beach *s2){
+
+    if(s1->get_name() < s2->get_name()) return true;
+    else if(s1->get_name() > s2->get_name()) return false;
 }

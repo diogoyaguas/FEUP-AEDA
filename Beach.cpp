@@ -378,18 +378,4 @@ void BayouBeach::displayBeach() {
     }
 }
 
-bool operator<(const string &s1, const string &s2){
-
-    unsigned int i = 1;
-
-    if(s1.at(0) < s2.at(0)) return true;
-    else if(s1.at(0) > s2.at(0)) return false;
-    else {
-        while(s1.at(i) != s2.at(i)){
-            i++;
-        }
-        if(s1.at(0) < s2.at(0)) return true;
-        else if(s1.at(0) > s2.at(0)) return false;
-    }
-}
 

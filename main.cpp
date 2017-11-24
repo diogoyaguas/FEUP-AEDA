@@ -1,16 +1,18 @@
 #include <iostream>
 #include "Interfaces.h"
+#include <algorithm>
 
 using namespace std;
+
 
 
 int main() {
 
     Company company;
 
-    if("abd" < "abe") {cout << "oiiii" << endl;}
+    cout << company.beachExists("Teixo") << endl;
 
-    cout << string(100, '\n');
+    ClearScreen();
     
     mainMenu(company);
 

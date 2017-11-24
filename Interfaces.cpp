@@ -62,6 +62,11 @@ void mainMenu(Company &company) {
             ClearScreen();
             mainMenu(company);
             break;
+        case 3:
+            compareMenu(company);
+            ClearScreen();
+            mainMenu(company);
+            break;
         case 4:
             AddAlterRemoveMenu(company);
             ClearScreen();
@@ -197,6 +202,7 @@ void AddAlterRemoveMenu(Company &company){
 }
 
 void AlterBeachMenu(Company &company){
+
     unsigned int displayOption=1;
     unsigned int option;
     int i, x;
@@ -263,6 +269,24 @@ void AlterBeachMenu(Company &company){
         cout << "ERROR: Beach with given name doesn't exist." << endl;
         AddAlterRemoveMenu(company);
     }
+}
+
+void compareMenu(Company &company){
+
+    string b1, b2;
+
+    int ind1, ind2;
+
+    cout << "Insert the name of the two beaches you wish to compare:" << endl << ":::";
+    cin >> b1;
+    ind1 = company.beachExists(b1);
+    cout << ":::";
+    cin >> b2;
+    ind2 = company.beachExists(b2);
+
+    company.compareBeaches(company.getBeaches().at(ind1),company.getBeaches().at(ind2));
+
+    returnMainMenu();
 }
 
 void ClearScreen() {

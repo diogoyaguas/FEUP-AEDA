@@ -202,13 +202,6 @@ public:
      */
     void erase_ExtraService(string service);
 
-    /**
-     *
-     * @param b1
-     * @return
-     */
-    bool operator<(const string &s1);
-
 };
 
 class RiverBeach: public Beach{
