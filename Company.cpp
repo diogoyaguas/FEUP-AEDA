@@ -502,47 +502,7 @@ void Company::updateFile() {
     file.open("BeachFile.txt");
 
     for (auto &beach: beaches) {
-        file << beach->getType() << "; ";
-        file << beach->get_county() << "; ";
-        file << beach->get_name() << "; ";
-        file << beach->get_blue_flag() << "; ";
-        file << beach->get_lifeguard() << "; ";
-        file << beach->get_max_capacity() << "; ";
-        file << beach->get_latitude() << "; ";
-        file << beach->get_longitude() << "; ";
-
-        if (beach->getType() == "River") {
-            file << beach->get_width() << "; ";
-            file << beach->get_maxDepth() << "; ";
-        } else {
-            file << beach->get_aquaticArea() << "; ";
-        }
-
-        if (!beach->getBasicServices().empty()) {
-            for (auto &bService: beach->getBasicServices()) {
-                if (bService == beach->getBasicServices().at(beach->getBasicServices().size() - 1)) {
-                    file << bService;
-                    break;
-                }
-                file << bService << ", ";
-            }
-        }
-        file << "; ";
-        file << "(";
-        if (!beach->getExtraServices().empty()) {
-            for (auto &service: beach->getExtraServices()) {
-                if (service.getName() == beach->getExtraServices().at(0).getName()) {
-                    file << service.getType() << ", ";
-                } else {
-                    file << " " << service.getType() << ", ";
-                }
-                file << service.getName() << ", ";
-                file << service.getPriceRange() << ", ";
-                file << service.getStars() << ";";
-            }
-        }
-        file << ")";
-        file << endl;
+        beach->writeBeach(file);
     }
 
 }
@@ -787,7 +747,7 @@ void Company::compareBeaches(Beach *b1, Beach *b2) {
             cout << right << setw(28) << " | " << endl << left;
     }
 
-    cout << string(69, '-');
+    cout << string(69, '-') << endl << endl;
 
 
 }
