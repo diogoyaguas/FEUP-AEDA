@@ -468,7 +468,7 @@ void BayouBeach::writeBeach(ofstream & file) const{
 }
 
 bool operator<(const string &s1, const string &s2){
-
+  
     unsigned int i = 1;
 
     if(s1.at(0) < s2.at(0)) return true;
@@ -481,4 +481,5 @@ bool operator<(const string &s1, const string &s2){
         else if(s1.at(0) > s2.at(0)) return false;
     }
 }
+
 

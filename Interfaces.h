@@ -58,4 +58,6 @@ bool ValidMenuInput(int lowerL, int upperL, int input);
 
 void ClearScreen();
 
+void compareMenu(Company &company);
+
 #endif //AEDA_INTERFACES_H

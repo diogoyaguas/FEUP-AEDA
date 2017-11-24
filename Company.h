@@ -92,5 +92,7 @@ public:
 
 };
 
+bool orderByName(Beach *s1, Beach *s2);
+
 
 #endif //AEDA_COMPANY_H
