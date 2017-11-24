@@ -202,6 +202,8 @@ public:
      */
     void erase_ExtraService(string service);
 
+    virtual void writeBeach(ofstream & file) const = 0;
+
     /**
      *
      * @param b1
@@ -244,6 +246,8 @@ public:
     void set_aquaticArea(float aquaticArea) {};
 
     void displayBeach();
+
+    void writeBeach(ofstream & file) const;
 };
 
 class BayouBeach: public Beach{
@@ -272,12 +276,13 @@ public:
     float get_width() const{return -1;};
     float get_maxDepth() const{return -1;};
     float get_aquaticArea() const{return aquaticArea;};
-
     void set_width(float width){};
     void set_maxDepth(float maxDept) {};
     void set_aquaticArea(float aquaticArea){this->aquaticArea = aquaticArea;};
 
     void displayBeach();
+
+    void writeBeach(ofstream & file) const;
 };
 
 #endif //AEDA_BEACH_H

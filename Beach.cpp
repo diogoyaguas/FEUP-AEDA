@@ -1,6 +1,7 @@
 #include "Beach.h"
 #include <iomanip>
 #include <vector>
+#include <fstream>
 
 //Beach
 Beach::Beach(string &county,string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi):
@@ -61,6 +62,7 @@ double Beach::distanceToBeach(float lat, float longi) {
     return earthRadiusKm * c;
 
 }
+
 
 //River Beach
 RiverBeach::RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi,  float &width, float &maxDepth)
@@ -168,6 +170,48 @@ RiverBeach::RiverBeach(string beach)
         }
    }
 }
+
+void RiverBeach::writeBeach(ofstream & file) const{
+
+    file << this->getType() << "; ";
+    file << this->get_county() << "; ";
+    file << this->get_name() << "; ";
+    file << this->get_blue_flag() << "; ";
+    file << this->get_lifeguard() << "; ";
+    file << this->get_max_capacity() << "; ";
+    file << this->get_latitude() << "; ";
+    file << this->get_longitude() << "; ";
+
+    file << this->get_width() << "; ";
+    file << this->get_maxDepth() << "; ";
+
+    if (!this->getBasicServices().empty()) {
+        for (auto &bService: this->getBasicServices()) {
+            if (bService == this->getBasicServices().at(this->getBasicServices().size() - 1)) {
+                file << bService;
+                break;
+            }
+            file << bService << ", ";
+        }
+    }
+    file << "; ";
+    file << "(";
+    if (!this->getExtraServices().empty()) {
+        for (auto &service: this->getExtraServices()) {
+            if (service.getName() == this->getExtraServices().at(0).getName()) {
+                file << service.getType() << ", ";
+            } else {
+                file << " " << service.getType() << ", ";
+            }
+            file << service.getName() << ", ";
+            file << service.getPriceRange() << ", ";
+            file << service.getStars() << ";";
+        }
+    }
+    file << ")";
+    file << endl;
+}
+
 
 void RiverBeach::displayBeach(){
 
@@ -376,6 +420,51 @@ void BayouBeach::displayBeach() {
         cout << setw(22) << setfill(' ') << "Price Range: " << extraServices.at(i).getPriceRange() << endl;
         cout << setw(16) << setfill(' ') << "Stars: " << extraServices.at(i).getStars() << endl << endl;
     }
+}
+
+void BayouBeach::writeBeach(ofstream & file) const{
+
+    file << this->getType() << "; ";
+    file << this->get_county() << "; ";
+    file << this->get_name() << "; ";
+    file << this->get_blue_flag() << "; ";
+    file << this->get_lifeguard() << "; ";
+    file << this->get_max_capacity() << "; ";
+    file << this->get_latitude() << "; ";
+    file << this->get_longitude() << "; ";
+
+    file << this->get_aquaticArea() << "; ";
+
+    //write basic services
+    if (!this->getBasicServices().empty()) {
+        for (auto &bService: this->getBasicServices()) {
+            if (bService == this->getBasicServices().at(this->getBasicServices().size() - 1)) {
+                file << bService;
+                break;
+            }
+            file << bService << ", ";
+        }
+    }
+
+    //write extra services
+    file << "; ";
+    file << "(";
+
+    if (!this->getExtraServices().empty()) {
+        for (auto &service: this->getExtraServices()) {
+            if (service.getName() == this->getExtraServices().at(0).getName()) {
+                file << service.getType() << ", ";
+            } else {
+                file << " " << service.getType() << ", ";
+            }
+            file << service.getName() << ", ";
+            file << service.getPriceRange() << ", ";
+            file << service.getStars() << ";";
+        }
+    }
+    file << ")";
+    file << endl;
+
 }
 
 bool operator<(const string &s1, const string &s2){
