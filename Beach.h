@@ -20,7 +20,7 @@ protected:
 public:
 
     /**
-     * @brief constructor for class Beach
+     * @brief Constructor for class Beach.
      * @param county
      * @param name
      * @param blueflag
@@ -32,6 +32,9 @@ public:
      */
     Beach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi);
 
+    /**
+     * @brief Alternative constructor for class Beach.
+     */
     Beach(){};
 
     // get methods
@@ -70,101 +73,92 @@ public:
     float get_longitude() const;
 
     /**
-     *
-     * @return
+     * @return width;
      */
     virtual float get_width() const = 0;
 
     /**
-     *
-     * @return
+     * @return maximun depth
      */
     virtual float get_maxDepth() const  = 0;
 
     /**
-     *
-     * @return
+     * @return aquatic area
      */
     virtual float get_aquaticArea() const = 0;
 
     /**
      *
-     * @return
+     * @return vector of Basic beach services
      */
     vector<string> getBasicServices() const;
 
     /**
-     * @return vector of Services beach contains
+     * @return vector of Extra beach services
      */
     vector<Services> getExtraServices() const;
 
     /**
-     * @brief helps identifying from which derived class ths object is
+     * @brief Helps identifying from which derived class ths object is.
      * @return "BayouBeach" if it's a class BayouBeach object, "RiverBeach" if it's a class RiverBeach object
      */
     virtual string getType() const=0;
 
     // set methods
     /**
-     * @brief changes name
+     * @brief Changes name.
      * @param name
      */
     void set_name(string name);
 
     /**
-     * @brief changes blueflag
+     * @brief Changes blueflag.
      */
     void set_blue_flag();
 
     /**
-     * @brief changes lifeguard
+     * @brief Changes lifeguard.
      */
     void set_lifeguard();
 
     /**
-     * @brief changes maximum capacity
+     * @brief Changes maximum capacity.
      * @param maximum capacity
      */
     void set_max_capacity(unsigned long max_capacity);
 
     /**
-     * @brief changes latitude
+     * @brief Changes latitude.
      * @param latitude
      */
     void set_latitude(float lat);
 
     /**
-     * @brief changes longitude
+     * @brief Changes longitude.
      * @param longitude
      */
     void set_longitude(float longi);
 
     /**
-     * @brief changes basic services
-     * @param basicServices
-     */
-    void set_BasicServices(vector<string> &basicServices);
-
-    /**
-     * @brief changes extra services
+     * @brief Changes extra services.
      * @param extraServices
      */
     void set_ExtraServices(vector<Services> &extraServices);
 
     /**
-     * @brief changes width
+     * @brief Changes width.
      * @param width
      */
     virtual void set_width(float width) = 0;
 
     /**
-     * @brief changes maximum depth
+     * @brief Changes maximum depth.
      * @param maximum depth
      */
     virtual void set_maxDepth(float maxDept) = 0;
 
     /**
-     * @brief changes aquatic area
+     * @brief Changes aquatic area.
      * @param Aquatic area
      */
     virtual void set_aquaticArea(float aquaticArea) = 0;
@@ -173,7 +167,7 @@ public:
     double degreesToRadians(double degrees) {return degrees * M_PI / 180;}
 
     /**
-     * @brief calculates distance from location's GPS coordinates to beach's coordinates
+     * @brief Calculates distance from location's GPS coordinates to beach's coordinates.
      * @param 2nd latitude
      * @param 2nd longitude
      * @return distance
@@ -181,35 +175,33 @@ public:
     double distanceToBeach(float lat,float longi);
 
     /**
-     * @brief displays all information about the beach
+     * @brief Displays all information about the beach.
      */
     virtual void displayBeach() = 0;
 
     /**
-     *
+     * @brief Adds Basic service to the vector.
      * @param service
      */
     void add_BasicService(string service);
 
     /**
-     *
+     * @brief Adds Extra service to the vector.
      * @param service
      */
     void add_ExtraService(Services service);
 
     /**
+     * @brief Erase extra service from the vector.
      * @param service
      */
     void erase_ExtraService(string service);
 
-    virtual void writeBeach(ofstream & file) const = 0;
-
     /**
-     *
-     * @param b1
-     * @return
+     * @brief Writes information about the beach in .txt file.
+     * @param file
      */
-    bool operator<(const string &s1);
+    virtual void writeBeach(ofstream & file) const = 0;
 
 };
 
@@ -217,7 +209,7 @@ class RiverBeach: public Beach{
     float width, maxDepth;
 public:
     /**
-     * @brief constructor for class RiverBeach
+     * @brief Constructor for class RiverBeach.
      * @param county
      * @param name
      * @param blueflag
@@ -231,7 +223,7 @@ public:
      */
     RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi,  float &width, float &maxDepth);
     /**
-     * @brief helper construtor which recognizes and associates Beach's object's given attributes
+     * @brief Helper construtor which recognizes and associates Beach's object's given attributes.
      * @param line from txt file representing an object of class beach
      */
     RiverBeach(string beach);
@@ -246,7 +238,6 @@ public:
     void set_aquaticArea(float aquaticArea) {};
 
     void displayBeach();
-
     void writeBeach(ofstream & file) const;
 };
 
@@ -254,7 +245,7 @@ class BayouBeach: public Beach{
     float aquaticArea;
 public:
     /**
-     * @brief constructor class BayouBeach
+     * @brief Constructor class BayouBeach.
      * @param county
      * @param name
      * @param blueflag
@@ -267,7 +258,7 @@ public:
      */
     BayouBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi, float &aquaticArea);
     /**
-     * @brief helper construtor which recognizes and associates Beach's object's given attributes
+     * @brief Helper construtor which recognizes and associates Beach's object's given attributes.
      * @param line from txt file representing an object of class beach
      */
     BayouBeach(string beach);
@@ -276,12 +267,12 @@ public:
     float get_width() const{return -1;};
     float get_maxDepth() const{return -1;};
     float get_aquaticArea() const{return aquaticArea;};
+
     void set_width(float width){};
     void set_maxDepth(float maxDept) {};
     void set_aquaticArea(float aquaticArea){this->aquaticArea = aquaticArea;};
 
     void displayBeach();
-
     void writeBeach(ofstream & file) const;
 };
 

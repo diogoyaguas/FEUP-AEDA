@@ -31,7 +31,6 @@ void Beach::set_lifeguard(){if(this->lifeguard){
 void Beach::set_max_capacity(unsigned long max_capacity){this->max_capacity = max_capacity;}
 void Beach::set_latitude(float lat){this->lat = lat;}
 void Beach::set_longitude(float longi){this->longi = longi;}
-void Beach::set_BasicServices(vector<string> &basicServices){this->basicServices = basicServices;}
 void Beach::set_ExtraServices(vector<Services> &extraServices){this->extraServices = extraServices;}
 
 //other methods
@@ -256,6 +255,8 @@ void RiverBeach::displayBeach(){
         }
     }
 
+    if(extraServices.size() == 0) {throw -1;}
+
     cout << endl << "Services: " << endl;
     for(unsigned int i = 0; i < extraServices.size(); i++){
         cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).getType() << endl;
@@ -413,6 +414,8 @@ void BayouBeach::displayBeach() {
         }
     }
 
+    if(extraServices.size() == 0) {throw -1;}
+
     cout << endl << "Services: " << endl;
     for(unsigned int i = 0; i < extraServices.size(); i++){
         cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).getType() << endl;
@@ -465,21 +468,6 @@ void BayouBeach::writeBeach(ofstream & file) const{
     file << ")";
     file << endl;
 
-}
-
-bool operator<(const string &s1, const string &s2){
-  
-    unsigned int i = 1;
-
-    if(s1.at(0) < s2.at(0)) return true;
-    else if(s1.at(0) > s2.at(0)) return false;
-    else {
-        while(s1.at(i) != s2.at(i)){
-            i++;
-        }
-        if(s1.at(0) < s2.at(0)) return true;
-        else if(s1.at(0) > s2.at(0)) return false;
-    }
 }
 
 

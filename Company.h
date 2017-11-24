@@ -10,81 +10,97 @@ private:
     vector<Beach *> beaches;
 public:
     /**
-     * Constructor of class Company
+     * Constructor of class Company.
      */
     Company();
+
     /**
      * @return vector Beaches
      */
     vector<Beach *> getBeaches(){return beaches;}
+
     /**
-     * @brief adds beach to Beaches' vector with user's input information
+     * @brief Adds beach to Beaches' vector with user's input information.
      */
     void addBeach();
+
     /**
-     * @brief removes beach to Beaches' vector with user's input information
+     * @brief Removes beach to Beaches' vector with user's input information.
      */
     void removeBeach();
+
     /**
-     * @brief alters river beach to Beaches' vector with user's input information
+     * @brief Alters river beach to Beaches' vector with user's input information.
      * @param option chose in  Alter Beach Menu
      * @param position of beach in Beaches' vector
      */
     void alterRBeachInfo(unsigned int option, unsigned int i);
+
     /**
-     * @brief alters bayou beach to Beaches' vector with user's input information
+     * @brief Alters bayou beach to Beaches' vector with user's input information.
      * @param option chose in  Alter Beach Menu
      * @param position of beach in Beaches' vector
      */
     void alterBBeachInfo(unsigned int option, unsigned int i);
+
     /**
-     *@brief adds a service to a certain beach
+     *@brief Adds a service to a certain beach.
      */
     void addService();
+
     /**
-     *
+     * @brief Alters a service.
      */
     void alterService();
     /**
-     *@brief erases a service from a certain beach
+     *@brief Erases a service from a certain beach.
      */
     void eraseService();
+
     /**
-     * @brief verifies if beach with certain name exist
+     * @brief Verifies if beach with certain name exist.
      * @param name
      * @return pos of beach in Beaches' vector if beach with name exists, -1 otherwise
      */
     int beachExists(string name);
+
     /**
-     * @brief displays the information about all beaches
+     * @brief Displays the information about all beaches.
      */
     void displayBeaches();
+
     /**
-     *@brief updates the file containing the information about the beaches according to the changes made in the program
+     *@brief Updates the file containing the information about the beaches according to the changes made in the program.
      */
     void updateFile();
+
     /**
-     *
+     * @brief Searchs beach by county and displays its information.
      */
     void searchCounty();
+
     /**
-     *
+     * @brief Search beach by name and displays its information.
      */
     void searchName();
+
     /**
-     *
+     * @brief Search beach by blue flag and displays its information.
      */
     void searchBlueflag();
+
     /**
-     *
+     * @brief Search beach by lifeguard and displays its information.
      */
     void searchLifeguard();
+
     /**
-     *
+     * @brief Search beach by closest beach and displays its information.
      */
     void searchClosest();
+
     /**
-     * @brief displays information about 2 beaches side by side
+     * @brief Displays information about 2 beaches side by side.
      * @param 1st Beach
      * @param 2nd Beach
      */
@@ -92,6 +108,12 @@ public:
 
 };
 
+/**
+ * @brief Sorts beaches vector by name's alphabetic order.
+ * @param s1
+ * @param s2
+ * @return
+ */
 bool orderByName(Beach *s1, Beach *s2);
 
 

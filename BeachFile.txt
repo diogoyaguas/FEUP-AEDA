@@ -13,22 +13,8 @@ River; Seia; Sandomil; 1; 1; 1500; 40.3558; -9.78227; 37; 8; WC, Awnings; (Bar, 
 River; Paredes de Coura; Taboao; 0; 1; 1250; 41.9187; -8.56704; 28; 6; WC, First Aid; (Bar, Capitao, 3/3, ****; Bar, Antunes, 1/3, **;)
 River; Mina de Sao Domingos; Tapada Grande; 0; 1; 1450; 37.6694; -7.50503; 45; 12; Showers, Awnings; (Hotel, Tapada Grande Hotel, 3/3, ****; Bar, Aos Domingos, 2/3, ***;)
 River; Tondela; Teixo; 1; 1; 950; 40.559; -8.23752; 43; 11; WC, First Aid; (Restaurant, Tacho do Teixo, 2/3, ****; Hotel, Camas de Tondela, 2/3, ****;)
-<<<<<<<
-Bayou; Moimenta da Beira; Vilar; 1; 0; 800; 40.9662; -7.50221; 2.5e+08; Showers, WC, Awnings; (Bar, Vilar do Alcool, 1/3, **; Hotel, Vilar das Almofadas, 2/3, ****;)
-River; Oliveira de Frades; Casal de Sejaes; 0; 1; 1600; 40.7456; -8.20114; 31; 6; WC, Awnings; (Restaurant, Casal de Sejaes, 3/3, *****; Hotel, Casal das Camas, 2/3, ***;)
-River; Proenca a Nova; Malhadal; 1; 0; 500; 39.7974; -7.95117; 36; 7; Showers, WC, Awnings, First Aid; (Hotel, Casa do Malhadal, 3/3, ****; Restaurant, Malhadal de Hoje, 2/3, ***;)
-River; Proenca a Nova; Aldeia Ruiva; 1; 1; 2100; 39.769; -7.98156; 37; 8; Showers, WC, Awnings, First Aid; (Bar, Ruivinhos, 2/3, ****; Restaurant, Aldeia Ruiva e sua Culinaria, 3/3, *****;)
-River; Tomar; Alverangel; 1; 1; 1050; 39.5498; -8.30176; 27; 10; Showers, WC; ()
-Bayou; Reguengos de Monsaraz; Monsaraz; 1; 1; 1650; 38.4348; -7.35096; 7.5e+08; WC, Awnings, First Aid; (Hotel, Monsaraz dos Sonhos, 2/3, ***; Restaurant, Reguengos Quentes, 3/3, ****;)
-Bayou; Ferreira do Alentejo; Odivelas; 1; 0; 1250; 38.1842; -8.1143; 1.5e+09; Showers, WC, Awnings; (Bar, Odivelas aos Copos, 2/3, ****;)
-River; Mina de Sao Domingos; Tapada Grande; 0; 1; 1450; 37.6694; -7.50503; 45; 12; Showers, Awnings; (Hotel, Tapada Grande Hotel, 3/3, ****; Bar, Aos Domingos, 2/3, ***;)
-River; Aljezur; Odeceixe; 1; 1; 450; 37.4412; -8.79729; 34; 9; WC; ()
-
-=======
 River; Mirandela; Vale Juncal; 0; 1; 1750; 41.5333; -7.18444; 22; 5; Showers, WC, Awnings; (Restaurant, Juncal, 1/3, **; Restaurant, Miracomes, 2/3, ****;)
 Bayou; Gouveia; Vale do Rossim; 0; 1; 1450; 40.4029; -7.58643; 4.15e+009; Showers, WC, Awnings; (Hotel, Vale do Rossim, 2/3, ****; Bar, Rossim, 1/3, ***;)
 River; Arcos de Valdevez; Valeta; 1; 1; 1300; 41.8488; -8.41814; 34; 7; Showers, WC, Awnings; (Restaurant, Braseiro, 2/3, ****; Bar, Plage, 1/3, ***;)
 River; Povoa de Lanhoso; Verim; 1; 1; 1350; 41.6453; -8.3122; 72; 12; Showers, WC, First Aid; (Bar, Lanhoso, 3/3, *****; Hotel, Verim, 2/3, ****;)
 Bayou; Moimenta da Beira; Vilar; 1; 0; 800; 40.9662; -7.50221; 2.5e+008; Showers, WC, Awnings; (Bar, Vilar do Alcool, 1/3, **; Hotel, Vilar das Almofadas, 2/3, ****;)
-
->>>>>>>

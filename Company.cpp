@@ -184,7 +184,7 @@ void Company::addBeach() {
         beaches.at(beaches.size() - 1)->add_ExtraService(Services(sType, sName, sPriceRange, sStars));
         cin.ignore(1000, '\n');
     }
-    cout << "Beach added successfully!" << string(4, '\n');
+    cout << string(2, '\n') << "Beach added successfully!" << string(2, '\n');
 }
 
 void Company::alterRBeachInfo(unsigned int option, unsigned int i) {
@@ -499,7 +499,11 @@ void Company::displayBeaches() {
 
     for (unsigned int i = 0; i < beaches.size(); i++) {
 
-        beaches.at(i)->displayBeach();
+        try{beaches.at(i)->displayBeach();} catch (int x) {
+            cout << endl << "This beach doesn't have any services associated." << endl << endl;
+        }
+
+
     }
 
     returnMainMenu();
