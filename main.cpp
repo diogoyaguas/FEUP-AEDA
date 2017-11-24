@@ -10,8 +10,6 @@ int main() {
 
     Company company;
 
-    cout << company.beachExists("Teixo") << endl;
-
     ClearScreen();
     
     mainMenu(company);
