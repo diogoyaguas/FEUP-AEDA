@@ -4,10 +4,11 @@
 #include "Beach.h"
 #include <iomanip>
 #include <math.h>
+#include "BST.h"
 
 class Company {
 private:
-    vector<Beach *> beaches;
+    BST<Beach *> beaches;
 public:
     /**
      * Constructor of class Company.
@@ -17,7 +18,7 @@ public:
     /**
      * @return vector Beaches
      */
-    vector<Beach *> getBeaches(){return beaches;}
+    BST<Beach *> getBeaches(){return beaches;}
 
     /**
      * @brief Adds beach to Beaches' vector with user's input information.
@@ -62,7 +63,7 @@ public:
      * @param name
      * @return pos of beach in Beaches' vector if beach with name exists, -1 otherwise
      */
-    int beachExists(string name);
+    Beach * beachExists(string name);
 
     /**
      * @brief Displays the information about all beaches.

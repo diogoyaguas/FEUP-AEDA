@@ -10,13 +10,13 @@ using namespace std;
 void returnMainMenu(){
     int option;
 
-    cout << endl << "0. Return to main menu" << endl << ":::";
+    cout << endl << "0. Return to main menu" << endl << "::: ";
     cin >> option;
 
     while (cin.fail() || !ValidMenuInput(0, 0, option)) {
         cin.clear();
         cin.ignore(1000, '\n');
-        cout << "Please enter a valid option: " << endl << ":::";
+        cout << "Please enter a valid option: " << endl << "::: ";
         cin >> option;
     }
 }
@@ -208,7 +208,7 @@ void AlterBeachMenu(Company &company){
     int i, x;
     string name;
 
-    cout << "Insert beach name" << endl << ":::";
+    cout << "Insert beach name" << endl << "::: ";
     cin.ignore(1000, '\n');
     getline(cin,name);
 
@@ -237,14 +237,14 @@ void AlterBeachMenu(Company &company){
         cout  << ++displayOption << ". Change services" << endl;
 
         //Collect input
-        cout << endl << "Enter a number option: "<< endl << ":::";
+        cout << endl << "Enter a number option: "<< endl << "::: ";
         cin >> option;
 
         //verifies if input is valid
         while (cin.fail() || !ValidMenuInput(1, 7, option)) {
             cin.clear();
             cin.ignore(1000, '\n');
-            cout << "Please enter a valid option: "<< endl << ":::";
+            cout << "Please enter a valid option: "<< endl << "::: ";
             cin >> option;
         }
 
@@ -277,10 +277,10 @@ void compareMenu(Company &company){
 
     int ind1, ind2;
 
-    cout << "Insert the name of the two beaches you wish to compare:" << endl << ":::";
+    cout << "Insert the name of the two beaches you wish to compare:" << endl << "::: ";
     cin >> b1;
     ind1 = company.beachExists(b1);
-    cout << ":::";
+    cout << "::: ";
     cin >> b2;
     ind2 = company.beachExists(b2);
 

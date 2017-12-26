@@ -203,6 +203,10 @@ public:
      */
     virtual void writeBeach(ofstream & file) const = 0;
 
+    bool operator == (const Beach & b1) const;
+
+    bool operator < (const Beach & b1) const;
+
 };
 
 class RiverBeach: public Beach{

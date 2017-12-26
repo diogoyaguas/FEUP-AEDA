@@ -33,6 +33,20 @@ void Beach::set_latitude(float lat){this->lat = lat;}
 void Beach::set_longitude(float longi){this->longi = longi;}
 void Beach::set_ExtraServices(vector<Services> &extraServices){this->extraServices = extraServices;}
 
+
+//operator overloads
+bool Beach::operator == (const Beach & b1) const{
+    if(this->county == b1.get_county() && this->name == b1.get_name())
+        return true;
+    else return false;
+}
+
+bool Beach::operator < (const Beach & b1) const{
+    if(this->county != b1.get_county())
+        return this->county < b1.get_county();
+    else return this->blueflag > b1.get_blue_flag();
+}
+
 //other methods
 void Beach::add_BasicService(string service){this->basicServices.push_back(service);}
 void Beach::add_ExtraService(Services service){this->extraServices.push_back(service);}
@@ -61,6 +75,11 @@ double Beach::distanceToBeach(float lat, float longi) {
     return earthRadiusKm * c;
 
 }
+
+
+
+
+
 
 
 //River Beach
@@ -265,6 +284,10 @@ void RiverBeach::displayBeach(){
         cout << setw(16) << setfill(' ') << "Stars: " << extraServices.at(i).getStars() << endl << endl;
     }
 }
+
+
+
+
 
 //Bayou Beach
 BayouBeach::BayouBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi, float &aquaticArea)
