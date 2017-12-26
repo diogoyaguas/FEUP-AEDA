@@ -21,11 +21,15 @@ void returnMainMenu(){
     }
 }
 
+
+
 bool ValidMenuInput(int lowerL, int upperL, int input){
     if(input<=upperL && input>=lowerL)
         return true;
     else return false;
 }
+
+
 
 void mainMenu(Company &company) {
 
@@ -118,7 +122,7 @@ void searchMenu(Company &company){
             company.searchLifeguard();
             break;
         case 5:
-            company.searchClosest();
+            //company.searchClosest();
             break;
     }
 
@@ -212,7 +216,6 @@ void AlterBeachMenu(Company &company){
     cin.ignore(1000, '\n');
     getline(cin,name);
 
-    i = company.beachExists(name);
 
     if(i!=-1) {
 
@@ -225,7 +228,7 @@ void AlterBeachMenu(Company &company){
         cout << ++displayOption << ". Lifeguard" << endl;
         cout << ++displayOption << ". Maximum capacity" << endl;
 
-        if(company.getBeaches().at(company.beachExists(name))->getType()=="River"){
+        if(company.beachExists(name)->getType()=="River"){
             cout << ++displayOption << ". Change width" << endl;
             cout << ++displayOption << ". Change maximum depth" << endl;
 
@@ -249,14 +252,14 @@ void AlterBeachMenu(Company &company){
         }
 
         //Alter according if to it's type
-        if(company.getBeaches().at(company.beachExists(name))->getType()=="River"){
+        if(company.beachExists(name)->getType()=="River"){
 
-            try{company.alterRBeachInfo(option,i);} catch(int x){
+            try{company.alterRBeachInfo(option,company.beachExists(name));} catch(int x){
                 x = -1;
                 cout << endl << "ERROR: Beach already exists!" << endl;
             }
         }else{
-            try{company.alterBBeachInfo(option,i);}catch(int x){
+            try{company.alterBBeachInfo(option,company.beachExists(name));}catch(int x){
                 x = -1;
                 cout << endl << "ERROR: Beach already exists!" << endl;
             }
@@ -279,15 +282,14 @@ void compareMenu(Company &company){
 
     cout << "Insert the name of the two beaches you wish to compare:" << endl << "::: ";
     cin >> b1;
-    ind1 = company.beachExists(b1);
     cout << "::: ";
     cin >> b2;
-    ind2 = company.beachExists(b2);
 
-    company.compareBeaches(company.getBeaches().at(ind1),company.getBeaches().at(ind2));
+    company.compareBeaches(company.beachExists(b1),company.beachExists(b2));
 
     returnMainMenu();
 }
+
 
 void ClearScreen() {
 

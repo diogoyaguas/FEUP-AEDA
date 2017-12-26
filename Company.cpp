@@ -38,17 +38,21 @@ Company::Company() {
 
 Beach * Company::beachExists(string name) {
 
-    BSTItrIn<Beach *> it(beaches);
+    set<Beach *> :: iterator it = beaches.begin();
 
 
-    while (!it.isAtEnd()) {
-        if (it.retrieve()->get_name() == name)
-            return it.retrieve();
-        return NULL; // não encontrou
+    while (it!= beaches.end()) {
+        if ((*it)->get_name() == name)
+            return (*it);
     }
+    return NULL; // não encontrou
+}
 
-    void Company::addBeach() {
-        string type, county, name, utility;
+
+
+
+void Company::addBeach() {
+        string type, county,  name, utility;
         bool lifeguard, blueflag;
         unsigned long max_capacity;
         float lat, longi, width, maxDepth, aquaticArea;
@@ -72,7 +76,7 @@ Beach * Company::beachExists(string name) {
 
         cout << endl << "Insert name: " << endl << "::: ";
         getline(cin, name);
-        if (beachExists(name) != -1) { throw -1; }
+        if (beachExists(name) == NULL) { throw -1; }
 
         cout << endl << "Insert 1 if contains blueflag, 0 otherwise: " << endl << "::: ";
         cin >> temp;
@@ -119,8 +123,7 @@ Beach * Company::beachExists(string name) {
             cin >> maxDepth;
             fail(maxDepth);
 
-            beaches.insert(
-                    new RiverBeach(county, name, blueflag, lifeguard, max_capacity, lat, longi, width, maxDepth));
+            beaches.insert(new RiverBeach(county, name, blueflag, lifeguard, max_capacity, lat, longi, width, maxDepth));
         }
 
         if (type == "Bayou") {
@@ -140,7 +143,7 @@ Beach * Company::beachExists(string name) {
         while (counter < utilities) {
             cout << endl << "service" << ++counter << ": ";
             getline(cin, utility);
-            beaches.at(beaches.size() - 1)->add_BasicService(utility);
+            (*beaches.end())->add_BasicService(utility);
         }
 
         cout << endl << "How many services does the beach have? (eg, Hotel, Bar): " << endl << "::: ";
@@ -174,14 +177,14 @@ Beach * Company::beachExists(string name) {
                 cin >> sStars;
             }
 
-            beaches.at(beaches.size() - 1)->add_ExtraService(Services(sType, sName, sPriceRange, sStars));
+            (*beaches.end())->add_ExtraService(Services(sType, sName, sPriceRange, sStars));
             cin.ignore(1000, '\n');
         }
         cout << string(2, '\n') << "Beach added successfully!" << string(2, '\n');
     }
-}
 
-    void Company::alterRBeachInfo(unsigned int option, unsigned int i) {
+
+void Company::alterRBeachInfo(unsigned int option, Beach * b){
         string name, county;
         bool blueflag, lifeguard;
         unsigned long max_capacity;
@@ -195,36 +198,36 @@ Beach * Company::beachExists(string name) {
                 cout << "Insert new name: " << endl;
                 cin.ignore(1000, '\n');
                 getline(cin, name);
-                if (beachExists(name) != -1) { throw -1; }
-                beaches.at(i)->set_name(name);
+                if (beachExists(name) == NULL) { throw -1; }
+                b->set_name(name);
                 break;
             case 2:
-                beaches.at(i)->set_blue_flag();
+                b->set_blue_flag();
                 break;
             case 3:
-                beaches.at(i)->set_lifeguard();
+                b->set_lifeguard();
                 break;
             case 4:
                 cout << "Insert new maximum capacity: " << endl;
                 cin >> max_capacity;
-                beaches.at(i)->set_max_capacity(max_capacity);
+                b->set_max_capacity(max_capacity);
                 break;
             case 5:
                 cout << "Insert new width: " << endl;
                 cin >> width;
-                beaches.at(i)->set_width(width);
+                b->set_width(width);
                 break;
             case 6:
                 cout << "Insert new depth area: " << endl;
                 cin >> maxDepth;
-                beaches.at(i)->set_maxDepth(maxDepth);
+                b->set_maxDepth(maxDepth);
                 break;
             case 7:
                 cout << "Insert latitude and longitude coordinates separated by a space (eg: 40.268799 -7.143181): "
                      << endl;
                 cin >> lat >> longi;
-                beaches.at(i)->set_latitude(lat);
-                beaches.at(i)->set_longitude(longi);
+                b->set_latitude(lat);
+                b->set_longitude(longi);
                 break;
             case 8:
                 break;
@@ -232,7 +235,8 @@ Beach * Company::beachExists(string name) {
 
     }
 
-    void Company::alterBBeachInfo(unsigned int option, unsigned int i) {
+
+void Company::alterBBeachInfo(unsigned int option, Beach * b) {
         string name, county;
         bool blueflag, lifeguard;
         unsigned long max_capacity;
@@ -246,31 +250,31 @@ Beach * Company::beachExists(string name) {
                 cout << "Insert new name: " << endl;
                 cin.ignore(1000, '\n');
                 getline(cin, name);
-                if (beachExists(name) != -1) { throw -1; }
-                beaches.at(i)->set_name(name);
+                if (beachExists(name) == NULL) { throw -1; }
+                b->set_name(name);
                 break;
             case 2:
-                beaches.at(i)->set_blue_flag();
+                b->set_blue_flag();
                 break;
             case 3:
-                beaches.at(i)->set_lifeguard();
+                b->set_lifeguard();
                 break;
             case 4:
                 cout << "Insert new maximum capacity: " << endl;
                 cin >> max_capacity;
-                beaches.at(i)->set_max_capacity(max_capacity);
+                b->set_max_capacity(max_capacity);
                 break;
             case 5:
                 cout << "Insert new width: " << endl;
                 cin >> aquaticArea;
-                beaches.at(i)->set_width(aquaticArea);
+                b->set_width(aquaticArea);
                 break;
             case 6:
                 cout << "Insert latitude and longitude coordinates separated by a space (eg: 40.268799 -7.143181): "
                      << endl;
                 cin >> lat >> longi;
-                beaches.at(i)->set_latitude(lat);
-                beaches.at(i)->set_longitude(longi);
+                b->set_latitude(lat);
+                b->set_longitude(longi);
                 break;
             case 7:
                 break;
@@ -278,18 +282,20 @@ Beach * Company::beachExists(string name) {
 
     }
 
-    void Company::removeBeach() {
+
+
+void Company::removeBeach() {
         string name;
         bool removed = false;
 
         cout << "Insert beach name: ";
         cin >> name;
 
-        for (int i = 0; i < beaches.size(); ++i) {
+        for (auto it = beaches.begin(); it != beaches.end(); it++) {
 
-            if (beaches.at(i)->get_name() == name) {
+            if ((*it)->get_name() == name) {
 
-                beaches.erase(beaches.begin() + i);
+                beaches.erase(it);
                 cout << endl << name << " beach erased successfully!" << string(4, '\n');
                 removed = true;
             }
@@ -298,9 +304,11 @@ Beach * Company::beachExists(string name) {
         if (!removed) {
             cout << endl << "ERROR: There is no beach with the given name!" << string(4, '\n');
         }
-    }
+}
 
-    void Company::addService() {
+
+
+void Company::addService() {
 
         string name, sType, sName, sPriceRange, sStars;
         unsigned int services, counter;
@@ -311,7 +319,7 @@ Beach * Company::beachExists(string name) {
         cout << "Insert name of the beach you wish to add a service to" << endl << "::: ";
         cin >> name;
 
-        i = beachExists(name);
+        Beach * b = beachExists(name);
 
         if (i != -1) {
 
@@ -346,13 +354,13 @@ Beach * Company::beachExists(string name) {
                     cin >> sStars;
                 }
 
-                for (auto &beach_service : beaches.at(i)->getExtraServices()) {
+                for (auto &beach_service : b->getExtraServices()) {
 
                     if (beach_service.getName() == sName) { throw -1; }
                 }
 
-                beaches.at(i)->add_ExtraService(Services(sType, sName, sPriceRange, sStars));
-                cin.ignore(1000, '\n');
+                b->add_ExtraService(Services(sType, sName, sPriceRange, sStars));
+                cin.ignore();
 
                 cout << endl << "Added successfully!" << endl;
 
@@ -360,7 +368,9 @@ Beach * Company::beachExists(string name) {
         }
     }
 
-    void Company::alterService() {
+
+
+void Company::alterService() {
 
         string name, service, sType, sName, sPriceRange, sStars;
         unsigned int option;
@@ -373,16 +383,16 @@ Beach * Company::beachExists(string name) {
         cin.ignore(1000, '\n');
         getline(cin, name);
 
-        i = beachExists(name);
+        Beach * b = beachExists(name);
 
         if (i != -1) {
 
             cout << "Insert name of the service you wish to alter" << endl << "::: ";
             getline(cin, service);
 
-            for (unsigned int j = 0; j < beaches.at(i)->getExtraServices().size(); ++j) {
+            for (unsigned int j = 0; j < b->getExtraServices().size(); ++j) {
 
-                if (beaches.at(i)->getExtraServices().at(j).getName() == service) {
+                if (b->getExtraServices().at(j).getName() == service) {
 
                     cout << "What information do you wish to alter?" << endl;
                     cout << "1. Alter type" << endl;
@@ -407,23 +417,23 @@ Beach * Company::beachExists(string name) {
                             cout << "Insert the new type of service" << endl << "::: ";
                             cin.ignore(1000, '\n');
                             getline(cin, sType);
-                            newServices = beaches.at(i)->getExtraServices();
+                            newServices = b->getExtraServices();
                             newServices.at(j).setType(sType);
-                            beaches.at(i)->set_ExtraServices(newServices);
+                            b->set_ExtraServices(newServices);
                             break;
                         case 2:
                             cout << "Insert the new name" << endl << "::: ";
                             cin.ignore(1000, '\n');
                             getline(cin, sName);
 
-                            for (auto &beach_service : beaches.at(i)->getExtraServices()) {
+                            for (auto &beach_service : b->getExtraServices()) {
 
                                 if (beach_service.getName() == sName) { throw -1; }
                             }
 
-                            newServices = beaches.at(i)->getExtraServices();
+                            newServices = b->getExtraServices();
                             newServices.at(j).setName(sName);
-                            beaches.at(i)->set_ExtraServices(newServices);
+                            b->set_ExtraServices(newServices);
                             break;
                         case 3:
                             cout << "Insert the new price range" << endl << "::: ";
@@ -434,9 +444,9 @@ Beach * Company::beachExists(string name) {
                                 cout << "Please enter a valid value: ";
                                 cin >> sPriceRange;
                             }
-                            newServices = beaches.at(i)->getExtraServices();
+                            newServices = b->getExtraServices();
                             newServices.at(j).setPriceRange(sPriceRange);
-                            beaches.at(i)->set_ExtraServices(newServices);
+                            b->set_ExtraServices(newServices);
                             break;
                         case 4:
                             cout << "Insert the new number of stars" << endl << "::: ";
@@ -449,9 +459,9 @@ Beach * Company::beachExists(string name) {
                                 cout << "Please enter a valid value: ";
                                 cin >> sStars;
                             }
-                            newServices = beaches.at(i)->getExtraServices();
+                            newServices = b->getExtraServices();
                             newServices.at(j).setStars(sStars);
-                            beaches.at(i)->set_ExtraServices(newServices);
+                            b->set_ExtraServices(newServices);
                             break;
                         case 5:
                             break;
@@ -463,7 +473,9 @@ Beach * Company::beachExists(string name) {
         }
     }
 
-    void Company::eraseService() {
+
+
+void Company::eraseService() {
 
         string name, service;
         int i;
@@ -474,26 +486,26 @@ Beach * Company::beachExists(string name) {
         cin.ignore(1000, '\n');
         getline(cin, name);
 
-        i = beachExists(name);
+        Beach * b = beachExists(name);
 
-        if (i != -1) {
+        if (b != NULL) {
 
             cout << "Insert name of the service you wish to remove" << endl << "::: ";
             cin >> service;
 
-            beaches.at(i)->erase_ExtraService(service);
+            b->erase_ExtraService(service);
         }
     }
 
-    void Company::displayBeaches() {
+void Company::displayBeaches() {
 
         int option;
 
         ClearScreen();
 
-        for (unsigned int i = 0; i < beaches.size(); i++) {
+        for (auto it= beaches.begin(); it != beaches.end(); it++) {
 
-            try { beaches.at(i)->displayBeach(); } catch (int x) {
+            try { (*it)->displayBeach(); } catch (int x) {
                 cout << endl << "This beach doesn't have any services associated." << endl << endl;
             }
 
@@ -504,20 +516,23 @@ Beach * Company::beachExists(string name) {
 
     }
 
-    void Company::updateFile() {
+
+
+void Company::updateFile() {
 
         ofstream file;
         file.open("BeachFile.txt");
 
-        sort(beaches.begin(), beaches.end(), orderByName);
-
-        for (auto &beach: beaches) {
-            beach->writeBeach(file);
-        }
-
+    for (auto it= beaches.begin(); it != beaches.end(); it++) {
+        (*it)->writeBeach(file);
     }
 
-    void Company::searchCounty() {
+}
+
+
+
+
+void Company::searchCounty() {
 
         string county;
         int option;
@@ -541,14 +556,14 @@ Beach * Company::beachExists(string name) {
         returnMainMenu();
     }
 
-    void Company::searchName() {
+
+
+void Company::searchName() {
 
         string name;
         int option;
 
         ClearScreen();
-
-        sort(beaches.begin(), beaches.end(), orderByName);
 
         cout << "Insert the name of the beach you wish to search for" << endl << "::: ";
         cin.ignore(1000, '\n');
@@ -556,22 +571,20 @@ Beach * Company::beachExists(string name) {
 
         ClearScreen();
 
-        int left = 0, right = beaches.size() - 1;
+    for (auto &beach: beaches) {
 
-        while (left <= right) {
-            int middle = (left + right) / 2;
-            if (beaches.at(middle)->get_name() < name)
-                left = middle + 1;
-            else if (name < beaches.at(middle)->get_name())
-                right = middle - 1;
-            else
-                beaches.at(middle)->displayBeach();
+        if (beach->get_name()==name) {
+
+            beach->displayBeach();
         }
+    }
 
         returnMainMenu();
     }
 
-    void Company::searchBlueflag() {
+
+
+void Company::searchBlueflag() {
 
         int option;
 
@@ -588,7 +601,9 @@ Beach * Company::beachExists(string name) {
         returnMainMenu();
     }
 
-    void Company::searchLifeguard() {
+
+
+void Company::searchLifeguard() {
 
         int option;
 
@@ -605,12 +620,13 @@ Beach * Company::beachExists(string name) {
         returnMainMenu();
     }
 
-    void Company::searchClosest() {
+void Company::searchClosest() {
 
-        unsigned int option, temp, ind;
+        unsigned int option, ind;
         float lat, longi;
         double distance;
         string name;
+        set<Beach *> :: iterator temp;
 
         ClearScreen();
 
@@ -632,53 +648,54 @@ Beach * Company::beachExists(string name) {
             case 1:
                 cout << "Insert the latitude and the longitude of your actual location" << endl << "::: ";
                 cin >> lat >> longi;
-                distance = beaches.at(0)->distanceToBeach(lat, longi);
+                distance = (*beaches.begin())->distanceToBeach(lat, longi);
 
-                for (unsigned int i = 1; i < beaches.size(); ++i) {
+                for (auto it = beaches.begin(); it != beaches.end(); it++) {
 
-                    if (beaches.at(i)->distanceToBeach(lat, longi) <= distance) {
+                    if ((*it)->distanceToBeach(lat, longi) <= distance) {
 
-                        distance = beaches.at(i)->distanceToBeach(lat, longi);
-                        temp = i;
+                        distance = (*it)->distanceToBeach(lat, longi);
+                        temp = it;
                     }
                 }
 
                 cout << "Distance between your actual location and closest beach: " << distance << " km" << endl;
                 cout << "Information of the beach: " << endl;
-                beaches.at(temp)->displayBeach();
+                (*temp)->displayBeach();
                 break;
             case 2:
                 cout << "Insert the name of your actual beach" << endl << "::: ";
                 cin.ignore(1000, '\n');
                 getline(cin, name);
-                ind = beachExists(name);
+                Beach * b = beachExists(name);
 
-                if (ind != -1) {
+                if (b != NULL) {
 
-                    lat = beaches.at(ind)->get_latitude();
-                    longi = beaches.at(ind)->get_longitude();
-                    distance = beaches.at(0)->distanceToBeach(lat, longi);
+                    lat = b->get_latitude();
+                    longi = b->get_longitude();
+                    distance = (*beaches.begin())->distanceToBeach(lat, longi);
 
-                    for (unsigned int i = 1; i < beaches.size(); ++i) {
+                    for (auto it = beaches.begin(); it != beaches.end(); it++) {
 
-                        if (beaches.at(i)->distanceToBeach(lat, longi) <= distance && i != ind) {
+                        if ((*it)->distanceToBeach(lat, longi) <= distance && (*it) != b) {
 
-                            distance = beaches.at(i)->distanceToBeach(lat, longi);
-                            temp = i;
+                            distance = b->distanceToBeach(lat, longi);
+                            temp = it;
                         }
                     }
 
                     cout << "Distance between your actual beach and closest beach: " << distance << " km" << endl;
                     cout << endl << "Information of the beach: " << endl;
-                    beaches.at(temp)->displayBeach();
-                    break;
+                    (*temp)->displayBeach();
                 }
+                break;
+
         }
 
         returnMainMenu();
     }
 
-    void Company::compareBeaches(Beach *b1, Beach *b2) {
+void Company::compareBeaches(Beach *b1, Beach *b2) {
         unsigned long size, size1, size2;
 
         cout << string(100, '\n') << left;
@@ -768,8 +785,8 @@ Beach * Company::beachExists(string name) {
 
     }
 
-    bool orderByName(Beach *s1, Beach *s2) {
+bool orderByName(Beach *s1, Beach *s2) {
 
         if (s1->get_name() < s2->get_name()) return true;
-        else if (s1->get_name() > s2->get_name()) return false;
-    }
+        else  return false;
+}

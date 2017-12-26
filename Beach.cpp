@@ -4,6 +4,7 @@
 #include <fstream>
 
 //Beach
+
 Beach::Beach(string &county,string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi):
 county(county),name(name), blueflag(blueflag), max_capacity(max_capacity), lat(lat), longi(longi)
 {

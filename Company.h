@@ -4,11 +4,11 @@
 #include "Beach.h"
 #include <iomanip>
 #include <math.h>
-#include "BST.h"
+#include <set>
 
 class Company {
 private:
-    BST<Beach *> beaches;
+    set <Beach *> beaches;
 public:
     /**
      * Constructor of class Company.
@@ -18,7 +18,7 @@ public:
     /**
      * @return vector Beaches
      */
-    BST<Beach *> getBeaches(){return beaches;}
+    set<Beach *> getBeaches(){return beaches;}
 
     /**
      * @brief Adds beach to Beaches' vector with user's input information.
@@ -35,14 +35,14 @@ public:
      * @param option chose in  Alter Beach Menu
      * @param position of beach in Beaches' vector
      */
-    void alterRBeachInfo(unsigned int option, unsigned int i);
+    void alterRBeachInfo(unsigned int option, Beach * b);
 
     /**
      * @brief Alters bayou beach to Beaches' vector with user's input information.
      * @param option chose in  Alter Beach Menu
      * @param position of beach in Beaches' vector
      */
-    void alterBBeachInfo(unsigned int option, unsigned int i);
+    void alterBBeachInfo(unsigned int option, Beach * b);
 
     /**
      *@brief Adds a service to a certain beach.
