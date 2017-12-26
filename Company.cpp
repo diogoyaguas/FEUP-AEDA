@@ -38,14 +38,17 @@ Company::Company() {
 
 Beach * Company::beachExists(string name) {
 
-    set<Beach *> :: iterator it = beaches.begin();
+   auto it = beaches.begin();
 
 
-    while (it!= beaches.end()) {
-        if ((*it)->get_name() == name)
+    for (it = beaches.begin(); it != beaches.end() ; it++) {
+
+
+        if ((*it )->get_name() == name)
             return (*it);
     }
-    return NULL; // não encontrou
+
+    return nullptr; // não encontrou
 }
 
 
@@ -76,7 +79,7 @@ void Company::addBeach() {
 
         cout << endl << "Insert name: " << endl << "::: ";
         getline(cin, name);
-        if (beachExists(name) == NULL) { throw -1; }
+        if (beachExists(name) == nullptr) { throw -1; }
 
         cout << endl << "Insert 1 if contains blueflag, 0 otherwise: " << endl << "::: ";
         cin >> temp;
@@ -198,7 +201,7 @@ void Company::alterRBeachInfo(unsigned int option, Beach * b){
                 cout << "Insert new name: " << endl;
                 cin.ignore(1000, '\n');
                 getline(cin, name);
-                if (beachExists(name) == NULL) { throw -1; }
+                if (beachExists(name) == nullptr) { throw -1; }
                 b->set_name(name);
                 break;
             case 2:
@@ -250,7 +253,7 @@ void Company::alterBBeachInfo(unsigned int option, Beach * b) {
                 cout << "Insert new name: " << endl;
                 cin.ignore(1000, '\n');
                 getline(cin, name);
-                if (beachExists(name) == NULL) { throw -1; }
+                if (beachExists(name) == nullptr) { throw -1; }
                 b->set_name(name);
                 break;
             case 2:
@@ -488,7 +491,7 @@ void Company::eraseService() {
 
         Beach * b = beachExists(name);
 
-        if (b != NULL) {
+        if (b != nullptr) {
 
             cout << "Insert name of the service you wish to remove" << endl << "::: ";
             cin >> service;
@@ -669,7 +672,7 @@ void Company::searchClosest() {
                 getline(cin, name);
                 Beach * b = beachExists(name);
 
-                if (b != NULL) {
+                if (b != nullptr) {
 
                     lat = b->get_latitude();
                     longi = b->get_longitude();
@@ -698,7 +701,7 @@ void Company::searchClosest() {
 void Company::compareBeaches(Beach *b1, Beach *b2) {
         unsigned long size, size1, size2;
 
-        cout << string(100, '\n') << left;
+        cout << string(100, '\n') << left << setfill(' ');
         cout << "COMPARE BEACHES:" << endl;
         cout << "Distance between beaches: " << b1->distanceToBeach(b2->get_latitude(), b2->get_longitude()) << "Km"
              << endl;
