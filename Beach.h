@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <queue>
 #include "Services.h"
 #include <math.h>
 
@@ -16,7 +17,7 @@ protected:
     unsigned long max_capacity;
     float lat, longi;
     vector<string> basicServices;
-    vector<Services> extraServices;
+    priority_queue<Services> queue_restaurant;
 
 public:
 
@@ -38,6 +39,7 @@ public:
      */
     Beach(){};
 
+
     // get methods
     /**
      * @return county
@@ -48,6 +50,7 @@ public:
      * @return name
      */
     string get_name() const;
+
     /**
      * @return 1 if beach contains blue flag, 0 otherwise
      */
@@ -95,15 +98,16 @@ public:
     vector<string> getBasicServices() const;
 
     /**
-     * @return vector of Extra beach services
-     */
-    vector<Services> getExtraServices() const;
-
-    /**
      * @brief Helps identifying from which derived class ths object is.
      * @return "BayouBeach" if it's a class BayouBeach object, "RiverBeach" if it's a class RiverBeach object
      */
     virtual string getType() const=0;
+
+    /**
+     * @return priority queue of Services Restaurants
+     */
+    priority_queue<Services> getRestaurantQueue() const;
+
 
     // set methods
     /**
@@ -141,12 +145,6 @@ public:
     void set_longitude(float longi);
 
     /**
-     * @brief Changes extra services.
-     * @param extraServices
-     */
-    void set_ExtraServices(vector<Services> &extraServices);
-
-    /**
      * @brief Changes width.
      * @param width
      */
@@ -163,6 +161,13 @@ public:
      * @param Aquatic area
      */
     virtual void set_aquaticArea(float aquaticArea) = 0;
+
+    /**
+     * @brief Changes priority queue of Services Restaurants.
+     * @param queue_restaurant
+     */
+    void set_RestaurantQueue(priority_queue<Services> queue_restaurant);
+
 
     // other functions
     double degreesToRadians(double degrees) {return degrees * M_PI / 180;}
@@ -213,6 +218,7 @@ public:
 class RiverBeach: public Beach{
     float width, maxDepth;
 public:
+
     /**
      * @brief Constructor for class RiverBeach.
      * @param county
@@ -227,6 +233,7 @@ public:
      * @param basicServices
      */
     RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi,  float &width, float &maxDepth);
+
     /**
      * @brief Helper construtor which recognizes and associates Beach's object's given attributes.
      * @param line from txt file representing an object of class beach

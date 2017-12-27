@@ -20,7 +20,8 @@ unsigned long Beach::get_max_capacity()const{return max_capacity;}
 float Beach::get_latitude()const{return lat;}
 float Beach::get_longitude()const{return longi;}
 vector<string> Beach::getBasicServices()const{return basicServices;}
-vector<Services> Beach::getExtraServices()const{return extraServices;}
+priority_queue<Services> Beach::getRestaurantQueue() const {return queue_restaurant;}
+
 
 // set methods
 void Beach::set_name(string name){this->name = name;}
@@ -33,7 +34,7 @@ void Beach::set_lifeguard(){if(this->lifeguard){
 void Beach::set_max_capacity(unsigned long max_capacity){this->max_capacity = max_capacity;}
 void Beach::set_latitude(float lat){this->lat = lat;}
 void Beach::set_longitude(float longi){this->longi = longi;}
-void Beach::set_ExtraServices(vector<Services> &extraServices){this->extraServices = extraServices;}
+void Beach::set_RestaurantQueue(priority_queue<Services> queue_restaurant){this->queue_restaurant = queue_restaurant;}
 
 
 //operator overloads
@@ -42,24 +43,36 @@ bool Beach::operator == (const Beach & b1) const{
         return true;
     else return false;
 }
-
 bool Beach::operator < (const Beach & b1) const{
     if(this->county != b1.get_county())
         return this->county < b1.get_county();
     else return this->blueflag > b1.get_blue_flag();
 }
 
+
 //other methods
 void Beach::add_BasicService(string service){this->basicServices.push_back(service);}
-void Beach::add_ExtraService(Services service){this->extraServices.push_back(service);}
+void Beach::add_ExtraService(Services service){this->queue_restaurant.push(service);}
 void Beach::erase_ExtraService(string service){
 
-    for(unsigned int i = 0; i < this->extraServices.size(); ++i){
+    priority_queue<Services> temp;
+    Services s_temp;
 
-        if(this->extraServices.at(i).getName() == service){
+    while(!this->queue_restaurant.empty()){
 
-            this->extraServices.erase(this->extraServices.begin()+i);
+        s_temp = this->queue_restaurant.top();
+        this->queue_restaurant.pop();
+        if(s_temp.getName() != service){
+
+            temp.push(s_temp);
         }
+    }
+
+    while(!temp.empty()){
+
+        s_temp= temp.top();
+        temp.pop();
+        this->queue_restaurant.push(s_temp);
     }
 }
 double Beach::distanceToBeach(float lat, float longi) {
@@ -171,18 +184,23 @@ RiverBeach::RiverBeach(string beach)
     string tempService;
     st = extra_services.find_first_of(';');
     if(extra_services.empty()){
-        extraServices.emplace_back(Services());
+        queue_restaurant.push(Services());
     }
 
     while(st != string::npos){
         tempService = extra_services.substr(0,st);
-        extraServices.emplace_back(Services(tempService));
+
+        if(Services(tempService).getType() == "Restaurant"){
+
+            queue_restaurant.push(Services(tempService));
+        }
+
         extra_services=extra_services.substr(st+2);
         st = extra_services.find_first_of(';');
 
         if(st == string::npos){
             tempService = extra_services.substr(0,st);
-            extraServices.emplace_back(Services(tempService));
+            queue_restaurant.push(Services(tempService));
         }
    }
 }
@@ -212,13 +230,21 @@ void RiverBeach::writeBeach(ofstream & file) const{
     }
     file << "; ";
     file << "(";
-    if (!this->getExtraServices().empty()) {
-        for (auto &service: this->getExtraServices()) {
-            if (service.getName() == this->getExtraServices().at(0).getName()) {
-                file << service.getType() << ", ";
-            } else {
-                file << " " << service.getType() << ", ";
-            }
+    Services service;
+    if (!this->getRestaurantQueue().empty()) {
+
+        service = this->getRestaurantQueue().top();
+        this->getRestaurantQueue().pop();
+        file << service.getType() << ", ";
+        file << service.getName() << ", ";
+        file << service.getPriceRange() << ", ";
+        file << service.getStars() << ";";
+
+        while(!this->getRestaurantQueue().empty()){
+
+            service = this->getRestaurantQueue().top();
+            this->getRestaurantQueue().pop();
+            file << " " << service.getType() << ", ";
             file << service.getName() << ", ";
             file << service.getPriceRange() << ", ";
             file << service.getStars() << ";";
@@ -272,14 +298,20 @@ void RiverBeach::displayBeach(){
         }
     }
 
-    if(extraServices.empty()) {throw -1;}
+    if(queue_restaurant.empty()) {throw -1;}
+
+    priority_queue<Services> temp = queue_restaurant;
 
     cout << endl << "Services: " << endl;
-    for(unsigned int i = 0; i < extraServices.size(); i++){
-        cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).getType() << endl;
-        cout << setw(15) << setfill(' ') << "Name: " << extraServices.at(i).getName() << endl;
-        cout << setw(22) << setfill(' ') << "Price Range: " << extraServices.at(i).getPriceRange() << endl;
-        cout << setw(16) << setfill(' ') << "Stars: " << extraServices.at(i).getStars() << endl << endl;
+    while(!temp.empty()){
+
+        Services service = temp.top();
+        temp.pop();
+        cout << setw(15) << setfill(' ') << "Type: " << service.getType() << endl;
+        cout << setw(15) << setfill(' ') << "Name: " << service.getName() << endl;
+        cout << setw(22) << setfill(' ') << "Price Range: " << service.getPriceRange() << endl;
+        cout << setw(16) << setfill(' ') << "Stars: " << service.getStars() << endl;
+        cout << setw(15) << setfill(' ') << "Date: " << service.getDateInspection() << endl << endl;
     }
 }
 
@@ -370,23 +402,23 @@ BayouBeach::BayouBeach(string beach)
     string tempService;
     st = extra_services.find_first_of(';');
     if(extra_services.empty()){
-        extraServices.emplace_back(Services());
+        queue_restaurant.push(Services());
     }
 
     if(st == string::npos){
         tempService = extra_services.substr(0,st);
-        extraServices.emplace_back(Services(tempService));
+        queue_restaurant.push(Services(tempService));
     }
 
     while(st != string::npos){
         tempService = extra_services.substr(0,st);
-        extraServices.emplace_back(Services(tempService));
+        queue_restaurant.push(Services(tempService));
         extra_services=extra_services.substr(st+2);
         st = extra_services.find_first_of(';');
 
         if(st == string::npos){
             tempService = extra_services.substr(0,st);
-            extraServices.emplace_back(Services(tempService));
+            queue_restaurant.push(Services(tempService));
         }
     }
 }
@@ -433,14 +465,20 @@ void BayouBeach::displayBeach() {
         }
     }
 
-    //if(extraServices.size() == 0) {throw -1;}
+    if(queue_restaurant.empty()) {throw -1;}
+
+    priority_queue<Services> temp = queue_restaurant;
 
     cout << endl << "Services: " << endl;
-    for(unsigned int i = 0; i < extraServices.size(); i++){
-        cout << setw(15) << setfill(' ') << "Type: " << extraServices.at(i).getType() << endl;
-        cout << setw(15) << setfill(' ') << "Name: " << extraServices.at(i).getName() << endl;
-        cout << setw(22) << setfill(' ') << "Price Range: " << extraServices.at(i).getPriceRange() << endl;
-        cout << setw(16) << setfill(' ') << "Stars: " << extraServices.at(i).getStars() << endl << endl;
+    while(!temp.empty()){
+
+        Services service = temp.top();
+        temp.pop();
+        cout << setw(15) << setfill(' ') << "Type: " << service.getType() << endl;
+        cout << setw(15) << setfill(' ') << "Name: " << service.getName() << endl;
+        cout << setw(22) << setfill(' ') << "Price Range: " << service.getPriceRange() << endl;
+        cout << setw(16) << setfill(' ') << "Stars: " << service.getStars() << endl;
+        cout << setw(15) << setfill(' ') << "Date: " << service.getDateInspection() << endl << endl;
     }
 }
 
@@ -471,14 +509,21 @@ void BayouBeach::writeBeach(ofstream & file) const{
     //write extra services
     file << "; ";
     file << "(";
+    Services service;
+    if (!this->getRestaurantQueue().empty()) {
 
-    if (!this->getExtraServices().empty()) {
-        for (auto &service: this->getExtraServices()) {
-            if (service.getName() == this->getExtraServices().at(0).getName()) {
-                file << service.getType() << ", ";
-            } else {
-                file << " " << service.getType() << ", ";
-            }
+        service = this->getRestaurantQueue().top();
+        this->getRestaurantQueue().pop();
+        file << service.getType() << ", ";
+        file << service.getName() << ", ";
+        file << service.getPriceRange() << ", ";
+        file << service.getStars() << ";";
+
+        while(!this->getRestaurantQueue().empty()){
+
+            service = this->getRestaurantQueue().top();
+            this->getRestaurantQueue().pop();
+            file << " " << service.getType() << ", ";
             file << service.getName() << ", ";
             file << service.getPriceRange() << ", ";
             file << service.getStars() << ";";
