@@ -5,7 +5,8 @@
 using namespace std;
 
 class Services {
-    string type, name, priceRange, stars;
+    string type; // Restaurant, Bar, Hotel, Renting, PointsOfInterest
+    string name, priceRange, stars, dateInspection;
 
 public:
     /**
@@ -14,8 +15,9 @@ public:
      * @param name
      * @param priceRange
      * @param stars
+     * @param dateInspection
      */
-    Services(string type, string name, string priceRange, string stars);
+    Services(string type, string name, string priceRange, string stars, string dateInspection);
 
     /**
      * @brief Helper construtor for class Services which creates an object from information in file.
@@ -47,6 +49,12 @@ public:
      * @return stars
      */
     string getStars(){return stars;}
+
+    /**
+     *
+     * @return dateInspection
+     */
+    string getDateInspection(){return dateInspection;}
 
     /**
      * Changes type.

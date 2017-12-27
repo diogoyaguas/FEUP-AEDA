@@ -117,13 +117,4 @@ public:
 
 };
 
-/**
- * @brief Sorts beaches vector by name's alphabetic order.
- * @param s1
- * @param s2
- * @return
- */
-bool orderByName(Beach *s1, Beach *s2);
-
-
 #endif //AEDA_COMPANY_H

@@ -22,8 +22,6 @@ void returnMainMenu(){
 }
 
 
-
-
 void mainMenu(Company &company) {
 
     int option;
@@ -76,6 +74,7 @@ void mainMenu(Company &company) {
 
     }}
 
+
 void searchMenu(Company &company){
     int option;
 
@@ -120,6 +119,7 @@ void searchMenu(Company &company){
     }
 
 }
+
 
 void AddAlterRemoveMenu(Company &company){
 
@@ -198,6 +198,7 @@ void AddAlterRemoveMenu(Company &company){
     }
 }
 
+
 void AlterBeachMenu(Company &company){
 
     unsigned int displayOption=1;
@@ -266,6 +267,7 @@ void AlterBeachMenu(Company &company){
         AddAlterRemoveMenu(company);
     }
 }
+
 
 void compareMenu(Company &company){
 

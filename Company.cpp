@@ -38,6 +38,7 @@ Company::Company() {
     }
 }
 
+
 Beach * Company::beachExists(string name) {
 
    auto it = beaches.begin();
@@ -52,7 +53,6 @@ Beach * Company::beachExists(string name) {
 
     return nullptr; // não encontrou
 }
-
 
 
 void Company::addBeach() {
@@ -181,7 +181,7 @@ void Company::addBeach() {
                 cin >> sStars;
             }
 
-            (*beaches.end())->add_ExtraService(Services(sType, sName, sPriceRange, sStars));
+            (*beaches.end())->add_ExtraService(Services(sType, sName, sPriceRange, sStars, getActualDate()));
             cin.ignore(1000, '\n');
         }
         cout << string(2, '\n') << "Beach added successfully!" << string(2, '\n');
@@ -287,7 +287,6 @@ void Company::alterBBeachInfo(unsigned int option, Beach * b) {
     }
 
 
-
 void Company::removeBeach() {
         string name;
         bool removed = false;
@@ -309,7 +308,6 @@ void Company::removeBeach() {
             cout << endl << "ERROR: There is no beach with the given name!" << string(4, '\n');
         }
 }
-
 
 
 void Company::addService() {
@@ -363,7 +361,7 @@ void Company::addService() {
                     if (beach_service.getName() == sName) { throw -1; }
                 }
 
-                b->add_ExtraService(Services(sType, sName, sPriceRange, sStars));
+                b->add_ExtraService(Services(sType, sName, sPriceRange, sStars, getActualDate()));
                 cin.ignore();
 
                 cout << endl << "Added successfully!" << endl;
@@ -371,7 +369,6 @@ void Company::addService() {
             }
         }
     }
-
 
 
 void Company::alterService() {
@@ -478,7 +475,6 @@ void Company::alterService() {
     }
 
 
-
 void Company::eraseService() {
 
         string name, service;
@@ -501,6 +497,7 @@ void Company::eraseService() {
         }
     }
 
+
 void Company::displayBeaches() {
 
         int option;
@@ -521,7 +518,6 @@ void Company::displayBeaches() {
     }
 
 
-
 void Company::updateFile() {
 
         ofstream file;
@@ -532,8 +528,6 @@ void Company::updateFile() {
     }
 
 }
-
-
 
 
 void Company::searchCounty() {
@@ -561,7 +555,6 @@ void Company::searchCounty() {
     }
 
 
-
 void Company::searchName() {
 
         string name;
@@ -587,7 +580,6 @@ void Company::searchName() {
     }
 
 
-
 void Company::searchBlueflag() {
 
         ClearScreen();
@@ -604,7 +596,6 @@ void Company::searchBlueflag() {
 
         returnMainMenu();
     }
-
 
 
 void Company::searchLifeguard() {
@@ -624,6 +615,7 @@ void Company::searchLifeguard() {
 
     returnMainMenu();
 }
+
 
 void Company::searchClosest() {
 
@@ -699,6 +691,7 @@ void Company::searchClosest() {
 
         returnMainMenu();
     }
+
 
 void Company::compareBeaches(Beach *b1, Beach *b2) {
         unsigned long size, size1, size2;
@@ -790,8 +783,3 @@ void Company::compareBeaches(Beach *b1, Beach *b2) {
 
     }
 
-bool orderByName(Beach *s1, Beach *s2) {
-
-        if (s1->get_name() < s2->get_name()) return true;
-        else  return false;
-}

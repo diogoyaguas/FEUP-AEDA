@@ -80,10 +80,6 @@ double Beach::distanceToBeach(float lat, float longi) {
 
 
 
-
-
-
-
 //River Beach
 RiverBeach::RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity, float &lat , float &longi,  float &width, float &maxDepth)
         :Beach(county, name, blueflag, lifeguard, max_capacity,  lat ,  longi) {
@@ -286,8 +282,6 @@ void RiverBeach::displayBeach(){
         cout << setw(16) << setfill(' ') << "Stars: " << extraServices.at(i).getStars() << endl << endl;
     }
 }
-
-
 
 
 

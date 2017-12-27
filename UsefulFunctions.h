@@ -1,10 +1,9 @@
-//
-// Created by Beatriz Mendes on 27/12/2017.
-//
-
 #ifndef PROJAEDA_USEFULFUNCTION_H
 #define PROJAEDA_USEFULFUNCTION_H
 
+#include <string>
+
+using namespace std;
 
 /**
  * @brief Verifies if input given by user is between lowerL and upperL.
@@ -19,5 +18,11 @@ bool ValidMenuInput(int lowerL, int upperL, int input);
  * @brief Clears screen.
  */
 void ClearScreen();
+
+/**
+ *
+ * @return Actual date.
+ */
+string getActualDate();
 
 #endif //PROJAEDA_USEFULFUNCTION_H
