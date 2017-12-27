@@ -34,22 +34,22 @@ public:
     /**
      * @return type
      */
-    string getType() { return type; }
+    string getType() const { return type; }
 
     /**
      * @return name
      */
-    string getName() { return name; }
+    string getName() const { return name; }
 
     /**
      * @return price range
      */
-    string getPriceRange() { return priceRange; }
+    string getPriceRange() const { return priceRange; }
 
     /**
      * @return stars
      */
-    string getStars() { return stars; }
+    string getStars() const { return stars; }
 
     /**
      *

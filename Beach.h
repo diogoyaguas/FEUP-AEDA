@@ -17,7 +17,7 @@ protected:
     unsigned long max_capacity;
     float lat, longi;
     vector<string> basicServices;
-    priority_queue<Services> queue_restaurant;
+    vector<priority_queue<Services>> extraServices;
 
 public:
 
@@ -98,15 +98,16 @@ public:
     vector<string> getBasicServices() const;
 
     /**
+     *
+     * @return vector of Extra beach services
+     */
+    vector<priority_queue<Services>> getExtraServices() const;
+
+    /**
      * @brief Helps identifying from which derived class ths object is.
      * @return "BayouBeach" if it's a class BayouBeach object, "RiverBeach" if it's a class RiverBeach object
      */
     virtual string getType() const=0;
-
-    /**
-     * @return priority queue of Services Restaurants
-     */
-    priority_queue<Services> getRestaurantQueue() const;
 
 
     // set methods
@@ -162,12 +163,6 @@ public:
      */
     virtual void set_aquaticArea(float aquaticArea) = 0;
 
-    /**
-     * @brief Changes priority queue of Services Restaurants.
-     * @param queue_restaurant
-     */
-    void set_RestaurantQueue(priority_queue<Services> queue_restaurant);
-
 
     // other functions
     double degreesToRadians(double degrees) {return degrees * M_PI / 180;}
@@ -201,7 +196,7 @@ public:
      * @brief Erase extra service from the vector.
      * @param service
      */
-    void erase_ExtraService(string service);
+    void erase_ExtraService(Services service);
 
     /**
      * @brief Writes information about the beach in .txt file.

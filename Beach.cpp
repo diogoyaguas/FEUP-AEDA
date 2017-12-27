@@ -20,8 +20,7 @@ unsigned long Beach::get_max_capacity()const{return max_capacity;}
 float Beach::get_latitude()const{return lat;}
 float Beach::get_longitude()const{return longi;}
 vector<string> Beach::getBasicServices()const{return basicServices;}
-priority_queue<Services> Beach::getRestaurantQueue() const {return queue_restaurant;}
-
+vector<priority_queue<Services>> Beach::getExtraServices() const{return extraServices}
 
 // set methods
 void Beach::set_name(string name){this->name = name;}
@@ -34,8 +33,6 @@ void Beach::set_lifeguard(){if(this->lifeguard){
 void Beach::set_max_capacity(unsigned long max_capacity){this->max_capacity = max_capacity;}
 void Beach::set_latitude(float lat){this->lat = lat;}
 void Beach::set_longitude(float longi){this->longi = longi;}
-void Beach::set_RestaurantQueue(priority_queue<Services> queue_restaurant){this->queue_restaurant = queue_restaurant;}
-
 
 //operator overloads
 bool Beach::operator == (const Beach & b1) const{
@@ -52,28 +49,51 @@ bool Beach::operator < (const Beach & b1) const{
 
 //other methods
 void Beach::add_BasicService(string service){this->basicServices.push_back(service);}
-void Beach::add_ExtraService(Services service){this->queue_restaurant.push(service);}
-void Beach::erase_ExtraService(string service){
+void Beach::add_ExtraService(Services service){
 
-    priority_queue<Services> temp;
-    Services s_temp;
+    for(unsigned int i = 0; i < this->extraServices.size(); ++i){
 
-    while(!this->queue_restaurant.empty()){
+        if(extraServices.at(i).top().getType() == service.getType()){
 
-        s_temp = this->queue_restaurant.top();
-        this->queue_restaurant.pop();
-        if(s_temp.getName() != service){
-
-            temp.push(s_temp);
+            extraServices.at(i).push(service);
+            return;
         }
     }
 
-    while(!temp.empty()){
+    priority_queue<Services> new_q;
+    new_q.push(service);
+    this->extraServices.push_back(new_q);
 
-        s_temp= temp.top();
-        temp.pop();
-        this->queue_restaurant.push(s_temp);
+}
+void Beach::erase_ExtraService(Services service){
+
+    for(unsigned int i = 0; i < this->extraServices.size(); ++i){
+
+        if(extraServices.at(i).top().getType() == service.getType()){
+
+            priority_queue<Services> temp;
+            Services s_temp;
+
+            while(!this->queue_restaurant.empty()){
+
+                s_temp = this->queue_restaurant.top();
+                this->queue_restaurant.pop();
+                if(s_temp.getName() != service){
+
+                    temp.push(s_temp);
+                }
+            }
+
+            while(!temp.empty()){
+
+                s_temp= temp.top();
+                temp.pop();
+                this->queue_restaurant.push(s_temp);
+            }
+        }
     }
+
+
 }
 double Beach::distanceToBeach(float lat, float longi) {
     int earthRadiusKm = 6371;
