@@ -2,6 +2,7 @@
 #include "Interfaces.h"
 #include <algorithm>
 #include <fstream>
+#include "UsefulFunctions.h"
 
 using namespace std;
 

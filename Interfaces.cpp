@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include <algorithm>
+#include "UsefulFunctions.h"
 #include "Interfaces.h"
 
 using namespace std;
@@ -21,13 +21,6 @@ void returnMainMenu(){
     }
 }
 
-
-
-bool ValidMenuInput(int lowerL, int upperL, int input){
-    if(input<=upperL && input>=lowerL)
-        return true;
-    else return false;
-}
 
 
 
@@ -291,9 +284,6 @@ void compareMenu(Company &company){
 }
 
 
-void ClearScreen() {
 
-    cout << string(50,'\n');
-}
 
 

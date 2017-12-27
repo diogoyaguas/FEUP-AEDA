@@ -3,6 +3,7 @@
 
 #include "Company.h"
 
+
 /**
  * @brief Redirects to main menu when user enters 0.
  */
@@ -49,19 +50,7 @@ void AddAlterRemoveMenu(Company &company);
  */
 void AlterBeachMenu(Company &company);
 
-/**
- * @brief Verifies if input given by user is between lowerL and upperL.
- * @param lowest input int possible
- * @param highest input int possible
- * @param input entered by user
- * @return 0 if success, 1 otherwise
- */
-bool ValidMenuInput(int lowerL, int upperL, int input);
 
-/**
- * @brief Clears screen.
- */
-void ClearScreen();
 
 /**
  * @brief Sub-menu from Main menu that allows user to compare beaches.

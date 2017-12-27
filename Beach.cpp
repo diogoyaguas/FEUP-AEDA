@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <vector>
 #include <fstream>
+#include "UsefulFunctions.h"
 
 //Beach
 
