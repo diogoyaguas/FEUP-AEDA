@@ -6,9 +6,17 @@
 #include <math.h>
 #include <set>
 
+struct SortOrder{
+    bool operator()(const Beach * b1, const Beach * b2) const{
+        if (b1->get_county()!= b2->get_county())
+            return b1->get_county() < b2->get_county();
+        else return b1->get_blue_flag() > b2->get_blue_flag();
+    }
+};
+
 class Company {
 private:
-    set <Beach *> beaches;
+    set <Beach *, SortOrder> beaches;
 public:
     /**
      * Constructor of class Company.
@@ -18,7 +26,7 @@ public:
     /**
      * @return vector Beaches
      */
-    set<Beach *> getBeaches(){return beaches;}
+    set<Beach *, SortOrder> getBeaches(){return beaches;}
 
     /**
      * @brief Adds beach to Beaches' vector with user's input information.

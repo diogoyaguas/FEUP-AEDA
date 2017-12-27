@@ -5,6 +5,7 @@
 
 using namespace std;
 
+
 Company::Company() {
     string fileBeach = "BeachFile.txt";
     ifstream file;
@@ -50,7 +51,6 @@ Beach * Company::beachExists(string name) {
 
     return nullptr; // não encontrou
 }
-
 
 
 

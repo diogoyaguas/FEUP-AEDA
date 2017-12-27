@@ -6,6 +6,7 @@
 #include "Services.h"
 #include <math.h>
 
+
 using namespace std;
 
 class Beach {
@@ -279,5 +280,7 @@ public:
     void displayBeach();
     void writeBeach(ofstream & file) const;
 };
+
+
 
 #endif //AEDA_BEACH_H
