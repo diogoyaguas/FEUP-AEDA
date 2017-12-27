@@ -314,7 +314,6 @@ void Company::addService() {
 
     string name, sType, sName, sPriceRange, sStars;
     unsigned int services, counter;
-    int i;
 
     ClearScreen();
 
@@ -323,7 +322,7 @@ void Company::addService() {
 
     Beach *b = beachExists(name);
 
-    if (i != -1) {
+    if (b != NULL) {
 
         cout << endl << "How many services do you wish to add? (eg, Hotel, Bar): " << endl << "::: ";
         cin >> services;
@@ -356,13 +355,16 @@ void Company::addService() {
                 cin >> sStars;
             }
 
-            priority_queue<Services> temp = b->getRestaurantQueue();
+            for (unsigned int i = 0; i < b->getExtraServices().size(); ++i) {
 
-            while (!temp.empty()) {
+                priority_queue<Services> temp = b->getExtraServices().at(i);
 
-                Services service = temp.top();
-                temp.pop();
-                if (service.getName() == sName) { throw -1; }
+                while (!temp.empty()) {
+
+                    Services service = temp.top();
+                    temp.pop();
+                    if (service.getName() == sName) { throw -1; }
+                }
             }
 
             b->add_ExtraService(Services(sType, sName, sPriceRange, sStars, getActualDate()));
@@ -396,116 +398,108 @@ void Company::alterService() {
         cout << "Insert name of the service you wish to alter" << endl << "::: ";
         getline(cin, service);
 
-        priority_queue<Services> temp = b->getRestaurantQueue();
+        for (unsigned int i = 0; i < b->getExtraServices().size(); ++i) {
 
-        while (!temp.empty()) {
+            priority_queue<Services> temp = b->getExtraServices().at(i);
 
-            Services temp_service = temp.top();
-            temp.pop();
-            if (temp_service.getName() == service) {
+            while (!temp.empty()) {
 
-                sType = temp_service.getType();
-                sName = temp_service.getName();
-                sPriceRange = temp_service.getPriceRange();
-                sStars = temp_service.getStars();
+                Services temp_service = temp.top();
+                temp.pop();
+                if (temp_service.getName() == service) {
 
-                cout << "What information do you wish to alter?" << endl;
-                cout << "1. Alter type" << endl;
-                cout << "2. Alter name" << endl;
-                cout << "3. Alter price range" << endl;
-                cout << "4. Alter number of stars" << endl;
-                cout << "5. Return to main menu" << endl;
-                cout << endl << "Enter a number option: " << endl << "::: ";
-                cin >> option;
+                    sType = temp_service.getType();
+                    sName = temp_service.getName();
+                    sPriceRange = temp_service.getPriceRange();
+                    sStars = temp_service.getStars();
 
-                //verifies if input is valid
-                while (cin.fail() || !ValidMenuInput(1, 5, option)) {
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    cout << "Please enter a valid option: " << endl << "::: ";
+                    cout << "What information do you wish to alter?" << endl;
+                    cout << "1. Alter type" << endl;
+                    cout << "2. Alter name" << endl;
+                    cout << "3. Alter price range" << endl;
+                    cout << "4. Alter number of stars" << endl;
+                    cout << "5. Return to main menu" << endl;
+                    cout << endl << "Enter a number option: " << endl << "::: ";
                     cin >> option;
-                }
 
-                switch (option) {
-
-                    case 1:
-                        cout << "Insert the new type of service" << endl << "::: ";
+                    //verifies if input is valid
+                    while (cin.fail() || !ValidMenuInput(1, 5, option)) {
+                        cin.clear();
                         cin.ignore(1000, '\n');
-                        getline(cin, sType);
-                        b->erase_ExtraService(service);
-                        newServices = b->getRestaurantQueue();
-                        newServices.push(Services(sType, sName, sPriceRange, sStars, getActualDate()));
-                        b->set_RestaurantQueue(newServices);
-                        break;
-                    case 2:
-                        cout << "Insert the new name" << endl << "::: ";
-                        cin.ignore(1000, '\n');
-                        getline(cin, sName);
+                        cout << "Please enter a valid option: " << endl << "::: ";
+                        cin >> option;
+                    }
 
-                        temp_s = b->getRestaurantQueue();
+                    Services old_s = Services(sType, sName, sPriceRange, sStars, getActualDate());
 
-                        while (!temp_s.empty()) {
+                    switch (option) {
 
-                            Services service = temp_s.top();
-                            temp_s.pop();
-                            if (service.getName() == sName) { throw -1; }
-                        }
-
-                        b->erase_ExtraService(service);
-                        newServices = b->getRestaurantQueue();
-                        newServices.push(Services(sType, sName, sPriceRange, sStars, getActualDate()));
-                        b->set_RestaurantQueue(newServices);
-                        break;
-                    case 3:
-                        cout << "Insert the new price range" << endl << "::: ";
-                        cin.ignore(1000, '\n');
-                        cin >> sPriceRange;
-                        while (sPriceRange != "1/3" && sPriceRange != "2/3" && sPriceRange != "3/3") {
+                        case 1:
+                            b->erase_ExtraService(old_s);
+                            cout << "Insert the new type of service" << endl << "::: ";
                             cin.ignore(1000, '\n');
-                            cout << "Please enter a valid value: ";
+                            getline(cin, sType);
+                            b->add_ExtraService(Services(sType, sName, sPriceRange, sStars, getActualDate()));
+                            break;
+                        case 2:
+                            cout << "Insert the new name" << endl << "::: ";
+                            cin.ignore(1000, '\n');
+                            getline(cin, sName);
+                            temp_s = b->getExtraServices().at(i);
+                            while (!temp_s.empty()) {
+
+                                Services service = temp_s.top();
+                                temp_s.pop();
+                                if (service.getName() == sName) { throw -1; }
+                            }
+                            b->erase_ExtraService(old_s);
+                            b->add_ExtraService(Services(sType, sName, sPriceRange, sStars, getActualDate()));
+                            break;
+                        case 3:
+                            cout << "Insert the new price range" << endl << "::: ";
+                            cin.ignore(1000, '\n');
                             cin >> sPriceRange;
-                        }
-                        b->erase_ExtraService(service);
-                        newServices = b->getRestaurantQueue();
-                        newServices.push(Services(sType, sName, sPriceRange, sStars, getActualDate()));
-                        b->set_RestaurantQueue(newServices);
-                        break;
-                    case 4:
-                        cout << "Insert the new number of stars" << endl << "::: ";
-                        cin.ignore(1000, '\n');
-                        cin >> sStars;
-                        while (sStars != "*" && sStars != "**" && sStars != "***" && sStars != "****" &&
-                               sStars != "*****") {
-                            cin.clear();
+                            while (sPriceRange != "1/3" && sPriceRange != "2/3" && sPriceRange != "3/3") {
+                                cin.ignore(1000, '\n');
+                                cout << "Please enter a valid value: ";
+                                cin >> sPriceRange;
+                            }
+                            b->erase_ExtraService(old_s);
+                            b->add_ExtraService(Services(sType, sName, sPriceRange, sStars, getActualDate()));
+                            break;
+                        case 4:
+                            cout << "Insert the new number of stars" << endl << "::: ";
                             cin.ignore(1000, '\n');
-                            cout << "Please enter a valid value: ";
                             cin >> sStars;
-                        }
-                        b->erase_ExtraService(service);
-                        newServices = b->getRestaurantQueue();
-                        newServices.push(Services(sType, sName, sPriceRange, sStars, getActualDate()));
-                        b->set_RestaurantQueue(newServices);
-                        break;
-                    case 5:
-                        break;
+                            while (sStars != "*" && sStars != "**" && sStars != "***" && sStars != "****" &&
+                                   sStars != "*****") {
+                                cin.clear();
+                                cin.ignore(1000, '\n');
+                                cout << "Please enter a valid value: ";
+                                cin >> sStars;
+                            }
+                            b->erase_ExtraService(old_s);
+                            b->add_ExtraService(Services(sType, sName, sPriceRange, sStars, getActualDate()));
+                            break;
+                        case 5:
+                            break;
+                    }
+
+                    cout << endl << "Altered successfully!" << endl;
+
+
+                    break;
                 }
 
-                cout << endl << "Altered successfully!" << endl;
-
-
-                break;
             }
-
         }
-
-
     }
 }
 
 
 void Company::eraseService() {
 
-    string name, service;
+    string name, r_service;
     int i;
 
     ClearScreen();
@@ -519,9 +513,19 @@ void Company::eraseService() {
     if (b != nullptr) {
 
         cout << "Insert name of the service you wish to remove" << endl << "::: ";
-        cin >> service;
+        cin >> r_service;
 
-        b->erase_ExtraService(service);
+        for (unsigned int i = 0; i < b->getExtraServices().size(); ++i) {
+
+            priority_queue<Services> temp = b->getExtraServices().at(i);
+
+            while (!temp.empty()) {
+
+                Services service = temp.top();
+                temp.pop();
+                if (service.getName() == r_service) { b->erase_ExtraService(service); }
+            }
+        }
     }
 }
 
