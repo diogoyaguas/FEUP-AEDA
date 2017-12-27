@@ -122,7 +122,7 @@ void searchMenu(Company &company){
             company.searchLifeguard();
             break;
         case 5:
-            //company.searchClosest();
+            company.searchClosest();
             break;
     }
 

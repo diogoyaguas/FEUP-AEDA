@@ -241,7 +241,7 @@ void RiverBeach::displayBeach(){
     cout << "Width: " << width << endl;
     cout << "Maximum Depth:" << maxDepth << endl;
 
-    unsigned int size;
+    unsigned long size;
 
     if(blueflag && lifeguard){
 
@@ -275,7 +275,7 @@ void RiverBeach::displayBeach(){
         }
     }
 
-    if(extraServices.size() == 0) {throw -1;}
+    if(extraServices.empty()) {throw -1;}
 
     cout << endl << "Services: " << endl;
     for(unsigned int i = 0; i < extraServices.size(); i++){
@@ -438,7 +438,7 @@ void BayouBeach::displayBeach() {
         }
     }
 
-    if(extraServices.size() == 0) {throw -1;}
+    //if(extraServices.size() == 0) {throw -1;}
 
     cout << endl << "Services: " << endl;
     for(unsigned int i = 0; i < extraServices.size(); i++){

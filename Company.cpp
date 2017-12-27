@@ -589,15 +589,15 @@ void Company::searchName() {
 
 void Company::searchBlueflag() {
 
-        int option;
-
         ClearScreen();
 
-        for (auto &beach: beaches) {
+        for (auto it = beaches.begin(); it!= beaches.end(); it++) {
 
-            if (beach->get_blue_flag()) {
+            if ((*it)->get_blue_flag()) {
 
-                beach->displayBeach();
+                try { (*it)->displayBeach(); } catch (int x) {
+                    cout << endl << "This beach doesn't have any services associated." << endl << endl;
+                }
             }
         }
 
@@ -608,20 +608,21 @@ void Company::searchBlueflag() {
 
 void Company::searchLifeguard() {
 
-        int option;
 
-        ClearScreen();
+    ClearScreen();
 
-        for (auto &beach: beaches) {
+    for (auto it = beaches.begin(); it!= beaches.end(); it++) {
 
-            if (beach->get_lifeguard()) {
+        if ((*it)->get_lifeguard()) {
 
-                beach->displayBeach();
+            try { (*it)->displayBeach(); } catch (int x) {
+                cout << endl << "This beach doesn't have any services associated." << endl << endl;
             }
         }
-
-        returnMainMenu();
     }
+
+    returnMainMenu();
+}
 
 void Company::searchClosest() {
 
@@ -634,8 +635,8 @@ void Company::searchClosest() {
         ClearScreen();
 
         cout << "Search for the closest beach by:" << endl;
-        cout << "1. Actual location" << endl;
-        cout << "2. Actual beach" << endl << "::: ";
+        cout << "1. Current location" << endl;
+        cout << "2. Another beach" << endl << "::: ";
         cin >> option;
         while (cin.fail() || !ValidMenuInput(1, 2, option)) {
             cin.clear();
@@ -649,7 +650,7 @@ void Company::searchClosest() {
         switch (option) {
 
             case 1:
-                cout << "Insert the latitude and the longitude of your actual location" << endl << "::: ";
+                cout << "Insert the latitude and the longitude of your current location" << endl << "::: ";
                 cin >> lat >> longi;
                 distance = (*beaches.begin())->distanceToBeach(lat, longi);
 
@@ -662,12 +663,12 @@ void Company::searchClosest() {
                     }
                 }
 
-                cout << "Distance between your actual location and closest beach: " << distance << " km" << endl;
-                cout << "Information of the beach: " << endl;
+                cout << "Distance from your current location to closest beach: " << distance << " km" << endl;
+                cout << "Information about the beach: " << endl;
                 (*temp)->displayBeach();
                 break;
             case 2:
-                cout << "Insert the name of your actual beach" << endl << "::: ";
+                cout << "Insert the name of the beach" << endl << "::: ";
                 cin.ignore(1000, '\n');
                 getline(cin, name);
                 Beach * b = beachExists(name);
@@ -687,8 +688,8 @@ void Company::searchClosest() {
                         }
                     }
 
-                    cout << "Distance between your actual beach and closest beach: " << distance << " km" << endl;
-                    cout << endl << "Information of the beach: " << endl;
+                    cout << "Distance between the beach you entered and closest beach: " << distance << " km" << endl;
+                    cout << endl << "Information about the beach: " << endl;
                     (*temp)->displayBeach();
                 }
                 break;
