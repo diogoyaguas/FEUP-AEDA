@@ -20,17 +20,15 @@ struct sort_serviceShutDown {
 
     bool operator () (const pair_serviceShutDown & p1, const pair_serviceShutDown & p2) const {
 
-        if (stoi(p1.second.substr(6,4)) < stoi(p2.second.substr(6,4))) return true;
-        else if (stoi(p1.second.substr(6,4)) == stoi(p2.second.substr(6,4))) {
+        if (stoi(p1.second.substr(6,4)) != stoi(p2.second.substr(6,4))) return stoi(p1.second.substr(6,4)) < stoi(p2.second.substr(6,4));
+        else {
 
-            if (stoi(p1.second.substr(3,2)) < stoi(p2.second.substr(3,2))) return true;
-            else if (stoi(p1.second.substr(3,2)) == stoi(p2.second.substr(3,2))) {
+            if (stoi(p1.second.substr(3,2)) != stoi(p2.second.substr(3,2))) return stoi(p1.second.substr(3,2)) != stoi(p2.second.substr(3,2));
+            else {
 
-                if (stoi(p1.second.substr(0,2)) < stoi(p2.second.substr(0,2))) return true;
-                else return false;
+                return stoi(p1.second.substr(0,2)) < stoi(p2.second.substr(0,2));
             }
         }
-        return false;
     }
 };
 
