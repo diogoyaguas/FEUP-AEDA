@@ -819,6 +819,7 @@ void Company::alterDateofInspection() {
 
     string name, service, sType, sName, sPriceRange, sStars, newDate;
     unsigned int option;
+    int i;
     priority_queue<Services> newServices;
     priority_queue<Services> temp_s;
 
@@ -879,6 +880,7 @@ void Company::alterDateofInspection() {
                             cin.ignore(1000, '\n');
                             getline(cin, newDate);
 
+
                             while(newDate.size() != 10){
                                 cin.clear();
                                 cin.ignore(1000, '\n');
@@ -926,6 +928,7 @@ void Company::alterDateofInspection() {
         }
     }
 }
+
 
 
 void Company::closeService() {
@@ -1031,7 +1034,6 @@ void Company::closeService() {
 
                     cout << "Service closed successfully!" << endl;
 
-
                     break;
                 }
             }
@@ -1043,4 +1045,3 @@ void Company::reopenServce() {
 
 
 }
-
