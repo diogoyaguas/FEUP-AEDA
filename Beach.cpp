@@ -72,7 +72,8 @@ void Beach::add_ExtraService(Services service) {
 
     for (unsigned int i = 0; i < this->extraServices.size(); ++i) {
 
-        if (this->extraServices.at(i).top().getType() == service.getType()) {
+        if(service.getType() == "") return;
+        else if (this->extraServices.at(i).top().getType() == service.getType()) {
 
             this->extraServices.at(i).push(service);
             return;
@@ -225,11 +226,6 @@ RiverBeach::RiverBeach(string beach)
     st = extra_services.find_first_of(';');
     if (extra_services.empty()) {
         add_ExtraService(Services());
-    }
-
-    if (st == string::npos) {
-        tempService = extra_services.substr(0, st);
-        add_ExtraService(Services(tempService));
     }
 
     while (st != string::npos) {
