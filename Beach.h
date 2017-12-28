@@ -5,7 +5,7 @@
 #include <vector>
 #include <queue>
 #include "Services.h"
-#include <math.h>
+#include <cmath>
 
 
 using namespace std;

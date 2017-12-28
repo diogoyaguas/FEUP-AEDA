@@ -57,19 +57,19 @@ public:
      */
     string getDateInspection() { return dateInspection; }
 
-    string getYearInspection() const {
-        string s1 = dateInspection.substr(dateInspection.find_last_of('-', 0), 4);
-        return s1;
+    int getYearInspection() const {
+        string s1 = dateInspection.substr(6, 4);
+        return stoi(s1);
     }
 
-    string getMonthInspection() const {
-        string s1 = dateInspection.substr(dateInspection.find_first_of('-', 0), 2);
-        return s1;
+    int getMonthInspection() const {
+        string s1 = dateInspection.substr(3, 2);
+        return stoi(s1);
     }
 
-    string getDayInspection() const {
+    int getDayInspection() const {
         string s1 = dateInspection.substr(0, 2);
-        return s1;
+        return stoi(s1);
     }
 
     /**
