@@ -1,6 +1,7 @@
 #include "Beach.h"
 #include <iomanip>
 #include <vector>
+#include <utility>
 #include <fstream>
 #include "UsefulFunctions.h"
 
@@ -29,6 +30,8 @@ float Beach::get_longitude() const { return longi; }
 vector<string> Beach::getBasicServices() const { return basicServices; }
 
 vector<priority_queue<Services>> Beach::getExtraServices() const { return extraServices; }
+
+unordered_set<pair<Services,string>> Beach::getServicesDown() const { return ServicesDown;}
 
 // set methods
 void Beach::set_name(string name) { this->name = name; }
@@ -63,7 +66,6 @@ bool Beach::operator<(const Beach &b1) const {
         return this->county < b1.get_county();
     else return this->blueflag > b1.get_blue_flag();
 }
-
 
 //other methods
 void Beach::add_BasicService(string service) { this->basicServices.push_back(service); }
@@ -130,6 +132,12 @@ double Beach::distanceToBeach(float lat, float longi) {
     double c = 2 * atan2(sqrt(a), sqrt(1 - a));
     return earthRadiusKm * c;
 
+}
+
+void Beach::add_ClosedService(Services service, string date) {
+
+    pair<Services,string> close (service,date);
+    this->ServicesDown.insert(close);
 }
 
 

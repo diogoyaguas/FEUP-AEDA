@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <queue>
+#include <unordered_set>
 #include "Services.h"
 #include <cmath>
 
@@ -18,6 +19,8 @@ protected:
     float lat, longi;
     vector<string> basicServices;
     vector<priority_queue<Services>> extraServices;
+    unordered_set<pair<Services,string>> ServicesDown;
+
 
 public:
 
@@ -102,6 +105,12 @@ public:
      * @return vector of Extra beach services
      */
     vector<priority_queue<Services>> getExtraServices() const;
+
+    /**
+     *
+     * @return hash table with the Services that are closed
+     */
+    unordered_set<pair<Services,string>> getServicesDown() const { return ServicesDown;}
 
     /**
      * @brief Helps identifying from which derived class ths object is.
@@ -198,6 +207,8 @@ public:
      */
     void erase_ExtraService(Services service);
 
+    void add_ClosedService(Services service, string date);
+
     /**
      * @brief Writes information about the beach in .txt file.
      * @param file
@@ -283,6 +294,20 @@ public:
     void writeBeach(ofstream & file) const;
 };
 
+bool operator () (const pair<Services,string> & p1, const pair<Services,string> & p2) const {
+
+    if (stoi(p1.second.substr(6,4)) < stoi(p2.second.substr(6,4))) return true;
+    else if (stoi(p1.second.substr(6,4)) == stoi(p2.second.substr(6,4))) {
+
+        if (stoi(p1.second.substr(3,2)) < stoi(p2.second.substr(3,2))) return true;
+        else if (stoi(p1.second.substr(3,2)) == stoi(p2.second.substr(3,2))) {
+
+            if (stoi(p1.second.substr(0,2)) < stoi(p2.second.substr(0,2))) return true;
+            else return false;
+        }
+    }
+    return false;
+}
 
 
 #endif //AEDA_BEACH_H

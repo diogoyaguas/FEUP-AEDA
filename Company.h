@@ -120,6 +120,16 @@ public:
      */
     void alterDateofInspection();
 
+    /**
+     *
+     */
+    void closeService();
+
+    /**
+     *
+     */
+    void reopenServce();
+
 
 };
 
