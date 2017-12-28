@@ -115,6 +115,12 @@ public:
      */
     void compareBeaches(Beach * b1, Beach * b2);
 
+    /**
+     *
+     */
+    void alterDateofInspection();
+
+
 };
 
 #endif //AEDA_COMPANY_H
