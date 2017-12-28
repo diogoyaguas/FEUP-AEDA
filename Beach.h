@@ -12,7 +12,6 @@ using namespace std;
 
 typedef pair<Services,string> pair_serviceShutDown;
 
-
 struct sort_serviceShutDown {
     int operator()(const pair_serviceShutDown & f1) const{
         return 0;

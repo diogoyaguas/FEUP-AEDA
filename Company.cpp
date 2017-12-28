@@ -930,7 +930,6 @@ void Company::alterDateofInspection() {
 }
 
 
-
 void Company::closeService() {
 
     string name, service, sType, sName, sPriceRange, sStars, sDate, newDate;
@@ -938,7 +937,7 @@ void Company::closeService() {
 
     ClearScreen();
 
-    cout << "Insert name of the beach you wish to alter the date of inspection of a service" << endl << "::: ";
+    cout << "Insert name of the beach you wish to close a service" << endl << "::: ";
     cin.ignore(1000, '\n');
     getline(cin, name);
 
@@ -1041,7 +1040,36 @@ void Company::closeService() {
     }
 }
 
-void Company::reopenServce() {
+
+void Company::reopenService() {
+
+    string name, service, sType, sName, sPriceRange, sStars, sDate, newDate;
+    unsigned int option;
+
+    ClearScreen();
+
+    cout << "Insert name of the beach you wish to reopen a service" << endl << "::: ";
+    cin.ignore(1000, '\n');
+    getline(cin, name);
+
+    Beach *b = beachExists(name);
+
+    if (b != NULL) {
+
+        cout << "Insert name of the service you wish to reopen" << endl << "::: ";
+        getline(cin, service);
+
+        for(auto it = b->getServicesDown().begin(); it != b->getServicesDown().end(); ++it) {
+
+            if((*it).first.getName() == service) {
+
+
+            }
+        }
+
+        
+
+    }
 
 
 }
