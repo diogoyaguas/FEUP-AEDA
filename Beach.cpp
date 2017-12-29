@@ -197,13 +197,16 @@ RiverBeach::RiverBeach(string beach)
 
     //attribute basic serves
     basic_services = divideString(';',beach);
+    unsigned long st;
     string bs;
 
-    while (!basic_services.empty() && bs!="not_found") {
+    while (!basic_services.empty()) {
         bs = divideString(',',basic_services);
-        if (bs == "not_found")
-            this->basicServices.push_back(basic_services);
 
+        if (bs == "not_found") {
+            this->basicServices.push_back(basic_services);
+            break;
+        }
         this->basicServices.push_back(bs);
     }
 
@@ -212,26 +215,25 @@ RiverBeach::RiverBeach(string beach)
     last = beach.find_first_of(')') - 1;
     extra_services = beach.substr(stop, last - stop);
     string tempService;
-    tempService = divideString(';',extra_services);
-    if (extra_services.empty())
+    st = extra_services.find_first_of(';');
+    if (extra_services.empty()) {
         add_ExtraService(Services());
-
-    if (tempService == "not_found") {
-        tempService = extra_services.substr(0);
-        add_ExtraService(Services(tempService));
     }
 
-    while (tempService != "not_found") {
+    while (st != string::npos) {
+        tempService = extra_services.substr(0, st);
         add_ExtraService(Services(tempService));
+        extra_services = extra_services.substr(st + 2);
+        st = extra_services.find_first_of(';');
 
-        if (tempService != "not_found") {
-            tempService = extra_services.substr(0);
+        if (st == string::npos) {
+            st = extra_services.size();
+            tempService = extra_services.substr(0, st);
             add_ExtraService(Services(tempService));
+            st = string::npos;
         }
-        tempService = divideString(';',extra_services);
     }
 }
-
 
 void RiverBeach::writeBeach(ofstream &file) const {
 
@@ -331,13 +333,14 @@ void RiverBeach::displayBeach() {
 
     if (extraServices.empty()) { throw -1; }
 
+    cout << endl << "Services: " << endl;
+
     int n = 0;
 
     for (unsigned int i = 0; i < extraServices.size(); ++i) {
 
         priority_queue<Services> temp = extraServices.at(i);
 
-        cout << endl << "Services: " << endl;
 
         while (!temp.empty()) {
 
@@ -410,13 +413,16 @@ BayouBeach::BayouBeach(string beach)
 
     //attribute basic serves
     basic_services = divideString(';',beach);
+    unsigned long st;
     string bs;
 
-    while (!basic_services.empty() && bs!="not_found") {
+    while (!basic_services.empty()) {
         bs = divideString(',',basic_services);
-        if (bs == "not_found")
-            this->basicServices.push_back(basic_services);
 
+        if (bs == "not_found") {
+            this->basicServices.push_back(basic_services);
+            break;
+        }
         this->basicServices.push_back(bs);
     }
 
@@ -425,24 +431,23 @@ BayouBeach::BayouBeach(string beach)
     last = beach.find_first_of(')') - 1;
     extra_services = beach.substr(stop, last - stop);
     string tempService;
-    tempService = divideString(';',extra_services);
+    st = extra_services.find_first_of(';');
     if (extra_services.empty()) {
         add_ExtraService(Services());
     }
 
-    if (tempService == "not_found") {
-        tempService = extra_services.substr(0);
+    while (st != string::npos) {
+        tempService = extra_services.substr(0, st);
         add_ExtraService(Services(tempService));
-    }
+        extra_services = extra_services.substr(st + 2);
+        st = extra_services.find_first_of(';');
 
-    while (tempService != "not_found") {
-        add_ExtraService(Services(tempService));
-
-        if (tempService != "not_found") {
-            tempService = extra_services.substr(0);
+        if (st == string::npos) {
+            st = extra_services.size();
+            tempService = extra_services.substr(0, st);
             add_ExtraService(Services(tempService));
+            st = string::npos;
         }
-        tempService = divideString(';',extra_services);
     }
 }
 
@@ -489,13 +494,14 @@ void BayouBeach::displayBeach() {
 
     if (extraServices.empty()) { throw -1; }
 
+    cout << endl << "Services: " << endl;
+
     int n = 0;
 
     for (unsigned int i = 0; i < extraServices.size(); ++i) {
 
         priority_queue<Services> temp = extraServices.at(i);
 
-        cout << endl << "Services: " << endl;
 
         while (!temp.empty()) {
 
@@ -510,6 +516,7 @@ void BayouBeach::displayBeach() {
             cout << setw(15) << setfill(' ') << "Date: " << service.getDateInspection() << endl << endl;
         }
     }
+    if (n == 0) { throw -1; }
 }
 
 void BayouBeach::writeBeach(ofstream &file) const {
