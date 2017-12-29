@@ -196,17 +196,15 @@ RiverBeach::RiverBeach(string beach)
     this->maxDepth = stof(divideString(';',beach));
 
     //attribute basic serves
-    last = beach.find(';');
-    basic_services = beach.substr(0, last);
-    unsigned long st;
+    basic_services = divideString(';',beach);
+    string bs;
 
-    while (stop != string::npos && !basic_services.empty()) {
-        st = basic_services.find_first_of(',');
-        this->basicServices.push_back(basic_services.substr(0, st));
-        if (st == string::npos)
-            break;
-        basic_services = basic_services.substr(st + 2);
-        stop = st;
+    while (!basic_services.empty() && bs!="not_found") {
+        bs = divideString(',',basic_services);
+        if (bs == "not_found")
+            this->basicServices.push_back(basic_services);
+
+        this->basicServices.push_back(bs);
     }
 
     //attribute extra services
@@ -214,25 +212,26 @@ RiverBeach::RiverBeach(string beach)
     last = beach.find_first_of(')') - 1;
     extra_services = beach.substr(stop, last - stop);
     string tempService;
-    st = extra_services.find_first_of(';');
-    if (extra_services.empty()) {
+    tempService = divideString(';',extra_services);
+    if (extra_services.empty())
         add_ExtraService(Services());
+
+    if (tempService == "not_found") {
+        tempService = extra_services.substr(0);
+        add_ExtraService(Services(tempService));
     }
 
-    while (st != string::npos) {
-        tempService = extra_services.substr(0, st);
+    while (tempService != "not_found") {
         add_ExtraService(Services(tempService));
-        extra_services = extra_services.substr(st + 2);
-        st = extra_services.find_first_of(';');
 
-        if (st == string::npos) {
-            st = extra_services.size();
-            tempService = extra_services.substr(0, st);
+        if (tempService != "not_found") {
+            tempService = extra_services.substr(0);
             add_ExtraService(Services(tempService));
-            st = string::npos;
         }
+        tempService = divideString(';',extra_services);
     }
 }
+
 
 void RiverBeach::writeBeach(ofstream &file) const {
 
@@ -410,17 +409,15 @@ BayouBeach::BayouBeach(string beach)
     this->aquaticArea = stof(divideString(';',beach));
 
     //attribute basic serves
-    last = beach.find(';');
-    basic_services = beach.substr(0, last);
-    unsigned long st;
+    basic_services = divideString(';',beach);
+    string bs;
 
-    while (!basic_services.empty()) {
-        st = basic_services.find_first_of(',');
-        this->basicServices.push_back(basic_services.substr(0, st));
-        if (st == string::npos)
-            break;
-        basic_services = basic_services.substr(st + 2);
-        stop = st;
+    while (!basic_services.empty() && bs!="not_found") {
+        bs = divideString(',',basic_services);
+        if (bs == "not_found")
+            this->basicServices.push_back(basic_services);
+
+        this->basicServices.push_back(bs);
     }
 
     //attribute extra services
@@ -428,28 +425,24 @@ BayouBeach::BayouBeach(string beach)
     last = beach.find_first_of(')') - 1;
     extra_services = beach.substr(stop, last - stop);
     string tempService;
-    st = extra_services.find_first_of(';');
+    tempService = divideString(';',extra_services);
     if (extra_services.empty()) {
         add_ExtraService(Services());
     }
 
-    if (st == string::npos) {
-        tempService = extra_services.substr(0, st);
+    if (tempService == "not_found") {
+        tempService = extra_services.substr(0);
         add_ExtraService(Services(tempService));
     }
 
-    while (st != string::npos) {
-        tempService = extra_services.substr(0, st);
+    while (tempService != "not_found") {
         add_ExtraService(Services(tempService));
-        extra_services = extra_services.substr(st + 2);
-        st = extra_services.find_first_of(';');
 
-        if (st == string::npos) {
-            st = extra_services.size();
-            tempService = extra_services.substr(0, st);
+        if (tempService != "not_found") {
+            tempService = extra_services.substr(0);
             add_ExtraService(Services(tempService));
-            st = string::npos;
         }
+        tempService = divideString(';',extra_services);
     }
 }
 

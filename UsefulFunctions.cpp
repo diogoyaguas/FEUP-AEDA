@@ -51,9 +51,13 @@ string getActualDate() {
 
 string divideString(char char_to_find, string & line){
     string temp;
+    int stop=line.find_first_of(char_to_find);
 
-        temp = line.substr(0,line.find_first_of(char_to_find));
-        line = line.substr(line.find_first_of(char_to_find)+2);
+    if(stop == string::npos)
+        return "not_found";
+
+    temp = line.substr(0,stop);
+    line = line.substr(stop+2);
 
     return temp;
 }
