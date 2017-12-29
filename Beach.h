@@ -246,6 +246,7 @@ public:
 
     void writeBeachClosedServices(ofstream &file);
 
+    void readClosedServices(string service);
 
 };
 
