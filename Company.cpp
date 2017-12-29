@@ -1074,11 +1074,16 @@ void Company::reopenService() {
 
         for(auto it = b->getServicesDown().begin(); it != b->getServicesDown().end(); ++it) {
 
-            if((*it).service.getName() == service) {
+            if((*it).first.getName() == service) {
+
+                b->add_ExtraService((*it).first);
+                b->getServicesDown().erase((*it));
+                break;
             }
         }
     }
 
+        cout << "Service reopened successfully!" << endl;
 
 }
 
