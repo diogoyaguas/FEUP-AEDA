@@ -48,3 +48,13 @@ string getActualDate() {
     return date;
 
 }
+
+string divideString(char char_to_find, string & line){
+    string temp;
+
+        temp = line.substr(0,line.find_first_of(char_to_find));
+        line = line.substr(line.find_first_of(char_to_find)+2);
+
+    return temp;
+}
+

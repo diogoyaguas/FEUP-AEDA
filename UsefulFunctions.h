@@ -25,4 +25,7 @@ void ClearScreen();
  */
 string getActualDate();
 
+
+string divideString(char char_to_find, string & line);
+
 #endif //PROJAEDA_USEFULFUNCTION_H

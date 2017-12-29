@@ -158,18 +158,14 @@ RiverBeach::RiverBeach(string beach)
     string extra_services; //temporary string only containing information relevant to attribute basic services
 
     //attribute county
-    stop = beach.find_first_of(';');
-    this->county = beach.substr(0, stop);
+    this->county = divideString(';',beach);
 
     //attribute name
-    beach = beach.substr(stop + 2); // +2 marks the begining of the char after space
-    stop = beach.find_first_of(';');
-    this->name = beach.substr(0, stop);
+    this->name =  divideString(';',beach);
+
 
     //attribute blueflag
-    beach = beach.substr(stop + 2);
-    stop = beach.find_first_of(';');
-    if (stoi(beach.substr(0, stop))) {
+    if (stoi(divideString(';',beach))) {
 
         this->blueflag = true;
 
@@ -177,9 +173,7 @@ RiverBeach::RiverBeach(string beach)
         this->blueflag = false;
 
     // attribute lifeguard
-    beach = beach.substr(stop + 2);
-    stop = beach.find_first_of(';');
-    if (stoi(beach.substr(0, stop))) {
+    if (stoi(divideString(';',beach))) {
 
         this->lifeguard = true;
 
@@ -187,32 +181,21 @@ RiverBeach::RiverBeach(string beach)
         this->lifeguard = false;
 
     //attribute maximum capacity
-    beach = beach.substr(stop + 2);
-    stop = beach.find_first_of(';');
-    this->max_capacity = stoul(beach.substr(0, stop));
+    this->max_capacity = stoul(divideString(';',beach));
 
     //attribute latitude
-    beach = beach.substr(stop + 2);
-    stop = beach.find_first_of(';');
-    this->lat = stof(beach.substr(0, stop));
+    this->lat = stof(divideString(';',beach));
 
     //attribute longitude
-    beach = beach.substr(stop + 2);
-    stop = beach.find_first_of(';');
-    this->longi = stof(beach.substr(0, stop));
+    this->longi = stof(divideString(';',beach));
 
     //attribute width
-    beach = beach.substr(stop + 2);
-    stop = beach.find_first_of(';');
-    this->width = stof(beach.substr(0, stop));
+    this->width = stof(divideString(';',beach));
 
     //attribute maximum depth
-    beach = beach.substr(stop + 2);
-    stop = beach.find_first_of(';');
-    this->maxDepth = stof(beach.substr(0, stop));
+    this->maxDepth = stof(divideString(';',beach));
 
     //attribute basic serves
-    beach = beach.substr(stop + 2);
     last = beach.find(';');
     basic_services = beach.substr(0, last);
     unsigned long st;
@@ -389,19 +372,16 @@ BayouBeach::BayouBeach(string beach)
     string basic_services; //temporary string only containing information relevant to attribute basic services
     string extra_services; //temporary string only containing information relevant to attribute basic services
 
+
     //attribute county
-    stop = beach.find_first_of(';');
-    this->county = beach.substr(0, stop);
+    this->county = divideString(';',beach);
 
     //attribute name
-    beach = beach.substr(stop + 2); // +2 marks the begining of the char after space
-    stop = beach.find_first_of(';');
-    this->name = beach.substr(0, stop);
+    this->name =  divideString(';',beach);
+
 
     //attribute blueflag
-    beach = beach.substr(stop + 2);
-    stop = beach.find_first_of(';');
-    if (stoi(beach.substr(0, stop))) {
+    if (stoi(divideString(';',beach))) {
 
         this->blueflag = true;
 
@@ -409,9 +389,7 @@ BayouBeach::BayouBeach(string beach)
         this->blueflag = false;
 
     // attribute lifeguard
-    beach = beach.substr(stop + 2);
-    stop = beach.find_first_of(';');
-    if (stoi(beach.substr(0, stop))) {
+    if (stoi(divideString(';',beach))) {
 
         this->lifeguard = true;
 
@@ -419,27 +397,19 @@ BayouBeach::BayouBeach(string beach)
         this->lifeguard = false;
 
     //attribute maximum capacity
-    beach = beach.substr(stop + 2);
-    stop = beach.find_first_of(';');
-    this->max_capacity = stoul(beach.substr(0, stop));
+    this->max_capacity = stoul(divideString(';',beach));
 
     //attribute latitude
-    beach = beach.substr(stop + 2);
-    stop = beach.find_first_of(';');
-    this->lat = stof(beach.substr(0, stop));
+    this->lat = stof(divideString(';',beach));
 
     //attribute longitude
-    beach = beach.substr(stop + 2);
-    stop = beach.find_first_of(';');
-    this->longi = stof(beach.substr(0, stop));
+    this->longi = stof(divideString(';',beach));
+
 
     //attribute width
-    beach = beach.substr(stop + 2);
-    stop = beach.find_first_of(';');
-    this->aquaticArea = stof(beach.substr(0, stop));
+    this->aquaticArea = stof(divideString(';',beach));
 
     //attribute basic serves
-    beach = beach.substr(stop + 2);
     last = beach.find(';');
     basic_services = beach.substr(0, last);
     unsigned long st;
