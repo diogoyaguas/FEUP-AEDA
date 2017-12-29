@@ -119,9 +119,12 @@ void Beach::erase_ExtraService(Services service) {
 
 }
 
-void Beach::add_ClosedService(Services service, string date) {
+void Beach::add_ClosedService(Services service, string date, string type_of_closing) {
 
-    pair<Services,string> close (service,date);
+    struct_serviceShutDown close;
+    close.date = date;
+    close.service = service;
+    close.type_of_closing = type_of_closing;
     this->ServicesDown.insert(close);
 }
 

@@ -10,28 +10,32 @@
 
 using namespace std;
 
-typedef pair<Services,string> pair_serviceShutDown;
+typedef struct{
+    Services service;
+    string date;
+    string type_of_closing;
+} struct_serviceShutDown;
 
 struct sort_serviceShutDown {
-    int operator()(const pair_serviceShutDown & f1) const{
+    int operator()(const struct_serviceShutDown & f1) const{
         return 0;
     }
 
-    bool operator () (const pair_serviceShutDown & p1, const pair_serviceShutDown & p2) const {
+    bool operator () (const struct_serviceShutDown & p1, const struct_serviceShutDown & p2) const {
 
-        if (stoi(p1.second.substr(6,4)) != stoi(p2.second.substr(6,4))) return stoi(p1.second.substr(6,4)) < stoi(p2.second.substr(6,4));
+        if (stoi(p1.date.substr(6,4)) != stoi(p2.date.substr(6,4))) return stoi(p1.date.substr(6,4)) < stoi(p2.date.substr(6,4));
         else {
 
-            if (stoi(p1.second.substr(3,2)) != stoi(p2.second.substr(3,2))) return stoi(p1.second.substr(3,2)) != stoi(p2.second.substr(3,2));
+            if (stoi(p1.date.substr(3,2)) != stoi(p2.date.substr(3,2))) return stoi(p1.date.substr(3,2)) != stoi(p2.date.substr(3,2));
             else {
 
-                return stoi(p1.second.substr(0,2)) < stoi(p2.second.substr(0,2));
+                return stoi(p1.date.substr(0,2)) < stoi(p2.date.substr(0,2));
             }
         }
     }
 };
 
-typedef unordered_set<pair_serviceShutDown, sort_serviceShutDown, sort_serviceShutDown> HashTable_services;
+typedef unordered_set<struct_serviceShutDown, sort_serviceShutDown, sort_serviceShutDown> HashTable_services;
 
 
 class Beach {
@@ -228,7 +232,7 @@ public:
     void erase_ExtraService(Services service);
 
 
-    void add_ClosedService(Services service, string date);
+    void add_ClosedService(Services service, string date, string type_of_closing);
 
     /**
      * @brief Writes information about the beach in .txt file.

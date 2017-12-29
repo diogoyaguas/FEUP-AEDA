@@ -932,7 +932,7 @@ void Company::alterDateofInspection() {
 
 void Company::closeService() {
 
-    string name, service, sType, sName, sPriceRange, sStars, sDate, newDate;
+    string name, service, sType, sName, sPriceRange, sStars, sDate, newDate, type_of_closing;
     unsigned int option;
 
     ClearScreen();
@@ -966,11 +966,12 @@ void Company::closeService() {
                     Services old_s = Services(sType, sName, sPriceRange, sStars, sDate);
 
                     cout << "When this service closed?" << endl;
-                    cout << "1. Actual date" << endl;
+                    cout << "1. Current date" << endl;
                     cout << "2. Past date" << endl;
                     cout << "3. Return to main menu" << endl;
                     cout << endl << "Enter a number option: " << endl << "::: ";
                     cin >> option;
+
 
                     //verifies if input is valid
                     while (cin.fail() || !ValidMenuInput(1, 5, option)) {
@@ -984,7 +985,7 @@ void Company::closeService() {
 
                         case 1:
                             b->erase_ExtraService(old_s);
-                            b->add_ClosedService(old_s,getActualDate());
+                           newDate = getActualDate();
                             break;
                         case 2:
                             b->erase_ExtraService(old_s);
@@ -1025,11 +1026,23 @@ void Company::closeService() {
                                     }
                                 }
                             }
-                            b->add_ClosedService(old_s,newDate);
+
                             break;
                         case 5:
                             break;
                     }
+
+                    cout << "Do you wish to close it temporarily or permanently?" << endl;
+                    cout << "1. Temporarily" << endl;
+                    cout << "2. Permanently" << endl;
+                    cout << endl << "Enter a number option: " << endl << "::: ";
+                    cin >> option;
+
+                    if(option == 1)
+                        type_of_closing = "TEMP";
+                    else type_of_closing = "PERM";
+
+                    b->add_ClosedService(old_s,newDate, type_of_closing);
 
                     cout << "Service closed successfully!" << endl;
 
@@ -1061,7 +1074,7 @@ void Company::reopenService() {
 
         for(auto it = b->getServicesDown().begin(); it != b->getServicesDown().end(); ++it) {
 
-            if((*it).first.getName() == service) {
+            if((*it).service.getName() == service) {
 
 
             }
