@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <fstream>
 #include "UsefulFunctions.h"
+#include "Beach.h"
 
 using namespace std;
 
@@ -1074,9 +1075,9 @@ void Company::reopenService() {
 
         for(auto it = b->getServicesDown().begin(); it != b->getServicesDown().end(); ++it) {
 
-            if((*it).first.getName() == service) {
+            if((*it).service.getName() == service) {
 
-                b->add_ExtraService((*it).first);
+                b->add_ExtraService((*it).service);
                 b->getServicesDown().erase((*it));
                 break;
             }
