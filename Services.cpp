@@ -1,4 +1,5 @@
 #include "Services.h"
+#include <fstream>
 
 Services::Services(string type, string name, string priceRange, string stars, string dateInspection)
 :type(type), name(name), priceRange(priceRange), stars(stars), dateInspection(dateInspection)
@@ -31,4 +32,13 @@ Services::Services(string service){
     stop = service.find_first_of(',');
     this->dateInspection = service.substr(0,stop);
 
+}
+
+
+void Services::writeService(ofstream &file) const {
+    file << this->type << ", ";
+    file << this->name << ", ";
+    file << this->priceRange << ", ";
+    file << this->stars << ", ";
+    file << this->dateInspection << ";";
 }

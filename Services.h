@@ -110,6 +110,8 @@ public:
         }
         return false;
     }
+
+    void writeService(ofstream &file) const;
 };
 
 #endif //AEDA_SERVICES_H

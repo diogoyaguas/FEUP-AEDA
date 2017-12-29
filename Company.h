@@ -130,6 +130,7 @@ public:
      */
     void reopenService();
 
+    void updateCloseServicesFile();
 
 };
 

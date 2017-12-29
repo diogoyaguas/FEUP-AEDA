@@ -32,7 +32,7 @@ void mainMenu(Company &company) {
     cout << "2. Search beach." << endl;
     cout << "3. Compare beaches." << endl;
     cout << "4. Add, alter or remove beach." << endl;
-    cout << "5. Update beaches' file." << endl;
+    cout << "5. Update files." << endl;
 
     cout << endl << "Enter a number option: " << endl << "::: ";
     cin >> option;
@@ -68,6 +68,7 @@ void mainMenu(Company &company) {
             break;
         case 5:
             company.updateFile();
+            company.updateCloseServicesFile();
             ClearScreen();
             mainMenu(company);
             break;

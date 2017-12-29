@@ -1075,14 +1075,20 @@ void Company::reopenService() {
         for(auto it = b->getServicesDown().begin(); it != b->getServicesDown().end(); ++it) {
 
             if((*it).service.getName() == service) {
-
-
             }
         }
-
-        
-
     }
 
 
+}
+
+
+void Company::updateCloseServicesFile(){
+    ofstream file;
+    file.open("ClosedServicesFile.txt");
+
+    for (auto it = this->beaches.begin(); it != this->beaches.end() ; ++it) {
+        (*it)->writeBeachClosedServices(file);
+        file << endl;
+    }
 }

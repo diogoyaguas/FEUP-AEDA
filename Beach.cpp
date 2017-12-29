@@ -69,80 +69,6 @@ bool Beach::operator<(const Beach &b1) const {
 
 
 //other methods
-void Beach::add_BasicService(string service) { this->basicServices.push_back(service); }
-
-void Beach::add_ExtraService(Services service) {
-
-    for (unsigned int i = 0; i < this->extraServices.size(); ++i) {
-
-        if (this->extraServices.at(i).top().getType() == service.getType()) {
-
-            this->extraServices.at(i).push(service);
-            return;
-        }
-    }
-
-    priority_queue<Services> new_q;
-    new_q.push(service);
-    this->extraServices.push_back(new_q);
-
-}
-
-void Beach::erase_ExtraService(Services service) {
-
-    for (unsigned int i = 0; i < this->extraServices.size(); ++i) {
-
-        if (this->extraServices.at(i).top().getType() == service.getType()) {
-
-            priority_queue<Services> temp;
-            Services s_temp;
-
-            while (!this->extraServices.at(i).empty()) {
-
-                s_temp = this->extraServices.at(i).top();
-                this->extraServices.at(i).pop();
-                if (s_temp.getName() != service.getName()) {
-
-                    temp.push(s_temp);
-                }
-            }
-
-            while (!temp.empty()) {
-
-                s_temp = temp.top();
-                temp.pop();
-                this->extraServices.at(i).push(s_temp);
-            }
-        }
-    }
-
-
-}
-
-void Beach::add_ClosedService(Services service, string date, string type_of_closing) {
-
-    struct_serviceShutDown close;
-    close.date = date;
-    close.service = service;
-    close.type_of_closing = type_of_closing;
-    this->ServicesDown.insert(close);
-}
-
-double Beach::distanceToBeach(float lat, float longi) {
-    int earthRadiusKm = 6371;
-    double tempLat, tempL1;
-
-    double dLat = degreesToRadians(lat - this->lat);
-    double dLon = degreesToRadians(longi - this->longi);
-
-    tempL1 = degreesToRadians(this->lat);
-    tempLat = degreesToRadians(lat);
-
-    double a = sin(dLat / 2) * sin(dLat / 2) + sin(dLon / 2) * sin(dLon / 2) * cos(tempL1) * cos(tempLat);
-    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
-    return earthRadiusKm * c;
-
-}
 
 void Beach::displayBeachExtraInfo() {
     unsigned int size;
@@ -211,6 +137,89 @@ void Beach::displayBeach() {
     cout << "Name: " << getType() << " Beach " << name << endl;
     cout << "Maximum Capacity: " << max_capacity << endl;
 }
+
+void Beach::add_BasicService(string service) { this->basicServices.push_back(service); }
+
+void Beach::add_ExtraService(Services service) {
+
+    for (unsigned int i = 0; i < this->extraServices.size(); ++i) {
+
+        if (this->extraServices.at(i).top().getType() == service.getType()) {
+
+            this->extraServices.at(i).push(service);
+            return;
+        }
+    }
+
+    priority_queue<Services> new_q;
+    new_q.push(service);
+    this->extraServices.push_back(new_q);
+
+}
+
+void Beach::erase_ExtraService(Services service) {
+
+    for (unsigned int i = 0; i < this->extraServices.size(); ++i) {
+
+        if (this->extraServices.at(i).top().getType() == service.getType()) {
+
+            priority_queue<Services> temp;
+            Services s_temp;
+
+            while (!this->extraServices.at(i).empty()) {
+
+                s_temp = this->extraServices.at(i).top();
+                this->extraServices.at(i).pop();
+                if (s_temp.getName() != service.getName()) {
+
+                    temp.push(s_temp);
+                }
+            }
+
+            while (!temp.empty()) {
+
+                s_temp = temp.top();
+                temp.pop();
+                this->extraServices.at(i).push(s_temp);
+            }
+        }
+    }
+
+
+}
+
+void Beach::add_ClosedService(Services service, string date, string type_of_closing) {
+
+    struct_serviceShutDown close;
+    close.date = date;
+    close.service = service;
+    close.type_of_closing = type_of_closing;
+    this->ServicesDown.insert(close);
+}
+
+void Beach::writeBeachClosedServices(ofstream &file) {
+    for (auto it = this->ServicesDown.begin(); it != this->ServicesDown.end() ; it++) {
+        file << (*it).type_of_closing << "; " << (*it).date << "; ";
+        (*it).service.writeService(file);
+    }
+}
+
+double Beach::distanceToBeach(float lat, float longi) {
+    int earthRadiusKm = 6371;
+    double tempLat, tempL1;
+
+    double dLat = degreesToRadians(lat - this->lat);
+    double dLon = degreesToRadians(longi - this->longi);
+
+    tempL1 = degreesToRadians(this->lat);
+    tempLat = degreesToRadians(lat);
+
+    double a = sin(dLat / 2) * sin(dLat / 2) + sin(dLon / 2) * sin(dLon / 2) * cos(tempL1) * cos(tempLat);
+    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    return earthRadiusKm * c;
+
+}
+
 
 
 //River Beach
@@ -336,24 +345,20 @@ void RiverBeach::writeBeach(ofstream &file) const {
 
     for (unsigned int i = 0; i < this->getExtraServices().size(); ++i) {
         temp = this->getExtraServices().at(i);
+        if(i != 0) file << " ";
 
         if (!temp.empty()) {
 
             service = temp.top();
             temp.pop();
-            file << service.getType() << ", ";
-            file << service.getName() << ", ";
-            file << service.getPriceRange() << ", ";
-            file << service.getStars() << ";";
+            service.writeService(file);
 
             while (!temp.empty()) {
 
                 service = temp.top();
                 temp.pop();
-                file << " " << service.getType() << ", ";
-                file << service.getName() << ", ";
-                file << service.getPriceRange() << ", ";
-                file << service.getStars() << ";";
+                file << " " ;
+                service.writeService(file);
             }
         }
     }
@@ -508,28 +513,24 @@ void BayouBeach::writeBeach(ofstream &file) const {
     for (unsigned int i = 0; i < this->getExtraServices().size(); ++i) {
         temp = this->getExtraServices().at(i);
 
+        if(i != 0) file << " ";
+
         if (!temp.empty()) {
 
             service = temp.top();
             temp.pop();
-            file << service.getType() << ", ";
-            file << service.getName() << ", ";
-            file << service.getPriceRange() << ", ";
-            file << service.getStars() << ";";
+            service.writeService(file);
 
             while (!temp.empty()) {
 
                 service = temp.top();
                 temp.pop();
-                file << " " << service.getType() << ", ";
-                file << service.getName() << ", ";
-                file << service.getPriceRange() << ", ";
-                file << service.getStars() << ";";
+                file << " " ;
+                service.writeService(file);
             }
         }
     }
     file << ")";
     file << endl;
 }
-
 

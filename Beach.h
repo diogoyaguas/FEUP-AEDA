@@ -244,6 +244,8 @@ public:
 
     bool operator < (const Beach & b1) const;
 
+    void writeBeachClosedServices(ofstream &file);
+
 
 };
 
