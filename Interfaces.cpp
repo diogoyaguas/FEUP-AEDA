@@ -68,7 +68,7 @@ void mainMenu(Company &company) {
             break;
         case 5:
             company.updateFile();
-            company.updateCloseServicesFile();
+            company.updateClosedServicesFile();
             ClearScreen();
             mainMenu(company);
             break;

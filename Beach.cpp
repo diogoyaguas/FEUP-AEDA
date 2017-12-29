@@ -199,9 +199,17 @@ void Beach::add_ClosedService(Services service, string date, string type_of_clos
 
 void Beach::writeBeachClosedServices(ofstream &file) {
     for (auto it = this->ServicesDown.begin(); it != this->ServicesDown.end() ; it++) {
-        file << (*it).type_of_closing << "; " << (*it).date << "; ";
+        file << this->name << "; " << (*it).type_of_closing << "; " << (*it).date << "; ";
         (*it).service.writeService(file);
     }
+}
+
+void Beach::readClosedServices(string service){
+    Services tmp_service_down;
+    struct_serviceShutDown s;
+    s.type_of_closing=divideString(';',service);
+    s.date = divideString(';',service);
+    s.service = Services(service);
 }
 
 double Beach::distanceToBeach(float lat, float longi) {

@@ -1083,12 +1083,27 @@ void Company::reopenService() {
 }
 
 
-void Company::updateCloseServicesFile(){
+void Company::updateClosedServicesFile(){
     ofstream file;
     file.open("ClosedServicesFile.txt");
 
     for (auto it = this->beaches.begin(); it != this->beaches.end() ; ++it) {
         (*it)->writeBeachClosedServices(file);
         file << endl;
+    }
+}
+
+
+void Company::readClosedServicesFile(){
+    fstream file;
+    string service, beach_name;
+    file.open("ClosedServicesFile.txt");
+
+    while(getline(file, service)){
+        beach_name = divideString(';',service);
+        for (auto it = beaches.begin(); it != beaches.end() ; ++it) {
+            if(beach_name == (*it)->get_name())
+                (*it)->readClosedServices(service);
+        }
     }
 }
