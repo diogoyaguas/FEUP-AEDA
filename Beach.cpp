@@ -141,6 +141,74 @@ double Beach::distanceToBeach(float lat, float longi) {
 
 }
 
+void Beach::displayBeachExtraInfo() {
+    unsigned int size;
+
+    if (blueflag && lifeguard) {
+
+        cout << "Useful information: " << "Blue Flag" << endl << setw(29) << setfill(' ') << "Lifeguard" << endl;
+        for (unsigned int i = 0; i < basicServices.size(); i++) {
+
+            size = basicServices.at(i).size();
+            cout << setw(20 + size) << setfill(' ') << basicServices.at(i) << endl;
+        }
+    } else if (blueflag && !lifeguard) {
+        cout << "Useful information: " << "Blue Flag" << endl;
+        for (unsigned int i = 0; i < basicServices.size(); i++) {
+
+            size = basicServices.at(i).size();
+            cout << setw(20 + size) << setfill(' ') << basicServices.at(i) << endl;
+        }
+    } else if (!blueflag && !lifeguard) {
+        cout << "Useful information: " << "Lifeguard" << endl;
+        for (unsigned int i = 0; i < basicServices.size(); i++) {
+
+            size = basicServices.at(i).size();
+            cout << setw(20 + size) << setfill(' ') << basicServices.at(i) << endl;
+        }
+    } else {
+        cout << "Useful information: " << basicServices.at(0) << endl;
+        for (unsigned int i = 1; i < basicServices.size(); i++) {
+
+            size = basicServices.at(i).size();
+            cout << setw(20 + size) << setfill(' ') << basicServices.at(i) << endl;
+        }
+    }
+
+    if (extraServices.empty()) { throw -1; }
+
+    cout << endl << "Services: " << endl;
+
+    int n = 0;
+
+    for (unsigned int i = 0; i < extraServices.size(); ++i) {
+
+        priority_queue<Services> temp = extraServices.at(i);
+
+
+        while (!temp.empty()) {
+
+            n++;
+
+            Services service = temp.top();
+            temp.pop();
+            cout << setw(15) << setfill(' ') << "Type: " << service.getType() << endl;
+            cout << setw(15) << setfill(' ') << "Name: " << service.getName() << endl;
+            cout << setw(22) << setfill(' ') << "Price Range: " << service.getPriceRange() << endl;
+            cout << setw(16) << setfill(' ') << "Stars: " << service.getStars() << endl;
+            cout << setw(15) << setfill(' ') << "Date: " << service.getDateInspection() << endl << endl;
+        }
+    }
+    if (n == 0) { throw -1; }
+}
+
+void Beach::displayBeach() {
+    cout << "County: " << county << endl;
+    cout << "GPS coordinates: " << lat << " | " << longi << endl;
+    cout << "Name: " << getType() << " Beach " << name << endl;
+    cout << "Maximum Capacity: " << max_capacity << endl;
+}
+
 
 //River Beach
 RiverBeach::RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity,
@@ -261,22 +329,24 @@ void RiverBeach::writeBeach(ofstream &file) const {
     file << "; ";
     file << "(";
     Services service;
+    priority_queue<Services> temp;
 
     for (unsigned int i = 0; i < this->getExtraServices().size(); ++i) {
+        temp = this->getExtraServices().at(i);
 
-        if (!this->getExtraServices().at(i).empty()) {
+        if (!temp.empty()) {
 
-            service = this->getExtraServices().at(i).top();
-            this->getExtraServices().at(i).pop();
+            service = temp.top();
+            temp.pop();
             file << service.getType() << ", ";
             file << service.getName() << ", ";
             file << service.getPriceRange() << ", ";
             file << service.getStars() << ";";
 
-            while (!this->getExtraServices().at(i).empty()) {
+            while (!temp.empty()) {
 
-                service = this->getExtraServices().at(i).top();
-                this->getExtraServices().at(i).pop();
+                service = temp.top();
+                temp.pop();
                 file << " " << service.getType() << ", ";
                 file << service.getName() << ", ";
                 file << service.getPriceRange() << ", ";
@@ -291,72 +361,14 @@ void RiverBeach::writeBeach(ofstream &file) const {
 
 void RiverBeach::displayBeach() {
 
-    cout << "County: " << county << endl;
-    cout << "GPS coordinates: " << lat << " | " << longi << endl;
-    cout << "Name: " << getType() << " Beach " << name << endl;
-    cout << "Maximum Capacity: " << max_capacity << endl;
+    Beach::displayBeach();
+
     cout << "Width: " << width << endl;
     cout << "Maximum Depth:" << maxDepth << endl;
 
-    unsigned long size;
-
-    if (blueflag && lifeguard) {
-
-        cout << "Useful information: " << "Blue Flag" << endl << setw(29) << setfill(' ') << "Lifeguard" << endl;
-        for (unsigned int i = 0; i < basicServices.size(); i++) {
-
-            size = basicServices.at(i).size();
-            cout << setw(20 + size) << setfill(' ') << basicServices.at(i) << endl;
-        }
-    } else if (blueflag && !lifeguard) {
-        cout << "Useful information: " << "Blue Flag" << endl;
-        for (unsigned int i = 0; i < basicServices.size(); i++) {
-
-            size = basicServices.at(i).size();
-            cout << setw(20 + size) << setfill(' ') << basicServices.at(i) << endl;
-        }
-    } else if (!blueflag && !lifeguard) {
-        cout << "Useful information: " << "Lifeguard" << endl;
-        for (unsigned int i = 0; i < basicServices.size(); i++) {
-
-            size = basicServices.at(i).size();
-            cout << setw(20 + size) << setfill(' ') << basicServices.at(i) << endl;
-        }
-    } else {
-        cout << "Useful information: " << basicServices.at(0) << endl;
-        for (unsigned int i = 1; i < basicServices.size(); i++) {
-
-            size = basicServices.at(i).size();
-            cout << setw(20 + size) << setfill(' ') << basicServices.at(i) << endl;
-        }
-    }
-
-    if (extraServices.empty()) { throw -1; }
-
-    cout << endl << "Services: " << endl;
-
-    int n = 0;
-
-    for (unsigned int i = 0; i < extraServices.size(); ++i) {
-
-        priority_queue<Services> temp = extraServices.at(i);
+    Beach::displayBeachExtraInfo();
 
 
-        while (!temp.empty()) {
-
-            n++;
-
-            Services service = temp.top();
-            temp.pop();
-            cout << setw(15) << setfill(' ') << "Type: " << service.getType() << endl;
-            cout << setw(15) << setfill(' ') << "Name: " << service.getName() << endl;
-            cout << setw(22) << setfill(' ') << "Price Range: " << service.getPriceRange() << endl;
-            cout << setw(16) << setfill(' ') << "Stars: " << service.getStars() << endl;
-            cout << setw(15) << setfill(' ') << "Date: " << service.getDateInspection() << endl << endl;
-        }
-    }
-
-    if (n == 0) { throw -1; }
 }
 
 
@@ -453,70 +465,11 @@ BayouBeach::BayouBeach(string beach)
 
 void BayouBeach::displayBeach() {
 
-    cout << "County: " << county << endl;
-    cout << "GPS coordinates: " << lat << " | " << longi << endl;
-    cout << "Name: " << getType() << " Beach " << name << endl;
-    cout << "Maximum Capacity: " << max_capacity << endl;
+    Beach::displayBeach();
+
     cout << "Aquatic Area: " << aquaticArea << endl;
 
-    unsigned int size;
-
-    if (blueflag && lifeguard) {
-
-        cout << "Useful information: " << "Blue Flag" << endl << setw(29) << setfill(' ') << "Lifeguard" << endl;
-        for (unsigned int i = 0; i < basicServices.size(); i++) {
-
-            size = basicServices.at(i).size();
-            cout << setw(20 + size) << setfill(' ') << basicServices.at(i) << endl;
-        }
-    } else if (blueflag && !lifeguard) {
-        cout << "Useful information: " << "Blue Flag" << endl;
-        for (unsigned int i = 0; i < basicServices.size(); i++) {
-
-            size = basicServices.at(i).size();
-            cout << setw(20 + size) << setfill(' ') << basicServices.at(i) << endl;
-        }
-    } else if (!blueflag && !lifeguard) {
-        cout << "Useful information: " << "Lifeguard" << endl;
-        for (unsigned int i = 0; i < basicServices.size(); i++) {
-
-            size = basicServices.at(i).size();
-            cout << setw(20 + size) << setfill(' ') << basicServices.at(i) << endl;
-        }
-    } else {
-        cout << "Useful information: " << basicServices.at(0) << endl;
-        for (unsigned int i = 1; i < basicServices.size(); i++) {
-
-            size = basicServices.at(i).size();
-            cout << setw(20 + size) << setfill(' ') << basicServices.at(i) << endl;
-        }
-    }
-
-    if (extraServices.empty()) { throw -1; }
-
-    cout << endl << "Services: " << endl;
-
-    int n = 0;
-
-    for (unsigned int i = 0; i < extraServices.size(); ++i) {
-
-        priority_queue<Services> temp = extraServices.at(i);
-
-
-        while (!temp.empty()) {
-
-            n++;
-
-            Services service = temp.top();
-            temp.pop();
-            cout << setw(15) << setfill(' ') << "Type: " << service.getType() << endl;
-            cout << setw(15) << setfill(' ') << "Name: " << service.getName() << endl;
-            cout << setw(22) << setfill(' ') << "Price Range: " << service.getPriceRange() << endl;
-            cout << setw(16) << setfill(' ') << "Stars: " << service.getStars() << endl;
-            cout << setw(15) << setfill(' ') << "Date: " << service.getDateInspection() << endl << endl;
-        }
-    }
-    if (n == 0) { throw -1; }
+    Beach::displayBeachExtraInfo();
 }
 
 void BayouBeach::writeBeach(ofstream &file) const {
@@ -547,22 +500,24 @@ void BayouBeach::writeBeach(ofstream &file) const {
     file << "; ";
     file << "(";
     Services service;
+    priority_queue<Services> temp;
 
     for (unsigned int i = 0; i < this->getExtraServices().size(); ++i) {
+        temp = this->getExtraServices().at(i);
 
-        if (!this->getExtraServices().at(i).empty()) {
+        if (!temp.empty()) {
 
-            service = this->getExtraServices().at(i).top();
-            this->getExtraServices().at(i).pop();
+            service = temp.top();
+            temp.pop();
             file << service.getType() << ", ";
             file << service.getName() << ", ";
             file << service.getPriceRange() << ", ";
             file << service.getStars() << ";";
 
-            while (!this->getExtraServices().at(i).empty()) {
+            while (!temp.empty()) {
 
-                service = this->getExtraServices().at(i).top();
-                this->getExtraServices().at(i).pop();
+                service = temp.top();
+                temp.pop();
                 file << " " << service.getType() << ", ";
                 file << service.getName() << ", ";
                 file << service.getPriceRange() << ", ";
@@ -572,7 +527,6 @@ void BayouBeach::writeBeach(ofstream &file) const {
     }
     file << ")";
     file << endl;
-
 }
 
 

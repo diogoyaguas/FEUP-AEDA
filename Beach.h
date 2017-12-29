@@ -207,6 +207,8 @@ public:
      */
     virtual void displayBeach() = 0;
 
+    void displayBeachExtraInfo();
+
     /**
      * @brief Adds Basic service to the vector.
      * @param service
