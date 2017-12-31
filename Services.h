@@ -52,21 +52,29 @@ public:
     string getStars() const { return stars; }
 
     /**
-     *
      * @return dateInspection
      */
     string getDateInspection() const { return dateInspection; }
 
+    /**
+     * @return year of inspection
+     */
     int getYearInspection() const {
         string s1 = dateInspection.substr(6, 4);
         return stoi(s1);
     }
 
+    /**
+     * @return month of inspection
+     */
     int getMonthInspection() const {
         string s1 = dateInspection.substr(3, 2);
         return stoi(s1);
     }
 
+    /**
+     * @return day of inspection
+     */
     int getDayInspection() const {
         string s1 = dateInspection.substr(0, 2);
         return stoi(s1);
@@ -111,6 +119,10 @@ public:
         return false;
     }
 
+    /**
+     * @brief Write service information on .txt file.
+     * @param file
+     */
     void writeService(ofstream &file) const;
 };
 

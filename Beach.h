@@ -121,17 +121,18 @@ public:
     virtual float get_aquaticArea() const = 0;
 
     /**
-     *
      * @return vector of Basic beach services
      */
     vector<string> getBasicServices() const;
 
     /**
-     *
      * @return vector of Extra beach services
      */
     vector<priority_queue<Services>> getExtraServices() const;
 
+    /**
+     * @return hash table of closed services
+     */
     HashTable_services getServicesDown() const;
 
     /**
@@ -211,6 +212,9 @@ public:
      */
     virtual void displayBeach() = 0;
 
+    /**
+     * @brief Display all extra infromation about the beach.
+     */
     void displayBeachExtraInfo();
 
     /**
@@ -231,9 +235,14 @@ public:
      */
     void erase_ExtraService(Services service);
 
+    /**
+     * @brief Close a service, permanently or temporarily, on a specific date.
+     * @param service
+     * @param date
+     * @param type_of_closing
+     */
     void add_ClosedService(Services service, string date, string type_of_closing);
 
-    struct_serviceShutDown * searchClosedService(string name);
 
     /**
      * @brief Writes information about the beach in .txt file.
@@ -245,8 +254,16 @@ public:
 
     bool operator < (const Beach & b1) const;
 
+    /**
+     * @brief Writes information about the services closed of the beach in .txt file.
+     * @param file
+     */
     void writeBeachClosedServices(ofstream &file);
 
+    /**
+     * @brief Reads from .txt file the information about the services closed.
+     * @param service
+     */
     void readClosedServices(string service);
 
 };

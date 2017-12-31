@@ -20,12 +20,16 @@ bool ValidMenuInput(int lowerL, int upperL, int input);
 void ClearScreen();
 
 /**
- *
  * @return Actual date.
  */
 string getActualDate();
 
-
+/**
+ * @brief Divide string.
+ * @param char_to_find
+ * @param line
+ * @return
+ */
 string divideString(char char_to_find, string & line);
 
 #endif //PROJAEDA_USEFULFUNCTION_H

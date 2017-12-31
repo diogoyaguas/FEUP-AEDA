@@ -26,11 +26,13 @@ void fail (T &value){
     }
 }
 
+
 /**
  * @brief Main menu that allows user to choose a topic to take action in.
  * @param company
  */
 void mainMenu(Company &company);
+
 
 /**
  * @brief Sub-menu from main menu that allows user to choose actions relating to the search of a determinate beach.
@@ -38,18 +40,19 @@ void mainMenu(Company &company);
  */
 void searchMenu(Company &company);
 
+
 /**
  * @brief Sub-menu from main menu that allows user to choose actions relating altering informarion about a beach, adding or removing beaches.
  * @param company
  */
 void AddAlterRemoveMenu(Company &company);
 
+
 /**
  * @brief Sub-menu from Add, Alter ,Remove menu that allows user to choose which information of the beach he wishes to alter.
  * @param company
  */
 void AlterBeachMenu(Company &company);
-
 
 
 /**
@@ -59,8 +62,10 @@ void AlterBeachMenu(Company &company);
 void compareMenu(Company &company);
 
 
+/**
+ * @brief Sub-menu from Add, Alter ,Remove menu that allows user to choose which information of the service he wish to alter.
+ * @param company
+ */
 void AlterServicesMenu(Company &company);
-
-void checkBeachMenu(Company & company);
 
 #endif //AEDA_INTERFACES_H

@@ -116,24 +116,33 @@ public:
     void compareBeaches(Beach * b1, Beach * b2);
 
     /**
-     *
+     * @brief Alter the date of inspection of a service.
      */
     void alterDateofInspection();
 
     /**
-    *
+    * @brief Close a service, permanently or temporarily, on a specific date.
     */
     void closeService();
 
     /**
-     *
+     * @brief Reopen a service closed temporarily.
      */
     void reopenService();
 
+    /**
+     * @brief Update the closed services .txt file.
+     */
     void updateClosedServicesFile();
 
+    /**
+     * @brief Read the closed service .txt file.
+     */
     void readClosedServicesFile();
 
+    /**
+     * @brief Display all the closed services of a specific beach.
+     */
     void displayClosedServices();
 
 };
