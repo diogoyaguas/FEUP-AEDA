@@ -212,6 +212,7 @@ void Beach::readClosedServices(string service){
     s.type_of_closing=divideString(';',service);
     s.date = divideString(';',service);
     s.service = Services(service);
+    add_ClosedService(s.service,s.date,s.type_of_closing);
 }
 
 double Beach::distanceToBeach(float lat, float longi) {

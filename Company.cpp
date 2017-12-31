@@ -927,7 +927,7 @@ void Company::alterDateofInspection() {
 void Company::closeService() {
 
     string name, service, sType, sName, sPriceRange, sStars, sDate, newDate, type_of_closing;
-    unsigned int option;
+    unsigned int option, final;
 
     ClearScreen();
 
@@ -943,7 +943,7 @@ void Company::closeService() {
     getline(cin, service);
 
     for (unsigned int i = 0; i < b->getExtraServices().size(); ++i) {
-
+        final = i;
         priority_queue<Services> temp = b->getExtraServices().at(i);
 
         while (!temp.empty()) {
@@ -1043,6 +1043,7 @@ void Company::closeService() {
             }
 
         }
+        if(final == b->getExtraServices().size() - 1 && temp.empty()) {throw -1;}
     }
 }
 
@@ -1060,7 +1061,7 @@ void Company::reopenService() {
 
     Beach *b = beachExists(name);
 
-    if (b != NULL) {
+    if (b != nullptr) {
 
         cout << "Insert name of the service you wish to reopen" << endl << "::: ";
         getline(cin, service);
@@ -1071,13 +1072,15 @@ void Company::reopenService() {
 
                 b->add_ExtraService((*it).service);
                 b->getServicesDown().erase((*it));
+                cout << "Service reopened successfully!" << endl;
+                usleep(100000);
                 break;
             }
+            if(it == b->getServicesDown().end()){ throw -1;}
         }
     }
 
-    cout << "Service reopened successfully!" << endl;
-    usleep(100000);
+
 
 }
 
