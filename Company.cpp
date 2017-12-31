@@ -38,6 +38,7 @@ Company::Company() {
             beaches.insert(new BayouBeach(beach.substr(stop + 2)));
         }
     }
+    readClosedServicesFile();
 }
 
 
@@ -1106,4 +1107,34 @@ void Company::readClosedServicesFile() {
                 (*it)->readClosedServices(service);
         }
     }
+}
+
+
+void Company::displayClosedServices() {
+
+    ClearScreen();
+
+    for(auto beach: beaches) {
+
+        if (!beach->getServicesDown().empty()) {
+
+            cout << endl << "County: " << beach->get_county() << endl;
+            cout << "GPS coordinates: " << beach->get_latitude() << " | " << beach->get_longitude() << endl;
+            cout << "Name: " << beach->getType() << " Beach " << beach->get_name() << endl;
+            cout << "Services closed:" << endl << endl;
+
+            for (auto it: beach->getServicesDown()) {
+
+                cout << it.service.getType() << " " << it.service.getName() << endl;
+
+                if (it.type_of_closing == "PERM") {
+                    cout << "Service permanently closed in " << it.date << endl;
+                } else if (it.type_of_closing == "TEMP") {
+                    cout << "Service temporarily closed in " << it.date << endl;
+                }
+            }
+            cout << setw(40) << setfill('-') << " " << endl;
+        }
+    }
+    usleep(1000000);
 }

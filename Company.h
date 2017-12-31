@@ -134,6 +134,8 @@ public:
 
     void readClosedServicesFile();
 
+    void displayClosedServices();
+
 };
 
 #endif //AEDA_COMPANY_H

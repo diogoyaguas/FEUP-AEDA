@@ -92,14 +92,13 @@ void searchMenu(Company &company){
     cout << "3. Search by Blue Flag" << endl;
     cout << "4. Search by Lifeguard" << endl;
     cout << "5. Search closest beach" << endl;
-    cout << "6. Search by Services" << endl;
-    cout << "7. Return to main menu" << endl;
+    cout << "6. Return to main menu" << endl;
 
     cout << endl << "Enter a number option: ";
     cin >> option;
 
     //verifies if input is valid
-    while(cin.fail()||!ValidMenuInput(1, 7, option)) {
+    while(cin.fail()||!ValidMenuInput(1, 6, option)) {
         cin.clear();
         cin.ignore(1000, '\n');
         cout << "Please enter a valid option: ";
@@ -158,8 +157,6 @@ void searchMenu(Company &company){
             returnMainMenu();
             break;
         case 6:
-            break;
-        case 7:
             ClearScreen();
             mainMenu(company);
             break;
@@ -409,6 +406,9 @@ void AlterServicesMenu(Company &company){
             mainMenu(company);
             break;
         case 7:
+            company.displayClosedServices();
+            ClearScreen();
+            mainMenu(company);
             break;
         case 8:
             ClearScreen();

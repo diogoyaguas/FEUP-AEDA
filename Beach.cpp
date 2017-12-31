@@ -231,7 +231,6 @@ double Beach::distanceToBeach(float lat, float longi) {
 }
 
 
-
 //River Beach
 RiverBeach::RiverBeach(string &county, string &name, bool &blueflag, bool &lifeguard, unsigned long &max_capacity,
                        float &lat, float &longi, float &width, float &maxDepth)

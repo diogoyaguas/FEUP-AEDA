@@ -231,8 +231,9 @@ public:
      */
     void erase_ExtraService(Services service);
 
-
     void add_ClosedService(Services service, string date, string type_of_closing);
+
+    struct_serviceShutDown * searchClosedService(string name);
 
     /**
      * @brief Writes information about the beach in .txt file.
