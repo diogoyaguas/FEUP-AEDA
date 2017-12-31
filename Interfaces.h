@@ -58,4 +58,9 @@ void AlterBeachMenu(Company &company);
  */
 void compareMenu(Company &company);
 
+
+void AlterServicesMenu(Company &company);
+
+void checkBeachMenu(Company & company);
+
 #endif //AEDA_INTERFACES_H

@@ -198,7 +198,9 @@ void Beach::add_ClosedService(Services service, string date, string type_of_clos
 }
 
 void Beach::writeBeachClosedServices(ofstream &file) {
+
     for (auto it = this->ServicesDown.begin(); it != this->ServicesDown.end() ; it++) {
+        cout << (*it).service.getDateInspection();
         file << this->name << "; " << (*it).type_of_closing << "; " << (*it).date << "; ";
         (*it).service.writeService(file);
     }

@@ -16,4 +16,4 @@ Bayou; Reguengos de Monsaraz; Monsaraz; 1; 1; 1650; 38.4348; -7.35096; 7.5e+08; 
 River; Seia; Sandomil; 1; 1; 1500; 40.3558; -9.78227; 37; 8; WC, Awnings; (Bar, Seia, 2/3, ***, **; Hotel, Sandomil, 3/3, *****, 01-12-2016;)
 River; Tomar; Alverangel; 1; 1; 1050; 39.5498; -8.30176; 27; 10; Showers, WC; ()
 River; Tondela; Teixo; 1; 1; 950; 40.559; -8.23752; 43; 11; WC, First Aid; (Restaurant, Tacho do Teixo, 2/3, ****, 26-11-2017; Hotel, Camas de Tondela, 2/3, ****, 19-11-2016;)
-Bayou; Vieira do Minho; Ermal; 0; 1; 1100; 41.2895; -8.13068; 1.1505e+09; WC; (Restaurant, Minhal, 3/3, ****, 31-05-2016; Restaurant, Ermal, 2/3, ***, 17-02-2016;)
+Bayou; Vieira do Minho; Ermal; 0; 1; 1100; 41.2895; -8.13068; 1.1505e+09; WC; (Restaurant, Ermal, 2/3, ***, 17-02-2016;)

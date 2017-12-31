@@ -4,6 +4,7 @@
 #include <iomanip>
 #include "UsefulFunctions.h"
 #include "Interfaces.h"
+#include <unistd.h>
 
 using namespace std;
 
@@ -29,16 +30,17 @@ void mainMenu(Company &company) {
     cout << " MAIN MENU" << setw(40)<< setfill(' ') << " " << endl;
     cout << setfill('-') << setw(50)<<"-"<<endl;
     cout << "1. Display all beaches" << endl;
-    cout << "2. Search beach." << endl;
-    cout << "3. Compare beaches." << endl;
-    cout << "4. Add, alter or remove beach." << endl;
-    cout << "5. Update files." << endl;
+    cout << "2. Search beach" << endl;
+    cout << "3. Compare beaches" << endl;
+    cout << "4. Add, alter or remove beach" << endl;
+    cout << "5. Update files" << endl;
+    cout << "6. Exit" << endl;
 
     cout << endl << "Enter a number option: " << endl << "::: ";
     cin >> option;
 
     //verifies if input is valid
-    while(cin.fail()||!ValidMenuInput(1, 5, option)) {
+    while(cin.fail()||!ValidMenuInput(1, 6, option)) {
         cin.clear();
         cin.ignore(1000, '\n');
         cout << "Please enter a valid option: "<< endl << "::: ";
@@ -72,6 +74,9 @@ void mainMenu(Company &company) {
             ClearScreen();
             mainMenu(company);
             break;
+        case 6:
+            exit(1);
+            break;
 
     }}
 
@@ -88,12 +93,13 @@ void searchMenu(Company &company){
     cout << "4. Search by Lifeguard" << endl;
     cout << "5. Search closest beach" << endl;
     cout << "6. Search by Services" << endl;
+    cout << "7. Return to main menu" << endl;
 
     cout << endl << "Enter a number option: ";
     cin >> option;
 
     //verifies if input is valid
-    while(cin.fail()||!ValidMenuInput(1, 6, option)) {
+    while(cin.fail()||!ValidMenuInput(1, 7, option)) {
         cin.clear();
         cin.ignore(1000, '\n');
         cout << "Please enter a valid option: ";
@@ -101,21 +107,61 @@ void searchMenu(Company &company){
     }
 
     switch(option) {
-
         case 1:
-            company.searchCounty();
+            try{company.searchCounty();}
+            catch(int x){
+                cout << endl << "ERROR: Beach with given county doesn't exist! Redirecting to previous menu..." << endl;
+                usleep(1000000);
+                searchMenu(company);
+                break;
+            }
+            returnMainMenu();
             break;
         case 2:
-            company.searchName();
+            try{company.searchName();}
+            catch(int x){
+                cout << endl << "ERROR: Beach with given name doesn't exist! Redirecting to previous menu..." << endl;
+                sleep(1000000);
+                searchMenu(company);
+                break;
+            }
+            returnMainMenu();
             break;
         case 3:
-            company.searchBlueflag();
+            try{company.searchBlueflag();}
+            catch(int x){
+                cout << endl << "ERROR: There are no beach with blueflag! Redirecting to previous menu..." << endl;
+                usleep(1000000);
+                searchMenu(company);
+                break;
+            }
+            returnMainMenu();
             break;
         case 4:
-            company.searchLifeguard();
+            try{company.searchLifeguard();}
+            catch(int x){
+                cout << endl << "ERROR: There are no beach with lifeguard! Redirecting to previous menu..." << endl;
+                usleep(1000000);
+                searchMenu(company);
+                break;
+            }
+            returnMainMenu();
             break;
         case 5:
-            company.searchClosest();
+            try{company.searchClosest();}
+            catch(int x){
+                cout << endl << "ERROR: Beach doesn't exist! Redirecting to previous menu..." << endl;
+                usleep(1000000);
+                searchMenu(company);
+                break;
+            }
+            returnMainMenu();
+            break;
+        case 6:
+            break;
+        case 7:
+            ClearScreen();
+            mainMenu(company);
             break;
     }
 
@@ -132,16 +178,14 @@ void AddAlterRemoveMenu(Company &company){
     cout << "1. Add beach" << endl;
     cout << "2. Alter beach" << endl;
     cout << "3. Remove beach" << endl;
-    cout << "4. Add service" << endl;
-    cout << "5. Alter service" << endl;
-    cout << "6. Remove service" << endl;
-    cout << "7. Return to main menu" << endl;
+    cout << "4. Alter services" << endl;
+    cout << "5. Return to main menu" << endl;
 
     cout << endl << "Enter a number option: " << endl << "::: ";
     cin >> option;
 
     //verifies if input is valid
-    while(cin.fail()||!ValidMenuInput(1, 7, option)) {
+    while(cin.fail()||!ValidMenuInput(1, 5, option)) {
         cin.clear();
         cin.ignore(1000, '\n');
         cout << "Please enter a valid option: "<< endl << "::: ";
@@ -152,47 +196,42 @@ void AddAlterRemoveMenu(Company &company){
         case 1:
             try{company.addBeach();}
             catch(int x){
-                cout << endl << "ERROR: Beach already exists!" << endl;
+                cout << endl << "ERROR: Beach already exists! Redirecting to previous menu..." << endl;
+                usleep(1000000);
+                AddAlterRemoveMenu(company);
+                break;
             }
             returnMainMenu();
             ClearScreen();
             mainMenu(company);
             break;
         case 2:
-            AlterBeachMenu(company);
+            try{AlterBeachMenu(company);}
+            catch(int x){
+                cout << endl << "ERROR: Beach already exists! Redirecting to previous menu..." << endl;
+                usleep(1000000);
+                AddAlterRemoveMenu(company);
+                break;
+            }
             returnMainMenu();
             ClearScreen();
             mainMenu(company);
             break;
         case 3:
-            company.removeBeach();
+            try{company.removeBeach();}
+            catch(int x){
+                cout << endl << "ERROR: Beach doesn't exists! Redirecting to previous menu..." << endl;
+                usleep(1000000);
+                AddAlterRemoveMenu(company);
+                break;
+            }
             ClearScreen();
             mainMenu(company);
             break;
         case 4:
-            try{company.addService();}
-            catch(int x){
-                cout << endl << "ERROR: Service already exists!" << endl;
-            }
-            returnMainMenu();
-            ClearScreen();
-            mainMenu(company);
+            AlterServicesMenu(company);
             break;
         case 5:
-            try{company.alterService();}
-            catch(int x){
-                cout << endl << "ERROR: Service already exists!" << endl;
-            }
-            returnMainMenu();
-            ClearScreen();
-            mainMenu(company);
-            break;
-        case 6:
-            company.eraseService();
-            ClearScreen();
-            mainMenu(company);
-            break;
-        case 7:
             ClearScreen();
             mainMenu(company);
             break;
@@ -211,6 +250,7 @@ void AlterBeachMenu(Company &company){
     cin.ignore(1000, '\n');
     getline(cin,name);
 
+    if(company.beachExists(name)==nullptr) {throw -1;}
 
     if(i!=-1) {
 
@@ -233,18 +273,21 @@ void AlterBeachMenu(Company &company){
 
         cout << ++displayOption << ". GPS coordinates" << endl;
         cout  << ++displayOption << ". Change services" << endl;
+        cout << ++displayOption << ". Return to main menu" << endl;
 
         //Collect input
         cout << endl << "Enter a number option: "<< endl << "::: ";
         cin >> option;
 
         //verifies if input is valid
-        while (cin.fail() || !ValidMenuInput(1, 7, option)) {
+        while (cin.fail() || !ValidMenuInput(1, 8, option)) {
             cin.clear();
             cin.ignore(1000, '\n');
             cout << "Please enter a valid option: "<< endl << "::: ";
             cin >> option;
         }
+
+        if(option == 8){returnMainMenu();}
 
         //Alter according if to it's type
         if(company.beachExists(name)->getType()=="River"){
@@ -270,6 +313,111 @@ void AlterBeachMenu(Company &company){
 }
 
 
+void AlterServicesMenu(Company &company){
+    int option;
+
+    cout << string(100,'\n');
+    cout << " ALTER SERVICES" << setw(37) << setfill(' ') << " " << endl;
+    cout << setfill('-') << setw(47)<<"-"<<endl;
+    cout << "1. Add service" << endl;
+    cout << "2. Alter service" << endl;
+    cout << "3. Remove service" << endl;
+    cout << "4. Inspection service" << endl;
+    cout << "5. Close service" << endl;
+    cout << "6. Reopen service" << endl;
+    cout << "7. Display closed services" << endl;
+    cout << "8. Return to main menu" << endl;
+
+    cout << endl << "Enter a number option: " << endl << "::: ";
+    cin >> option;
+
+    //verifies if input is valid
+    while(cin.fail()||!ValidMenuInput(1, 8, option)) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Please enter a valid option: "<< endl << "::: ";
+        cin >> option;
+    }
+
+    switch(option){
+        case 1:
+            try{company.addService();}
+            catch(int x){
+                cout << endl << "ERROR: Service already exists! Redirecting to previous menu..." << endl;
+                usleep(190000);
+                AlterServicesMenu(company);
+                break;
+            }
+            returnMainMenu();
+            ClearScreen();
+            mainMenu(company);
+            break;
+        case 2:
+            try{company.alterService();}
+            catch(int x){
+                cout << endl << "ERROR: Service already exists! Redirecting to previous menu..." << endl;
+                usleep(190000);
+                AlterServicesMenu(company);
+                break;
+            }
+            returnMainMenu();
+            ClearScreen();
+            mainMenu(company);
+            break;
+        case 3:
+            try{company.eraseService();}
+            catch(int x){
+                cout << endl << "ERROR: Service doesn't exist! Redirecting to previous menu..." << endl;
+                usleep(190000);
+                AlterServicesMenu(company);
+                break;
+            }
+            ClearScreen();
+            mainMenu(company);
+            break;
+        case 4:
+            try{company.alterDateofInspection();}
+            catch(int x){
+                cout << endl << "ERROR: Service doesn't exist! Redirecting to previous menu..." << endl;
+                usleep(190000);
+                AlterServicesMenu(company);
+                break;
+            }
+            ClearScreen();
+            mainMenu(company);
+            break;
+        case 5:
+            try{company.closeService();}
+            catch(int x){
+                cout << endl << "ERROR: Service doesn't exist! Redirecting to previous menu..." << endl;
+                usleep(190000);
+                AlterServicesMenu(company);
+                break;
+            }
+            ClearScreen();
+            mainMenu(company);
+            break;
+        case 6:
+            try{company.reopenService();}
+            catch(int x){
+                cout << endl << "ERROR: Service doesn't exist! Redirecting to previous menu..." << endl;
+                usleep(190000);
+                AlterServicesMenu(company);
+                break;
+            }
+            ClearScreen();
+            mainMenu(company);
+            break;
+        case 7:
+            break;
+        case 8:
+            ClearScreen();
+            mainMenu(company);
+            break;
+    }
+}
+
+
 void compareMenu(Company &company){
 
     string b1, b2;
@@ -285,8 +433,4 @@ void compareMenu(Company &company){
 
     returnMainMenu();
 }
-
-
-
-
 

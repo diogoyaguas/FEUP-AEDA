@@ -55,7 +55,7 @@ public:
      *
      * @return dateInspection
      */
-    string getDateInspection() { return dateInspection; }
+    string getDateInspection() const { return dateInspection; }
 
     int getYearInspection() const {
         string s1 = dateInspection.substr(6, 4);
