@@ -32,8 +32,8 @@ void mainMenu(Company &company) {
     cout << "1. Display all beaches" << endl;
     cout << "2. Search beach" << endl;
     cout << "3. Compare beaches" << endl;
-    cout << "4. Add, alter or remove beach" << endl;
-    cout << "5. Update files" << endl;
+    cout << "4. Add, alter or remove" << endl;
+    cout << "5. Update files" << endl << endl;
     cout << "6. Exit" << endl;
 
     cout << endl << "Enter a number option: " << endl << "::: ";
@@ -91,7 +91,7 @@ void searchMenu(Company &company){
     cout << "2. Search by name." << endl;
     cout << "3. Search by Blue Flag" << endl;
     cout << "4. Search by Lifeguard" << endl;
-    cout << "5. Search closest beach" << endl;
+    cout << "5. Search closest beach" << endl << endl;
     cout << "6. Return to main menu" << endl;
 
     cout << endl << "Enter a number option: ";
@@ -174,8 +174,8 @@ void AddAlterRemoveMenu(Company &company){
     cout << setfill('-') << setw(47)<<"-"<<endl;
     cout << "1. Add beach" << endl;
     cout << "2. Alter beach" << endl;
-    cout << "3. Remove beach" << endl;
-    cout << "4. Alter services" << endl;
+    cout << "3. Remove beach" << endl << endl;
+    cout << "4. Services" << endl << endl;
     cout << "5. Return to main menu" << endl;
 
     cout << endl << "Enter a number option: " << endl << "::: ";
@@ -314,15 +314,15 @@ void AlterServicesMenu(Company &company){
     int option;
 
     cout << string(100,'\n');
-    cout << " ALTER SERVICES" << setw(37) << setfill(' ') << " " << endl;
+    cout << " SERVICES" << setw(37) << setfill(' ') << " " << endl;
     cout << setfill('-') << setw(47)<<"-"<<endl;
     cout << "1. Add service" << endl;
     cout << "2. Alter service" << endl;
-    cout << "3. Remove service" << endl;
+    cout << "3. Remove service" << endl << endl;
     cout << "4. Inspection service" << endl;
     cout << "5. Close service" << endl;
     cout << "6. Reopen service" << endl;
-    cout << "7. Display closed services" << endl;
+    cout << "7. Display closed services" << endl << endl;
     cout << "8. Return to main menu" << endl;
 
     cout << endl << "Enter a number option: " << endl << "::: ";
