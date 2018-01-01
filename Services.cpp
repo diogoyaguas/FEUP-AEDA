@@ -36,9 +36,12 @@ Services::Services(string service){
 
 
 void Services::writeService(ofstream &file) const {
-    file << this->type << ", ";
-    file << this->name << ", ";
-    file << this->priceRange << ", ";
-    file << this->stars << ", ";
-    file << this->dateInspection << ";";
+
+    if(!this->type.empty()) {
+        file << this->type << ", ";
+        file << this->name << ", ";
+        file << this->priceRange << ", ";
+        file << this->stars << ", ";
+        file << this->dateInspection << ";";
+    }
 }
