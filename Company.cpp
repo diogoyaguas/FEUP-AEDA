@@ -1106,8 +1106,10 @@ void Company::readClosedServicesFile() {
     while (getline(file, service)) {
         beach_name = divideString(';', service);
         for (auto it = beaches.begin(); it != beaches.end(); ++it) {
-            if (beach_name == (*it)->get_name())
+            if (beach_name == (*it)->get_name()) {
                 (*it)->readClosedServices(service);
+                break;
+            }
         }
     }
 }

@@ -211,6 +211,7 @@ void Beach::readClosedServices(string service){
     struct_serviceShutDown s;
     s.type_of_closing=divideString(';',service);
     s.date = divideString(';',service);
+    service = service.substr(0, service.size()-1);
     s.service = Services(service);
     add_ClosedService(s.service,s.date,s.type_of_closing);
 }
