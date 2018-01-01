@@ -304,10 +304,18 @@ RiverBeach::RiverBeach(string beach)
     stop = beach.find_first_of('(') + 1;
     last = beach.find_first_of(')') - 1;
     extra_services = beach.substr(stop, last - stop);
+    if(extra_services == ")") extra_services = "";
     string tempService;
     st = extra_services.find_first_of(';');
     if (extra_services.empty()) {
         add_ExtraService(Services());
+    }
+
+    if (st == string::npos && !extra_services.empty()) {
+        st = extra_services.size();
+        tempService = extra_services.substr(0, st);
+        add_ExtraService(Services(tempService));
+        st = string::npos;
     }
 
     while (st != string::npos) {
