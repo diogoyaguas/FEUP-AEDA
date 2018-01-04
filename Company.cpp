@@ -1075,6 +1075,8 @@ void Company::reopenService() {
     for (auto it = table.begin(); it != b->getServicesDown().end(); ++it) {
         
         if ((*it).service.getName() == service) {
+
+            if((*it).type_of_closing == "PERM") { throw 0;}
             Services s((*it).service.getType(), (*it).service.getName(), (*it).service.getPriceRange(),
                        (*it).service.getStars(), (*it).service.getDateInspection());
             b->add_ExtraService(s);
@@ -1086,7 +1088,7 @@ void Company::reopenService() {
         }
     }
 
-    if(!exists) {throw -1;}
+    if(!exists) {throw 1;}
 
 }
 

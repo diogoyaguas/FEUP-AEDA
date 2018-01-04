@@ -399,8 +399,10 @@ void AlterServicesMenu(Company &company){
             catch(int x){
                 if(x == -1)
                     cout << endl << "ERROR: Beach doesn't exist! Redirecting to previous menu..." << endl;
-                else
+                else if (x==1)
                     cout << endl << "ERROR: Service doesn't exist! Redirecting to previous menu..." << endl;
+                else
+                    cout << endl << "ERROR: Service closed permanently! Redirecting to previous menu..." << endl;
                 usleep(190000);
                 AlterServicesMenu(company);
                 break;
