@@ -32,6 +32,15 @@ vector<priority_queue<Services>> Beach::getExtraServices() const { return extraS
 
 HashTable_services Beach::getServicesDown() const { return ServicesDown;}
 
+void Beach::removeServiceDown(string name){
+    auto it = this->ServicesDown.begin();
+    for (; it != this->ServicesDown.end(); ++it) {
+        if((*it).service.getName()==name)
+            break;
+    }
+
+    this->ServicesDown.erase(it);
+};
 
 // set methods
 void Beach::set_name(string name) { this->name = name; }
@@ -382,7 +391,6 @@ void RiverBeach::writeBeach(ofstream &file) const {
         }
     }
     file << ")";
-    file << endl;
 }
 
 
@@ -550,6 +558,5 @@ void BayouBeach::writeBeach(ofstream &file) const {
         }
     }
     file << ")";
-    file << endl;
 }
 

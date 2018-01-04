@@ -554,6 +554,8 @@ void Company::updateFile() {
 
     for (auto it = beaches.begin(); it != beaches.end(); it++) {
         (*it)->writeBeach(file);
+        if ((*it) != (*beaches.end()))
+            file << endl;
     }
 
 }
@@ -582,7 +584,7 @@ void Company::searchCounty() {
         }
     }
 
-    if(!found){throw -1;}
+    if (!found) { throw -1; }
 }
 
 
@@ -599,8 +601,8 @@ void Company::searchName() {
 
     ClearScreen();
 
-    Beach * b = beachExists(name);
-    if(b == nullptr) {throw -1;}
+    Beach *b = beachExists(name);
+    if (b == nullptr) { throw -1; }
 
     b->displayBeach();
 }
@@ -619,7 +621,7 @@ void Company::searchBlueflag() {
             found = true;
         }
     }
-    if(!found){throw -1;}
+    if (!found) { throw -1; }
 
 }
 
@@ -637,7 +639,7 @@ void Company::searchLifeguard() {
             found = true;
         }
     }
-    if(!found){throw -1;}
+    if (!found) { throw -1; }
     returnMainMenu();
 }
 
@@ -691,24 +693,24 @@ void Company::searchClosest() {
             getline(cin, name);
             Beach *b = beachExists(name);
 
-            if (b == nullptr) {throw -1;}
+            if (b == nullptr) { throw -1; }
 
-                lat = b->get_latitude();
-                longi = b->get_longitude();
-                distance = (*beaches.begin())->distanceToBeach(lat, longi);
+            lat = b->get_latitude();
+            longi = b->get_longitude();
+            distance = (*beaches.begin())->distanceToBeach(lat, longi);
 
-                for (auto it = beaches.begin(); it != beaches.end(); it++) {
+            for (auto it = beaches.begin(); it != beaches.end(); it++) {
 
-                    if ((*it)->distanceToBeach(lat, longi) <= distance && (*it) != b) {
+                if ((*it)->distanceToBeach(lat, longi) <= distance && (*it) != b) {
 
-                        distance = b->distanceToBeach(lat, longi);
-                        temp = it;
-                    }
+                    distance = b->distanceToBeach(lat, longi);
+                    temp = it;
                 }
+            }
 
-                cout << "Distance between the beach you entered and closest beach: " << distance << " km" << endl;
-                cout << endl << "Information about the beach: " << endl;
-                (*temp)->displayBeach();
+            cout << "Distance between the beach you entered and closest beach: " << distance << " km" << endl;
+            cout << endl << "Information about the beach: " << endl;
+            (*temp)->displayBeach();
 
             break;
 
@@ -1043,15 +1045,17 @@ void Company::closeService() {
             }
 
         }
-        if(final == b->getExtraServices().size() - 1 && temp.empty()) {throw -1;}
+        if (final == b->getExtraServices().size() - 1 && temp.empty()) { throw -1; }
     }
 }
 
 
 void Company::reopenService() {
 
+
     string name, service, sType, sName, sPriceRange, sStars, sDate, newDate;
-    unsigned int option;
+    HashTable_services table;
+    bool exists;
 
     ClearScreen();
 
@@ -1061,26 +1065,28 @@ void Company::reopenService() {
 
     Beach *b = beachExists(name);
 
-    if (b != nullptr) {
+    if (b == nullptr) { throw -1; }
 
-        cout << "Insert name of the service you wish to reopen" << endl << "::: ";
-        getline(cin, service);
+    table = b->getServicesDown();
 
-        for (auto it = b->getServicesDown().begin(); it != b->getServicesDown().end(); ++it) {
+    cout << "Insert name of the service you wish to reopen" << endl << "::: ";
+    getline(cin, service);
 
-            if ((*it).service.getName() == service) {
-
-                b->add_ExtraService((*it).service);
-                b->getServicesDown().erase((*it));
-                cout << "Service reopened successfully!" << endl;
-                usleep(100000);
-                break;
-            }
-            if(it == b->getServicesDown().end()){ throw -1;}
+    for (auto it = table.begin(); it != b->getServicesDown().end(); ++it) {
+        
+        if ((*it).service.getName() == service) {
+            Services s((*it).service.getType(), (*it).service.getName(), (*it).service.getPriceRange(),
+                       (*it).service.getStars(), (*it).service.getDateInspection());
+            b->add_ExtraService(s);
+            b->removeServiceDown(service);
+            cout << "Service reopened successfully!" << endl;
+            usleep(16000);
+            exists = true;
+            break;
         }
     }
 
-
+    if(!exists) {throw -1;}
 
 }
 
@@ -1092,7 +1098,8 @@ void Company::updateClosedServicesFile() {
     for (auto it = this->beaches.begin(); it != this->beaches.end(); ++it) {
         if (!(*it)->getServicesDown().empty()) {
             (*it)->writeBeachClosedServices(file);
-            file << endl;
+            if ((*it) != (*beaches.end()))
+                file << endl;
         }
     }
 }
@@ -1108,7 +1115,6 @@ void Company::readClosedServicesFile() {
         for (auto it = beaches.begin(); it != beaches.end(); ++it) {
             if (beach_name == (*it)->get_name()) {
                 (*it)->readClosedServices(service);
-                break;
             }
         }
     }
@@ -1119,7 +1125,7 @@ void Company::displayClosedServices() {
 
     ClearScreen();
 
-    for(auto beach: beaches) {
+    for (auto beach: beaches) {
 
         if (!beach->getServicesDown().empty()) {
 

@@ -1,2 +1,1 @@
-Valeta; PERM; 12-10-2017; Restaurant, Braseiro, 2/3, ****, 01-01-2015;
-Taboao; PERM; 31-12-2017; Bar, Capitao, 3/3, ****, 29-11-2017;
+Teixo; TEMP; 04-01-2018; Restaurant, Tacho do Teixo, 2/3, ****, 26-11-2017;

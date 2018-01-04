@@ -266,6 +266,8 @@ public:
      */
     void readClosedServices(string service);
 
+    void removeServiceDown(string name);
+
 };
 
 class RiverBeach: public Beach{
