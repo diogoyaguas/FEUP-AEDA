@@ -1072,7 +1072,7 @@ void Company::reopenService() {
     cout << "Insert name of the service you wish to reopen" << endl << "::: ";
     getline(cin, service);
 
-    for (auto it = table.begin(); it != b->getServicesDown().end(); ++it) {
+    for (auto it = table.begin(); it != b->getServicesDown(); ++it) {
         
         if ((*it).service.getName() == service) {
 
@@ -1151,3 +1151,199 @@ void Company::displayClosedServices() {
     }
     usleep(1000000);
 }
+
+
+void Company::closePoint() {
+
+    string name, service, sType, sName, sPriceRange, sStars, sDate, newDate, type_of_closing;
+    unsigned int option, final;
+
+    ClearScreen();
+
+    cout << "Insert name of the service you wish to close" << endl << "::: ";
+    getline(cin, service);
+
+    for (unsigned int i = 0; i < this->PointsOfInterest.size(); ++i) {
+        final = i;
+        priority_queue<Services> temp = this->PointsOfInterest.at(i);
+
+        while (!temp.empty()) {
+
+            Services temp_service = temp.top();
+            temp.pop();
+            if (temp_service.getName() == service) {
+
+                sType = temp_service.getType();
+                sName = temp_service.getName();
+                sPriceRange = temp_service.getPriceRange();
+                sStars = temp_service.getStars();
+                sDate = temp_service.getDateInspection();
+                Services old_s = Services(sType, sName, sPriceRange, sStars, sDate);
+
+                cout << endl << "When was this service closed?" << endl;
+                cout << "1. Current date" << endl;
+                cout << "2. Past date" << endl;
+                cout << endl << "Enter a number option: " << endl << "::: ";
+                cin >> option;
+
+
+                //verifies if input is valid
+                while (cin.fail() || !ValidMenuInput(1, 2, option)) {
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    cout << "Please enter a valid option: " << endl << "::: ";
+                    cin >> option;
+                }
+
+                switch (option) {
+
+                    case 1:
+                        for (auto it = beaches.begin(); it != beaches.end(); it++) {
+
+                            if ((*it)->distanceToBeach() < 50) {
+
+                                (*it)->erase_ExtraService(old_s);
+
+                            }
+                        }
+                        newDate = getActualDate();
+                        break;
+
+                    case 2:
+                        for (auto it = beaches.begin(); it != beaches.end(); it++) {
+
+                            if ((*it)->distanceToBeach() < 50) {
+
+                                (*it)->erase_ExtraService(old_s);
+
+                            }
+                        }
+                        cout << "Insert the new date of inspection (e.g. " << getActualDate() << ")" << endl
+                             << "::: ";
+                        cin.ignore(1000, '\n');
+                        getline(cin, newDate);
+
+                        while (newDate.size() != 10) {
+                            cin.clear();
+                            cin.ignore(1000, '\n');
+                            cout << "Please enter a date with a valid type: " << endl << "::: ";
+                            cin >> newDate;
+                        }
+
+                        while (stoi(newDate.substr(6, 4)) > stoi(getActualDate().substr(6, 4))) {
+                            cin.clear();
+                            cin.ignore(1000, '\n');
+                            cout << "Please enter a date with a valid year: " << endl << "::: ";
+                            cin >> newDate;
+                        }
+                        if (stoi(newDate.substr(6, 4)) == stoi(getActualDate().substr(6, 4))) {
+
+                            while (stoi(newDate.substr(3, 2)) > stoi(getActualDate().substr(3, 2))) {
+                                cin.clear();
+                                cin.ignore(1000, '\n');
+                                cout << "Please enter a date with a valid month: " << endl << "::: ";
+                                cin >> newDate;
+                            }
+
+                            if (stoi(newDate.substr(3, 2)) == stoi(getActualDate().substr(3, 2))) {
+
+                                while (stoi(newDate.substr(3, 2)) > stoi(getActualDate().substr(3, 2))) {
+                                    cin.clear();
+                                    cin.ignore(1000, '\n');
+                                    cout << "Please enter a date with a valid day: " << endl << "::: ";
+                                    cin >> newDate;
+                                }
+                            }
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+
+                cout << endl << "Do you wish to close it temporarily or permanently?" << endl;
+                cout << "1. Temporarily" << endl;
+                cout << "2. Permanently" << endl;
+                cout << endl << "Enter a number option: " << endl << "::: ";
+                cin >> option;
+
+                if (option == 1)
+                    type_of_closing = "TEMP";
+                else type_of_closing = "PERM";
+
+                int n = 0;
+
+                for (auto it = beaches.begin(); it != beaches.end(); it++) {
+
+                    if ((*it)->distanceToBeach() < 50) {
+
+                        (*it)->add_ClosedService(old_s, newDate, type_of_closing);
+                        n++;
+
+                    }
+                }
+
+                if(n == 0) { throw  0;}
+
+                cout << "Service closed successfully!" << endl;
+                usleep(1000000);
+                break;
+            }
+
+        }
+        if (final == this->PointsOfInterest.size() - 1 && temp.empty()) { throw -1; }
+    }
+}
+
+
+void Company::reopenClosedPoints() {
+
+    string name, service, sType, sName, sPriceRange, sStars, sDate, newDate;
+    HashTable_points table;
+    bool exists;
+
+    ClearScreen();
+
+    table = this->PointOfInterest;
+
+    cout << "Insert name of the service you wish to reopen" << endl << "::: ";
+    getline(cin, service);
+
+    for (auto it = table.begin(); it != this->PointOfInterest.end(); ++it) {
+
+        if ((*it).service.getName() == service) {
+
+            if((*it).type_of_closing == "PERM") { throw 0;}
+            Services s((*it).service.getType(), (*it).service.getName(), (*it).service.getPriceRange(),
+                       (*it).service.getStars(), (*it).service.getDateInspection());
+
+            for (auto ti = beaches.begin(); ti != beaches.end(); ti++) {
+
+                if ((*ti)->distanceToBeach((*it).lat,(*it).longi) < 50) {
+
+                    (*ti)->add_ExtraService(s);
+                }
+            }
+
+            this->removePointDown(service);
+
+            cout << "Service reopened successfully!" << endl;
+            usleep(16000);
+            exists = true;
+            break;
+        }
+    }
+
+    if(!exists) {throw 1;}
+}
+
+
+void Company::removePointDown(string name){
+    auto it = this->PointOfInterest.begin();
+    for (; it != this->PointOfInterest.end(); ++it) {
+        if((*it).service.getName()==name)
+            break;
+    }
+
+    this->PointOfInterest.erase(it);
+};

@@ -6,6 +6,34 @@
 #include <math.h>
 #include <set>
 
+typedef struct{
+    Services service; ///< Service closed
+    string date; ///< Closing date
+    string type_of_closing; ///< Type of closing
+    float lat, longi; ///< Coordinates of the service
+} struct_pointsShutDown;
+
+struct sort_pointsShutDown {
+    int operator()(const struct_pointsShutDown & f1) const{
+        return 0;
+    }
+
+    bool operator () (const struct_pointsShutDown & p1, const struct_pointsShutDown & p2) const {
+
+        if (stoi(p1.date.substr(6,4)) != stoi(p2.date.substr(6,4))) return stoi(p1.date.substr(6,4)) < stoi(p2.date.substr(6,4));
+        else {
+
+            if (stoi(p1.date.substr(3,2)) != stoi(p2.date.substr(3,2))) return stoi(p1.date.substr(3,2)) != stoi(p2.date.substr(3,2));
+            else {
+
+                return stoi(p1.date.substr(0,2)) < stoi(p2.date.substr(0,2));
+            }
+        }
+    }
+};
+
+typedef unordered_set<struct_pointsShutDown, sort_serviceShutDown, sort_serviceShutDown> HashTable_points;
+
 struct SortOrder{
     bool operator()(const Beach * b1, const Beach * b2) const{
         if (b1->get_county()!= b2->get_county())
@@ -17,6 +45,8 @@ struct SortOrder{
 class Company {
 private:
     set <Beach *, SortOrder> beaches;
+    vector <priority_queue<Services>> PointsOfInterest;
+    HashTable_points PointOfInterest;
 public:
     /**
      * Constructor of class Company.
@@ -144,6 +174,22 @@ public:
      * @brief Display all the closed services of a specific beach.
      */
     void displayClosedServices();
+
+    /**
+     * @brief Reopen a service closed temporarily that don't belong to any beach.
+     */
+    void reopenClosedPoints();
+
+    /**
+     * @brief Close a service, permanently or temporarily, on a specific date, that don't belong to any beach.
+     */
+    void closePoint();
+
+    /**
+     * @brief Remove a closed point of interest from the hash table.
+     * @param name
+     */
+    void removePointDown(string name);
 
 };
 

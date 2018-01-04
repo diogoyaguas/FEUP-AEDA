@@ -322,14 +322,16 @@ void AlterServicesMenu(Company &company){
     cout << "4. Inspection service" << endl;
     cout << "5. Close service" << endl;
     cout << "6. Reopen service" << endl;
-    cout << "7. Display closed services" << endl << endl;
-    cout << "8. Return to main menu" << endl;
+    cout << "7. Close point of interest" << endl;
+    cout << "8. Reopen points of interest" << endl;
+    cout << "9. Display closed services" << endl << endl;
+    cout << "10. Return to main menu" << endl;
 
     cout << endl << "Enter a number option: " << endl << "::: ";
     cin >> option;
 
     //verifies if input is valid
-    while(cin.fail()||!ValidMenuInput(1, 8, option)) {
+    while(cin.fail()||!ValidMenuInput(1, 10, option)) {
         cin.clear();
         cin.ignore(1000, '\n');
         cout << "Please enter a valid option: "<< endl << "::: ";
@@ -411,11 +413,39 @@ void AlterServicesMenu(Company &company){
             mainMenu(company);
             break;
         case 7:
-            company.displayClosedServices();
+            try{company.closePoint();}
+            catch(int x){
+                if(x == -1) {
+                    cout << endl << "ERROR: Service doesn't exist! Redirecting to previous menu..." << endl;
+                } else
+                    cout << endl << "ERROR: Service not close enough to any beach! Redirecting to previous menu..." << endl;
+                usleep(190000);
+                AlterServicesMenu(company);
+                break;
+            }
             ClearScreen();
             mainMenu(company);
             break;
         case 8:
+            try{company.reopenClosedPoints();}
+            catch(int x){
+                if(x == 0)
+                    cout << endl << "ERROR: Service closed permanently! Redirecting to previous menu..." << endl;
+                else if (x==1)
+                    cout << endl << "ERROR: Service doesn't exist! Redirecting to previous menu..." << endl;
+                usleep(190000);
+                AlterServicesMenu(company);
+                break;
+            }
+            ClearScreen();
+            mainMenu(company);
+            break;
+        case 9:
+            company.displayClosedServices();
+            ClearScreen();
+            mainMenu(company);
+            break;
+        case 10:
             ClearScreen();
             mainMenu(company);
             break;

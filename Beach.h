@@ -11,9 +11,9 @@
 using namespace std;
 
 typedef struct{
-    Services service;
-    string date;
-    string type_of_closing;
+    Services service; ///< Service closed
+    string date; ///< Closing date
+    string type_of_closing; ///< Type of closing (permanent or temporary)
 } struct_serviceShutDown;
 
 struct sort_serviceShutDown {
@@ -266,6 +266,10 @@ public:
      */
     void readClosedServices(string service);
 
+    /**
+     * @brief Remove a closed service from the hash table.
+     * @param name
+     */
     void removeServiceDown(string name);
 
 };
