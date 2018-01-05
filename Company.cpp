@@ -38,7 +38,7 @@ Company::Company() {
     }
     readClosedServicesFile();
     readInterestPointsFile();
-    //readClosedInterestPointsFile();
+    readClosedInterestPointsFile();
 }
 
 
@@ -1116,7 +1116,7 @@ void Company::displayClosedServices() {
 }
 
 
-/*void Company::closePoint() {
+void Company::closePoint() {
 
     string name, service, sType, sName, sPriceRange, sStars, sDate, newDate, type_of_closing;
     unsigned int option, final;
@@ -1233,10 +1233,10 @@ void Company::displayClosedServices() {
         }
         if (final == this->PointsOfInterest.size() - 1 && temp.empty()) { throw -1; }
     }
-}*/
+}
 
 
-/*void Company::reopenClosedPoints() {
+void Company::reopenClosedPoints() {
 
     string name, point, sType, sName, sPriceRange, sStars, sDate, newDate;
     HashTable_points table;
@@ -1282,10 +1282,10 @@ void Company::displayClosedServices() {
     }
 
     if (!exists) { throw 1; }
-}*/
+}
 
 
-/*void Company::removePointDown(string name) {
+void Company::removePointDown(string name) {
     auto it = this->PointOfInterest_Closed.begin();
     for (; it != this->PointOfInterest_Closed.end(); ++it) {
         if ((*it).InterestP.getName() == name)
@@ -1293,7 +1293,7 @@ void Company::displayClosedServices() {
     }
 
     this->PointOfInterest_Closed.erase(it);
-}*/
+}
 
 
 void Company::readInterestPointsFile() {
@@ -1335,7 +1335,7 @@ void Company::readInterestPointsFile() {
 }
 
 
-/*void Company::readClosedInterestPointsFile() {
+void Company::readClosedInterestPointsFile() {
 
 
     fstream file;
@@ -1359,9 +1359,9 @@ void Company::readInterestPointsFile() {
         InterestPoint p(service, lat, longi);
         add_ClosedPoint(p,date,type_of_closing);
     }
-}*/
+}
 
-/*void Company::updateClosedInterestPointsFile() {
+void Company::updateClosedInterestPointsFile() {
 
     ofstream file;
     file.open("ClosedInterestPointsFile.txt");
@@ -1372,7 +1372,7 @@ void Company::readInterestPointsFile() {
         file << "; " << it.date << "; ";
         it.InterestP.writeService(file);
     }
-}*/
+}
 
 void Company::updateInterestPointsFile() {
     ofstream file;
@@ -1394,7 +1394,7 @@ void Company::updateInterestPointsFile() {
 }
 
 
-/*void Company::erase_InterestPoints(InterestPoint point) {
+void Company::erase_InterestPoints(InterestPoint point) {
 
     for (unsigned int i = 0; i < this->PointsOfInterest.size(); ++i) {
 
@@ -1423,10 +1423,10 @@ void Company::updateInterestPointsFile() {
     }
 
 
-}*/
+}
 
 
-/*void Company::add_InterestPoints(InterestPoint point) {
+void Company::add_InterestPoints(InterestPoint point) {
 
     for (unsigned int i = 0; i < this->PointsOfInterest.size(); ++i) {
 
@@ -1441,10 +1441,10 @@ void Company::updateInterestPointsFile() {
     new_q.push(point);
     this->PointsOfInterest.push_back(new_q);
 
-}*/
+}
 
 
-/*void Company::add_ClosedPoint(InterestPoint point, string date, string type_of_closing) {
+void Company::add_ClosedPoint(InterestPoint point, string date, string type_of_closing) {
 
     struct_pointsShutDown close;
     close.date = date;
@@ -1452,4 +1452,4 @@ void Company::updateInterestPointsFile() {
     close.type_of_closing = type_of_closing;
     this->PointOfInterest_Closed.insert(close);
 
-}*/
+}

@@ -72,7 +72,7 @@ void mainMenu(Company &company) {
             company.updateFile();
             company.updateClosedServicesFile();
             company.updateInterestPointsFile();
-            //company.updateClosedInterestPointsFile();
+            company.updateClosedInterestPointsFile();
             ClearScreen();
             mainMenu(company);
             break;
@@ -415,7 +415,7 @@ void AlterServicesMenu(Company &company){
             mainMenu(company);
             break;
         case 7:
-            /*try{company.closePoint();}
+            try{company.closePoint();}
             catch(int x){
                 if(x == -1) {
                     cout << endl << "ERROR: Service doesn't exist! Redirecting to previous menu..." << endl;
@@ -424,12 +424,12 @@ void AlterServicesMenu(Company &company){
                 usleep(190000);
                 AlterServicesMenu(company);
                 break;
-            }*/
+            }
             ClearScreen();
             mainMenu(company);
             break;
         case 8:
-            /*try{company.reopenClosedPoints();}
+            try{company.reopenClosedPoints();}
             catch(int x){
                 if(x == 0)
                     cout << endl << "ERROR: Service closed permanently! Redirecting to previous menu..." << endl;
@@ -438,7 +438,7 @@ void AlterServicesMenu(Company &company){
                 usleep(190000);
                 AlterServicesMenu(company);
                 break;
-            }*/
+            }
             ClearScreen();
             mainMenu(company);
             break;
