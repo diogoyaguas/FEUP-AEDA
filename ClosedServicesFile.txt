@@ -1,1 +1,2 @@
-Teixo; TEMP; 04-01-2018; Restaurant, Tacho do Teixo, 2/3, ****, 26-11-2017;
+Meimao; TEMP; 04-01-2018; Restaurant, Tacho do Teixo, 2/3, ****, 26-11-2017;
+Seixal; PERM; 21-10-2017; Bar, Seixao, 3/3, ****, 10-05-2017;

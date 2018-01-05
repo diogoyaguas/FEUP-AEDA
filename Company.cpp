@@ -59,6 +59,56 @@ Beach *Company::beachExists(string name) {
 }
 
 
+void Company::displayBeaches() {
+
+    bool exists_ip_near = false;
+
+    ClearScreen();
+
+    for (auto it = beaches.begin(); it != beaches.end(); it++) {
+
+        try { (*it)->displayBeach(); } catch (int x) {
+            cout << endl << "This beach doesn't have any services associated." << endl;
+        }
+
+
+        for (auto i = PointsOfInterest.begin(); i != PointsOfInterest.end(); ++i) {
+            priority_queue<InterestPoint> interestPts = (*i);
+
+            while(!interestPts.empty()) {
+                if((*it)->distanceToBeach(interestPts.top().getLatitude(), interestPts.top().getLongitude()) < 50) {
+                    cout << endl << "Services / interest points close by:" << endl;
+                    break;
+                }
+                interestPts.pop();
+            }
+
+
+            interestPts = (*i);
+
+            while(!interestPts.empty()){
+
+                if((*it)->distanceToBeach(interestPts.top().getLatitude(), interestPts.top().getLongitude()) < 50){
+                    (*i).top().displayService();
+                }
+                string n;
+                n = (*i).top().getName();
+                interestPts.pop();
+                n = (*i).top().getName();
+            }
+
+            cout << endl;
+        }
+
+    }
+    returnMainMenu();
+}
+
+
+
+
+// add, alter and remove beaches and services
+
 void Company::addBeach() {
     string type, county, name, utility;
     bool lifeguard, blueflag;
@@ -194,6 +244,27 @@ void Company::addBeach() {
 }
 
 
+void Company::removeBeach() {
+    string name;
+
+    cout << "Insert beach name: ";
+    cin >> name;
+
+    if (this->beachExists(name) == nullptr) { throw -1; }
+
+    for (auto it = beaches.begin(); it != beaches.end(); it++) {
+
+        if ((*it)->get_name() == name) {
+
+            beaches.erase(it);
+            cout << endl << name << "Beach erased successfully!" << string(4, '\n');
+        }
+    }
+    usleep(19000);
+
+}
+
+
 void Company::alterRBeachInfo(unsigned int option, Beach *b) {
     string name, county;
     bool blueflag, lifeguard;
@@ -289,27 +360,6 @@ void Company::alterBBeachInfo(unsigned int option, Beach *b) {
         case 7:
             break;
     }
-
-}
-
-
-void Company::removeBeach() {
-    string name;
-
-    cout << "Insert beach name: ";
-    cin >> name;
-
-    if (this->beachExists(name) == nullptr) { throw -1; }
-
-    for (auto it = beaches.begin(); it != beaches.end(); it++) {
-
-        if ((*it)->get_name() == name) {
-
-            beaches.erase(it);
-            cout << endl << name << "Beach erased successfully!" << string(4, '\n');
-        }
-    }
-    usleep(19000);
 
 }
 
@@ -532,51 +582,9 @@ void Company::eraseService() {
 }
 
 
-void Company::displayBeaches() {
-
-    bool exists_ip_near = false;
-
-    ClearScreen();
-
-    for (auto it = beaches.begin(); it != beaches.end(); it++) {
-
-        try { (*it)->displayBeach(); } catch (int x) {
-            cout << endl << "This beach doesn't have any services associated." << endl;
-        }
 
 
-        for (auto i = PointsOfInterest.begin(); i != PointsOfInterest.end(); ++i) {
-            priority_queue<InterestPoint> interestPts = (*i);
-
-            while(!interestPts.empty()) {
-                if((*it)->distanceToBeach(interestPts.top().getLatitude(), interestPts.top().getLongitude()) < 50) {
-                    cout << endl << "Services / interest points close by:" << endl;
-                    break;
-                }
-                interestPts.pop();
-            }
-
-
-            interestPts = (*i);
-
-            while(!interestPts.empty()){
-
-                if((*it)->distanceToBeach(interestPts.top().getLatitude(), interestPts.top().getLongitude()) < 50){
-                    (*i).top().displayService();
-                }
-                string n;
-                n = (*i).top().getName();
-                interestPts.pop();
-                n = (*i).top().getName();
-            }
-
-            cout << endl;
-        }
-
-    }
-    returnMainMenu();
-}
-
+//search and compare beaches
 
 void Company::searchCounty() {
 
@@ -828,120 +836,6 @@ void Company::compareBeaches(Beach *b1, Beach *b2) {
 }
 
 
-void Company::alterDateofInspection() {
-
-    string name, service, sType, sName, sPriceRange, sStars, newDate;
-    unsigned int option;
-    int i;
-    priority_queue<Services> newServices;
-    priority_queue<Services> temp_s;
-
-    ClearScreen();
-
-    cout << "Insert name of the beach you wish to alter the date of inspection of a service" << endl << "::: ";
-    cin.ignore(1000, '\n');
-    getline(cin, name);
-
-    Beach *b = beachExists(name);
-
-    if (b == nullptr) { throw -1; }
-
-    cout << "Insert name of the service you wish to alter" << endl << "::: ";
-    getline(cin, service);
-
-    for (unsigned int i = 0; i < b->getExtraServices().size(); ++i) {
-
-        priority_queue<Services> temp = b->getExtraServices().at(i);
-
-        while (!temp.empty()) {
-
-            Services temp_service = temp.top();
-            temp.pop();
-            if (temp_service.getName() == service) {
-
-                sType = temp_service.getType();
-                sName = temp_service.getName();
-                sPriceRange = temp_service.getPriceRange();
-                sStars = temp_service.getStars();
-                Services old_s = Services(sType, sName, sPriceRange, sStars, getActualDate());
-
-                cout << endl;
-                cout << "What date do you wish to enter?" << endl;
-                cout << "1. Current date" << endl;
-                cout << "2. Past date" << endl;
-                cout << "3. Return to main menu" << endl;
-                cout << endl << "Enter a number option: " << endl << "::: ";
-                cin >> option;
-
-                //verifies if input is valid
-                while (cin.fail() || !ValidMenuInput(1, 5, option)) {
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    cout << "Please enter a valid option: " << endl << "::: ";
-                    cin >> option;
-                }
-
-                switch (option) {
-
-                    case 1:
-                        b->erase_ExtraService(old_s);
-                        b->add_ExtraService(Services(sType, sName, sPriceRange, sStars, getActualDate()));
-                        break;
-                    case 2:
-                        b->erase_ExtraService(old_s);
-                        cout << "Insert the new date of inspection (e.g. " << getActualDate() << ")" << endl
-                             << "::: ";
-                        cin.ignore(1000, '\n');
-                        getline(cin, newDate);
-
-
-                        while (newDate.size() != 10) {
-                            cin.clear();
-                            cin.ignore(1000, '\n');
-                            cout << "Please enter a date with a valid type: " << endl << "::: ";
-                            cin >> newDate;
-                        }
-
-                        while (stoi(newDate.substr(6, 4)) > stoi(getActualDate().substr(6, 4))) {
-                            cin.clear();
-                            cin.ignore(1000, '\n');
-                            cout << "Please enter a date with a valid year: " << endl << "::: ";
-                            cin >> newDate;
-                        }
-                        if (stoi(newDate.substr(6, 4)) == stoi(getActualDate().substr(6, 4))) {
-
-                            while (stoi(newDate.substr(3, 2)) > stoi(getActualDate().substr(3, 2))) {
-                                cin.clear();
-                                cin.ignore(1000, '\n');
-                                cout << "Please enter a date with a valid month: " << endl << "::: ";
-                                cin >> newDate;
-                            }
-
-                            if (stoi(newDate.substr(3, 2)) == stoi(getActualDate().substr(3, 2))) {
-
-                                while (stoi(newDate.substr(3, 2)) > stoi(getActualDate().substr(3, 2))) {
-                                    cin.clear();
-                                    cin.ignore(1000, '\n');
-                                    cout << "Please enter a date with a valid day: " << endl << "::: ";
-                                    cin >> newDate;
-                                }
-                            }
-                        }
-                        b->add_ExtraService(Services(sType, sName, sPriceRange, sStars, newDate));
-                        break;
-                    case 5:
-                        break;
-                }
-
-                cout << endl << "Date altered successfully!" << endl;
-                usleep(1000000);
-                break;
-            }
-
-        }
-    }
-}
-
 
 
 //services
@@ -1106,6 +1000,120 @@ void Company::displayClosedServices() {
     usleep(1000000);
 }
 
+
+void Company::alterDateofInspection() {
+
+    string name, service, sType, sName, sPriceRange, sStars, newDate;
+    unsigned int option;
+    int i;
+    priority_queue<Services> newServices;
+    priority_queue<Services> temp_s;
+
+    ClearScreen();
+
+    cout << "Insert name of the beach you wish to alter the date of inspection of a service" << endl << "::: ";
+    cin.ignore(1000, '\n');
+    getline(cin, name);
+
+    Beach *b = beachExists(name);
+
+    if (b == nullptr) { throw -1; }
+
+    cout << "Insert name of the service you wish to alter" << endl << "::: ";
+    getline(cin, service);
+
+    for (unsigned int i = 0; i < b->getExtraServices().size(); ++i) {
+
+        priority_queue<Services> temp = b->getExtraServices().at(i);
+
+        while (!temp.empty()) {
+
+            Services temp_service = temp.top();
+            temp.pop();
+            if (temp_service.getName() == service) {
+
+                sType = temp_service.getType();
+                sName = temp_service.getName();
+                sPriceRange = temp_service.getPriceRange();
+                sStars = temp_service.getStars();
+                Services old_s = Services(sType, sName, sPriceRange, sStars, getActualDate());
+
+                cout << endl;
+                cout << "What date do you wish to enter?" << endl;
+                cout << "1. Current date" << endl;
+                cout << "2. Past date" << endl;
+                cout << "3. Return to main menu" << endl;
+                cout << endl << "Enter a number option: " << endl << "::: ";
+                cin >> option;
+
+                //verifies if input is valid
+                while (cin.fail() || !ValidMenuInput(1, 5, option)) {
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    cout << "Please enter a valid option: " << endl << "::: ";
+                    cin >> option;
+                }
+
+                switch (option) {
+
+                    case 1:
+                        b->erase_ExtraService(old_s);
+                        b->add_ExtraService(Services(sType, sName, sPriceRange, sStars, getActualDate()));
+                        break;
+                    case 2:
+                        b->erase_ExtraService(old_s);
+                        cout << "Insert the new date of inspection (e.g. " << getActualDate() << ")" << endl
+                             << "::: ";
+                        cin.ignore(1000, '\n');
+                        getline(cin, newDate);
+
+
+                        while (newDate.size() != 10) {
+                            cin.clear();
+                            cin.ignore(1000, '\n');
+                            cout << "Please enter a date with a valid type: " << endl << "::: ";
+                            cin >> newDate;
+                        }
+
+                        while (stoi(newDate.substr(6, 4)) > stoi(getActualDate().substr(6, 4))) {
+                            cin.clear();
+                            cin.ignore(1000, '\n');
+                            cout << "Please enter a date with a valid year: " << endl << "::: ";
+                            cin >> newDate;
+                        }
+                        if (stoi(newDate.substr(6, 4)) == stoi(getActualDate().substr(6, 4))) {
+
+                            while (stoi(newDate.substr(3, 2)) > stoi(getActualDate().substr(3, 2))) {
+                                cin.clear();
+                                cin.ignore(1000, '\n');
+                                cout << "Please enter a date with a valid month: " << endl << "::: ";
+                                cin >> newDate;
+                            }
+
+                            if (stoi(newDate.substr(3, 2)) == stoi(getActualDate().substr(3, 2))) {
+
+                                while (stoi(newDate.substr(3, 2)) > stoi(getActualDate().substr(3, 2))) {
+                                    cin.clear();
+                                    cin.ignore(1000, '\n');
+                                    cout << "Please enter a date with a valid day: " << endl << "::: ";
+                                    cin >> newDate;
+                                }
+                            }
+                        }
+                        b->add_ExtraService(Services(sType, sName, sPriceRange, sStars, newDate));
+                        break;
+                    case 5:
+                        break;
+                }
+
+                cout << endl << "Date altered successfully!" << endl;
+                usleep(1000000);
+                break;
+            }
+
+        }
+    }
+}
 
 
 
@@ -1328,6 +1336,7 @@ void Company::add_ClosedPoint(InterestPoint point, string date, string type_of_c
 
 
 //reading and updating
+
 void Company::readClosedServicesFile() {
     fstream file;
     string service, beach_name;

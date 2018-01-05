@@ -63,6 +63,23 @@ public:
     set<Beach *, SortOrder> getBeaches(){return beaches;}
 
     /**
+     * @brief Verifies if beach with certain name exist.
+     * @param name
+     * @return pos of beach in Beaches' vector if beach with name exists, -1 otherwise
+     */
+    Beach * beachExists(string name);
+
+    /**
+     * @brief Displays the information about all beaches.
+     */
+    void displayBeaches();
+
+
+
+
+    // add, alter and remove beaches and services
+
+    /**
      * @brief Adds beach to Beaches' vector with user's input information.
      */
     void addBeach();
@@ -100,22 +117,10 @@ public:
      */
     void eraseService();
 
-    /**
-     * @brief Verifies if beach with certain name exist.
-     * @param name
-     * @return pos of beach in Beaches' vector if beach with name exists, -1 otherwise
-     */
-    Beach * beachExists(string name);
 
-    /**
-     * @brief Displays the information about all beaches.
-     */
-    void displayBeaches();
 
-    /**
-     *@brief Updates the file containing the information about the beaches according to the changes made in the program.
-     */
-    void updateFile();
+
+    //search and compare beaches
 
     /**
      * @brief Searchs beach by county and displays its information.
@@ -149,10 +154,10 @@ public:
      */
     void compareBeaches(Beach * b1, Beach * b2);
 
-    /**
-     * @brief Alter the date of inspection of a service.
-     */
-    void alterDateofInspection();
+
+
+
+    //services
 
     /**
     * @brief Close a service, permanently or temporarily, on a specific date.
@@ -165,24 +170,19 @@ public:
     void reopenService();
 
     /**
-     * @brief Update the closed services .txt file.
-     */
-    void updateClosedServicesFile();
-
-    /**
-     * @brief Read the closed service .txt file.
-     */
-    void readClosedServicesFile();
-
-    /**
      * @brief Display all the closed services of a specific beach.
      */
     void displayClosedServices();
 
     /**
-     * @brief Reopen a service closed temporarily that don't belong to any beach.
+     * @brief Alter the date of inspection of a service.
      */
-    void reopenClosedPoints();
+    void alterDateofInspection();
+
+
+
+
+    //interest points
 
     /**
      * @brief Close a service, permanently or temporarily, on a specific date, that don't belong to any beach.
@@ -190,30 +190,15 @@ public:
     void closePoint();
 
     /**
+     * @brief Reopen a service closed temporarily that don't belong to any beach.
+     */
+    void reopenClosedPoints();
+
+    /**
      * @brief Remove a closed point of interest from the hash table.
      * @param name
      */
     void removePointDown(string name);
-
-    /**
-     * @brief Reads the interest points .txt file.
-     */
-    void readInterestPointsFile();
-
-    /**
-     * @brief Reads the closed interest point .txt file.
-     */
-    void readClosedInterestPointsFile();
-
-    /**
-     * @brief Update the closed interest points .txt file.
-     */
-    void updateClosedInterestPointsFile();
-
-    /**
-     * @brief Update the interest points .txt file.
-     */
-    void updateInterestPointsFile();
 
     /**
      * @brief Erase a point of interest from the vector.
@@ -234,6 +219,47 @@ public:
      * @param type_of_closing
      */
     void add_ClosedPoint(InterestPoint point, string date, string type_of_closing);
+
+
+
+
+    //reading and updating
+
+    /**
+     * @brief Read the closed service .txt file.
+     */
+    void readClosedServicesFile();
+
+    /**
+     * @brief Reads the interest points .txt file.
+     */
+    void readInterestPointsFile();
+
+    /**
+     * @brief Update the closed interest points .txt file.
+     */
+    void updateClosedInterestPointsFile();
+
+    /**
+     *@brief Updates the file containing the information about the beaches according to the changes made in the program.
+     */
+    void updateFile();
+
+    /**
+     * @brief Update the closed services .txt file.
+     */
+    void updateClosedServicesFile();
+
+    /**
+     * @brief Reads the closed interest point .txt file.
+     */
+    void readClosedInterestPointsFile();
+
+    /**
+     * @brief Update the interest points .txt file.
+     */
+    void updateInterestPointsFile();
+
 };
 
 #endif //AEDA_COMPANY_H

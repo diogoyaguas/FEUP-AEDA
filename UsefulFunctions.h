@@ -15,7 +15,7 @@ using namespace std;
 bool ValidMenuInput(int lowerL, int upperL, int input);
 
 /**
- * @brief Clears screen.
+ * @brief Clears screen. 
  */
 void ClearScreen();
 
