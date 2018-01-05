@@ -38,6 +38,7 @@ Company::Company() {
     }
     readClosedServicesFile();
     readInterestPointsFile();
+    //readClosedInterestPointsFile();
 }
 
 
@@ -1115,7 +1116,7 @@ void Company::displayClosedServices() {
 }
 
 
-void Company::closePoint() {
+/*void Company::closePoint() {
 
     string name, service, sType, sName, sPriceRange, sStars, sDate, newDate, type_of_closing;
     unsigned int option, final;
@@ -1145,7 +1146,7 @@ void Company::closePoint() {
                 sLat = temp_point.getLatitude();
                 sLongi = temp_point.getLongitude();
 
-                Services old_s = Services(sType, sName, sPriceRange, sStars, sDate)
+                Services old_s = Services(sType, sName, sPriceRange, sStars, sDate);
                 InterestPoint old_p = InterestPoint(old_s, sLat, sLongi);
 
                 cout << endl << "When was this service closed?" << endl;
@@ -1173,7 +1174,7 @@ void Company::closePoint() {
 
                             if ((*it)->distanceToBeach(temp_point.getLatitude(), temp_point.getLongitude()) < 50) {
 
-                                (*it)->erase_ExtraService(old_s.);
+                                (*it)->erase_ExtraService(old_s);
                                 n++;
 
                             }
@@ -1232,10 +1233,10 @@ void Company::closePoint() {
         }
         if (final == this->PointsOfInterest.size() - 1 && temp.empty()) { throw -1; }
     }
-}
+}*/
 
 
-void Company::reopenClosedPoints() {
+/*void Company::reopenClosedPoints() {
 
     string name, point, sType, sName, sPriceRange, sStars, sDate, newDate;
     HashTable_points table;
@@ -1281,10 +1282,10 @@ void Company::reopenClosedPoints() {
     }
 
     if (!exists) { throw 1; }
-}
+}*/
 
 
-void Company::removePointDown(string name) {
+/*void Company::removePointDown(string name) {
     auto it = this->PointOfInterest_Closed.begin();
     for (; it != this->PointOfInterest_Closed.end(); ++it) {
         if ((*it).InterestP.getName() == name)
@@ -1292,7 +1293,7 @@ void Company::removePointDown(string name) {
     }
 
     this->PointOfInterest_Closed.erase(it);
-};
+}*/
 
 
 void Company::readInterestPointsFile() {
@@ -1334,6 +1335,45 @@ void Company::readInterestPointsFile() {
 }
 
 
+/*void Company::readClosedInterestPointsFile() {
+
+
+    fstream file;
+    string line, temp;
+    string type_of_closing, date;
+    Services service;
+    float lat, longi;
+    bool added = false;
+
+    file.open("ClosedInterestPointsFile.txt");
+
+    while (getline(file, line)) {
+
+        temp = divideString(';', line);
+        type_of_closing = temp;
+        date = divideString(';', line);
+        temp = divideString(';', line);
+        service = Services(temp);
+        lat = stof(divideString(';', line));
+        longi = stof(line);
+        InterestPoint p(service, lat, longi);
+        add_ClosedPoint(p,date,type_of_closing);
+    }
+}*/
+
+/*void Company::updateClosedInterestPointsFile() {
+
+    ofstream file;
+    file.open("ClosedInterestPointsFile.txt");
+
+    for (auto it: PointOfInterest_Closed) {
+
+        file << it.type_of_closing;
+        file << "; " << it.date << "; ";
+        it.InterestP.writeService(file);
+    }
+}*/
+
 void Company::updateInterestPointsFile() {
     ofstream file;
     file.open("InterestPointsFile.txt");
@@ -1354,7 +1394,7 @@ void Company::updateInterestPointsFile() {
 }
 
 
-void Company::erase_InterestPoints(InterestPoint point) {
+/*void Company::erase_InterestPoints(InterestPoint point) {
 
     for (unsigned int i = 0; i < this->PointsOfInterest.size(); ++i) {
 
@@ -1383,10 +1423,10 @@ void Company::erase_InterestPoints(InterestPoint point) {
     }
 
 
-}
+}*/
 
 
-void Company::add_InterestPoints(InterestPoint point) {
+/*void Company::add_InterestPoints(InterestPoint point) {
 
     for (unsigned int i = 0; i < this->PointsOfInterest.size(); ++i) {
 
@@ -1401,10 +1441,10 @@ void Company::add_InterestPoints(InterestPoint point) {
     new_q.push(point);
     this->PointsOfInterest.push_back(new_q);
 
-}
+}*/
 
 
-void Company::add_ClosedPoint(InterestPoint point, string date, string type_of_closing) {
+/*void Company::add_ClosedPoint(InterestPoint point, string date, string type_of_closing) {
 
     struct_pointsShutDown close;
     close.date = date;
@@ -1412,4 +1452,4 @@ void Company::add_ClosedPoint(InterestPoint point, string date, string type_of_c
     close.type_of_closing = type_of_closing;
     this->PointOfInterest_Closed.insert(close);
 
-}
+}*/

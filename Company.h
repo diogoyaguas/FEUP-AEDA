@@ -14,8 +14,8 @@ typedef struct{
     string type_of_closing; ///< Type of closing
 } struct_pointsShutDown;
 
-
 struct sort_pointsShutDown {
+
     int operator()(const struct_pointsShutDown & f1) {
         return 0;
     }
@@ -194,9 +194,19 @@ public:
     void removePointDown(string name);
 
     /**
-     * @brief reads the interest points .txt file.
+     * @brief Reads the interest points .txt file.
      */
     void readInterestPointsFile();
+
+    /**
+     * @brief Reads the closed interest point .txt file.
+     */
+    void readClosedInterestPointsFile();
+
+    /**
+     * @brief Update the closed interest points .txt file.
+     */
+    void updateClosedInterestPointsFile();
 
     /**
      * @brief Update the interest points .txt file.
