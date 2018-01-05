@@ -193,9 +193,14 @@ public:
      */
     void removePointDown(string name);
 
-
+    /**
+     * @brief reads the interest points .txt file.
+     */
     void readInterestPointsFile();
 
+    /**
+     * @brief Update the interest points .txt file.
+     */
     void updateInterestPointsFile();
 
 };

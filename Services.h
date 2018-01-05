@@ -131,9 +131,28 @@ class InterestPoint :  public Services {
     float longi;
 
 public:
+    /**
+     * @brief Constructor for class InterestPoint
+     * @param service
+     * @param lat
+     * @param longi
+     */
     InterestPoint(Services service, float lat, float longi);
+
+    /**
+     * @return lat;
+     */
     float getLatitude() const {return lat;}
+
+    /**
+     * @return longi
+     */
     float getLongitude() const {return longi;}
+
+    /**
+     * @brief Write service information on .txt file.
+     * @param file
+     */
     void writeService(ofstream &file) const;
 };
 
