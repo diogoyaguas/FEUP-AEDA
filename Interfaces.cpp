@@ -27,9 +27,8 @@ void mainMenu(Company &company) {
 
     int option;
 
-    cout << " MAIN MENU" << setw(40)<< setfill(' ') << " " << endl;
+    cout << " MAIN MENU" << setw(29)<< setfill(' ') << " "<< getActualDate() << endl;
     cout << setfill('-') << setw(50)<<"-"<<endl;
-    cout << endl << "Current Date: " << getActualDate() << endl << endl;
     cout << "1. Display all beaches" << endl;
     cout << "2. Search beach" << endl;
     cout << "3. Compare beaches" << endl;

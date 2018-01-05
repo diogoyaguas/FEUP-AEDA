@@ -43,8 +43,6 @@ string getActualDate() {
 
     date = sday + "-" + smonth + "-" + syear;
 
-    cout << date << endl;
-
     return date;
 
 }

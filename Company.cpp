@@ -564,7 +564,10 @@ void Company::displayBeaches() {
                 if((*it)->distanceToBeach(interestPts.top().getLatitude(), interestPts.top().getLongitude()) < 50){
                     (*i).top().displayService();
                 }
+                string n;
+                n = (*i).top().getName();
                 interestPts.pop();
+                n = (*i).top().getName();
             }
 
             cout << endl;

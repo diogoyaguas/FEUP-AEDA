@@ -124,6 +124,10 @@ public:
      * @param file
      */
     virtual void writeService(ofstream &file) const;
+
+    /**
+     * @brief dispplays information of service
+     */
     void displayService() const;
 };
 
