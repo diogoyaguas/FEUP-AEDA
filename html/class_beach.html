@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -42,6 +49,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_beach.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -56,7 +78,6 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -66,9 +87,11 @@ $(function() {
 <div class="title">Beach Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for Beach:</div>
-<div class="dyncontent">
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Beach:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
  <div class="center">
   <img src="class_beach.png" usemap="#Beach_map" alt=""/>
   <map id="Beach_map" name="Beach_map">
@@ -108,8 +131,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afc6a57f98777ec5de1882acaf2703e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23305808d894c08a79fa3a0d201d0c51"><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a23305808d894c08a79fa3a0d201d0c51">getBasicServices</a> () const</td></tr>
 <tr class="separator:a23305808d894c08a79fa3a0d201d0c51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69ce8d1f21dc1b81edd6df001ec6c2b2"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_services.html">Services</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a69ce8d1f21dc1b81edd6df001ec6c2b2">getExtraServices</a> () const</td></tr>
-<tr class="separator:a69ce8d1f21dc1b81edd6df001ec6c2b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e18f68fc778b0ab604bc99c6d2f7505"><td class="memItemLeft" align="right" valign="top">vector&lt; priority_queue&lt; <a class="el" href="class_services.html">Services</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a2e18f68fc778b0ab604bc99c6d2f7505">getExtraServices</a> () const</td></tr>
+<tr class="separator:a2e18f68fc778b0ab604bc99c6d2f7505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a832e34ced9d46ad37838cb3cd2960ed9"><td class="memItemLeft" align="right" valign="top">HashTable_services&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a832e34ced9d46ad37838cb3cd2960ed9">getServicesDown</a> () const</td></tr>
+<tr class="separator:a832e34ced9d46ad37838cb3cd2960ed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30001df535b2456e47611c7a0705660b"><td class="memItemLeft" align="right" valign="top">virtual string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a30001df535b2456e47611c7a0705660b">getType</a> () const =0</td></tr>
 <tr class="memdesc:a30001df535b2456e47611c7a0705660b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helps identifying from which derived class ths object is.  <a href="#a30001df535b2456e47611c7a0705660b">More...</a><br /></td></tr>
 <tr class="separator:a30001df535b2456e47611c7a0705660b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,9 +158,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:af846ce1aabbd67742a4fef8fa64dcec8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#af846ce1aabbd67742a4fef8fa64dcec8">set_longitude</a> (float longi)</td></tr>
 <tr class="memdesc:af846ce1aabbd67742a4fef8fa64dcec8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes longitude.  <a href="#af846ce1aabbd67742a4fef8fa64dcec8">More...</a><br /></td></tr>
 <tr class="separator:af846ce1aabbd67742a4fef8fa64dcec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3e07bb07ec9c8b633ecb600c80567f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#ae3e07bb07ec9c8b633ecb600c80567f2">set_ExtraServices</a> (vector&lt; <a class="el" href="class_services.html">Services</a> &gt; &amp;extraServices)</td></tr>
-<tr class="memdesc:ae3e07bb07ec9c8b633ecb600c80567f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes extra services.  <a href="#ae3e07bb07ec9c8b633ecb600c80567f2">More...</a><br /></td></tr>
-<tr class="separator:ae3e07bb07ec9c8b633ecb600c80567f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f3a4bde9008bcc87861710e8c99c008"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a3f3a4bde9008bcc87861710e8c99c008">set_width</a> (float width)=0</td></tr>
 <tr class="memdesc:a3f3a4bde9008bcc87861710e8c99c008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes width.  <a href="#a3f3a4bde9008bcc87861710e8c99c008">More...</a><br /></td></tr>
 <tr class="separator:a3f3a4bde9008bcc87861710e8c99c008"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,22 +173,44 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>degreesToRadians</b
 <tr class="memitem:a4b7774165afd3ae88952281b9d846865"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a4b7774165afd3ae88952281b9d846865">distanceToBeach</a> (float lat, float longi)</td></tr>
 <tr class="memdesc:a4b7774165afd3ae88952281b9d846865"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates distance from location's GPS coordinates to beach's coordinates.  <a href="#a4b7774165afd3ae88952281b9d846865">More...</a><br /></td></tr>
 <tr class="separator:a4b7774165afd3ae88952281b9d846865"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05675f3e8c2523cc7db11aeb66933867"><td class="memItemLeft" align="right" valign="top"><a id="a05675f3e8c2523cc7db11aeb66933867"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a05675f3e8c2523cc7db11aeb66933867">displayBeach</a> ()=0</td></tr>
-<tr class="memdesc:a05675f3e8c2523cc7db11aeb66933867"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays all information about the beach. <br /></td></tr>
-<tr class="separator:a05675f3e8c2523cc7db11aeb66933867"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4473789ed0ebe45d1410145a79d55165"><td class="memItemLeft" align="right" valign="top"><a id="a4473789ed0ebe45d1410145a79d55165"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a4473789ed0ebe45d1410145a79d55165">displayBeach</a> ()=0</td></tr>
+<tr class="memdesc:a4473789ed0ebe45d1410145a79d55165"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays all information about the beach. <br /></td></tr>
+<tr class="separator:a4473789ed0ebe45d1410145a79d55165"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28bde1bcb5aa5fe087fbb3b8a599f870"><td class="memItemLeft" align="right" valign="top"><a id="a28bde1bcb5aa5fe087fbb3b8a599f870"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a28bde1bcb5aa5fe087fbb3b8a599f870">displayBeachExtraInfo</a> ()</td></tr>
+<tr class="memdesc:a28bde1bcb5aa5fe087fbb3b8a599f870"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display all extra infromation about the beach. <br /></td></tr>
+<tr class="separator:a28bde1bcb5aa5fe087fbb3b8a599f870"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a242686b20a85f0efa8b19eafdb53d0a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a242686b20a85f0efa8b19eafdb53d0a7">add_BasicService</a> (string service)</td></tr>
 <tr class="memdesc:a242686b20a85f0efa8b19eafdb53d0a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds Basic service to the vector.  <a href="#a242686b20a85f0efa8b19eafdb53d0a7">More...</a><br /></td></tr>
 <tr class="separator:a242686b20a85f0efa8b19eafdb53d0a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9182c63f32af1afd95649f14077c820c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a9182c63f32af1afd95649f14077c820c">add_ExtraService</a> (<a class="el" href="class_services.html">Services</a> service)</td></tr>
 <tr class="memdesc:a9182c63f32af1afd95649f14077c820c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds Extra service to the vector.  <a href="#a9182c63f32af1afd95649f14077c820c">More...</a><br /></td></tr>
 <tr class="separator:a9182c63f32af1afd95649f14077c820c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa22b4abddf590bef4ff426f28866aca0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#aa22b4abddf590bef4ff426f28866aca0">erase_ExtraService</a> (string service)</td></tr>
-<tr class="memdesc:aa22b4abddf590bef4ff426f28866aca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase extra service from the vector.  <a href="#aa22b4abddf590bef4ff426f28866aca0">More...</a><br /></td></tr>
-<tr class="separator:aa22b4abddf590bef4ff426f28866aca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac962d50cc1111377e76a303cf71c9ac6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#ac962d50cc1111377e76a303cf71c9ac6">erase_ExtraService</a> (<a class="el" href="class_services.html">Services</a> service)</td></tr>
+<tr class="memdesc:ac962d50cc1111377e76a303cf71c9ac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase extra service from the vector.  <a href="#ac962d50cc1111377e76a303cf71c9ac6">More...</a><br /></td></tr>
+<tr class="separator:ac962d50cc1111377e76a303cf71c9ac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a075271b7da69d3962823ead468b780b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a075271b7da69d3962823ead468b780b6">add_ClosedService</a> (<a class="el" href="class_services.html">Services</a> service, string date, string type_of_closing)</td></tr>
+<tr class="memdesc:a075271b7da69d3962823ead468b780b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close a service, permanently or temporarily, on a specific date.  <a href="#a075271b7da69d3962823ead468b780b6">More...</a><br /></td></tr>
+<tr class="separator:a075271b7da69d3962823ead468b780b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ba3bf80382fa1b5e00befe0c4ccde88"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a2ba3bf80382fa1b5e00befe0c4ccde88">writeBeach</a> (ofstream &amp;file) const =0</td></tr>
 <tr class="memdesc:a2ba3bf80382fa1b5e00befe0c4ccde88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes information about the beach in .txt file.  <a href="#a2ba3bf80382fa1b5e00befe0c4ccde88">More...</a><br /></td></tr>
 <tr class="separator:a2ba3bf80382fa1b5e00befe0c4ccde88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6175d751644b5cb47665ae185a270bde"><td class="memItemLeft" align="right" valign="top"><a id="a6175d751644b5cb47665ae185a270bde"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (const <a class="el" href="class_beach.html">Beach</a> &amp;b1) const</td></tr>
+<tr class="separator:a6175d751644b5cb47665ae185a270bde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0263cc27ad103261c92c3ec675b9d55e"><td class="memItemLeft" align="right" valign="top"><a id="a0263cc27ad103261c92c3ec675b9d55e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (const <a class="el" href="class_beach.html">Beach</a> &amp;b1) const</td></tr>
+<tr class="separator:a0263cc27ad103261c92c3ec675b9d55e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25d6cac15cd9962e8cc492e75a602e38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a25d6cac15cd9962e8cc492e75a602e38">writeBeachClosedServices</a> (ofstream &amp;file)</td></tr>
+<tr class="memdesc:a25d6cac15cd9962e8cc492e75a602e38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes information about the services closed of the beach in .txt file.  <a href="#a25d6cac15cd9962e8cc492e75a602e38">More...</a><br /></td></tr>
+<tr class="separator:a25d6cac15cd9962e8cc492e75a602e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cb97a2c51dfc0baa97bed193f16ee64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a7cb97a2c51dfc0baa97bed193f16ee64">readClosedServices</a> (string service)</td></tr>
+<tr class="memdesc:a7cb97a2c51dfc0baa97bed193f16ee64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads from .txt file the information about the services closed.  <a href="#a7cb97a2c51dfc0baa97bed193f16ee64">More...</a><br /></td></tr>
+<tr class="separator:a7cb97a2c51dfc0baa97bed193f16ee64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31e4e8d6f3ef1e9265997faed89d4e7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a31e4e8d6f3ef1e9265997faed89d4e7a">removeServiceDown</a> (string name)</td></tr>
+<tr class="memdesc:a31e4e8d6f3ef1e9265997faed89d4e7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a closed service from the hash table.  <a href="#a31e4e8d6f3ef1e9265997faed89d4e7a">More...</a><br /></td></tr>
+<tr class="separator:a31e4e8d6f3ef1e9265997faed89d4e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -194,9 +238,12 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>longi</b></td></tr>
 <tr class="memitem:a7b3208969cfa2492ac219cc7b8403717"><td class="memItemLeft" align="right" valign="top"><a id="a7b3208969cfa2492ac219cc7b8403717"></a>
 vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>basicServices</b></td></tr>
 <tr class="separator:a7b3208969cfa2492ac219cc7b8403717"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f4fe9ab51968a44adf478b22b164364"><td class="memItemLeft" align="right" valign="top"><a id="a7f4fe9ab51968a44adf478b22b164364"></a>
-vector&lt; <a class="el" href="class_services.html">Services</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>extraServices</b></td></tr>
-<tr class="separator:a7f4fe9ab51968a44adf478b22b164364"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6c3d0bac3327e41332802587966ee9d"><td class="memItemLeft" align="right" valign="top"><a id="ac6c3d0bac3327e41332802587966ee9d"></a>
+vector&lt; priority_queue&lt; <a class="el" href="class_services.html">Services</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>extraServices</b></td></tr>
+<tr class="separator:ac6c3d0bac3327e41332802587966ee9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60f9b6b9070f45d4491826329bdde671"><td class="memItemLeft" align="right" valign="top"><a id="a60f9b6b9070f45d4491826329bdde671"></a>
+HashTable_services&#160;</td><td class="memItemRight" valign="bottom"><b>ServicesDown</b></td></tr>
+<tr class="separator:a60f9b6b9070f45d4491826329bdde671"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="addc648363a2a06c27983955cb1efe923"></a>
@@ -299,6 +346,50 @@ vector&lt; <a class="el" href="class_services.html">Services</a> &gt;&#160;</td>
 
 </div>
 </div>
+<a id="a075271b7da69d3962823ead468b780b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a075271b7da69d3962823ead468b780b6">&#9670;&nbsp;</a></span>add_ClosedService()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beach::add_ClosedService </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_services.html">Services</a>&#160;</td>
+          <td class="paramname"><em>service</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>date</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>type_of_closing</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Close a service, permanently or temporarily, on a specific date. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">service</td><td></td></tr>
+    <tr><td class="paramname">date</td><td></td></tr>
+    <tr><td class="paramname">type_of_closing</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a9182c63f32af1afd95649f14077c820c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9182c63f32af1afd95649f14077c820c">&#9670;&nbsp;</a></span>add_ExtraService()</h2>
 
@@ -363,8 +454,8 @@ vector&lt; <a class="el" href="class_services.html">Services</a> &gt;&#160;</td>
 
 </div>
 </div>
-<a id="aa22b4abddf590bef4ff426f28866aca0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa22b4abddf590bef4ff426f28866aca0">&#9670;&nbsp;</a></span>erase_ExtraService()</h2>
+<a id="ac962d50cc1111377e76a303cf71c9ac6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac962d50cc1111377e76a303cf71c9ac6">&#9670;&nbsp;</a></span>erase_ExtraService()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -372,7 +463,7 @@ vector&lt; <a class="el" href="class_services.html">Services</a> &gt;&#160;</td>
         <tr>
           <td class="memname">void Beach::erase_ExtraService </td>
           <td>(</td>
-          <td class="paramtype">string&#160;</td>
+          <td class="paramtype"><a class="el" href="class_services.html">Services</a>&#160;</td>
           <td class="paramname"><em>service</em></td><td>)</td>
           <td></td>
         </tr>
@@ -617,14 +708,14 @@ vector&lt; <a class="el" href="class_services.html">Services</a> &gt;&#160;</td>
 
 </div>
 </div>
-<a id="a69ce8d1f21dc1b81edd6df001ec6c2b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69ce8d1f21dc1b81edd6df001ec6c2b2">&#9670;&nbsp;</a></span>getExtraServices()</h2>
+<a id="a2e18f68fc778b0ab604bc99c6d2f7505"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e18f68fc778b0ab604bc99c6d2f7505">&#9670;&nbsp;</a></span>getExtraServices()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt; <a class="el" href="class_services.html">Services</a> &gt; Beach::getExtraServices </td>
+          <td class="memname">vector&lt; priority_queue&lt; <a class="el" href="class_services.html">Services</a> &gt; &gt; Beach::getExtraServices </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -632,6 +723,24 @@ vector&lt; <a class="el" href="class_services.html">Services</a> &gt;&#160;</td>
       </table>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>vector of Extra beach services </dd></dl>
+
+</div>
+</div>
+<a id="a832e34ced9d46ad37838cb3cd2960ed9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a832e34ced9d46ad37838cb3cd2960ed9">&#9670;&nbsp;</a></span>getServicesDown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HashTable_services Beach::getServicesDown </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>hash table of closed services </dd></dl>
 
 </div>
 </div>
@@ -662,6 +771,58 @@ vector&lt; <a class="el" href="class_services.html">Services</a> &gt;&#160;</td>
 <dl class="section return"><dt>Returns</dt><dd>"BayouBeach" if it's a class <a class="el" href="class_bayou_beach.html">BayouBeach</a> object, "RiverBeach" if it's a class <a class="el" href="class_river_beach.html">RiverBeach</a> object </dd></dl>
 
 <p>Implemented in <a class="el" href="class_bayou_beach.html#aad2b96c052075911ae3c0d23fd38b067">BayouBeach</a>, and <a class="el" href="class_river_beach.html#a07f48c077de96aca001f47ce06253f2f">RiverBeach</a>.</p>
+
+</div>
+</div>
+<a id="a7cb97a2c51dfc0baa97bed193f16ee64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cb97a2c51dfc0baa97bed193f16ee64">&#9670;&nbsp;</a></span>readClosedServices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beach::readClosedServices </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>service</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reads from .txt file the information about the services closed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">service</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a31e4e8d6f3ef1e9265997faed89d4e7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31e4e8d6f3ef1e9265997faed89d4e7a">&#9670;&nbsp;</a></span>removeServiceDown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beach::removeServiceDown </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove a closed service from the hash table. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -698,32 +859,6 @@ vector&lt; <a class="el" href="class_services.html">Services</a> &gt;&#160;</td>
 </dl>
 
 <p>Implemented in <a class="el" href="class_bayou_beach.html#a45c742927ddd735983e92a89c7baba96">BayouBeach</a>, and <a class="el" href="class_river_beach.html#ac236cb64cc422eea722bb99fdb29d4d0">RiverBeach</a>.</p>
-
-</div>
-</div>
-<a id="ae3e07bb07ec9c8b633ecb600c80567f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3e07bb07ec9c8b633ecb600c80567f2">&#9670;&nbsp;</a></span>set_ExtraServices()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Beach::set_ExtraServices </td>
-          <td>(</td>
-          <td class="paramtype">vector&lt; <a class="el" href="class_services.html">Services</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>extraServices</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Changes extra services. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">extraServices</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -939,16 +1074,46 @@ vector&lt; <a class="el" href="class_services.html">Services</a> &gt;&#160;</td>
 
 </div>
 </div>
+<a id="a25d6cac15cd9962e8cc492e75a602e38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25d6cac15cd9962e8cc492e75a602e38">&#9670;&nbsp;</a></span>writeBeachClosedServices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Beach::writeBeachClosedServices </td>
+          <td>(</td>
+          <td class="paramtype">ofstream &amp;&#160;</td>
+          <td class="paramname"><em>file</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Writes information about the services closed of the beach in .txt file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/beamendes/Documents/AEDA/AEDA-FEUP/aeda/<a class="el" href="_beach_8h_source.html">Beach.h</a></li>
-<li>/Users/beamendes/Documents/AEDA/AEDA-FEUP/aeda/Beach.cpp</li>
+<li>/Users/beamendes/Documents/ProjAEDA/<a class="el" href="_beach_8h_source.html">Beach.h</a></li>
+<li>/Users/beamendes/Documents/ProjAEDA/Beach.cpp</li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_beach.html">Beach</a></li>
+    <li class="footer">Generated on Fri Jan 5 2018 22:12:36 for AEDA by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

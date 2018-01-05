@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['readme',['README',['../md___users_beamendes__documents__a_e_d_a__a_e_d_a-_f_e_u_p_aeda__r_e_a_d_m_e.html',1,'']]],
-  ['removebeach',['removeBeach',['../class_company.html#a3936079f764ee1b095389eb526511e85',1,'Company']]],
-  ['riverbeach',['RiverBeach',['../class_river_beach.html',1,'RiverBeach'],['../class_river_beach.html#aa4964f12fe275b47b78fa5f1c52b0b32',1,'RiverBeach::RiverBeach(string &amp;county, string &amp;name, bool &amp;blueflag, bool &amp;lifeguard, unsigned long &amp;max_capacity, float &amp;lat, float &amp;longi, float &amp;width, float &amp;maxDepth)'],['../class_river_beach.html#a70e712f116a7cb499cd9f274dffaa308',1,'RiverBeach::RiverBeach(string beach)']]]
+  ['interestp',['InterestP',['../structstruct__points_shut_down.html#af32bf440cc63f67ed54a020b7af22972',1,'struct_pointsShutDown']]],
+  ['interestpoint',['InterestPoint',['../class_interest_point.html',1,'InterestPoint'],['../class_interest_point.html#ae224e65675fe86b0e45c7b37ceb92ae3',1,'InterestPoint::InterestPoint(Services service, float lat, float longi)'],['../class_interest_point.html#a1b6bd2869b17262d6ff88ce9af43d9fd',1,'InterestPoint::InterestPoint()']]]
 ];

@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -42,6 +49,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_river_beach.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -56,18 +78,20 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_river_beach-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">RiverBeach Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for RiverBeach:</div>
-<div class="dyncontent">
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for RiverBeach:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
  <div class="center">
   <img src="class_river_beach.png" usemap="#RiverBeach_map" alt=""/>
   <map id="RiverBeach_map" name="RiverBeach_map">
@@ -132,8 +156,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a129633666198d102f58fe1dc7b9f89d8 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23305808d894c08a79fa3a0d201d0c51 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a23305808d894c08a79fa3a0d201d0c51">getBasicServices</a> () const</td></tr>
 <tr class="separator:a23305808d894c08a79fa3a0d201d0c51 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69ce8d1f21dc1b81edd6df001ec6c2b2 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_services.html">Services</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a69ce8d1f21dc1b81edd6df001ec6c2b2">getExtraServices</a> () const</td></tr>
-<tr class="separator:a69ce8d1f21dc1b81edd6df001ec6c2b2 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e18f68fc778b0ab604bc99c6d2f7505 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">vector&lt; priority_queue&lt; <a class="el" href="class_services.html">Services</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a2e18f68fc778b0ab604bc99c6d2f7505">getExtraServices</a> () const</td></tr>
+<tr class="separator:a2e18f68fc778b0ab604bc99c6d2f7505 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a832e34ced9d46ad37838cb3cd2960ed9 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">HashTable_services&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a832e34ced9d46ad37838cb3cd2960ed9">getServicesDown</a> () const</td></tr>
+<tr class="separator:a832e34ced9d46ad37838cb3cd2960ed9 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfca41723a51e0da9596facfafe8f6db inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#acfca41723a51e0da9596facfafe8f6db">set_name</a> (string name)</td></tr>
 <tr class="memdesc:acfca41723a51e0da9596facfafe8f6db inherit pub_methods_class_beach"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes name.  <a href="class_beach.html#acfca41723a51e0da9596facfafe8f6db">More...</a><br /></td></tr>
 <tr class="separator:acfca41723a51e0da9596facfafe8f6db inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,24 +180,52 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:af846ce1aabbd67742a4fef8fa64dcec8 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#af846ce1aabbd67742a4fef8fa64dcec8">set_longitude</a> (float longi)</td></tr>
 <tr class="memdesc:af846ce1aabbd67742a4fef8fa64dcec8 inherit pub_methods_class_beach"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes longitude.  <a href="class_beach.html#af846ce1aabbd67742a4fef8fa64dcec8">More...</a><br /></td></tr>
 <tr class="separator:af846ce1aabbd67742a4fef8fa64dcec8 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3e07bb07ec9c8b633ecb600c80567f2 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#ae3e07bb07ec9c8b633ecb600c80567f2">set_ExtraServices</a> (vector&lt; <a class="el" href="class_services.html">Services</a> &gt; &amp;extraServices)</td></tr>
-<tr class="memdesc:ae3e07bb07ec9c8b633ecb600c80567f2 inherit pub_methods_class_beach"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes extra services.  <a href="class_beach.html#ae3e07bb07ec9c8b633ecb600c80567f2">More...</a><br /></td></tr>
-<tr class="separator:ae3e07bb07ec9c8b633ecb600c80567f2 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae26aa5e34a3c7a85b297204f2d71fef3 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top"><a id="ae26aa5e34a3c7a85b297204f2d71fef3"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>degreesToRadians</b> (double degrees)</td></tr>
 <tr class="separator:ae26aa5e34a3c7a85b297204f2d71fef3 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b7774165afd3ae88952281b9d846865 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a4b7774165afd3ae88952281b9d846865">distanceToBeach</a> (float lat, float longi)</td></tr>
 <tr class="memdesc:a4b7774165afd3ae88952281b9d846865 inherit pub_methods_class_beach"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates distance from location's GPS coordinates to beach's coordinates.  <a href="class_beach.html#a4b7774165afd3ae88952281b9d846865">More...</a><br /></td></tr>
 <tr class="separator:a4b7774165afd3ae88952281b9d846865 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28bde1bcb5aa5fe087fbb3b8a599f870 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top"><a id="a28bde1bcb5aa5fe087fbb3b8a599f870"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a28bde1bcb5aa5fe087fbb3b8a599f870">displayBeachExtraInfo</a> ()</td></tr>
+<tr class="memdesc:a28bde1bcb5aa5fe087fbb3b8a599f870 inherit pub_methods_class_beach"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display all extra infromation about the beach. <br /></td></tr>
+<tr class="separator:a28bde1bcb5aa5fe087fbb3b8a599f870 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a242686b20a85f0efa8b19eafdb53d0a7 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a242686b20a85f0efa8b19eafdb53d0a7">add_BasicService</a> (string service)</td></tr>
 <tr class="memdesc:a242686b20a85f0efa8b19eafdb53d0a7 inherit pub_methods_class_beach"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds Basic service to the vector.  <a href="class_beach.html#a242686b20a85f0efa8b19eafdb53d0a7">More...</a><br /></td></tr>
 <tr class="separator:a242686b20a85f0efa8b19eafdb53d0a7 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9182c63f32af1afd95649f14077c820c inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a9182c63f32af1afd95649f14077c820c">add_ExtraService</a> (<a class="el" href="class_services.html">Services</a> service)</td></tr>
 <tr class="memdesc:a9182c63f32af1afd95649f14077c820c inherit pub_methods_class_beach"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds Extra service to the vector.  <a href="class_beach.html#a9182c63f32af1afd95649f14077c820c">More...</a><br /></td></tr>
 <tr class="separator:a9182c63f32af1afd95649f14077c820c inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa22b4abddf590bef4ff426f28866aca0 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#aa22b4abddf590bef4ff426f28866aca0">erase_ExtraService</a> (string service)</td></tr>
-<tr class="memdesc:aa22b4abddf590bef4ff426f28866aca0 inherit pub_methods_class_beach"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase extra service from the vector.  <a href="class_beach.html#aa22b4abddf590bef4ff426f28866aca0">More...</a><br /></td></tr>
-<tr class="separator:aa22b4abddf590bef4ff426f28866aca0 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac962d50cc1111377e76a303cf71c9ac6 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#ac962d50cc1111377e76a303cf71c9ac6">erase_ExtraService</a> (<a class="el" href="class_services.html">Services</a> service)</td></tr>
+<tr class="memdesc:ac962d50cc1111377e76a303cf71c9ac6 inherit pub_methods_class_beach"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase extra service from the vector.  <a href="class_beach.html#ac962d50cc1111377e76a303cf71c9ac6">More...</a><br /></td></tr>
+<tr class="separator:ac962d50cc1111377e76a303cf71c9ac6 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a075271b7da69d3962823ead468b780b6 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a075271b7da69d3962823ead468b780b6">add_ClosedService</a> (<a class="el" href="class_services.html">Services</a> service, string date, string type_of_closing)</td></tr>
+<tr class="memdesc:a075271b7da69d3962823ead468b780b6 inherit pub_methods_class_beach"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close a service, permanently or temporarily, on a specific date.  <a href="class_beach.html#a075271b7da69d3962823ead468b780b6">More...</a><br /></td></tr>
+<tr class="separator:a075271b7da69d3962823ead468b780b6 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6175d751644b5cb47665ae185a270bde inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top"><a id="a6175d751644b5cb47665ae185a270bde"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator==</b> (const <a class="el" href="class_beach.html">Beach</a> &amp;b1) const</td></tr>
+<tr class="separator:a6175d751644b5cb47665ae185a270bde inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0263cc27ad103261c92c3ec675b9d55e inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top"><a id="a0263cc27ad103261c92c3ec675b9d55e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (const <a class="el" href="class_beach.html">Beach</a> &amp;b1) const</td></tr>
+<tr class="separator:a0263cc27ad103261c92c3ec675b9d55e inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25d6cac15cd9962e8cc492e75a602e38 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a25d6cac15cd9962e8cc492e75a602e38">writeBeachClosedServices</a> (ofstream &amp;file)</td></tr>
+<tr class="memdesc:a25d6cac15cd9962e8cc492e75a602e38 inherit pub_methods_class_beach"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes information about the services closed of the beach in .txt file.  <a href="class_beach.html#a25d6cac15cd9962e8cc492e75a602e38">More...</a><br /></td></tr>
+<tr class="separator:a25d6cac15cd9962e8cc492e75a602e38 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cb97a2c51dfc0baa97bed193f16ee64 inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a7cb97a2c51dfc0baa97bed193f16ee64">readClosedServices</a> (string service)</td></tr>
+<tr class="memdesc:a7cb97a2c51dfc0baa97bed193f16ee64 inherit pub_methods_class_beach"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads from .txt file the information about the services closed.  <a href="class_beach.html#a7cb97a2c51dfc0baa97bed193f16ee64">More...</a><br /></td></tr>
+<tr class="separator:a7cb97a2c51dfc0baa97bed193f16ee64 inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31e4e8d6f3ef1e9265997faed89d4e7a inherit pub_methods_class_beach"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_beach.html#a31e4e8d6f3ef1e9265997faed89d4e7a">removeServiceDown</a> (string name)</td></tr>
+<tr class="memdesc:a31e4e8d6f3ef1e9265997faed89d4e7a inherit pub_methods_class_beach"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a closed service from the hash table.  <a href="class_beach.html#a31e4e8d6f3ef1e9265997faed89d4e7a">More...</a><br /></td></tr>
+<tr class="separator:a31e4e8d6f3ef1e9265997faed89d4e7a inherit pub_methods_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ab1b1553f28c8b8918561c2e9917f66ea"><td class="memItemLeft" align="right" valign="top"><a id="ab1b1553f28c8b8918561c2e9917f66ea"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>width</b></td></tr>
+<tr class="separator:ab1b1553f28c8b8918561c2e9917f66ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad77631d81a720e6bf0622921d77087ac"><td class="memItemLeft" align="right" valign="top"><a id="ad77631d81a720e6bf0622921d77087ac"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>maxDepth</b></td></tr>
+<tr class="separator:ad77631d81a720e6bf0622921d77087ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -200,9 +254,12 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>longi</b></td></tr>
 <tr class="memitem:a7b3208969cfa2492ac219cc7b8403717 inherit pro_attribs_class_beach"><td class="memItemLeft" align="right" valign="top"><a id="a7b3208969cfa2492ac219cc7b8403717"></a>
 vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>basicServices</b></td></tr>
 <tr class="separator:a7b3208969cfa2492ac219cc7b8403717 inherit pro_attribs_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f4fe9ab51968a44adf478b22b164364 inherit pro_attribs_class_beach"><td class="memItemLeft" align="right" valign="top"><a id="a7f4fe9ab51968a44adf478b22b164364"></a>
-vector&lt; <a class="el" href="class_services.html">Services</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>extraServices</b></td></tr>
-<tr class="separator:a7f4fe9ab51968a44adf478b22b164364 inherit pro_attribs_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6c3d0bac3327e41332802587966ee9d inherit pro_attribs_class_beach"><td class="memItemLeft" align="right" valign="top"><a id="ac6c3d0bac3327e41332802587966ee9d"></a>
+vector&lt; priority_queue&lt; <a class="el" href="class_services.html">Services</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>extraServices</b></td></tr>
+<tr class="separator:ac6c3d0bac3327e41332802587966ee9d inherit pro_attribs_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60f9b6b9070f45d4491826329bdde671 inherit pro_attribs_class_beach"><td class="memItemLeft" align="right" valign="top"><a id="a60f9b6b9070f45d4491826329bdde671"></a>
+HashTable_services&#160;</td><td class="memItemRight" valign="bottom"><b>ServicesDown</b></td></tr>
+<tr class="separator:a60f9b6b9070f45d4491826329bdde671 inherit pro_attribs_class_beach"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa4964f12fe275b47b78fa5f1c52b0b32"></a>
@@ -578,15 +635,19 @@ vector&lt; <a class="el" href="class_services.html">Services</a> &gt;&#160;</td>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/Users/beamendes/Documents/AEDA/AEDA-FEUP/aeda/<a class="el" href="_beach_8h_source.html">Beach.h</a></li>
-<li>/Users/beamendes/Documents/AEDA/AEDA-FEUP/aeda/Beach.cpp</li>
+<li>/Users/beamendes/Documents/ProjAEDA/<a class="el" href="_beach_8h_source.html">Beach.h</a></li>
+<li>/Users/beamendes/Documents/ProjAEDA/Beach.cpp</li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_river_beach.html">RiverBeach</a></li>
+    <li class="footer">Generated on Fri Jan 5 2018 22:12:36 for AEDA by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

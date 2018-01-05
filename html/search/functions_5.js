@@ -11,10 +11,17 @@ var searchData=
   ['get_5fname',['get_name',['../class_beach.html#ae84e85693f8377673df6e91fba4503eb',1,'Beach']]],
   ['get_5fwidth',['get_width',['../class_beach.html#af28e3603ea98766d94c9e8eb9f76d509',1,'Beach::get_width()'],['../class_river_beach.html#a4fc528a34d80e3e2a6a48e53ab3e3f49',1,'RiverBeach::get_width()'],['../class_bayou_beach.html#a4d4fe4911ac6772ac0335e133de498c8',1,'BayouBeach::get_width()']]],
   ['getbasicservices',['getBasicServices',['../class_beach.html#a23305808d894c08a79fa3a0d201d0c51',1,'Beach']]],
-  ['getbeaches',['getBeaches',['../class_company.html#a5551b69f0b6de3037f7a3a4ca4d3c48a',1,'Company']]],
-  ['getextraservices',['getExtraServices',['../class_beach.html#a69ce8d1f21dc1b81edd6df001ec6c2b2',1,'Beach']]],
-  ['getname',['getName',['../class_services.html#a71c420517519b0316b771c637044b76a',1,'Services']]],
-  ['getpricerange',['getPriceRange',['../class_services.html#ac4c520cb327c737a775be426ffae1165',1,'Services']]],
-  ['getstars',['getStars',['../class_services.html#a35360c22f682d48fd7271f9c5017c7a5',1,'Services']]],
-  ['gettype',['getType',['../class_beach.html#a30001df535b2456e47611c7a0705660b',1,'Beach::getType()'],['../class_river_beach.html#a07f48c077de96aca001f47ce06253f2f',1,'RiverBeach::getType()'],['../class_bayou_beach.html#aad2b96c052075911ae3c0d23fd38b067',1,'BayouBeach::getType()'],['../class_services.html#af4da1cfed2bfabfc164d505993d105ce',1,'Services::getType()']]]
+  ['getbeaches',['getBeaches',['../class_company.html#a990a27a0a1b36d20032b929df1e76498',1,'Company']]],
+  ['getdateinspection',['getDateInspection',['../class_services.html#a6edf6b0788eb8110f6b12dd3e4a5ed31',1,'Services']]],
+  ['getdayinspection',['getDayInspection',['../class_services.html#a0d62a26fb072f4b9d2dc76a885bbda77',1,'Services']]],
+  ['getextraservices',['getExtraServices',['../class_beach.html#a2e18f68fc778b0ab604bc99c6d2f7505',1,'Beach']]],
+  ['getlatitude',['getLatitude',['../class_interest_point.html#ab76a980836e4928b1ddddbc144df497d',1,'InterestPoint']]],
+  ['getlongitude',['getLongitude',['../class_interest_point.html#a97b4456bcb8981af5184647baf41bec6',1,'InterestPoint']]],
+  ['getmonthinspection',['getMonthInspection',['../class_services.html#a918dd9e2a6f43aa306b50cf12d011fdb',1,'Services']]],
+  ['getname',['getName',['../class_services.html#a39d48db0feea6a3ddb128f887575f1e9',1,'Services']]],
+  ['getpricerange',['getPriceRange',['../class_services.html#a95165dc1ee95a4435b28953f2806d7ae',1,'Services']]],
+  ['getservicesdown',['getServicesDown',['../class_beach.html#a832e34ced9d46ad37838cb3cd2960ed9',1,'Beach']]],
+  ['getstars',['getStars',['../class_services.html#a2f74e945a775949d131a5caf66ff3bb0',1,'Services']]],
+  ['gettype',['getType',['../class_beach.html#a30001df535b2456e47611c7a0705660b',1,'Beach::getType()'],['../class_river_beach.html#a07f48c077de96aca001f47ce06253f2f',1,'RiverBeach::getType()'],['../class_bayou_beach.html#aad2b96c052075911ae3c0d23fd38b067',1,'BayouBeach::getType()'],['../class_services.html#aaf07ab319ea508fc9174129d44e8891b',1,'Services::getType()']]],
+  ['getyearinspection',['getYearInspection',['../class_services.html#af6eef2874d47317c55089e3d0bc91cf0',1,'Services']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['riverbeach',['RiverBeach',['../class_river_beach.html',1,'']]]
+  ['interestpoint',['InterestPoint',['../class_interest_point.html',1,'']]]
 ];

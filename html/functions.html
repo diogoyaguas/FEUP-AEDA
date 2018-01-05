@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -43,6 +50,20 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -64,8 +85,17 @@ $(function() {
 <li>add_BasicService()
 : <a class="el" href="class_beach.html#a242686b20a85f0efa8b19eafdb53d0a7">Beach</a>
 </li>
+<li>add_ClosedPoint()
+: <a class="el" href="class_company.html#a1fc2d7f2372eed32532020d37da2671d">Company</a>
+</li>
+<li>add_ClosedService()
+: <a class="el" href="class_beach.html#a075271b7da69d3962823ead468b780b6">Beach</a>
+</li>
 <li>add_ExtraService()
 : <a class="el" href="class_beach.html#a9182c63f32af1afd95649f14077c820c">Beach</a>
+</li>
+<li>add_InterestPoints()
+: <a class="el" href="class_company.html#aca86310933b0e5c65df92c9704469973">Company</a>
 </li>
 <li>addBeach()
 : <a class="el" href="class_company.html#a637bea6b73fee60679b2786c7be03694">Company</a>
@@ -74,10 +104,13 @@ $(function() {
 : <a class="el" href="class_company.html#ade7da5185959ac2ec280f94381a4c531">Company</a>
 </li>
 <li>alterBBeachInfo()
-: <a class="el" href="class_company.html#a77499b6ff8a4913bdb00843613467e56">Company</a>
+: <a class="el" href="class_company.html#aa1a1701a87f87bbaa49215895316731e">Company</a>
+</li>
+<li>alterDateofInspection()
+: <a class="el" href="class_company.html#a9da49eb50ab1387f81a72ce3ef765ae0">Company</a>
 </li>
 <li>alterRBeachInfo()
-: <a class="el" href="class_company.html#a584718d76eabe565779c41f3d047eb77">Company</a>
+: <a class="el" href="class_company.html#abe822269c7e48e15e23330c42ab14b4d">Company</a>
 </li>
 <li>alterService()
 : <a class="el" href="class_company.html#a0ec21ed7be545ec7154e0c2295ce804c">Company</a>
@@ -93,12 +126,18 @@ $(function() {
 : <a class="el" href="class_beach.html#addc648363a2a06c27983955cb1efe923">Beach</a>
 </li>
 <li>beachExists()
-: <a class="el" href="class_company.html#afabcb7d6b8e6fdb49ce4c9352ac88287">Company</a>
+: <a class="el" href="class_company.html#a51bf877f794fa7cfcf46d7d933d35683">Company</a>
 </li>
 </ul>
 
 
 <h3><a id="index_c"></a>- c -</h3><ul>
+<li>closePoint()
+: <a class="el" href="class_company.html#a2f24a5966f9f2dae3782b9c7cf55d3dd">Company</a>
+</li>
+<li>closeService()
+: <a class="el" href="class_company.html#a312c7b677754aa90ae3febcd47dee073">Company</a>
+</li>
 <li>Company()
 : <a class="el" href="class_company.html#a29937dda711b09df306ae7ca9b3d6b42">Company</a>
 </li>
@@ -109,13 +148,26 @@ $(function() {
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
+<li>date
+: <a class="el" href="structstruct__points_shut_down.html#a4c86cd3fb411a674442f1598f6fe687f">struct_pointsShutDown</a>
+, <a class="el" href="structstruct__service_shut_down.html#ad4352f1e350cc4418edf9e00cf2394c2">struct_serviceShutDown</a>
+</li>
 <li>displayBeach()
 : <a class="el" href="class_bayou_beach.html#a4dc1d41b1884873288cb9e5fb567726f">BayouBeach</a>
-, <a class="el" href="class_beach.html#a05675f3e8c2523cc7db11aeb66933867">Beach</a>
+, <a class="el" href="class_beach.html#a4473789ed0ebe45d1410145a79d55165">Beach</a>
 , <a class="el" href="class_river_beach.html#a1dba28cdd6d3c2dda666eb9f398cabbf">RiverBeach</a>
 </li>
 <li>displayBeaches()
 : <a class="el" href="class_company.html#ad740b440f2fa9948324c0aa0fa6d026e">Company</a>
+</li>
+<li>displayBeachExtraInfo()
+: <a class="el" href="class_beach.html#a28bde1bcb5aa5fe087fbb3b8a599f870">Beach</a>
+</li>
+<li>displayClosedServices()
+: <a class="el" href="class_company.html#a16f17a575ca53c792b2a856258b97624">Company</a>
+</li>
+<li>displayService()
+: <a class="el" href="class_services.html#ae4c12cc5a979d8b5cce2b0645928bb9d">Services</a>
 </li>
 <li>distanceToBeach()
 : <a class="el" href="class_beach.html#a4b7774165afd3ae88952281b9d846865">Beach</a>
@@ -125,7 +177,10 @@ $(function() {
 
 <h3><a id="index_e"></a>- e -</h3><ul>
 <li>erase_ExtraService()
-: <a class="el" href="class_beach.html#aa22b4abddf590bef4ff426f28866aca0">Beach</a>
+: <a class="el" href="class_beach.html#ac962d50cc1111377e76a303cf71c9ac6">Beach</a>
+</li>
+<li>erase_InterestPoints()
+: <a class="el" href="class_company.html#a9df2c5d763b68e9a6fc7e210354c4ed3">Company</a>
 </li>
 <li>eraseService()
 : <a class="el" href="class_company.html#a1c64f4273adb50b24e1cb2bf2c05ac08">Company</a>
@@ -174,32 +229,87 @@ $(function() {
 : <a class="el" href="class_beach.html#a23305808d894c08a79fa3a0d201d0c51">Beach</a>
 </li>
 <li>getBeaches()
-: <a class="el" href="class_company.html#a5551b69f0b6de3037f7a3a4ca4d3c48a">Company</a>
+: <a class="el" href="class_company.html#a990a27a0a1b36d20032b929df1e76498">Company</a>
+</li>
+<li>getDateInspection()
+: <a class="el" href="class_services.html#a6edf6b0788eb8110f6b12dd3e4a5ed31">Services</a>
+</li>
+<li>getDayInspection()
+: <a class="el" href="class_services.html#a0d62a26fb072f4b9d2dc76a885bbda77">Services</a>
 </li>
 <li>getExtraServices()
-: <a class="el" href="class_beach.html#a69ce8d1f21dc1b81edd6df001ec6c2b2">Beach</a>
+: <a class="el" href="class_beach.html#a2e18f68fc778b0ab604bc99c6d2f7505">Beach</a>
+</li>
+<li>getLatitude()
+: <a class="el" href="class_interest_point.html#ab76a980836e4928b1ddddbc144df497d">InterestPoint</a>
+</li>
+<li>getLongitude()
+: <a class="el" href="class_interest_point.html#a97b4456bcb8981af5184647baf41bec6">InterestPoint</a>
+</li>
+<li>getMonthInspection()
+: <a class="el" href="class_services.html#a918dd9e2a6f43aa306b50cf12d011fdb">Services</a>
 </li>
 <li>getName()
-: <a class="el" href="class_services.html#a71c420517519b0316b771c637044b76a">Services</a>
+: <a class="el" href="class_services.html#a39d48db0feea6a3ddb128f887575f1e9">Services</a>
 </li>
 <li>getPriceRange()
-: <a class="el" href="class_services.html#ac4c520cb327c737a775be426ffae1165">Services</a>
+: <a class="el" href="class_services.html#a95165dc1ee95a4435b28953f2806d7ae">Services</a>
+</li>
+<li>getServicesDown()
+: <a class="el" href="class_beach.html#a832e34ced9d46ad37838cb3cd2960ed9">Beach</a>
 </li>
 <li>getStars()
-: <a class="el" href="class_services.html#a35360c22f682d48fd7271f9c5017c7a5">Services</a>
+: <a class="el" href="class_services.html#a2f74e945a775949d131a5caf66ff3bb0">Services</a>
 </li>
 <li>getType()
 : <a class="el" href="class_bayou_beach.html#aad2b96c052075911ae3c0d23fd38b067">BayouBeach</a>
 , <a class="el" href="class_beach.html#a30001df535b2456e47611c7a0705660b">Beach</a>
 , <a class="el" href="class_river_beach.html#a07f48c077de96aca001f47ce06253f2f">RiverBeach</a>
-, <a class="el" href="class_services.html#af4da1cfed2bfabfc164d505993d105ce">Services</a>
+, <a class="el" href="class_services.html#aaf07ab319ea508fc9174129d44e8891b">Services</a>
+</li>
+<li>getYearInspection()
+: <a class="el" href="class_services.html#af6eef2874d47317c55089e3d0bc91cf0">Services</a>
+</li>
+</ul>
+
+
+<h3><a id="index_i"></a>- i -</h3><ul>
+<li>InterestP
+: <a class="el" href="structstruct__points_shut_down.html#af32bf440cc63f67ed54a020b7af22972">struct_pointsShutDown</a>
+</li>
+<li>InterestPoint()
+: <a class="el" href="class_interest_point.html#ae224e65675fe86b0e45c7b37ceb92ae3">InterestPoint</a>
 </li>
 </ul>
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
+<li>readClosedInterestPointsFile()
+: <a class="el" href="class_company.html#a5cf7eb8f6ae1c5c7ab17386eec7a6f6a">Company</a>
+</li>
+<li>readClosedServices()
+: <a class="el" href="class_beach.html#a7cb97a2c51dfc0baa97bed193f16ee64">Beach</a>
+</li>
+<li>readClosedServicesFile()
+: <a class="el" href="class_company.html#a7b333119934a05b016270ec94868a5dd">Company</a>
+</li>
+<li>readInterestPointsFile()
+: <a class="el" href="class_company.html#a3f30bcbb49bc7d4b2af53e5851f0f2ea">Company</a>
+</li>
 <li>removeBeach()
 : <a class="el" href="class_company.html#a3936079f764ee1b095389eb526511e85">Company</a>
+</li>
+<li>removePointDown()
+: <a class="el" href="class_company.html#ac827ac384576601b043ec412f9aad1be">Company</a>
+</li>
+<li>removeServiceDown()
+: <a class="el" href="class_beach.html#a31e4e8d6f3ef1e9265997faed89d4e7a">Beach</a>
+</li>
+<li>reopenClosedPoints()
+: <a class="el" href="class_company.html#a1a412862b23ef98a192c1b9b7bcf714f">Company</a>
+</li>
+<li>reopenService()
+: <a class="el" href="class_company.html#a501e88f2ce75d3335d4be74ade42dbaf">Company</a>
 </li>
 <li>RiverBeach()
 : <a class="el" href="class_river_beach.html#aa4964f12fe275b47b78fa5f1c52b0b32">RiverBeach</a>
@@ -223,8 +333,11 @@ $(function() {
 <li>searchName()
 : <a class="el" href="class_company.html#a914fcef89a30b4a28cc4455183dab791">Company</a>
 </li>
+<li>service
+: <a class="el" href="structstruct__service_shut_down.html#a2c60e070fb3115805ee6106e9e376410">struct_serviceShutDown</a>
+</li>
 <li>Services()
-: <a class="el" href="class_services.html#ac158976e8d9bd44be7e5959452b13178">Services</a>
+: <a class="el" href="class_services.html#a74566440aca0d8a9f23f1a52d89be239">Services</a>
 </li>
 <li>set_aquaticArea()
 : <a class="el" href="class_bayou_beach.html#a45c742927ddd735983e92a89c7baba96">BayouBeach</a>
@@ -233,9 +346,6 @@ $(function() {
 </li>
 <li>set_blue_flag()
 : <a class="el" href="class_beach.html#a019436b74c149f527a985f0c7c6fc8d2">Beach</a>
-</li>
-<li>set_ExtraServices()
-: <a class="el" href="class_beach.html#ae3e07bb07ec9c8b633ecb600c80567f2">Beach</a>
 </li>
 <li>set_latitude()
 : <a class="el" href="class_beach.html#a68a0fd1f91ee10e6acc9b676274bf2af">Beach</a>
@@ -277,9 +387,26 @@ $(function() {
 </ul>
 
 
+<h3><a id="index_t"></a>- t -</h3><ul>
+<li>type_of_closing
+: <a class="el" href="structstruct__points_shut_down.html#a76a9e54f13b714a51af1b3d778260020">struct_pointsShutDown</a>
+, <a class="el" href="structstruct__service_shut_down.html#ad7b10813887aaa90b1219d917cd7b3eb">struct_serviceShutDown</a>
+</li>
+</ul>
+
+
 <h3><a id="index_u"></a>- u -</h3><ul>
+<li>updateClosedInterestPointsFile()
+: <a class="el" href="class_company.html#a8e5752aebe93f03df56effbbb3572f4c">Company</a>
+</li>
+<li>updateClosedServicesFile()
+: <a class="el" href="class_company.html#aba471cd01d2bc23c5c77ab70481f2abd">Company</a>
+</li>
 <li>updateFile()
 : <a class="el" href="class_company.html#ad8d5d9aba5b078ca69fbc3f40b2bd282">Company</a>
+</li>
+<li>updateInterestPointsFile()
+: <a class="el" href="class_company.html#a69f2bd79d48c8dc6afd48e146764a333">Company</a>
 </li>
 </ul>
 
@@ -290,13 +417,23 @@ $(function() {
 , <a class="el" href="class_beach.html#a2ba3bf80382fa1b5e00befe0c4ccde88">Beach</a>
 , <a class="el" href="class_river_beach.html#acdbf29ab6540a2b0a5fd18cbea14375b">RiverBeach</a>
 </li>
+<li>writeBeachClosedServices()
+: <a class="el" href="class_beach.html#a25d6cac15cd9962e8cc492e75a602e38">Beach</a>
+</li>
+<li>writeService()
+: <a class="el" href="class_interest_point.html#a4bd3f7e90f068c5de28b58585ede4059">InterestPoint</a>
+, <a class="el" href="class_services.html#a38fd9d9836f112d235c671b9de9f250e">Services</a>
+</li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Jan 5 2018 22:12:37 for AEDA by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

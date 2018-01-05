@@ -9,6 +9,13 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -42,6 +49,21 @@ $(function() {
 });
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_beach.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -56,7 +78,6 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">Beach Member List</div>  </div>
@@ -66,16 +87,18 @@ $(function() {
 <p>This is the complete list of members for <a class="el" href="class_beach.html">Beach</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a242686b20a85f0efa8b19eafdb53d0a7">add_BasicService</a>(string service)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_beach.html#a9182c63f32af1afd95649f14077c820c">add_ExtraService</a>(Services service)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>basicServices</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_beach.html#addc648363a2a06c27983955cb1efe923">Beach</a>(string &amp;county, string &amp;name, bool &amp;blueflag, bool &amp;lifeguard, unsigned long &amp;max_capacity, float &amp;lat, float &amp;longi)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a46f93d12e0399676c648d351613976af">Beach</a>()</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>blueflag</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>county</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>degreesToRadians</b>(double degrees) (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a05675f3e8c2523cc7db11aeb66933867">displayBeach</a>()=0</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_beach.html#a075271b7da69d3962823ead468b780b6">add_ClosedService</a>(Services service, string date, string type_of_closing)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a9182c63f32af1afd95649f14077c820c">add_ExtraService</a>(Services service)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>basicServices</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#addc648363a2a06c27983955cb1efe923">Beach</a>(string &amp;county, string &amp;name, bool &amp;blueflag, bool &amp;lifeguard, unsigned long &amp;max_capacity, float &amp;lat, float &amp;longi)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_beach.html#a46f93d12e0399676c648d351613976af">Beach</a>()</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>blueflag</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>county</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>degreesToRadians</b>(double degrees) (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_beach.html#a4473789ed0ebe45d1410145a79d55165">displayBeach</a>()=0</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a28bde1bcb5aa5fe087fbb3b8a599f870">displayBeachExtraInfo</a>()</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_beach.html#a4b7774165afd3ae88952281b9d846865">distanceToBeach</a>(float lat, float longi)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#aa22b4abddf590bef4ff426f28866aca0">erase_ExtraService</a>(string service)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#ac962d50cc1111377e76a303cf71c9ac6">erase_ExtraService</a>(Services service)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0"><td class="entry"><b>extraServices</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_beach.html#afc6a57f98777ec5de1882acaf2703e6d">get_aquaticArea</a>() const =0</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_beach.html#a6f3155d6b2a779d27b619d87775ff62b">get_blue_flag</a>() const</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
@@ -88,30 +111,39 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="class_beach.html#ae84e85693f8377673df6e91fba4503eb">get_name</a>() const</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_beach.html#af28e3603ea98766d94c9e8eb9f76d509">get_width</a>() const =0</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a23305808d894c08a79fa3a0d201d0c51">getBasicServices</a>() const</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_beach.html#a69ce8d1f21dc1b81edd6df001ec6c2b2">getExtraServices</a>() const</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a30001df535b2456e47611c7a0705660b">getType</a>() const =0</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>lat</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>lifeguard</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>longi</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>max_capacity</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr bgcolor="#f0f0f0"><td class="entry"><b>name</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_beach.html#a2e18f68fc778b0ab604bc99c6d2f7505">getExtraServices</a>() const</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a832e34ced9d46ad37838cb3cd2960ed9">getServicesDown</a>() const</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_beach.html#a30001df535b2456e47611c7a0705660b">getType</a>() const =0</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>lat</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>lifeguard</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>longi</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>max_capacity</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>name</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>operator&lt;</b>(const Beach &amp;b1) const (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>operator==</b>(const Beach &amp;b1) const (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_beach.html#a7cb97a2c51dfc0baa97bed193f16ee64">readClosedServices</a>(string service)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a31e4e8d6f3ef1e9265997faed89d4e7a">removeServiceDown</a>(string name)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0"><td class="entry"><b>ServicesDown</b> (defined in <a class="el" href="class_beach.html">Beach</a>)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a37e71c3348356d49f3b1080973708376">set_aquaticArea</a>(float aquaticArea)=0</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_beach.html#a019436b74c149f527a985f0c7c6fc8d2">set_blue_flag</a>()</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#ae3e07bb07ec9c8b633ecb600c80567f2">set_ExtraServices</a>(vector&lt; Services &gt; &amp;extraServices)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_beach.html#a68a0fd1f91ee10e6acc9b676274bf2af">set_latitude</a>(float lat)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a861404c8f84396add0866190f1f83ecd">set_lifeguard</a>()</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_beach.html#af846ce1aabbd67742a4fef8fa64dcec8">set_longitude</a>(float longi)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a952a4e75dd1e8200c6cc0bfde8728789">set_max_capacity</a>(unsigned long max_capacity)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_beach.html#af0226438bc6e731b2bca9f5a6078b572">set_maxDepth</a>(float maxDept)=0</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#acfca41723a51e0da9596facfafe8f6db">set_name</a>(string name)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_beach.html#a3f3a4bde9008bcc87861710e8c99c008">set_width</a>(float width)=0</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a2ba3bf80382fa1b5e00befe0c4ccde88">writeBeach</a>(ofstream &amp;file) const =0</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a68a0fd1f91ee10e6acc9b676274bf2af">set_latitude</a>(float lat)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_beach.html#a861404c8f84396add0866190f1f83ecd">set_lifeguard</a>()</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#af846ce1aabbd67742a4fef8fa64dcec8">set_longitude</a>(float longi)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_beach.html#a952a4e75dd1e8200c6cc0bfde8728789">set_max_capacity</a>(unsigned long max_capacity)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#af0226438bc6e731b2bca9f5a6078b572">set_maxDepth</a>(float maxDept)=0</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_beach.html#acfca41723a51e0da9596facfafe8f6db">set_name</a>(string name)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a3f3a4bde9008bcc87861710e8c99c008">set_width</a>(float width)=0</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_beach.html#a2ba3bf80382fa1b5e00befe0c4ccde88">writeBeach</a>(ofstream &amp;file) const =0</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_beach.html#a25d6cac15cd9962e8cc492e75a602e38">writeBeachClosedServices</a>(ofstream &amp;file)</td><td class="entry"><a class="el" href="class_beach.html">Beach</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Fri Jan 5 2018 22:12:36 for AEDA by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>
