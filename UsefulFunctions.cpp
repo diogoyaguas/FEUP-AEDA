@@ -62,3 +62,48 @@ string divideString(char char_to_find, string & line){
     return temp;
 }
 
+string insertDate(){
+
+    string newDate;
+
+    cout << "Insert the new date of inspection (e.g. " << getActualDate() << ")" << endl
+         << "::: ";
+    cin.ignore(1000, '\n');
+    getline(cin, newDate);
+
+    while (newDate.size() != 10) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Please enter a date with a valid type: " << endl << "::: ";
+        cin >> newDate;
+    }
+
+    while (stoi(newDate.substr(6, 4)) > stoi(getActualDate().substr(6, 4))) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Please enter a date with a valid year: " << endl << "::: ";
+        cin >> newDate;
+    }
+    if (stoi(newDate.substr(6, 4)) == stoi(getActualDate().substr(6, 4))) {
+
+        while (stoi(newDate.substr(3, 2)) > stoi(getActualDate().substr(3, 2))) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Please enter a date with a valid month: " << endl << "::: ";
+            cin >> newDate;
+        }
+
+        if (stoi(newDate.substr(3, 2)) == stoi(getActualDate().substr(3, 2))) {
+
+            while (stoi(newDate.substr(3, 2)) > stoi(getActualDate().substr(3, 2))) {
+                cin.clear();
+                cin.ignore(1000, '\n');
+                cout << "Please enter a date with a valid day: " << endl << "::: ";
+                cin >> newDate;
+            }
+        }
+    }
+
+    return newDate;
+}
+

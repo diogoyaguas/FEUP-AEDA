@@ -32,4 +32,10 @@ string getActualDate();
  */
 string divideString(char char_to_find, string & line);
 
+/**
+ * brief Ask to the user to insert a new date.
+ * @return new date
+ */
+string insertDate();
+
 #endif //PROJAEDA_USEFULFUNCTION_H

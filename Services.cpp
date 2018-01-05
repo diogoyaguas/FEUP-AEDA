@@ -48,6 +48,8 @@ void Services::writeService(ofstream &file) const {
 
 
 //
+InterestPoint::InterestPoint() {}
+
 InterestPoint::InterestPoint(Services service, float lat, float longi)
 :Services(service.getType(), service.getName(), service.getPriceRange(), service.getStars(), service.getDateInspection()), lat(lat), longi(longi)
 {}

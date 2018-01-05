@@ -9,7 +9,7 @@
 
 
 typedef struct{
-    InterestPoint InterestP;
+    InterestPoint InterestP; ///< Point of Interest
     string date; ///< Closing date
     string type_of_closing; ///< Type of closing
 } struct_pointsShutDown;
@@ -202,6 +202,26 @@ public:
      * @brief Update the interest points .txt file.
      */
     void updateInterestPointsFile();
+
+    /**
+     * @brief Erase a point of interest from the vector.
+     * @param service
+     */
+    void erase_InterestPoints(InterestPoint point);
+
+    /**
+     * @brief Add a point of interest to the vector.
+     * @param service
+     */
+    void add_InterestPoints(InterestPoint point);
+
+    /**
+     * @brief Close a point of interest, permanently or temporarily, on a specific date.
+     * @param point
+     * @param date
+     * @param type_of_closing
+     */
+    void add_ClosedPoint(InterestPoint point, string date, string type_of_closing);
 
 };
 

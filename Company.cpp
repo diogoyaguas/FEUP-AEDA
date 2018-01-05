@@ -1,9 +1,7 @@
 #include "Company.h"
 #include "Interfaces.h"
-#include <algorithm>
 #include <fstream>
 #include "UsefulFunctions.h"
-#include "Beach.h"
 #include <unistd.h>
 
 using namespace std;
@@ -985,43 +983,7 @@ void Company::closeService() {
                         break;
                     case 2:
                         b->erase_ExtraService(old_s);
-                        cout << "Insert the new date of inspection (e.g. " << getActualDate() << ")" << endl
-                             << "::: ";
-                        cin.ignore(1000, '\n');
-                        getline(cin, newDate);
-
-                        while (newDate.size() != 10) {
-                            cin.clear();
-                            cin.ignore(1000, '\n');
-                            cout << "Please enter a date with a valid type: " << endl << "::: ";
-                            cin >> newDate;
-                        }
-
-                        while (stoi(newDate.substr(6, 4)) > stoi(getActualDate().substr(6, 4))) {
-                            cin.clear();
-                            cin.ignore(1000, '\n');
-                            cout << "Please enter a date with a valid year: " << endl << "::: ";
-                            cin >> newDate;
-                        }
-                        if (stoi(newDate.substr(6, 4)) == stoi(getActualDate().substr(6, 4))) {
-
-                            while (stoi(newDate.substr(3, 2)) > stoi(getActualDate().substr(3, 2))) {
-                                cin.clear();
-                                cin.ignore(1000, '\n');
-                                cout << "Please enter a date with a valid month: " << endl << "::: ";
-                                cin >> newDate;
-                            }
-
-                            if (stoi(newDate.substr(3, 2)) == stoi(getActualDate().substr(3, 2))) {
-
-                                while (stoi(newDate.substr(3, 2)) > stoi(getActualDate().substr(3, 2))) {
-                                    cin.clear();
-                                    cin.ignore(1000, '\n');
-                                    cout << "Please enter a date with a valid day: " << endl << "::: ";
-                                    cin >> newDate;
-                                }
-                            }
-                        }
+                        newDate = insertDate();
 
                         break;
                     default:
@@ -1074,10 +1036,10 @@ void Company::reopenService() {
     getline(cin, service);
 
     for (auto it = table.begin(); it != table.end(); ++it) {
-        
+
         if ((*it).service.getName() == service) {
 
-            if((*it).type_of_closing == "PERM") { throw 0;}
+            if ((*it).type_of_closing == "PERM") { throw 0; }
             Services s((*it).service.getType(), (*it).service.getName(), (*it).service.getPriceRange(),
                        (*it).service.getStars(), (*it).service.getDateInspection());
             b->add_ExtraService(s);
@@ -1089,7 +1051,7 @@ void Company::reopenService() {
         }
     }
 
-    if(!exists) {throw 1;}
+    if (!exists) { throw 1; }
 
 }
 
@@ -1157,9 +1119,10 @@ void Company::closePoint() {
 
     string name, service, sType, sName, sPriceRange, sStars, sDate, newDate, type_of_closing;
     unsigned int option, final;
+    float sLat, sLongi;
 
     ClearScreen();
-    cin.ignore(1000,'\n');
+    cin.ignore(1000, '\n');
 
     cout << "Insert name of the service you wish to close" << endl << "::: ";
     getline(cin, service);
@@ -1170,16 +1133,20 @@ void Company::closePoint() {
 
         while (!temp.empty()) {
 
-            InterestPoint temp_service = temp.top();
+            InterestPoint temp_point = temp.top();
             temp.pop();
-            if (temp_service.getName() == service) {
+            if (temp_point.getName() == service) {
 
-                sType = temp_service.getType();
-                sName = temp_service.getName();
-                sPriceRange = temp_service.getPriceRange();
-                sStars = temp_service.getStars();
-                sDate = temp_service.getDateInspection();
-                Services old_s = Services(sType, sName, sPriceRange, sStars, sDate);
+                sType = temp_point.getType();
+                sName = temp_point.getName();
+                sPriceRange = temp_point.getPriceRange();
+                sStars = temp_point.getStars();
+                sDate = temp_point.getDateInspection();
+                sLat = temp_point.getLatitude();
+                sLongi = temp_point.getLongitude();
+
+                Services old_s = Services(sType, sName, sPriceRange, sStars, sDate)
+                InterestPoint old_p = InterestPoint(old_s, sLat, sLongi);
 
                 cout << endl << "When was this service closed?" << endl;
                 cout << "1. Current date" << endl;
@@ -1196,66 +1163,42 @@ void Company::closePoint() {
                     cin >> option;
                 }
 
+                int n = 0;
+
                 switch (option) {
 
                     case 1:
+
                         for (auto it = beaches.begin(); it != beaches.end(); it++) {
 
-                            if ((*it)->distanceToBeach(temp_service.getLatitude(), temp_service.getLongitude()) < 50) {
+                            if ((*it)->distanceToBeach(temp_point.getLatitude(), temp_point.getLongitude()) < 50) {
 
-                                (*it)->erase_ExtraService(old_s);
+                                (*it)->erase_ExtraService(old_s.);
+                                n++;
 
                             }
                         }
                         newDate = getActualDate();
+                        if (n == 0) { throw 0; }
+                        erase_InterestPoints(old_p);
                         break;
 
                     case 2:
+
                         for (auto it = beaches.begin(); it != beaches.end(); it++) {
 
-                            if ((*it)->distanceToBeach(temp_service.getLatitude(), temp_service.getLongitude())  < 50) {
+                            if ((*it)->distanceToBeach(temp_point.getLatitude(), temp_point.getLongitude()) < 50) {
 
                                 (*it)->erase_ExtraService(old_s);
+                                n++;
 
                             }
                         }
-                        cout << "Insert the new date of inspection (e.g. " << getActualDate() << ")" << endl
-                             << "::: ";
-                        cin.ignore(1000, '\n');
-                        getline(cin, newDate);
 
-                        while (newDate.size() != 10) {
-                            cin.clear();
-                            cin.ignore(1000, '\n');
-                            cout << "Please enter a date with a valid type: " << endl << "::: ";
-                            cin >> newDate;
-                        }
+                        if (n == 0) { throw 0; }
+                        erase_InterestPoints(old_p);
 
-                        while (stoi(newDate.substr(6, 4)) > stoi(getActualDate().substr(6, 4))) {
-                            cin.clear();
-                            cin.ignore(1000, '\n');
-                            cout << "Please enter a date with a valid year: " << endl << "::: ";
-                            cin >> newDate;
-                        }
-                        if (stoi(newDate.substr(6, 4)) == stoi(getActualDate().substr(6, 4))) {
-
-                            while (stoi(newDate.substr(3, 2)) > stoi(getActualDate().substr(3, 2))) {
-                                cin.clear();
-                                cin.ignore(1000, '\n');
-                                cout << "Please enter a date with a valid month: " << endl << "::: ";
-                                cin >> newDate;
-                            }
-
-                            if (stoi(newDate.substr(3, 2)) == stoi(getActualDate().substr(3, 2))) {
-
-                                while (stoi(newDate.substr(3, 2)) > stoi(getActualDate().substr(3, 2))) {
-                                    cin.clear();
-                                    cin.ignore(1000, '\n');
-                                    cout << "Please enter a date with a valid day: " << endl << "::: ";
-                                    cin >> newDate;
-                                }
-                            }
-                        }
+                        newDate = insertDate();
 
                         break;
                     default:
@@ -1268,29 +1211,24 @@ void Company::closePoint() {
                 cout << endl << "Enter a number option: " << endl << "::: ";
                 cin >> option;
 
+                //verifies if input is valid
+                while (cin.fail() || !ValidMenuInput(1, 2, option)) {
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    cout << "Please enter a valid option: " << endl << "::: ";
+                    cin >> option;
+                }
+
                 if (option == 1)
                     type_of_closing = "TEMP";
                 else type_of_closing = "PERM";
 
-                int n = 0;
-
-                for (auto it = beaches.begin(); it != beaches.end(); it++) {
-
-                    if ((*it)->distanceToBeach(temp_service.getLatitude(), temp_service.getLongitude())  < 50) {
-
-                        (*it)->add_ClosedService(old_s, newDate, type_of_closing);
-                        n++;
-
-                    }
-                }
-
-                if(n == 0) { throw  0;}
+                add_ClosedPoint(old_p, newDate, type_of_closing);
 
                 cout << "Service closed successfully!" << endl;
                 usleep(1000000);
                 break;
             }
-
         }
         if (final == this->PointsOfInterest.size() - 1 && temp.empty()) { throw -1; }
     }
@@ -1299,36 +1237,41 @@ void Company::closePoint() {
 
 void Company::reopenClosedPoints() {
 
-    string name, service, sType, sName, sPriceRange, sStars, sDate, newDate;
+    string name, point, sType, sName, sPriceRange, sStars, sDate, newDate;
     HashTable_points table;
     bool exists;
 
     ClearScreen();
 
     table = this->PointOfInterest_Closed;
-    getline(cin, service);
+    getline(cin, point);
 
     cout << "Insert name of the service you wish to reopen" << endl << "::: ";
-    cin.ignore(1000,'\n');
+    cin.ignore(1000, '\n');
 
-    for (auto it = table.begin(); it != this->PointOfInterest_Closed.end(); ++it) {
-        cout << "oi";
+    for (auto it = table.begin(); it != table.end(); ++it) {
 
-        if ((*it).InterestP.getName() == service) {
+        if ((*it).InterestP.getName() == point) {
 
-            if((*it).type_of_closing == "PERM") { throw 0;}
-            Services s((*it).InterestP.getType(), (*it).InterestP.getName(), (*it).InterestP.getPriceRange(),
+            if ((*it).type_of_closing == "PERM") { throw 0; }
+
+            Services s(it->InterestP.getType(), (*it).InterestP.getName(), (*it).InterestP.getPriceRange(),
                        (*it).InterestP.getStars(), (*it).InterestP.getDateInspection());
+
+            InterestPoint p(s, (*it).InterestP.getLatitude(), (*it).InterestP.getLongitude());
+
 
             for (auto ti = beaches.begin(); ti != beaches.end(); ti++) {
 
-                if ((*ti)->distanceToBeach((*it).InterestP.getLatitude(),(*it).InterestP.getLongitude()) < 50) {
+                if ((*ti)->distanceToBeach((*it).InterestP.getLatitude(), (*it).InterestP.getLongitude()) < 50) {
 
                     (*ti)->add_ExtraService(s);
                 }
             }
 
-            this->removePointDown(service);
+            add_InterestPoints(p);
+
+            this->removePointDown(point);
 
             cout << "Service reopened successfully!" << endl;
             usleep(16000);
@@ -1337,14 +1280,14 @@ void Company::reopenClosedPoints() {
         }
     }
 
-    if(!exists) {throw 1;}
+    if (!exists) { throw 1; }
 }
 
 
-void Company::removePointDown(string name){
+void Company::removePointDown(string name) {
     auto it = this->PointOfInterest_Closed.begin();
     for (; it != this->PointOfInterest_Closed.end(); ++it) {
-        if((*it).InterestP.getName()==name)
+        if ((*it).InterestP.getName() == name)
             break;
     }
 
@@ -1352,7 +1295,7 @@ void Company::removePointDown(string name){
 };
 
 
-void Company::readInterestPointsFile(){
+void Company::readInterestPointsFile() {
     fstream file;
     string line, temp;
     Services service;
@@ -1361,29 +1304,29 @@ void Company::readInterestPointsFile(){
 
     file.open("InterestPointsFile.txt");
 
-    while(getline(file, line)){
-        temp = divideString(';',line);
+    while (getline(file, line)) {
+        temp = divideString(';', line);
         service = Services(temp);
-        lat = stof(divideString(';',line));
+        lat = stof(divideString(';', line));
         longi = stof(line);
         InterestPoint p(service, lat, longi);
 
-        for (auto it = PointsOfInterest.begin(); it != PointsOfInterest.end() ; ++it) {
-            if((*it).top().getType()==service.getType()){
+        for (auto it = PointsOfInterest.begin(); it != PointsOfInterest.end(); ++it) {
+            if ((*it).top().getType() == service.getType()) {
                 (*it).push(p);
                 added = true;
                 break;
             }
         }
 
-        if(!added){
+        if (!added) {
             priority_queue<InterestPoint> new_q;
             new_q.push(p);
             this->PointsOfInterest.push_back(new_q);
         }
 
-        for (auto it = beaches.begin(); it != beaches.end() ; ++it) {
-            if((*it)->distanceToBeach(lat, longi)<50){
+        for (auto it = beaches.begin(); it != beaches.end(); ++it) {
+            if ((*it)->distanceToBeach(lat, longi) < 50) {
                 (*it)->add_ExtraService(service);
             }
         }
@@ -1391,21 +1334,82 @@ void Company::readInterestPointsFile(){
 }
 
 
-void Company::updateInterestPointsFile(){
+void Company::updateInterestPointsFile() {
     ofstream file;
     file.open("InterestPointsFile.txt");
 
-    for (auto it = this->PointsOfInterest.begin(); it !=  this->PointsOfInterest.end(); ++it) {
+    for (auto it = this->PointsOfInterest.begin(); it != this->PointsOfInterest.end(); ++it) {
         InterestPoint p = (*it).top();
         (*it).pop();
         p.writeService(file);
         file << endl;
 
-        while(!(*it).empty()){
+        while (!(*it).empty()) {
             InterestPoint p = (*it).top();
             (*it).pop();
             p.writeService(file);
             file << endl;
         }
     }
+}
+
+
+void Company::erase_InterestPoints(InterestPoint point) {
+
+    for (unsigned int i = 0; i < this->PointsOfInterest.size(); ++i) {
+
+        if (this->PointsOfInterest.at(i).top().getType() == point.getType()) {
+
+            priority_queue<InterestPoint> temp;
+            InterestPoint s_temp;
+
+            while (!this->PointsOfInterest.at(i).empty()) {
+
+                s_temp = this->PointsOfInterest.at(i).top();
+                this->PointsOfInterest.at(i).pop();
+                if (s_temp.getName() != point.getName()) {
+
+                    temp.push(s_temp);
+                }
+            }
+
+            while (!temp.empty()) {
+
+                s_temp = temp.top();
+                temp.pop();
+                this->PointsOfInterest.at(i).push(s_temp);
+            }
+        }
+    }
+
+
+}
+
+
+void Company::add_InterestPoints(InterestPoint point) {
+
+    for (unsigned int i = 0; i < this->PointsOfInterest.size(); ++i) {
+
+        if (this->PointsOfInterest.at(i).top().getType() == point.getType()) {
+
+            this->PointsOfInterest.at(i).push(point);
+            return;
+        }
+    }
+
+    priority_queue<InterestPoint> new_q;
+    new_q.push(point);
+    this->PointsOfInterest.push_back(new_q);
+
+}
+
+
+void Company::add_ClosedPoint(InterestPoint point, string date, string type_of_closing) {
+
+    struct_pointsShutDown close;
+    close.date = date;
+    close.InterestP = point;
+    close.type_of_closing = type_of_closing;
+    this->PointOfInterest_Closed.insert(close);
+
 }

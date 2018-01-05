@@ -140,6 +140,11 @@ public:
     InterestPoint(Services service, float lat, float longi);
 
     /**
+     * @brief Alternative constructor
+     */
+    InterestPoint();
+
+    /**
      * @return lat;
      */
     float getLatitude() const {return lat;}
