@@ -575,7 +575,6 @@ void Company::displayBeaches() {
 }
 
 
-
 void Company::searchCounty() {
 
     string county;
@@ -1115,6 +1114,7 @@ void Company::closePoint() {
     string service, sType, sName, sPriceRange, sStars, sDate, newDate, type_of_closing;
     unsigned int option, final;
     float sLat, sLongi;
+    bool deleted = false;
 
     ClearScreen();
     cin.ignore(1000, '\n');
@@ -1164,11 +1164,13 @@ void Company::closePoint() {
                     case 1:
                         newDate = getActualDate();
                         erase_InterestPoints(old_p);
+                        deleted = true;
                         break;
 
                     case 2:
                         erase_InterestPoints(old_p);
                         newDate = insertDate();
+                        deleted = true;
                         break;
                 }
 
@@ -1190,18 +1192,15 @@ void Company::closePoint() {
                     type_of_closing = "TEMP";
                 else type_of_closing = "PERM";
 
-                int size;
-                size = this->PointOfInterest_Closed.size();
 
                 add_ClosedPoint(old_p, newDate, type_of_closing);
-                size = this->PointOfInterest_Closed.size();
 
                 cout << "Service closed successfully!" << endl;
-                usleep(1000000);
+                usleep(100000);
                 break;
             }
         }
-        if (final == this->PointsOfInterest.size() - 1 && temp.empty()) { throw -1; }
+        if (!deleted) { throw -1; }
     }
 }
 
@@ -1245,7 +1244,7 @@ void Company::reopenClosedPoints() {
         }
     }
 
-    //if (!exists) { throw 1; }
+    if (!exists) { throw 1; }
 }
 
 
