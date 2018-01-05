@@ -123,6 +123,17 @@ public:
      * @brief Write service information on .txt file.
      * @param file
      */
+    virtual void writeService(ofstream &file) const;
+};
+
+class InterestPoint :  public Services {
+    float lat;
+    float longi;
+
+public:
+    InterestPoint(Services service, float lat, float longi);
+    float getLatitude() const {return lat;}
+    float getLongitude() const {return longi;}
     void writeService(ofstream &file) const;
 };
 

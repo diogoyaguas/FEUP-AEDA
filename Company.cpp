@@ -39,6 +39,7 @@ Company::Company() {
         }
     }
     readClosedServicesFile();
+    readInterestPointsFile();
 }
 
 
@@ -1072,7 +1073,7 @@ void Company::reopenService() {
     cout << "Insert name of the service you wish to reopen" << endl << "::: ";
     getline(cin, service);
 
-    for (auto it = table.begin(); it != b->getServicesDown(); ++it) {
+    for (auto it = table.begin(); it != table.end(); ++it) {
         
         if ((*it).service.getName() == service) {
 
@@ -1100,8 +1101,6 @@ void Company::updateClosedServicesFile() {
     for (auto it = this->beaches.begin(); it != this->beaches.end(); ++it) {
         if (!(*it)->getServicesDown().empty()) {
             (*it)->writeBeachClosedServices(file);
-            if ((*it) != (*beaches.end()))
-                file << endl;
         }
     }
 }
@@ -1117,6 +1116,7 @@ void Company::readClosedServicesFile() {
         for (auto it = beaches.begin(); it != beaches.end(); ++it) {
             if (beach_name == (*it)->get_name()) {
                 (*it)->readClosedServices(service);
+                break;
             }
         }
     }
@@ -1159,17 +1159,18 @@ void Company::closePoint() {
     unsigned int option, final;
 
     ClearScreen();
+    cin.ignore(1000,'\n');
 
     cout << "Insert name of the service you wish to close" << endl << "::: ";
     getline(cin, service);
 
     for (unsigned int i = 0; i < this->PointsOfInterest.size(); ++i) {
         final = i;
-        priority_queue<Services> temp = this->PointsOfInterest.at(i);
+        priority_queue<InterestPoint> temp = this->PointsOfInterest.at(i);
 
         while (!temp.empty()) {
 
-            Services temp_service = temp.top();
+            InterestPoint temp_service = temp.top();
             temp.pop();
             if (temp_service.getName() == service) {
 
@@ -1200,7 +1201,7 @@ void Company::closePoint() {
                     case 1:
                         for (auto it = beaches.begin(); it != beaches.end(); it++) {
 
-                            if ((*it)->distanceToBeach() < 50) {
+                            if ((*it)->distanceToBeach(temp_service.getLatitude(), temp_service.getLongitude()) < 50) {
 
                                 (*it)->erase_ExtraService(old_s);
 
@@ -1212,7 +1213,7 @@ void Company::closePoint() {
                     case 2:
                         for (auto it = beaches.begin(); it != beaches.end(); it++) {
 
-                            if ((*it)->distanceToBeach() < 50) {
+                            if ((*it)->distanceToBeach(temp_service.getLatitude(), temp_service.getLongitude())  < 50) {
 
                                 (*it)->erase_ExtraService(old_s);
 
@@ -1275,7 +1276,7 @@ void Company::closePoint() {
 
                 for (auto it = beaches.begin(); it != beaches.end(); it++) {
 
-                    if ((*it)->distanceToBeach() < 50) {
+                    if ((*it)->distanceToBeach(temp_service.getLatitude(), temp_service.getLongitude())  < 50) {
 
                         (*it)->add_ClosedService(old_s, newDate, type_of_closing);
                         n++;
@@ -1304,22 +1305,24 @@ void Company::reopenClosedPoints() {
 
     ClearScreen();
 
-    table = this->PointOfInterest;
-
-    cout << "Insert name of the service you wish to reopen" << endl << "::: ";
+    table = this->PointOfInterest_Closed;
     getline(cin, service);
 
-    for (auto it = table.begin(); it != this->PointOfInterest.end(); ++it) {
+    cout << "Insert name of the service you wish to reopen" << endl << "::: ";
+    cin.ignore(1000,'\n');
 
-        if ((*it).service.getName() == service) {
+    for (auto it = table.begin(); it != this->PointOfInterest_Closed.end(); ++it) {
+        cout << "oi";
+
+        if ((*it).InterestP.getName() == service) {
 
             if((*it).type_of_closing == "PERM") { throw 0;}
-            Services s((*it).service.getType(), (*it).service.getName(), (*it).service.getPriceRange(),
-                       (*it).service.getStars(), (*it).service.getDateInspection());
+            Services s((*it).InterestP.getType(), (*it).InterestP.getName(), (*it).InterestP.getPriceRange(),
+                       (*it).InterestP.getStars(), (*it).InterestP.getDateInspection());
 
             for (auto ti = beaches.begin(); ti != beaches.end(); ti++) {
 
-                if ((*ti)->distanceToBeach((*it).lat,(*it).longi) < 50) {
+                if ((*ti)->distanceToBeach((*it).InterestP.getLatitude(),(*it).InterestP.getLongitude()) < 50) {
 
                     (*ti)->add_ExtraService(s);
                 }
@@ -1339,11 +1342,70 @@ void Company::reopenClosedPoints() {
 
 
 void Company::removePointDown(string name){
-    auto it = this->PointOfInterest.begin();
-    for (; it != this->PointOfInterest.end(); ++it) {
-        if((*it).service.getName()==name)
+    auto it = this->PointOfInterest_Closed.begin();
+    for (; it != this->PointOfInterest_Closed.end(); ++it) {
+        if((*it).InterestP.getName()==name)
             break;
     }
 
-    this->PointOfInterest.erase(it);
+    this->PointOfInterest_Closed.erase(it);
 };
+
+
+void Company::readInterestPointsFile(){
+    fstream file;
+    string line, temp;
+    Services service;
+    float lat, longi;
+    bool added = false;
+
+    file.open("InterestPointsFile.txt");
+
+    while(getline(file, line)){
+        temp = divideString(';',line);
+        service = Services(temp);
+        lat = stof(divideString(';',line));
+        longi = stof(line);
+        InterestPoint p(service, lat, longi);
+
+        for (auto it = PointsOfInterest.begin(); it != PointsOfInterest.end() ; ++it) {
+            if((*it).top().getType()==service.getType()){
+                (*it).push(p);
+                added = true;
+                break;
+            }
+        }
+
+        if(!added){
+            priority_queue<InterestPoint> new_q;
+            new_q.push(p);
+            this->PointsOfInterest.push_back(new_q);
+        }
+
+        for (auto it = beaches.begin(); it != beaches.end() ; ++it) {
+            if((*it)->distanceToBeach(lat, longi)<50){
+                (*it)->add_ExtraService(service);
+            }
+        }
+    }
+}
+
+
+void Company::updateInterestPointsFile(){
+    ofstream file;
+    file.open("InterestPointsFile.txt");
+
+    for (auto it = this->PointsOfInterest.begin(); it !=  this->PointsOfInterest.end(); ++it) {
+        InterestPoint p = (*it).top();
+        (*it).pop();
+        p.writeService(file);
+        file << endl;
+
+        while(!(*it).empty()){
+            InterestPoint p = (*it).top();
+            (*it).pop();
+            p.writeService(file);
+            file << endl;
+        }
+    }
+}

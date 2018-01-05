@@ -212,6 +212,7 @@ void Beach::writeBeachClosedServices(ofstream &file) {
         cout << (*it).service.getDateInspection();
         file << this->name << "; " << (*it).type_of_closing << "; " << (*it).date << "; ";
         (*it).service.writeService(file);
+        file << endl;
     }
 }
 

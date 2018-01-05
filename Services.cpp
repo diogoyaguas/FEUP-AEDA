@@ -45,3 +45,16 @@ void Services::writeService(ofstream &file) const {
         file << this->dateInspection << ";";
     }
 }
+
+
+//
+InterestPoint::InterestPoint(Services service, float lat, float longi)
+:Services(service.getType(), service.getName(), service.getPriceRange(), service.getStars(), service.getDateInspection()), lat(lat), longi(longi)
+{}
+
+
+void InterestPoint::writeService(ofstream &file) const{
+    Services::writeService(file);
+    file << " " << this->getLatitude();
+    file << "; " << this->getLongitude();
+}

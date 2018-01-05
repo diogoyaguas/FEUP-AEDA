@@ -71,6 +71,7 @@ void mainMenu(Company &company) {
         case 5:
             company.updateFile();
             company.updateClosedServicesFile();
+            company.updateInterestPointsFile();
             ClearScreen();
             mainMenu(company);
             break;
@@ -468,4 +469,5 @@ void compareMenu(Company &company){
 
     returnMainMenu();
 }
+
 

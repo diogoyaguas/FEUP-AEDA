@@ -6,19 +6,21 @@
 #include <math.h>
 #include <set>
 
+
+
 typedef struct{
-    Services service; ///< Service closed
+    InterestPoint InterestP;
     string date; ///< Closing date
     string type_of_closing; ///< Type of closing
-    float lat, longi; ///< Coordinates of the service
 } struct_pointsShutDown;
 
+
 struct sort_pointsShutDown {
-    int operator()(const struct_pointsShutDown & f1) const{
+    int operator()(const struct_pointsShutDown & f1) {
         return 0;
     }
 
-    bool operator () (const struct_pointsShutDown & p1, const struct_pointsShutDown & p2) const {
+    bool operator () (const struct_pointsShutDown & p1, const struct_pointsShutDown & p2)  const{
 
         if (stoi(p1.date.substr(6,4)) != stoi(p2.date.substr(6,4))) return stoi(p1.date.substr(6,4)) < stoi(p2.date.substr(6,4));
         else {
@@ -32,7 +34,7 @@ struct sort_pointsShutDown {
     }
 };
 
-typedef unordered_set<struct_pointsShutDown, sort_serviceShutDown, sort_serviceShutDown> HashTable_points;
+typedef unordered_set<struct_pointsShutDown, sort_pointsShutDown, sort_pointsShutDown> HashTable_points;
 
 struct SortOrder{
     bool operator()(const Beach * b1, const Beach * b2) const{
@@ -45,8 +47,8 @@ struct SortOrder{
 class Company {
 private:
     set <Beach *, SortOrder> beaches;
-    vector <priority_queue<Services>> PointsOfInterest;
-    HashTable_points PointOfInterest;
+    vector <priority_queue<InterestPoint>> PointsOfInterest;
+    HashTable_points PointOfInterest_Closed;
 public:
     /**
      * Constructor of class Company.
@@ -190,6 +192,11 @@ public:
      * @param name
      */
     void removePointDown(string name);
+
+
+    void readInterestPointsFile();
+
+    void updateInterestPointsFile();
 
 };
 
