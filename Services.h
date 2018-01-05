@@ -124,6 +124,7 @@ public:
      * @param file
      */
     virtual void writeService(ofstream &file) const;
+    void displayService() const;
 };
 
 class InterestPoint :  public Services {

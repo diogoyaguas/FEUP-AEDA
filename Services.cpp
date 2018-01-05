@@ -1,5 +1,6 @@
 #include "Services.h"
 #include <fstream>
+#include <iomanip>
 
 Services::Services(string type, string name, string priceRange, string stars, string dateInspection)
 :type(type), name(name), priceRange(priceRange), stars(stars), dateInspection(dateInspection)
@@ -35,6 +36,15 @@ Services::Services(string service){
 }
 
 
+void Services::displayService() const {
+
+    cout << setw(15) << setfill(' ') << "Type: " << this->getType() << endl;
+    cout << setw(15) << setfill(' ') << "Name: " << this->getName() << endl;
+    cout << setw(22) << setfill(' ') << "Price Range: " << this->getPriceRange() << endl;
+    cout << setw(16) << setfill(' ') << "Stars: " << this->getStars() << endl;
+    cout << setw(15) << setfill(' ') << "Date: " << this->getDateInspection() << endl << endl;
+
+}
 void Services::writeService(ofstream &file) const {
 
     if(!this->type.empty()) {

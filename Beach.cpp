@@ -115,7 +115,7 @@ void Beach::displayBeachExtraInfo() {
 
     if (extraServices.empty()) { throw -1; }
 
-    cout << endl << "Services: " << endl;
+    cout << endl << "Services in the area: " << endl;
 
     int n = 0;
 
@@ -130,11 +130,7 @@ void Beach::displayBeachExtraInfo() {
 
             Services service = temp.top();
             temp.pop();
-            cout << setw(15) << setfill(' ') << "Type: " << service.getType() << endl;
-            cout << setw(15) << setfill(' ') << "Name: " << service.getName() << endl;
-            cout << setw(22) << setfill(' ') << "Price Range: " << service.getPriceRange() << endl;
-            cout << setw(16) << setfill(' ') << "Stars: " << service.getStars() << endl;
-            cout << setw(15) << setfill(' ') << "Date: " << service.getDateInspection() << endl << endl;
+            service.displayService();
         }
     }
     if (n == 0) { throw -1; }
@@ -403,8 +399,6 @@ void RiverBeach::displayBeach() {
     cout << "Maximum Depth:" << maxDepth << endl;
 
     Beach::displayBeachExtraInfo();
-
-
 }
 
 

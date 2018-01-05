@@ -28,7 +28,9 @@ struct sort_pointsShutDown {
             if (stoi(p1.date.substr(3,2)) != stoi(p2.date.substr(3,2))) return stoi(p1.date.substr(3,2)) != stoi(p2.date.substr(3,2));
             else {
 
-                return stoi(p1.date.substr(0,2)) < stoi(p2.date.substr(0,2));
+                if( stoi(p1.date.substr(0,2)) != stoi(p2.date.substr(0,2)))
+                    return stoi(p1.date.substr(0,2)) < stoi(p2.date.substr(0,2));
+                else return true;
             }
         }
     }
@@ -232,7 +234,6 @@ public:
      * @param type_of_closing
      */
     void add_ClosedPoint(InterestPoint point, string date, string type_of_closing);
-
 };
 
 #endif //AEDA_COMPANY_H

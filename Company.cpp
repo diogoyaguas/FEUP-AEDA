@@ -4,6 +4,7 @@
 #include "UsefulFunctions.h"
 #include <unistd.h>
 
+
 using namespace std;
 
 
@@ -533,32 +534,46 @@ void Company::eraseService() {
 
 void Company::displayBeaches() {
 
-    int option;
+    bool exists_ip_near = false;
 
     ClearScreen();
 
     for (auto it = beaches.begin(); it != beaches.end(); it++) {
 
         try { (*it)->displayBeach(); } catch (int x) {
-            cout << endl << "This beach doesn't have any services associated." << endl << endl;
+            cout << endl << "This beach doesn't have any services associated." << endl;
         }
+
+
+        for (auto i = PointsOfInterest.begin(); i != PointsOfInterest.end(); ++i) {
+            priority_queue<InterestPoint> interestPts = (*i);
+
+            while(!interestPts.empty()) {
+                if((*it)->distanceToBeach(interestPts.top().getLatitude(), interestPts.top().getLongitude()) < 50) {
+                    cout << endl << "Services / interest points close by:" << endl;
+                    break;
+                }
+                interestPts.pop();
+            }
+
+
+            interestPts = (*i);
+
+            while(!interestPts.empty()){
+
+                if((*it)->distanceToBeach(interestPts.top().getLatitude(), interestPts.top().getLongitude()) < 50){
+                    (*i).top().displayService();
+                }
+                interestPts.pop();
+            }
+
+            cout << endl;
+        }
+
     }
     returnMainMenu();
 }
 
-
-void Company::updateFile() {
-
-    ofstream file;
-    file.open("BeachFile.txt");
-
-    for (auto it = beaches.begin(); it != beaches.end(); it++) {
-        (*it)->writeBeach(file);
-        if ((*it) != (*beaches.end()))
-            file << endl;
-    }
-
-}
 
 
 void Company::searchCounty() {
@@ -926,6 +941,9 @@ void Company::alterDateofInspection() {
 }
 
 
+
+//services
+
 void Company::closeService() {
 
     string name, service, sType, sName, sPriceRange, sStars, sDate, newDate, type_of_closing;
@@ -1057,35 +1075,6 @@ void Company::reopenService() {
 }
 
 
-void Company::updateClosedServicesFile() {
-    ofstream file;
-    file.open("ClosedServicesFile.txt");
-
-    for (auto it = this->beaches.begin(); it != this->beaches.end(); ++it) {
-        if (!(*it)->getServicesDown().empty()) {
-            (*it)->writeBeachClosedServices(file);
-        }
-    }
-}
-
-
-void Company::readClosedServicesFile() {
-    fstream file;
-    string service, beach_name;
-    file.open("ClosedServicesFile.txt");
-
-    while (getline(file, service)) {
-        beach_name = divideString(';', service);
-        for (auto it = beaches.begin(); it != beaches.end(); ++it) {
-            if (beach_name == (*it)->get_name()) {
-                (*it)->readClosedServices(service);
-                break;
-            }
-        }
-    }
-}
-
-
 void Company::displayClosedServices() {
 
     ClearScreen();
@@ -1116,9 +1105,14 @@ void Company::displayClosedServices() {
 }
 
 
+
+
+
+//interest points
+
 void Company::closePoint() {
 
-    string name, service, sType, sName, sPriceRange, sStars, sDate, newDate, type_of_closing;
+    string service, sType, sName, sPriceRange, sStars, sDate, newDate, type_of_closing;
     unsigned int option, final;
     float sLat, sLongi;
 
@@ -1164,45 +1158,17 @@ void Company::closePoint() {
                     cin >> option;
                 }
 
-                int n = 0;
 
                 switch (option) {
 
                     case 1:
-
-                        for (auto it = beaches.begin(); it != beaches.end(); it++) {
-
-                            if ((*it)->distanceToBeach(temp_point.getLatitude(), temp_point.getLongitude()) < 50) {
-
-                                (*it)->erase_ExtraService(old_s);
-                                n++;
-
-                            }
-                        }
                         newDate = getActualDate();
-                        if (n == 0) { throw 0; }
                         erase_InterestPoints(old_p);
                         break;
 
                     case 2:
-
-                        for (auto it = beaches.begin(); it != beaches.end(); it++) {
-
-                            if ((*it)->distanceToBeach(temp_point.getLatitude(), temp_point.getLongitude()) < 50) {
-
-                                (*it)->erase_ExtraService(old_s);
-                                n++;
-
-                            }
-                        }
-
-                        if (n == 0) { throw 0; }
                         erase_InterestPoints(old_p);
-
                         newDate = insertDate();
-
-                        break;
-                    default:
                         break;
                 }
 
@@ -1224,7 +1190,11 @@ void Company::closePoint() {
                     type_of_closing = "TEMP";
                 else type_of_closing = "PERM";
 
+                int size;
+                size = this->PointOfInterest_Closed.size();
+
                 add_ClosedPoint(old_p, newDate, type_of_closing);
+                size = this->PointOfInterest_Closed.size();
 
                 cout << "Service closed successfully!" << endl;
                 usleep(1000000);
@@ -1253,7 +1223,6 @@ void Company::reopenClosedPoints() {
 
     for (auto it = table.begin(); it != table.end(); ++it) {
 
-        cout << (*it).InterestP.getName() << endl;
 
         if ((*it).InterestP.getName() == point) {
 
@@ -1264,14 +1233,6 @@ void Company::reopenClosedPoints() {
 
             InterestPoint p(s, (*it).InterestP.getLatitude(), (*it).InterestP.getLongitude());
 
-
-            for (auto ti = beaches.begin(); ti != beaches.end(); ti++) {
-
-                if ((*ti)->distanceToBeach((*it).InterestP.getLatitude(), (*it).InterestP.getLongitude()) < 50) {
-
-                    (*ti)->add_ExtraService(s);
-                }
-            }
 
             add_InterestPoints(p);
 
@@ -1284,7 +1245,7 @@ void Company::reopenClosedPoints() {
         }
     }
 
-    if (!exists) { throw 1; }
+    //if (!exists) { throw 1; }
 }
 
 
@@ -1296,105 +1257,6 @@ void Company::removePointDown(string name) {
     }
 
     this->PointOfInterest_Closed.erase(it);
-}
-
-
-void Company::readInterestPointsFile() {
-    fstream file;
-    string line, temp;
-    Services service;
-    float lat, longi;
-    bool added = false;
-
-    file.open("InterestPointsFile.txt");
-
-    while (getline(file, line)) {
-        temp = divideString(';', line);
-        service = Services(temp);
-        lat = stof(divideString(';', line));
-        longi = stof(line);
-        InterestPoint p(service, lat, longi);
-
-        for (auto it = PointsOfInterest.begin(); it != PointsOfInterest.end(); ++it) {
-            if ((*it).top().getType() == service.getType()) {
-                (*it).push(p);
-                added = true;
-                break;
-            }
-        }
-
-        if (!added) {
-            priority_queue<InterestPoint> new_q;
-            new_q.push(p);
-            this->PointsOfInterest.push_back(new_q);
-        }
-
-        for (auto it = beaches.begin(); it != beaches.end(); ++it) {
-            if ((*it)->distanceToBeach(lat, longi) < 50) {
-                (*it)->add_ExtraService(service);
-            }
-        }
-    }
-}
-
-
-void Company::readClosedInterestPointsFile() {
-
-
-    fstream file;
-    string line, temp;
-    string type_of_closing, date;
-    Services service;
-    float lat, longi;
-    bool added = false;
-
-    file.open("ClosedInterestPointsFile.txt");
-
-    while (getline(file, line)) {
-
-        temp = divideString(';', line);
-        type_of_closing = temp;
-        date = divideString(';', line);
-        temp = divideString(';', line);
-        service = Services(temp);
-        lat = stof(divideString(';', line));
-        longi = stof(line);
-        InterestPoint p(service, lat, longi);
-        add_ClosedPoint(p,date,type_of_closing);
-    }
-}
-
-void Company::updateClosedInterestPointsFile() {
-
-    ofstream file;
-    file.open("ClosedInterestPointsFile.txt");
-
-    for (auto it: PointOfInterest_Closed) {
-
-        file << it.type_of_closing;
-        file << "; " << it.date << "; ";
-        it.InterestP.writeService(file);
-        file << endl;
-    }
-}
-
-void Company::updateInterestPointsFile() {
-    ofstream file;
-    file.open("InterestPointsFile.txt");
-
-    for (auto it = this->PointsOfInterest.begin(); it != this->PointsOfInterest.end(); ++it) {
-        InterestPoint p = (*it).top();
-        (*it).pop();
-        p.writeService(file);
-        file << endl;
-
-        while (!(*it).empty()) {
-            InterestPoint p = (*it).top();
-            (*it).pop();
-            p.writeService(file);
-            file << endl;
-        }
-    }
 }
 
 
@@ -1450,10 +1312,152 @@ void Company::add_InterestPoints(InterestPoint point) {
 
 void Company::add_ClosedPoint(InterestPoint point, string date, string type_of_closing) {
 
+    string size;
     struct_pointsShutDown close;
     close.date = date;
     close.InterestP = point;
     close.type_of_closing = type_of_closing;
     this->PointOfInterest_Closed.insert(close);
+    size = (*this->PointOfInterest_Closed.begin()).date;
 
+}
+
+
+
+
+//reading and updating
+void Company::readClosedServicesFile() {
+    fstream file;
+    string service, beach_name;
+    file.open("ClosedServicesFile.txt");
+
+    while (getline(file, service)) {
+        beach_name = divideString(';', service);
+        for (auto it = beaches.begin(); it != beaches.end(); ++it) {
+            if (beach_name == (*it)->get_name()) {
+                (*it)->readClosedServices(service);
+                break;
+            }
+        }
+    }
+}
+
+
+void Company::readInterestPointsFile() {
+    fstream file;
+    string line, temp;
+    Services service;
+    float lat, longi;
+    bool added = false;
+
+    file.open("InterestPointsFile.txt");
+
+    while (getline(file, line)) {
+        temp = divideString(';', line);
+        service = Services(temp);
+        lat = stof(divideString(';', line));
+        longi = stof(line);
+        InterestPoint p(service, lat, longi);
+
+        for (auto it = PointsOfInterest.begin(); it != PointsOfInterest.end(); ++it) {
+            if ((*it).top().getType() == service.getType()) {
+                (*it).push(p);
+                added = true;
+                break;
+            }
+        }
+
+        if (!added) {
+            priority_queue<InterestPoint> new_q;
+            new_q.push(p);
+            this->PointsOfInterest.push_back(new_q);
+        }
+    }
+}
+
+
+void Company::readClosedInterestPointsFile() {
+
+
+    fstream file;
+    string line, temp;
+    string type_of_closing, date;
+    Services service;
+    float lat, longi;
+    bool added = false;
+
+    file.open("ClosedInterestPointsFile.txt");
+
+    while (getline(file, line)) {
+
+        temp = divideString(';', line);
+        type_of_closing = temp;
+        date = divideString(';', line);
+        temp = divideString(';', line);
+        service = Services(temp);
+        lat = stof(divideString(';', line));
+        longi = stof(line);
+        InterestPoint p(service, lat, longi);
+        add_ClosedPoint(p,date,type_of_closing);
+    }
+}
+
+
+void Company::updateFile() {
+
+    ofstream file;
+    file.open("BeachFile.txt");
+
+    for (auto it = beaches.begin(); it != beaches.end(); it++) {
+        (*it)->writeBeach(file);
+        if ((*it) != (*beaches.end()))
+            file << endl;
+    }
+
+}
+
+
+void Company::updateClosedServicesFile() {
+    ofstream file;
+    file.open("ClosedServicesFile.txt");
+
+    for (auto it = this->beaches.begin(); it != this->beaches.end(); ++it) {
+        if (!(*it)->getServicesDown().empty()) {
+            (*it)->writeBeachClosedServices(file);
+        }
+    }
+}
+
+
+void Company::updateClosedInterestPointsFile() {
+
+    ofstream file;
+    file.open("ClosedInterestPointsFile.txt");
+    string a;
+
+    for (auto it = this->PointOfInterest_Closed.begin(); it != this->PointOfInterest_Closed.end(); ++it) {;
+        file << (*it).type_of_closing;
+        file << "; " << (*it).date << "; ";
+        (*it).InterestP.writeService(file);
+        a =  (*it).InterestP.getName();
+        file << endl;
+    }
+    file.close();
+}
+
+
+void Company::updateInterestPointsFile() {
+    ofstream file;
+    file.open("InterestPointsFile.txt");
+
+    for (auto it = this->PointsOfInterest.begin(); it != this->PointsOfInterest.end(); ++it) {;
+
+        while (!(*it).empty()) {
+            InterestPoint p = (*it).top();
+            (*it).pop();
+            p.writeService(file);
+            file << endl;
+        }
+    }
+    file.close();
 }
