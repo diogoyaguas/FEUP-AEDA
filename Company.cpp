@@ -1245,12 +1245,15 @@ void Company::reopenClosedPoints() {
     ClearScreen();
 
     table = this->PointOfInterest_Closed;
-    getline(cin, point);
+
 
     cout << "Insert name of the service you wish to reopen" << endl << "::: ";
     cin.ignore(1000, '\n');
+    getline(cin, point);
 
     for (auto it = table.begin(); it != table.end(); ++it) {
+
+        cout << (*it).InterestP.getName() << endl;
 
         if ((*it).InterestP.getName() == point) {
 
@@ -1371,6 +1374,7 @@ void Company::updateClosedInterestPointsFile() {
         file << it.type_of_closing;
         file << "; " << it.date << "; ";
         it.InterestP.writeService(file);
+        file << endl;
     }
 }
 
