@@ -7,7 +7,7 @@ The project developed in the AEDA curricular unit. (Features both parts 1 and 2)
 * **Topic:** Management of a leisure guide that has information about several river beaches and points of interest in Portugal.
 * **Course:** Algoritmos e Estruturas de Dados (AEDA) | Algorithms and Data Structures
 * **Course Link:** https://sigarra.up.pt/feup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=399886
-* **In colaboration with:** Diogo Yaguas (@diogoyaguas)
+* **In colaboration with:** Beatriz Mendes (@smbea)
 
 
 ### Disclaimer
