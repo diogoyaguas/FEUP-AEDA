@@ -1,16 +1,15 @@
-# FEUP-AEDA-Proj
-The project developed in the AEDA curricular unit. (Features both parts 1 and 2)
-<br/><b> Final Project Grade: 17 </b>
+# FEUP-AEDA
+Project for the Algorithms and Data Structures (AEDA) class of the Master in Informatics and Computer Engineering (MIEIC) at the Faculty of Engineering of the University of Porto (FEUP).
+<br><br>
+### Team Members
+Beatriz Soares Mendes<br>
+* Student Number: 201604253
+* E-Mail: up201604253@fe.up.pt
 
-### Project Infos
-* **Date:** 2nd Year, 1st Semester, 2017/2018
-* **Topic:** Management of a leisure guide that has information about several river beaches and points of interest in Portugal.
-* **Course:** Algoritmos e Estruturas de Dados (AEDA) | Algorithms and Data Structures
-* **Course Link:** https://sigarra.up.pt/feup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=399886
-* **In colaboration with:** Beatriz Mendes (@smbea)
+Diogo Filipe da Silva Yaguas<br>
+* Student Number: 201606165
+* E-Mail: up201606165@fe.up.pt
 
+### Grades
 
-### Disclaimer
-This repository, and every other `FEUP-COURSE*` repos on GitHub correspond to school projects from the respective *COURSE*. The code on this repo is intended for educational purposes. I do not take any responsibility, liability or whateverity over any code faults, inconsistency or anything else. If you intend on copying most or parts of the code for your school projects, keep in mind that this repo is public, and that your professor might search the web for similar project solutions or whatnot and choose to fail you for copying.
-
-(Credit to zettca for the original README layout, adapted by Miguel Duarte)
+*  Final Project - 17
